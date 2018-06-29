@@ -5,5 +5,6 @@ package com.playdata.model;
 public class Member {
 	public Member() {
 		System.out.println("¿¬½À!!");
+		System.out.println("test by sunghoon");
 	}
 }
