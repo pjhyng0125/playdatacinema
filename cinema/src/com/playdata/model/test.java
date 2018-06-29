@@ -1,4 +1,4 @@
-package com.encore;
+package com.playdata.model;
 
 public class test {
 	public static void main(String[] args) {
