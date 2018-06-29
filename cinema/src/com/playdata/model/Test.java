@@ -1,6 +1,6 @@
 package com.playdata.model;
 
-public class Model {
+public class Test {
 	public static void main(String[] args) {
 		System.out.println("hi lm here");
 		System.out.println("check");
