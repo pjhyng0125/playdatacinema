@@ -7,14 +7,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class LoginForm extends JFrame
+public class LoginView extends JFrame
 {
     public JTextField tf_id;
     public JPasswordField tf_pass;
     public JButton bt_login,bt_join;
 	JLabel la_id, la_pass;
 	
-  public LoginForm()
+  public LoginView()
 	{		
 		setTitle("Login Form");
 		

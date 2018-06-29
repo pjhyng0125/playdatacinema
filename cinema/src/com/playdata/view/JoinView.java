@@ -1,5 +1,6 @@
 package com.playdata.view;
 
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -8,19 +9,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class UpdateForm extends JFrame 
+public class JoinView extends JFrame 
 {
 	public JTextField tf_id,tf_name,tf_ssn1,tf_phone1,tf_phone2,tf_phone3,tf_addr;
 	public JPasswordField tf_pass,tf_pass2,tf_ssn2;
-	public JButton bt_submit,bt_reset;
+	public JButton bt_submit,bt_reset,bt_checkid;
 	JLabel la_id,la_pass1,la_pass2,la_n,la_j,la_t,la_addr,la_job;
 	public JComboBox<String> cb_job;
 	JLabel jb[];
 	
 	
-  public UpdateForm()
+  public JoinView()
 	{	  
-		setTitle("회원정보수정");
+		setTitle("회원가입");
 		
 		jb = new JLabel[3];		
 		String jobT[]= {"학생","공무원","언론/출판","군인/경찰","일반사무직","영업직","기술/전문직","보건/의료","자영업","주부","취준생","기타"};
@@ -31,16 +32,11 @@ public class UpdateForm extends JFrame
 		}
 		
 		tf_id = new JTextField();
-		  //tf_id.setEnabled(false);//비활성화
-		  tf_id.setEditable(false);//편집 불능
 		tf_pass = new JPasswordField();
 		tf_pass2 = new JPasswordField();
 		tf_name= new JTextField();
-		  tf_name.setEditable(false);
 		tf_ssn1 = new JTextField();
-		  tf_ssn1.setEditable(false);
 		tf_ssn2 = new JPasswordField();
-		  tf_ssn2.setEditable(false);
 		tf_phone1 = new JTextField();
 		tf_phone2 = new JTextField();
 		tf_phone3 = new JTextField();
@@ -48,7 +44,7 @@ public class UpdateForm extends JFrame
 		
 	    bt_submit = new JButton("등록");
 	    bt_reset = new JButton("취소");
-		
+		bt_checkid = new JButton("중복확인");
 		
 		la_id = new JLabel("I  D:");
 		la_pass1 = new JLabel("비  번:");
@@ -81,7 +77,7 @@ public class UpdateForm extends JFrame
 		
 		bt_submit.setBounds(50,370,90,25);
 		bt_reset.setBounds(150,370,90,25);
-		
+		bt_checkid.setBounds(190,30,90,25);
 		
 		la_id.setBounds(10,30,100,25);
 		la_pass1.setBounds(10,70,100,25);
@@ -108,6 +104,7 @@ public class UpdateForm extends JFrame
 		
 		add(bt_submit);
 		add(bt_reset);
+		add(bt_checkid);
 		
 		add(la_id); 
 		add(la_pass1); 
@@ -128,7 +125,6 @@ public class UpdateForm extends JFrame
 		setBounds(350,200,300,450);	
 		setResizable(false);
 	}//생성자  
-  
   public void showMsg(String msg) {
 		JOptionPane.showMessageDialog(this, msg);
 	}
@@ -144,23 +140,8 @@ public class UpdateForm extends JFrame
 	  tf_phone3.setText("");
 	  tf_ssn1.setText("");
 	  tf_ssn2.setText("");
+	  cb_job.setSelectedIndex(0);
   }
-  
-  public void setTexts(String id, String addr, String name, String pass, String pass2, String phone1, String phone2, String phone3,
-		  int ssn1, int ssn2, String job) {
-	  tf_id.setText(id);
-	  tf_addr.setText(addr);
-	  tf_name.setText(name);
-	  tf_pass.setText(pass);
-	  tf_pass2.setText(pass2);
-	  tf_phone1.setText(phone1);
-	  tf_phone2.setText(phone2);
-	  tf_phone3.setText(phone3);
-	  tf_ssn1.setText(ssn1+"");
-	  tf_ssn2.setText(ssn2+"");
-	  cb_job.setSelectedItem(job);
-  }
-  
-}//UpdateForm
 
+}//JoinForm
 
