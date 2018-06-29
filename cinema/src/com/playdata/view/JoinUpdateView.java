@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class UpdateForm extends JFrame 
+public class JoinUpdateView extends JFrame 
 {
 	public JTextField tf_id,tf_name,tf_ssn1,tf_phone1,tf_phone2,tf_phone3,tf_addr;
 	public JPasswordField tf_pass,tf_pass2,tf_ssn2;
@@ -18,7 +18,7 @@ public class UpdateForm extends JFrame
 	JLabel jb[];
 	
 	
-  public UpdateForm()
+  public JoinUpdateView()
 	{	  
 		setTitle("회원정보수정");
 		

@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class JoinForm extends JFrame 
+public class JoinView extends JFrame 
 {
 	public JTextField tf_id,tf_name,tf_ssn1,tf_phone1,tf_phone2,tf_phone3,tf_addr;
 	public JPasswordField tf_pass,tf_pass2,tf_ssn2;
@@ -19,7 +19,7 @@ public class JoinForm extends JFrame
 	JLabel jb[];
 	
 	
-  public JoinForm()
+  public JoinView()
 	{	  
 		setTitle("회원가입");
 		
