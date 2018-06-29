@@ -7,5 +7,6 @@ public class test {
 		System.out.println("check222");
 		System.out.println("0629/ check");
 		System.out.println("연습");
+		System.out.println("연습2by sunghoon");
 	}
 }
