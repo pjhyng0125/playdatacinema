@@ -6,9 +6,9 @@ import javax.swing.JFrame;
  */
 public class ScheduleView extends JFrame {
 	public ScheduleView() {
-		setTitle("AdminView");
+		setTitle("ScheduleView");
 		
-		setVisible(true);
 		setSize(1200, 800);
+		setVisible(true);
 	}
 }

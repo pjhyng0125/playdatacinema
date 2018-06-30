@@ -6,9 +6,9 @@ import javax.swing.JFrame;
  */
 public class ReView extends JFrame {
 	public ReView() {
-		setTitle("AdminView");
+		setTitle("ReView");
 		
-		setVisible(true);
 		setSize(1200, 800);
+		setVisible(true);
 	}
 }

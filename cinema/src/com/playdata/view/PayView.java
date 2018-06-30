@@ -6,9 +6,9 @@ import javax.swing.JFrame;
  */
 public class PayView extends JFrame {
 	public PayView() {
-		setTitle("AdminView");
+		setTitle("PayView");
 		
-		setVisible(true);
 		setSize(1200, 800);
+		setVisible(true);
 	}
 }

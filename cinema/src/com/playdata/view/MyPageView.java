@@ -6,9 +6,9 @@ import javax.swing.JFrame;
  */
 public class MyPageView extends JFrame {
 	public MyPageView() {
-		setTitle("AdminView");
+		setTitle("MyPageView");
 		
-		setVisible(true);
 		setSize(1200, 800);
+		setVisible(true);
 	}
 }
