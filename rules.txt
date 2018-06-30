@@ -15,3 +15,11 @@ JTextArea => ta_*
 JTable => t_
 JComboBox => cb_*
 ...
+
+ºä º¯¼ö¸í
+-View => v_-
+LoginVIew => v_login
+
+¸ðµ¨ º¯¼ö¸í
+MemberDAO => dao_member
+MovieDAO => dao_movie
