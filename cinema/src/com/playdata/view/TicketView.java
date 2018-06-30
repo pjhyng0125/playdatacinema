@@ -6,7 +6,9 @@ import javax.swing.JFrame;
  */
 public class TicketView extends JFrame {
 	public TicketView() {
-		setVisible(true);
+		setTitle("TicketView");
+		
 		setSize(1200, 800);
+		setVisible(true);
 	}
 }

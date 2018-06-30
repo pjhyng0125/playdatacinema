@@ -16,7 +16,7 @@ public class LoginView extends JFrame
 	
   public LoginView()
 	{		
-		setTitle("Login Form");
+		setTitle("LoginView");
 		
 		tf_id = new JTextField();			  
 		tf_pass = new JPasswordField();

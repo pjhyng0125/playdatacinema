@@ -21,7 +21,7 @@ public class JoinView extends JFrame
 	
   public JoinView()
 	{	  
-		setTitle("회원가입");
+		setTitle("JoinView");
 		
 		jb = new JLabel[3];		
 		String jobT[]= {"학생","공무원","언론/출판","군인/경찰","일반사무직","영업직","기술/전문직","보건/의료","자영업","주부","취준생","기타"};

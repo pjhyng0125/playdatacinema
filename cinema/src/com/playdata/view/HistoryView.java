@@ -6,6 +6,8 @@ import javax.swing.JFrame;
  */
 public class HistoryView extends JFrame {
 	public HistoryView() {
+		setTitle("HistoryView");
+		
 		setVisible(true);
 		setSize(1200, 800);
 	}
