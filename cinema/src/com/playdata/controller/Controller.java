@@ -42,11 +42,16 @@ public class Controller {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					for(int i=0; i<v_reserve.subv_reserve.length;i++)
-						for(int j=0; j<v_reserve.subv_reserve[i].tbt_stars.length;j++)
+					for(int i=0; i<v_reserve.subv_reserve.length;i++) {
+						for(int j=0; j<v_reserve.subv_reserve[i].tbt_stars.length;j++) {
 								v_reserve.subv_reserve[i].tbt_stars[j].setSelectedIcon(new ImageIcon("image/star_yellow.png"));
-					}//actionPerformed
-			});//actionLister
+//								System.out.println("i="+i+" j="+j+" k="+k );
+						}//for - j
+					}//for - i
+					
+					
+				}//actionPerformed
+			});//addActionLister
 		}//for
 	}//»ý¼ºÀÚ
 	

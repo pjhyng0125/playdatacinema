@@ -19,12 +19,11 @@ public class ReserveSubView extends JPanel {
 	public JButton bt_reserve;
 	JLabel la_image, la_title, la_percent, la_genre;
 	public JToggleButton []tbt_stars;
-	JPanel p_ps, p_center, p_stars;
+	JPanel p_image, p_content, p_stars, p_ps, p_pe, p_ls, p_le, p_center;
 	
 	public ReserveSubView() {
 		bt_reserve = new JButton("지금 예매");
 		la_image = new JLabel("la_image");
-		la_image.setBackground(Color.yellow);
 		la_title = new JLabel("앤트맨과 와스프");
 		la_percent = new JLabel("예매율 35.5%");
 		la_genre = new JLabel("코미디액션");
@@ -35,11 +34,17 @@ public class ReserveSubView extends JPanel {
 		la_percent.setHorizontalAlignment(JLabel.CENTER);
 		la_genre.setHorizontalAlignment(JLabel.CENTER);
 		
-		p_ps = new JPanel();
-		p_center = new JPanel();
+		p_image = new JPanel();
+		p_content = new JPanel();
 		p_stars = new JPanel();
-		p_stars.setLayout(null);
-		
+		p_ps = new JPanel();
+		p_pe = new JPanel();
+		p_ls = new JPanel();
+		p_le = new JPanel();
+		p_center = new JPanel();
+		p_center.setLayout(new BorderLayout());
+	
+//tbt_starts 배열 이미지 삽입 & 버튼 투명 적용
 		for(int i=0; i<tbt_stars.length; i++) {
 			tbt_stars[i] = new JToggleButton(new ImageIcon("image/star_blank.png"));
 			tbt_stars[i].setBorderPainted(false);	//tbt Border 없애주기
@@ -47,27 +52,41 @@ public class ReserveSubView extends JPanel {
 			tbt_stars[i].setFocusPainted(false);	//tbt 선택 테두리 사용 안함
 		}
 		
-		setLayout(new BorderLayout());
-//p_ps
-		p_ps.setPreferredSize(new Dimension(0, 300));
-		add(p_ps, BorderLayout.PAGE_START);
-		p_ps.add(la_image);
-//p_center
-		add("Center",p_center);
-		p_center.setLayout(new GridLayout(5, 1));
-			p_center.add(la_title);
-			p_center.add(la_percent);
-			p_center.add(la_genre);
-		p_center.add(p_stars);
+//p_image
+		p_image.setPreferredSize(new Dimension(0, 300));
+		p_center.add(p_image, BorderLayout.PAGE_START);
+		p_image.add(la_image);
+//p_content
+		p_center.add("Center",p_content);
+		p_content.setLayout(new GridLayout(5, 1));
+			p_content.add(la_title);
+			p_content.add(la_percent);
+			p_content.add(la_genre);
+		p_content.add(p_stars);
+		p_stars.setBackground(Color.BLUE);
+		p_stars.setLayout(null);
 //p_stars
 		for(int i=0; i<tbt_stars.length; i++) {
-			tbt_stars[i].setBounds(50*(i)+25, 10, 50, 50);
+			tbt_stars[i].setBounds(50*(i)+5, 10, 50, 50);
 			p_stars.add(tbt_stars[i]);
 		}
-		p_center.add(bt_reserve);
-		
+		p_content.add(bt_reserve);
+//set panel layout
+		setLayout(new BorderLayout());
+//add panels space size
+		p_ps.setPreferredSize(new Dimension(0, 30));
+		p_pe.setPreferredSize(new Dimension(0, 30));
+		p_ls.setPreferredSize(new Dimension(30, 0));
+		p_ls.setPreferredSize(new Dimension(30, 0));
+//add panels to this panel
+		add(p_ps,BorderLayout.PAGE_START);
+		add(p_pe,BorderLayout.PAGE_END);
+		add(p_ls,BorderLayout.LINE_START);
+		add(p_le,BorderLayout.LINE_END);
+		add(p_center,BorderLayout.CENTER);
 		
 		setBackground(Color.BLUE);
 		setSize(300, 740);
-	}
+	}//생성자
+	
 }
