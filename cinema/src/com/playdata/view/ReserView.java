@@ -39,9 +39,6 @@ public class ReserView extends JFrame{
 		p_center.add(new ReserveSubView());
 		
 		setSize(1200, 800);
-		setVisible(true);
-	}
-	public static void main(String[] args) {
-		new ReserView();
+		setVisible(false);
 	}
 }

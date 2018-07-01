@@ -39,8 +39,9 @@ public class ReserveSubView extends JPanel {
 		p_stars = new JPanel();
 		
 		for(int i=0; i<la_stars.length; i++) {
-			la_stars[i] = new JLabel("*");
-			la_stars[i].setBackground(Color.yellow);
+//			la_stars[i] = new JLabel("*");
+			la_stars[i] = new JLabel(new ImageIcon("image/star_blank.png"));
+			
 		}
 		
 		setLayout(new BorderLayout());
