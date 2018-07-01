@@ -35,7 +35,7 @@ public class Controller implements ActionListener {
 		/*
 		 * 작성자: 박진형
 		 * 수정일자: 07/01 10:19
-		 * 이벤트리스너 기능: ReserveSubView Action Listioner 추가
+		 * 이벤트리스너 기능: ReserveSubView Action Listener 추가
 		 */
 		for(int i=0; i<v_reserve.subv_reserve.length; i++)
 			for(int j=0; j<v_reserve.subv_reserve[i].tbt_stars.length;j++)
