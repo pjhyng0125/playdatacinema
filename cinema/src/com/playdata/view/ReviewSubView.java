@@ -14,6 +14,7 @@ public class ReviewSubView extends JPanel {
 		la_id = new JLabel("pjhyng0125");
 		la_content = new JLabel("content");
 		tbt_stars = new JToggleButton[5];
+		setLayout(null);
 		
 //tbt_starts 배열 이미지 삽입 & 버튼 투명 적용
 	for(int i=0; i<tbt_stars.length; i++) {
@@ -23,18 +24,18 @@ public class ReviewSubView extends JPanel {
 		tbt_stars[i].setFocusPainted(false);	//tbt 선택 테두리 사용 안함
 		}
 //p_stars
-		la_id.setBounds(50, 30, 60, 20);
+		la_id.setBounds(50, 30, 80, 20);
 		la_id.setBackground(Color.CYAN);
 		la_content.setBounds(50, 70, 400, 20);
 		la_content.setBackground(Color.gray);
+		add(la_id);
+		add(la_content);
 		for(int i=0; i<tbt_stars.length; i++) {
 			tbt_stars[i].setBounds(50*(i)+500, 30, 50, 50);
 			add(tbt_stars[i]);
 		}
-		add(la_id);
-		add(la_content);
 		
-		setBackground(Color.BLUE);
+		setBackground(Color.PINK);
 		setSize(1000,100);
 	}
 }
