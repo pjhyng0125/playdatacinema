@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 import com.playdata.view.LoginView;
 import com.playdata.view.ReserView;
 
-public class Controller {
+public class Controller implements ActionListener {
 	LoginView v_login;
 	ReserView v_reserve;
 	
@@ -35,27 +35,34 @@ public class Controller {
 		/*
 		 * 작성자: 박진형
 		 * 수정일자: 07/01 10:19
-		 * 이벤트리스너 기능: ReserveSubView에서 평점의 별 click 관련 이벤트 정의
+		 * 이벤트리스너 기능: ReserveSubView Action Listioner 추가
 		 */
-		for(int i=0; i<v_reserve.subv_reserve.length; i++) {
-			v_reserve.subv_reserve[i].tbt_stars[i].addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					for(int i=0; i<v_reserve.subv_reserve.length;i++) {
-						for(int j=0; j<v_reserve.subv_reserve[i].tbt_stars.length;j++) {
-								v_reserve.subv_reserve[i].tbt_stars[j].setSelectedIcon(new ImageIcon("image/star_yellow.png"));
-//								System.out.println("i="+i+" j="+j+" k="+k );
-						}//for - j
-					}//for - i
-					
-					
-				}//actionPerformed
-			});//addActionLister
-		}//for
+		for(int i=0; i<v_reserve.subv_reserve.length; i++)
+			for(int j=0; j<v_reserve.subv_reserve[i].tbt_stars.length;j++)
+				v_reserve.subv_reserve[i].tbt_stars[j].addActionListener(this);
 	}//생성자
 	
 	public static void main(String[] args) {
 		new Controller();
+	}
+	
+	/*
+	 * 작성자: 박진형
+	 * 수정일자: 07/01 12:35
+	 * 이벤트리스너 기능: ReserveSubView에서 Selected된 별의 이미지 변경
+	 */
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object ob = e.getSource();
+		for(int i=0; i<v_reserve.subv_reserve.length;i++) {
+			for(int j=0; j<v_reserve.subv_reserve[i].tbt_stars.length;j++) {
+				if(ob == v_reserve.subv_reserve[i].tbt_stars[j]) {
+					if(v_reserve.subv_reserve[i].tbt_stars[j].isSelected())
+						v_reserve.setstarSelected(i, j);
+					else
+						v_reserve.setstarSelected(i, j);
+				}
+			}//for-j
+		}//for-i
 	}
 }

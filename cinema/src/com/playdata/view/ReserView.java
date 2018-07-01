@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -46,5 +47,23 @@ public class ReserView extends JFrame{
 		
 		setSize(1200, 800);
 		setVisible(false);
-	}
+	}//생성자
+	
+	/*
+	 * 작성자: 박진형
+	 * 수정일자: 07/01 12:34
+	 * 이벤트리스너 기능: ReserveSubView에서 토글버튼 상태변경 & 이미지변경
+	 */
+	public void setstarSelected(int checked_i, int checked_j) {
+		for(int k=0; k<subv_reserve[checked_i].tbt_stars.length; k++) {
+			if(k<=checked_j) {
+				subv_reserve[checked_i].tbt_stars[k].setSelected(true);
+				subv_reserve[checked_i].tbt_stars[k].setIcon(new ImageIcon("image/star_yellow.png"));
+			}
+			else {
+				subv_reserve[checked_i].tbt_stars[k].setSelected(false);
+				subv_reserve[checked_i].tbt_stars[k].setIcon(new ImageIcon("image/star_blank.png"));
+			}
+		}
+	}//setstarSelected
 }

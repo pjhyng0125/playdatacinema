@@ -10,5 +10,5 @@ public class HistoryView extends JFrame {
 		
 		setSize(1200, 800);
 		setVisible(true);
-	}
+	}//»ý¼ºÀÚ
 }

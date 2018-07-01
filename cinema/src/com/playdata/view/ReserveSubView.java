@@ -88,5 +88,4 @@ public class ReserveSubView extends JPanel {
 		setBackground(Color.BLUE);
 		setSize(300, 740);
 	}//»ý¼ºÀÚ
-	
 }
