@@ -3,6 +3,7 @@ package com.playdata.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -29,22 +30,31 @@ public class MyPageView extends JFrame {
 		
 		
 		// ¶óº§ 
+		
 		la_mypage = new JLabel("¸¶ÀÌÆäÀÌÁö");
-		la_mypage.setBounds(100, 20, 200, 100);
+		la_mypage.setBounds(100, 5, 300, 100);
+		la_mypage.setFont(new Font("¸¼Àº°íµñ", 0, 50));
 		la_greet = new JLabel("´Ô È¯¿µÇÕ´Ï´Ù!");
-		la_greet.setBounds(20,20,300,30);
+		la_greet.setBounds(20, 20, 300, 30);
+		la_greet.setFont(new Font("¸¼Àº°íµñ", 0, 30));
 		la_grade = new JLabel("µî±Þ : ");
-		la_grade.setBounds(20, 70, 50, 30);
-		la_grade2 = new JLabel();
-		la_grade2.setBounds(80, 70, 230, 30);
+		la_grade.setBounds(20, 70, 100, 30);
+		la_grade.setFont(new Font("¸¼Àº°íµñ", 0, 30));
+		la_grade2 = new JLabel("VIP");
+		la_grade2.setBounds(180, 70, 230, 30);
+		la_grade2.setFont(new Font("¸¼Àº°íµñ", 0, 30));
 		la_cash = new JLabel("Ä³½¬ : ");
-		la_cash.setBounds(20, 120, 50, 30);
-		la_cash2 = new JLabel();
-		la_cash2.setBounds(80, 120, 230, 30);
+		la_cash.setBounds(20, 120, 100, 30);
+		la_cash.setFont(new Font("¸¼Àº°íµñ", 0, 30));
+		la_cash2 = new JLabel("20000¿ø");
+		la_cash2.setBounds(150, 120, 230, 30);
+		la_cash2.setFont(new Font("¸¼Àº°íµñ", 0, 30));
 		la_point = new JLabel("Æ÷ÀÎÆ® : ");
-		la_point.setBounds(20, 170, 50, 30);
-		la_point2 = new JLabel();
-		la_point2.setBounds(80, 170, 230, 30);
+		la_point.setBounds(20, 170, 120, 30);
+		la_point.setFont(new Font("¸¼Àº°íµñ", 0, 30));
+		la_point2 = new JLabel("3000P");
+		la_point2.setBounds(180, 170, 230, 30);
+		la_point2.setFont(new Font("¸¼Àº°íµñ", 0, 30));
 		
 		
 		// ÀÌ¹ÌÁö
@@ -56,18 +66,24 @@ public class MyPageView extends JFrame {
 		
 		// ¹öÆ°
 		bt_back = new JButton(i_back);
-		bt_back.setBounds(25, 25, 50, 50);
+		bt_back.setBounds(20, 16, 65, 65);
 		bt_check = new JButton("¿¹¸Å È®ÀÎ/Ãë¼Ò");
+		bt_check.setFont(new Font("¸¼Àº°íµñ", 0, 30));
 		bt_check.setBounds(40, 220, 300, 50 );
 		bt_history = new JButton("°ü¶÷³»¿ª");
+		bt_history.setFont(new Font("¸¼Àº°íµñ", 0, 30));
 		bt_history.setBounds(40, 290, 300, 50);
 		bt_revise = new JButton("È¸¿ø¼öÁ¤");
+		bt_revise.setFont(new Font("¸¼Àº°íµñ", 0, 30));
 		bt_revise.setBounds(40, 360, 300, 50);
 		bt_cash = new JButton("Ä³½¬ÃæÀü");
+		bt_cash.setFont(new Font("¸¼Àº°íµñ", 0, 30));
 		bt_cash.setBounds(40, 430, 300, 50);
 		bt_drop = new JButton("È¸¿øÅ»Åð");
+		bt_drop.setFont(new Font("¸¼Àº°íµñ", 0, 30));
 		bt_drop.setBounds(40, 500, 300, 50);
 		bt_logout = new JButton("·Î±×¾Æ¿ô");
+		bt_logout.setFont(new Font("¸¼Àº°íµñ", 0, 30));
 		bt_logout.setBounds(40, 570, 300, 50);
 		
 		//Ã¼Å©¹Ú½º
@@ -115,7 +131,7 @@ public class MyPageView extends JFrame {
 		add("Center",p_center);
 		
 		
-		setSize(400, 1000);
+		setSize(400, 950);
 		setVisible(true);
 	}//»ý¼ºÀÚ
 	
