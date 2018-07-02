@@ -26,23 +26,24 @@ public class ReView extends JFrame {
 //setBackground
 		p_content.setBackground(Color.CYAN);
 		p_reviews.setBackground(Color.green);
-		p_reviews.setPreferredSize(new Dimension(1140, 250));
-		
+		p_reviews.setLocation(0, 0);
+		p_reviews.setSize(1140,1000);
+//		p_reviews.setPreferredSize(new Dimension(1140, 1000));
 //setlayout
 		p_reviews.setLayout(null);
 		setLayout(null);
 		
 //setSize
 		p_content.setBounds(20,20,1140,350);
-		
+
 //JScrollerPane
-		sp = new JScrollPane();
-		sp.setViewportView(p_reviews);
+		sp = new JScrollPane(p_reviews);
 
 		sp.setPreferredSize(new Dimension(1140, 250));
-		sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+//		sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 //		sp.setVerticalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		sp.setVisible(true);
+		sp.setLayout(null);
+		sp.add(p_reviews);
 		sp.setBounds(20, 370, 1140, 350);
 		add(sp);
 		
@@ -52,19 +53,20 @@ public class ReView extends JFrame {
 		ReviewSubView rsv2 = new ReviewSubView();
 		ReviewSubView rsv3 = new ReviewSubView();
 		ReviewSubView rsv4 = new ReviewSubView();
-//		ReviewSubView rsv5 = new ReviewSubView();
+		ReviewSubView rsv5 = new ReviewSubView();
+		
 		v.add(rsv);
 		v.add(rsv1);
 		v.add(rsv2);
 		v.add(rsv3);
 		v.add(rsv4);
-//		v.add(rsv5);
+		v.add(rsv5);
 
 //add to frame
 		add(p_content);
 		for(int i=0; i<v.size(); i++) {
 //			v.get(i).setBounds(20, 100*(i+1)+280, 1140, 100);
-			v.get(i).setBounds(20, 100*(i), 1140, 100);			
+			v.get(i).setBounds(0, 100*(i), 1140, 100);			
 			p_reviews.add(v.get(i));
 		}
 		
