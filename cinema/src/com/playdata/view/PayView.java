@@ -9,6 +9,7 @@ public class PayView extends JFrame {
 		setTitle("PayView");
 		System.out.println("지환연습");
 		
+		
 		setSize(1200, 800);
 		setVisible(true);
 	}//생성자
