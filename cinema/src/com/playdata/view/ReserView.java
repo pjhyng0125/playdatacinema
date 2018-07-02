@@ -24,11 +24,6 @@ public class ReserView extends JFrame{
 		bt_mypage = new JButton("마이 페이지");
 		subv_reserve = new ReserveSubView[4];
 		
-		
-		
-		
-		
-		
 		setLayout(new BorderLayout());
 //p_ps
 		p_ps.setPreferredSize(new Dimension(0, 60));
