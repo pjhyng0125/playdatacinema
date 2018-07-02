@@ -17,7 +17,9 @@ public class JoinView extends JFrame
 	JLabel la_id,la_pass1,la_pass2,la_n,la_j,la_t,la_addr,la_job;
 	public JComboBox<String> cb_job;
 	JLabel jb[];
+	    
 	
+	 
 	
   public JoinView()
 	{	  
