@@ -8,7 +8,7 @@ public class PayView extends JFrame {
 	public PayView() {
 		setTitle("PayView");
 		System.out.println("지환연습");
-		 
+		 /////
 		
 		
 		
