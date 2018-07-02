@@ -7,11 +7,6 @@ import javax.swing.JFrame;
 public class PayView extends JFrame {
 	public PayView() {
 		setTitle("PayView");
-		System.out.println("지환연습");
-		 /////
-		
-		
-		
 		
 		setSize(1200, 800);
 		setVisible(true);
