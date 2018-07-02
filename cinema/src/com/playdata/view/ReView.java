@@ -22,7 +22,7 @@ public class ReView extends JFrame {
 		sp_frame = new JScrollPane();
 //		sp_frame.setViewportView(this);
 		setLayout(null);
-		
+		 
 		p_content.setBounds(20,20,1140,350);
 		
 		ReviewSubView rsv = new ReviewSubView();
