@@ -9,6 +9,7 @@ public class MyPageView extends JFrame {
 		setTitle("MyPageView");
 		System.out.println("성훈 연습");
 		System.out.println("우영연습");
+		System.out.println("지환연습");
 		
 		setSize(1200, 800);
 		setVisible(true);
