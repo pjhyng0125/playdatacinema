@@ -26,6 +26,9 @@ public class ReserView extends JFrame{
 		
 		
 		
+		
+		
+		
 		setLayout(new BorderLayout());
 //p_ps
 		p_ps.setPreferredSize(new Dimension(0, 60));
