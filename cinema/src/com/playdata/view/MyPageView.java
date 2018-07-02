@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 public class MyPageView extends JFrame {
 	public MyPageView() {
 		setTitle("MyPageView");
-		
+		System.out.println("¼ºÈÆ ¿¬½À");
 		
 		setSize(1200, 800);
 		setVisible(true);
