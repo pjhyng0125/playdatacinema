@@ -77,7 +77,7 @@ public class ReView extends JFrame {
 		p_bottom.add(bt_back);
 		p_bottom.add(bt_next);		
 		
-		int page_now = 0;	//후기창 하단의 페이지 저장하는 변수 0부터 시작
+		int page_now = 2;	//후기창 하단의 페이지 저장하는 변수 0부터 시작
 		la_page.setText("- "+page_now+" -");
 		Vector<ReviewSubView> vr = selectReview(v, page_now);
 		
