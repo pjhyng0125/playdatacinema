@@ -58,10 +58,10 @@ public class MyPageView extends JFrame {
 		
 		
 		// 이미지
-		i_grade = new ImageIcon("C:/lsh/workspace/temp_img/crown.png");			// 이미지 구해서 경로 설정해야함.
-		i_cash = new ImageIcon("C:/lsh/workspace/temp_img/cash.png");
-		i_point = new ImageIcon("C:/lsh/workspace/temp_img/point.png");
-		i_back = new ImageIcon("C:/lsh/workspace/temp_img/back.png");
+		i_grade = new ImageIcon("cinema/imgage/crown.png");			// 이미지 구해서 경로 설정해야함.
+		i_cash = new ImageIcon("cinema/imgage/cash.png");
+		i_point = new ImageIcon("cinema/imgage/point.png");
+		i_back = new ImageIcon("cinema/imgage/back.png");
 		
 		
 		// 버튼
