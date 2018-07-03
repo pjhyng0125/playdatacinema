@@ -134,7 +134,7 @@ public class MyPageView extends JFrame {
 		
 		
 		setSize(400, 950);
-		setVisible(true);
+		setVisible(false);
 	}//»ý¼ºÀÚ
 	
 }

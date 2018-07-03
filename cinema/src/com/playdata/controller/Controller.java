@@ -8,31 +8,62 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 
 import com.playdata.view.LoginView;
+import com.playdata.view.MyPageView;
+import com.playdata.view.PayView;
 import com.playdata.view.ReView;
 import com.playdata.view.ReserView;
 import com.playdata.view.ScheduleView;
+import com.playdata.view.ScreenView;
 
 public class Controller implements ActionListener {
+//view
 	LoginView v_login;
 	ReserView v_reserve;
 	ReView v_review;
 	ScheduleView v_schedule;
+	MyPageView v_mypage;
+	ScreenView v_screen;
+	PayView v_pay;
 	
 	int seleted_date;//ScheduleDateView에서 선택된 toggle button의 index를 저장하는 변수
-	int seleted_time;
+	int seleted_time;//ScheduleTimeView에서 선택된 toggle button의 index를 저장하는 변수
 	
 	public Controller() {
 		v_login = new LoginView();
 		v_reserve = new ReserView();
 		v_review = new ReView();
 		v_schedule = new ScheduleView();
-		
+		v_mypage = new MyPageView();
+		v_screen = new ScreenView();
+		v_pay = new PayView();
 		
 /*-------------------------------------EVENT LISTENER(익명)------------------------------------------*/
 		/*
 		 * 작성자: 박진형
+		 * 수정일자: 07/03 23:40
+		 * 이벤트리스너 기능: About ScreenView
+		 */
+		v_screen.pay_view.addActionListener(this);
+		v_screen.select_movie.addActionListener(this);
+		
+		/*
+		 * 작성자: 박진형
 		 * 수정일자: 07/03 23:18
-		 * 이벤트리스너 기능: ScheduleTimeView Check
+		 * 이벤트리스너 기능: ScheduleView => ScheduleTimeView Check
+		 */
+		v_schedule.bt_next.addActionListener(this);
+		
+		/*
+		 * 작성자: 박진형
+		 * 수정일자: 07/03 23:18
+		 * 이벤트리스너 기능: ReserView => MyPageView
+		 */
+		v_reserve.bt_mypage.addActionListener(this);
+		
+		/*
+		 * 작성자: 박진형
+		 * 수정일자: 07/03 23:18
+		 * 이벤트리스너 기능: ScheduleView => Check ScheduleTimeView
 		 */
 		for(int i=0; i<v_schedule.v_st.length; i++) {
 			v_schedule.v_st[i].tbt_time.addMouseListener(new MouseAdapter() {
@@ -65,7 +96,7 @@ public class Controller implements ActionListener {
 		/*
 		 * 작성자: 박진형
 		 * 수정일자: 07/03 20:13
-		 * 이벤트리스너 기능: ScheduleDateView Check
+		 * 이벤트리스너 기능: ScheduleView => Check ScheduleDateView
 		 * (MouseReleased)
 		 * 선택해제(!flag): 다 false가 되는 순간 tbt.setEnabled(true)
 		 * 선택(flag): 하나가 true 되는 순간  선택된 것 제외 나머지 tbt.setEnabled(false)
@@ -102,7 +133,7 @@ public class Controller implements ActionListener {
 		/*
 		 * 작성자: 박진형
 		 * 수정일자: 07/03 20:13
-		 * 이벤트리스너 기능: ReserView => ReView
+		 * 이벤트리스너 기능: ReserView => Move ReView
 		 */
 		for(int i=0; i<v_reserve.subv_reserve.length; i++)
 			v_reserve.subv_reserve[i].la_image.addMouseListener(new MouseAdapter() {
@@ -116,7 +147,7 @@ public class Controller implements ActionListener {
 		/*
 		 * 작성자: 박진형
 		 * 수정일자: 07/03 20:13
-		 * 이벤트리스너 기능: ReserView => ScheduleView
+		 * 이벤트리스너 기능: ReserView => Move ScheduleView
 		 */
 		for(int i=0; i<v_reserve.subv_reserve.length; i++)
 			v_reserve.subv_reserve[i].bt_reserve.addActionListener(new ActionListener() {
@@ -130,7 +161,7 @@ public class Controller implements ActionListener {
 		/*
 		 * 작성자: 박진형
 		 * 수정일자: 07/01 10:01
-		 * 이벤트리스너 기능: LoginView (bt_login) click => ReserView
+		 * 이벤트리스너 기능: LoginView (bt_login) click => Move ReserView
 		 */
 		v_login.bt_login.addActionListener(new ActionListener() {
 			
@@ -176,5 +207,23 @@ public class Controller implements ActionListener {
 				}
 			}//for-j
 		}//for-i
+		
+		if(ob == v_reserve.bt_mypage) {
+			v_reserve.setVisible(false);
+			v_mypage.setVisible(true);
+		}
+		else if(ob == v_schedule.bt_next) {
+			v_schedule.setVisible(false);
+			v_screen.setVisible(true);
+		}
+		else if(ob == v_screen.select_movie) {
+			v_screen.setVisible(false);
+			v_schedule.setVisible(true);
+		}
+		else if(ob == v_screen.pay_view) {
+			v_screen.setVisible(false);
+			v_pay.setVisible(true);
+		}
 	}//actionPerformed
+	
 }

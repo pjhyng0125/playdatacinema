@@ -275,11 +275,7 @@ public class PayView extends JFrame {
 			
 		
 		setSize(1200, 800);
-		setVisible(true);
+		setVisible(false);
 		
 	}//»ý¼ºÀÚ
-	
-	public static void main(String[] args) {
-		new PayView();
-	}
 }
