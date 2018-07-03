@@ -2,6 +2,8 @@ package com.playdata.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 
@@ -25,8 +27,47 @@ public class Controller implements ActionListener {
 /*-------------------------------------EVENT LISTENER(익명)------------------------------------------*/
 		/*
 		 * 작성자: 박진형
-		 * 수정일자: 07/01 10:01
-		 * 이벤트리스너 기능: ReserView => reView
+		 * 수정일자: 07/03 20:13
+		 * 이벤트리스너 기능: ScheduleDate can Check?
+		 */
+		for(int i=0; i<v_schedule.v_sd.length; i++) {
+			v_schedule.v_sd[i].addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					
+				}
+				
+			@Override
+				public void mouseReleased(MouseEvent e) {		
+				}	
+			@Override
+				public void mousePressed(MouseEvent e) {
+					v_schedule.canChecksDate();
+				}
+			});
+			
+		}
+		
+		
+		
+		/*
+		 * 작성자: 박진형
+		 * 수정일자: 07/03 20:13
+		 * 이벤트리스너 기능: ReserView => ReView
+		 */
+		for(int i=0; i<v_reserve.subv_reserve.length; i++)
+			v_reserve.subv_reserve[i].la_image.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					v_reserve.setVisible(false);
+					v_review.setVisible(true);
+				}
+			});
+		
+		/*
+		 * 작성자: 박진형
+		 * 수정일자: 07/03 20:13
+		 * 이벤트리스너 기능: ReserView => ScheduleView
 		 */
 		for(int i=0; i<v_reserve.subv_reserve.length; i++)
 			v_reserve.subv_reserve[i].bt_reserve.addActionListener(new ActionListener() {

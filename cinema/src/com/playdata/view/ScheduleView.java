@@ -3,6 +3,8 @@ package com.playdata.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,11 +14,12 @@ import javax.swing.JPanel;
  * 영화스케쥴뷰
  */
 public class ScheduleView extends JFrame {
-	JPanel p_date, p_time, p_next;
-	JButton bt_next;
-	JLabel la_title, la_date;
-	ScheduleDateView v_sd[];
-	ScheduleTimeView v_st[];
+	public JPanel p_date, p_time, p_next;
+	public JButton bt_next;
+	public JLabel la_title, la_date;
+	public ScheduleDateView v_sd[];
+	public ScheduleTimeView v_st[];
+	boolean flag;
 	
 	
 	public ScheduleView() {
@@ -72,4 +75,44 @@ public class ScheduleView extends JFrame {
 		setSize(1200, 800);
 		setVisible(false);
 	}//생성자
+	
+	/*
+	 * 작성자: 박진형
+	 * 수정일자: 07/03 20:32
+	 * 이벤트리스너 기능: ScheduleDateView num check
+	 */
+	public void canChecksDate() {	//한개면 그것 빼고 다 Enable(false) & 0개면 다 Enable(true) 
+//		int checked = -1;
+//		int count = 0;
+//		for(int i=0; i<v_sd.length; i++)
+//			if(v_sd[i].isSelected()) {
+//				checked = i;
+//				count++;
+//			}
+//		
+//		for(int i=0; i<v_sd.length; i++) {
+//			if(count == 1)
+//				if(checked != i)
+//					v_sd[i].setEnabled(false);
+//			else if(count == 0)
+//					v_sd[i].setEnabled(true);
+//		}
+	}
+	
+	/*
+	 * 작성자: 박진형
+	 * 수정일자: 07/03 20:32
+	 * 이벤트리스너 기능: ScheduleTimeView num check
+	 */
+	public boolean canChecksTime() {
+		int n = 0;
+		flag = true;
+		for(int i=0; i<v_st.length; i++)
+			if(v_st[i].tbt_time.isSelected())
+				n++;
+		if(n>1)
+			flag = false;
+		return flag;
+	}
+
 }

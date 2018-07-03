@@ -17,7 +17,7 @@ import javax.swing.JToggleButton;
  */
 public class ReserveSubView extends JPanel {
 	public JButton bt_reserve;
-	JLabel la_image, la_title, la_percent, la_genre;
+	public JLabel la_image, la_title, la_percent, la_genre;
 	public JToggleButton []tbt_stars;
 	JPanel p_image, p_content, p_stars, p_ps, p_pe, p_ls, p_le, p_center;
 	
