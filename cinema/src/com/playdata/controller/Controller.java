@@ -18,37 +18,52 @@ public class Controller implements ActionListener {
 	ReView v_review;
 	ScheduleView v_schedule;
 	
+	int seleted_date;//ScheduleDateView에서 선택된 toggle button의 index를 저장하는 변수
+	
 	public Controller() {
 		v_login = new LoginView();
 		v_reserve = new ReserView();
 		v_review = new ReView();
 		v_schedule = new ScheduleView();
 		
+		
 /*-------------------------------------EVENT LISTENER(익명)------------------------------------------*/
 		/*
 		 * 작성자: 박진형
 		 * 수정일자: 07/03 20:13
 		 * 이벤트리스너 기능: ScheduleDate can Check?
+		 * (Released)
+		 * 선택해제(!flag): 다 false가 되는 순간 tbt.setEnabled(true)
+		 * 선택(flag): 하나가 true 되는 순간  선택된 것 제외 나머지 tbt.setEnabled(false)
 		 */
 		for(int i=0; i<v_schedule.v_sd.length; i++) {
 			v_schedule.v_sd[i].addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					
-				}
-				
 			@Override
 				public void mouseReleased(MouseEvent e) {		
-				}	
-			@Override
-				public void mousePressed(MouseEvent e) {
-					v_schedule.canChecksDate();
+				boolean flag = false;	//toggle button이 선택되었는지 여부를 확인하는 변수
+				
+			/*--------------------toggle button 체크 확인------------------*/
+				for(int i=0; i<v_schedule.v_sd.length; i++) {
+					if(v_schedule.v_sd[i].isSelected()) {
+						flag = true;
+						seleted_date = i;
+					}
 				}
-			});
-			
-		}
-		
-		
+				
+		/*--------------------toggle button 체크 여부에 따라 setEnabled() 호출 ------------------*/
+				if(!flag) {	
+					for(int j=0; j<v_schedule.v_sd.length; j++)
+						v_schedule.v_sd[j].setEnabled(true);
+				}
+				else {
+					for(int j=0; j<v_schedule.v_sd.length; j++)
+						if(seleted_date != j)
+							v_schedule.v_sd[j].setEnabled(false);
+								
+				}
+				}//mouseReleased	
+			});//v_schedule.v_sd[i].addMouseListener
+		}//for
 		
 		/*
 		 * 작성자: 박진형
