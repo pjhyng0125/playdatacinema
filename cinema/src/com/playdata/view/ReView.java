@@ -87,7 +87,7 @@ public class ReView extends JFrame {
 		}
 		
 		setSize(1200, 800);
-		setVisible(true);
+		setVisible(false);
 	}//»ý¼ºÀÚ
 	
 	/*
@@ -104,9 +104,5 @@ public class ReView extends JFrame {
 		v.get(i).la_content.setText("content num = "+i);
 		}
 		return v_out;
-	}
-	
-	public static void main(String[] args) {
-		new ReView();
 	}
 }

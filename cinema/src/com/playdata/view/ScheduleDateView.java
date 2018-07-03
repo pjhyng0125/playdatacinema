@@ -2,11 +2,10 @@ package com.playdata.view;
 
 import java.awt.Color;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 
-public class ScheduleDateView extends JPanel {
+public class ScheduleDateView extends JToggleButton {
 	JLabel la_week, la_date ;
 	public ScheduleDateView() {
 		la_week = new JLabel("ø‰¿œ");
