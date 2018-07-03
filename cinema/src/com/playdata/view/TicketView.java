@@ -12,6 +12,7 @@ import javax.swing.JPanel;
  * 모바일티켓뷰
  */
 public class TicketView extends JFrame {
+	// 티켓 뷰  초기 작성자 : 이성훈 
 	
 	JPanel p_north, p_center;
 	//		모바일티켓		영화예매자		예매영화	 관림일자	   관람시각		예매인원	   예매좌석
@@ -94,7 +95,4 @@ public class TicketView extends JFrame {
 		setVisible(true);
 	}//생성자
 	
-	public static void main(String[] args) {
-		new TicketView();
-	}
 }
