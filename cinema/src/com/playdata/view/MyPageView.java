@@ -15,6 +15,8 @@ import javax.swing.JPanel;
  * 마이페이지뷰
  */
 public class MyPageView extends JFrame {
+	// 초기 작성자 : 이성훈
+	// 마이페이지 뷰 
 	
 		//버튼 되돌아가기 , 예매확인,   관람내역,    회원정보수정,  캐쉬충전,   회원탈퇴,   로그아웃
 	public JButton bt_back, bt_check,bt_history, bt_revise, bt_cash, bt_drop, bt_logout;	
@@ -135,7 +137,4 @@ public class MyPageView extends JFrame {
 		setVisible(true);
 	}//생성자
 	
-	public static void main(String[] args) {
-		new MyPageView();
-	}
 }

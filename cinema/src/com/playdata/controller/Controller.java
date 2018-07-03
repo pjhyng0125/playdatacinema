@@ -2,21 +2,81 @@ package com.playdata.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 
 import com.playdata.view.LoginView;
+import com.playdata.view.ReView;
 import com.playdata.view.ReserView;
+import com.playdata.view.ScheduleView;
 
 public class Controller implements ActionListener {
 	LoginView v_login;
 	ReserView v_reserve;
+	ReView v_review;
+	ScheduleView v_schedule;
 	
 	public Controller() {
 		v_login = new LoginView();
 		v_reserve = new ReserView();
+		v_review = new ReView();
+		v_schedule = new ScheduleView();
+		
+/*-------------------------------------EVENT LISTENER(익명)------------------------------------------*/
+		/*
+		 * 작성자: 박진형
+		 * 수정일자: 07/03 20:13
+		 * 이벤트리스너 기능: ScheduleDate can Check?
+		 */
+		for(int i=0; i<v_schedule.v_sd.length; i++) {
+			v_schedule.v_sd[i].addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					
+				}
+				
+			@Override
+				public void mouseReleased(MouseEvent e) {		
+				}	
+			@Override
+				public void mousePressed(MouseEvent e) {
+					v_schedule.canChecksDate();
+				}
+			});
+			
+		}
 		
 		
+		
+		/*
+		 * 작성자: 박진형
+		 * 수정일자: 07/03 20:13
+		 * 이벤트리스너 기능: ReserView => ReView
+		 */
+		for(int i=0; i<v_reserve.subv_reserve.length; i++)
+			v_reserve.subv_reserve[i].la_image.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					v_reserve.setVisible(false);
+					v_review.setVisible(true);
+				}
+			});
+		
+		/*
+		 * 작성자: 박진형
+		 * 수정일자: 07/03 20:13
+		 * 이벤트리스너 기능: ReserView => ScheduleView
+		 */
+		for(int i=0; i<v_reserve.subv_reserve.length; i++)
+			v_reserve.subv_reserve[i].bt_reserve.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					v_reserve.setVisible(false);
+					v_schedule.setVisible(true);
+				}
+			});
 		
 		/*
 		 * 작성자: 박진형
@@ -51,9 +111,12 @@ public class Controller implements ActionListener {
 	 * 수정일자: 07/01 12:35
 	 * 이벤트리스너 기능: ReserveSubView에서 Selected된 별의 이미지 변경
 	 */
+	
+/*-------------------------------------EVENT LISTENER(actionPerformed)------------------------------------------*/
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object ob = e.getSource();
+		
 		for(int i=0; i<v_reserve.subv_reserve.length;i++) {
 			for(int j=0; j<v_reserve.subv_reserve[i].tbt_stars.length;j++) {
 				if(ob == v_reserve.subv_reserve[i].tbt_stars[j]) {
@@ -64,5 +127,5 @@ public class Controller implements ActionListener {
 				}
 			}//for-j
 		}//for-i
-	}
+	}//actionPerformed
 }
