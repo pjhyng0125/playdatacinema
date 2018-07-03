@@ -19,6 +19,7 @@ public class Controller implements ActionListener {
 	ScheduleView v_schedule;
 	
 	int seleted_date;//ScheduleDateView에서 선택된 toggle button의 index를 저장하는 변수
+	int seleted_time;
 	
 	public Controller() {
 		v_login = new LoginView();
@@ -30,9 +31,42 @@ public class Controller implements ActionListener {
 /*-------------------------------------EVENT LISTENER(익명)------------------------------------------*/
 		/*
 		 * 작성자: 박진형
+		 * 수정일자: 07/03 23:18
+		 * 이벤트리스너 기능: ScheduleTimeView Check
+		 */
+		for(int i=0; i<v_schedule.v_st.length; i++) {
+			v_schedule.v_st[i].tbt_time.addMouseListener(new MouseAdapter() {
+			@Override
+				public void mouseReleased(MouseEvent e) {		
+				boolean flag = false;	//toggle button이 선택되었는지 여부를 확인하는 변수
+				
+			/*--------------------toggle button 체크 확인------------------*/
+				for(int i=0; i<v_schedule.v_st.length; i++) {
+					if(v_schedule.v_st[i].tbt_time.isSelected()) {
+						flag = true;
+						seleted_time = i;
+					}
+				}
+				
+		/*--------------------toggle button 체크 여부에 따라 setEnabled() 호출 ------------------*/
+				if(!flag) {	
+					for(int j=0; j<v_schedule.v_st.length; j++)
+						v_schedule.v_st[j].tbt_time.setEnabled(true);
+				}
+				else {
+					for(int j=0; j<v_schedule.v_st.length; j++)
+						if(seleted_time != j)
+							v_schedule.v_st[j].tbt_time.setEnabled(false);
+				}
+				}//mouseReleased	
+			});//v_schedule.v_st[i].addMouseListener
+		}//for
+		
+		/*
+		 * 작성자: 박진형
 		 * 수정일자: 07/03 20:13
-		 * 이벤트리스너 기능: ScheduleDate can Check?
-		 * (Released)
+		 * 이벤트리스너 기능: ScheduleDateView Check
+		 * (MouseReleased)
 		 * 선택해제(!flag): 다 false가 되는 순간 tbt.setEnabled(true)
 		 * 선택(flag): 하나가 true 되는 순간  선택된 것 제외 나머지 tbt.setEnabled(false)
 		 */
