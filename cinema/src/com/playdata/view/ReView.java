@@ -82,7 +82,7 @@ public class ReView extends JFrame {
 		Vector<ReviewSubView> vr = selectReview(v, page_now);
 		
 		for(int i=0; i<vr.size(); i++) {
-			vr.get(i).setBounds(20, 95*(i), 1140, 100);
+			vr.get(i).setBounds(20, 100*(i)+4, 1140, 95);
 			p_reviews.add(vr.get(i));
 		}
 		
