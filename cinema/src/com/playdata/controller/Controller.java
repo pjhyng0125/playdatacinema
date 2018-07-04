@@ -79,7 +79,6 @@ public class Controller implements ActionListener {
 				}
 			}
 		});
-		
 		v_review.bt_back.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -208,6 +207,9 @@ public class Controller implements ActionListener {
 		v_screen.pay_view.addActionListener(this);
 		v_screen.select_movie.addActionListener(this);
 		v_reserve.bt_mypage.addActionListener(this);
+		v_reserve.bt_logout.addActionListener(this);
+		v_mypage.bt_back.addActionListener(this);
+		v_review.bt_reserve.addActionListener(this);
 	}//생성자
 	
 	/*
@@ -271,6 +273,18 @@ public class Controller implements ActionListener {
 			v_screen.setVisible(false);
 			v_pay.setVisible(true);
 		}
+		else if(ob == v_reserve.bt_logout) {
+			if(v_reserve.sendConfirmedMsg("로그아웃 하시겠습니까?") == 0) {
+				v_reserve.sendshowMsg("로그아웃 되었습니다.");
+				v_reserve.setVisible(false);
+				v_login.setVisible(true);
+			}
+		}
+		else if(ob == v_mypage.bt_back) {
+			v_mypage.setVisible(false);
+			v_reserve.setVisible(true);
+		}
+		else if
 	}//actionPerformed
 	
 }

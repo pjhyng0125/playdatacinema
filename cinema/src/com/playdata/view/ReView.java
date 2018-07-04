@@ -18,7 +18,7 @@ import com.playdata.model.Comment;
  */
 public class ReView extends JFrame {
 	public JPanel p_content, p_reviews, p_bottom;
-	public JButton bt_back, bt_next;
+	public JButton bt_back, bt_next, bt_reserve;
 	public JLabel la_page;
 	public ArrayList<ReviewSubView> list;
 	
@@ -31,6 +31,7 @@ public class ReView extends JFrame {
 		bt_back = new JButton("이전");
 		bt_next = new JButton("다음");
 		la_page = new JLabel("- i -");
+		bt_reserve = new JButton("예매창으로");
 		
 		list = new ArrayList<>();
 		ReviewSubView rsv1 = new ReviewSubView("blank", "blank", 1);
@@ -58,6 +59,7 @@ public class ReView extends JFrame {
 		la_page.setFont(new Font("TimesRoman", Font.PLAIN, 25));
 		bt_back.setBounds(360, 10, 70, 30);
 		bt_next.setBounds(800, 10, 70, 30);
+		bt_reserve.setBounds(60, 10, 120, 30);
 //add to frame
 		add(p_content, BorderLayout.PAGE_START);
 		add(p_reviews, BorderLayout.CENTER);
@@ -65,6 +67,7 @@ public class ReView extends JFrame {
 		p_bottom.add(la_page);
 		p_bottom.add(bt_back);
 		p_bottom.add(bt_next);	
+		p_bottom.add(bt_reserve);	
 		
 		for(int i=0; i<list.size(); i++) {
 			list.get(i).setBounds(20, 100*(i)+4, 1140, 95);
