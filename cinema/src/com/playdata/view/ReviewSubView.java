@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
 public class ReviewSubView extends JPanel {
-	JLabel la_id, la_content;
+	public JLabel la_id, la_content;
 	public JToggleButton []tbt_stars;
 	String id, content;
 	int star;
@@ -37,6 +37,7 @@ public class ReviewSubView extends JPanel {
 		la_content.setBackground(Color.gray);
 		add(la_id);
 		add(la_content);
+		
 		for(int i=0; i<tbt_stars.length; i++) {
 			tbt_stars[i].setBounds(50*(i)+500, 30, 50, 50);
 			add(tbt_stars[i]);

@@ -29,6 +29,7 @@ public class Controller implements ActionListener {
 	int seleted_date;//ScheduleDateView에서 선택된 toggle button의 index를 저장하는 변수
 	int seleted_time;//ScheduleTimeView에서 선택된 toggle button의 index를 저장하는 변수
 	int review_page; //후기 창 page 변수
+	int review_maxpage;
 	
 //arraylist
 	ArrayList<Comment> list_comment;
@@ -52,14 +53,43 @@ public class Controller implements ActionListener {
 		list_comment.add(new Comment("d", "1121", 4));
 		list_comment.add(new Comment("e", "3141", 4));
 		list_comment.add(new Comment("f", "1161", 4));
-//list_comment 내에서 page에 따라 4개 이하의 코멘트를 list에 저장
-
-		for(int i=0; i<list_comment.size(); i++) {
-			ReviewSubView r = new ReviewSubView(list_comment.get(i).getId(), list_comment.get(i).getContent(), list_comment.get(i).getStar());
-			list_review.add(r);
-		}//일단 다 받아옴
+		list_comment.add(new Comment("g", "1161", 4));
+		list_comment.add(new Comment("h", "1161", 4));
+		list_comment.add(new Comment("i", "1161", 4));
+		list_comment.add(new Comment("j", "1161", 4));
+		list_comment.add(new Comment("k", "1161", 4));
+		
+		v_review.rewriteReview(selectReview(list_comment, 0));
+		
+		review_maxpage = list_comment.size() / 4;
+		System.out.println("review_maxpage: "+review_maxpage);
 		
 /*-------------------------------------EVENT LISTENER(익명)------------------------------------------*/
+		/*
+		 * 작성자: 박진형
+		 * 수정일자: 07/03 23:18
+		 * 이벤트리스너 기능: ReView => 다음 버튼 클릭 & 이전 버튼 클릭
+		 */
+		v_review.bt_next.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(review_page >= 0 && review_page < review_maxpage) {
+					review_page++;
+					v_review.rewriteReview(selectReview(list_comment, review_page));
+				}
+			}
+		});
+		
+		v_review.bt_back.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(review_page > 0 && review_page <= review_maxpage) {
+					review_page--;
+					v_review.rewriteReview(selectReview(list_comment, review_page));
+				}
+			}
+		});
+		
 		/*
 		 * 작성자: 박진형
 		 * 수정일자: 07/03 23:18
@@ -179,6 +209,20 @@ public class Controller implements ActionListener {
 		v_screen.select_movie.addActionListener(this);
 		v_reserve.bt_mypage.addActionListener(this);
 	}//생성자
+	
+	/*
+	 * 작성자: 박진형
+	 * 수정일자: 07/04 17:34
+	 * selectReview: ReView => 페이지에 해당하는 4개의 ReviewSubView가 담긴 벡터 반환 
+	 */
+	public ArrayList<Comment> selectReview(ArrayList<Comment> v_in, int review_page){
+		v_review.la_page.setText("- "+review_page+" -");	//review 창 페이지 라벨 텍스트 설정
+		ArrayList<Comment> v_out = new ArrayList<>();
+		for(int i=0; i<v_in.size(); i++)
+			if((i/4) == review_page)
+				v_out.add(v_in.get(i));
+		return v_out;
+	}
 	
 	public static void main(String[] args) {
 		new Controller();
