@@ -36,28 +36,28 @@ public class ReView extends JFrame {
 		setLayout(new BorderLayout());
 		
 		
-//addReviewSubView
-		ReviewSubView rsv = new ReviewSubView();
-		ReviewSubView rsv1 = new ReviewSubView();
-		ReviewSubView rsv2 = new ReviewSubView();
-		ReviewSubView rsv3 = new ReviewSubView();
-		ReviewSubView rsv4 = new ReviewSubView();
-		ReviewSubView rsv5 = new ReviewSubView();
-		ReviewSubView rsv6 = new ReviewSubView();
-		ReviewSubView rsv7 = new ReviewSubView();
-		ReviewSubView rsv8 = new ReviewSubView();
-		ReviewSubView rsv9 = new ReviewSubView();
-		
-		v.add(rsv);
-		v.add(rsv1);
-		v.add(rsv2);
-		v.add(rsv3);
-		v.add(rsv4);
-		v.add(rsv5);
-		v.add(rsv6);
-		v.add(rsv7);
-		v.add(rsv8);
-		v.add(rsv9);
+////addReviewSubView
+//		ReviewSubView rsv = new ReviewSubView();
+//		ReviewSubView rsv1 = new ReviewSubView();
+//		ReviewSubView rsv2 = new ReviewSubView();
+//		ReviewSubView rsv3 = new ReviewSubView();
+//		ReviewSubView rsv4 = new ReviewSubView();
+//		ReviewSubView rsv5 = new ReviewSubView();
+//		ReviewSubView rsv6 = new ReviewSubView();
+//		ReviewSubView rsv7 = new ReviewSubView();
+//		ReviewSubView rsv8 = new ReviewSubView();
+//		ReviewSubView rsv9 = new ReviewSubView();
+//		
+//		v.add(rsv);
+//		v.add(rsv1);
+//		v.add(rsv2);
+//		v.add(rsv3);
+//		v.add(rsv4);
+//		v.add(rsv5);
+//		v.add(rsv6);
+//		v.add(rsv7);
+//		v.add(rsv8);
+//		v.add(rsv9);
 
 //setBackground
 				p_content.setBackground(Color.CYAN);
@@ -93,7 +93,7 @@ public class ReView extends JFrame {
 	/*
 	 * 작성자: 박진형
 	 * 수정일자: 07/02 23:59
-	 * 함수 기능: 후기 전체 백터에서 page_now에 해당하는 후기 4개만 뽑아서 벡터에 저장
+	 * 함수 기능: 파라미터의 ArrayList(0~4)를 화면에 출력! 그저 출력만
 	 */
 	public Vector<ReviewSubView> selectReview(Vector<ReviewSubView> v_in, int page_now){
 		Vector<ReviewSubView> v_out = new Vector<>();

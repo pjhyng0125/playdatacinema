@@ -66,7 +66,4 @@ public class ReserView extends JFrame{
 			}
 		}
 	}//setstarSelected
-	public static void main(String[] args) {
-		new ReserView();
-	}
 }

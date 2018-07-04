@@ -10,9 +10,16 @@ import javax.swing.JToggleButton;
 public class ReviewSubView extends JPanel {
 	JLabel la_id, la_content;
 	public JToggleButton []tbt_stars;
-	public ReviewSubView() {
-		la_id = new JLabel("pjhyng0125");
-		la_content = new JLabel("content");
+	String id, content;
+	int star;
+	
+	public ReviewSubView(String id, String content, int star) {
+		this.id = id;
+		this.content = content;
+		this.star = star;
+		
+		la_id = new JLabel(id);
+		la_content = new JLabel(content);
 		tbt_stars = new JToggleButton[5];
 		setLayout(null);
 		

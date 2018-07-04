@@ -4,14 +4,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
-
+import com.playdata.model.Comment;
 import com.playdata.view.LoginView;
 import com.playdata.view.MyPageView;
 import com.playdata.view.PayView;
 import com.playdata.view.ReView;
 import com.playdata.view.ReserView;
+import com.playdata.view.ReviewSubView;
 import com.playdata.view.ScheduleView;
 import com.playdata.view.ScreenView;
 
@@ -24,11 +25,17 @@ public class Controller implements ActionListener {
 	MyPageView v_mypage;
 	ScreenView v_screen;
 	PayView v_pay;
-	
+//int
 	int seleted_date;//ScheduleDateView에서 선택된 toggle button의 index를 저장하는 변수
 	int seleted_time;//ScheduleTimeView에서 선택된 toggle button의 index를 저장하는 변수
+	int review_page; //후기 창 page 변수
+	
+//arraylist
+	ArrayList<Comment> list_comment;
+	ArrayList<ReviewSubView> list_review;
 	
 	public Controller() {
+//new
 		v_login = new LoginView();
 		v_reserve = new ReserView();
 		v_review = new ReView();
@@ -36,6 +43,21 @@ public class Controller implements ActionListener {
 		v_mypage = new MyPageView();
 		v_screen = new ScreenView();
 		v_pay = new PayView();
+		
+//show review
+		list_comment = new ArrayList<>();
+		list_comment.add(new Comment("a", "1234", 1));
+		list_comment.add(new Comment("b", "5678", 2));
+		list_comment.add(new Comment("c", "9101", 3));
+		list_comment.add(new Comment("d", "1121", 4));
+		list_comment.add(new Comment("e", "3141", 4));
+		list_comment.add(new Comment("f", "1161", 4));
+//list_comment 내에서 page에 따라 4개 이하의 코멘트를 list에 저장
+
+		for(int i=0; i<list_comment.size(); i++) {
+			ReviewSubView r = new ReviewSubView(list_comment.get(i).getId(), list_comment.get(i).getContent(), list_comment.get(i).getStar());
+			list_review.add(r);
+		}//일단 다 받아옴
 		
 /*-------------------------------------EVENT LISTENER(익명)------------------------------------------*/
 		/*
