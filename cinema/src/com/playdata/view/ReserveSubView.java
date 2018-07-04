@@ -21,9 +21,18 @@ public class ReserveSubView extends JPanel {
 	public JToggleButton []tbt_stars;
 	JPanel p_image, p_content, p_stars, p_ps, p_pe, p_ls, p_le, p_center;
 	
+	ImageIcon image_poster;
+	
 	public ReserveSubView() {
+		/*
+		 * 작성자 : 장우영
+		 * 수정일자 : 07/04 17:42
+		 * 이미지아이콘을 이용한 라벨에 이미지 넣기.
+		*/
+		image_poster = new ImageIcon("image/antman_reserview.png");
 		bt_reserve = new JButton("지금 예매");
-		la_image = new JLabel("la_image");
+		la_image = new JLabel(image_poster);
+		la_image.setBounds(14, 5, 232, 283);
 		la_title = new JLabel("앤트맨과 와스프");
 		la_percent = new JLabel("예매율 35.5%");
 		la_genre = new JLabel("코미디액션");
@@ -55,6 +64,7 @@ public class ReserveSubView extends JPanel {
 //p_image
 		p_image.setPreferredSize(new Dimension(0, 300));
 		p_center.add(p_image, BorderLayout.PAGE_START);
+		p_image.setLayout(null);
 		p_image.add(la_image);
 //p_content
 		p_center.add("Center",p_content);

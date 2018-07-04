@@ -27,18 +27,18 @@ public class PayView extends JFrame {
 	JPanel p_cash,p_discount;
 	  
 	//-----------------------------라벨
-	JLabel la_member;//회원등급
-	JLabel la_pay;//결제금액
-	JLabel la_discount;//할인금액
-	JLabel la_point;//포인트사용
-	JLabel la_final_pay;//최종결제금액
-	JLabel la_have_cash;//보유 캐쉬
-	private JLabel la_have_cash_1;
-	JLabel la_balance;// 사용후 잔액
-	JLabel la_sc_point;// 지급예정포인트
-	JLabel la_cash;//왼쪽 캐쉬
-	JLabel la_charge_cash;//캐쉬충전
-	JLabel la_discount_list, la_discount_coupon,la_have_point;//할인내역,할인쿠폰,보유포인트
+	JLabel lb_member;//회원등급
+	JLabel lb_pay;//결제금액
+	JLabel lb_discount;//할인금액
+	JLabel lb_point;//포인트사용
+	JLabel lb_final_pay;//최종결제금액
+	JLabel lb_have_cash;//보유 캐쉬
+	private JLabel lb_have_cash_1;
+	JLabel lb_balance;// 사용후 잔액
+	JLabel lb_sc_point;// 지급예정포인트
+	JLabel lb_cash;//왼쪽 캐쉬
+	JLabel lb_charge_cash;//캐쉬충전
+	JLabel lb_discount_list, lb_discount_coupon,lb_have_point;//할인내역,할인쿠폰,보유포인트
 	Choice ch_copoun;//쿠폰 선택
 	
 	//-----------------------------텍스트필드
@@ -56,10 +56,10 @@ public class PayView extends JFrame {
     JTextField tf_use_point;//포인트 사용
     
     //-------------------------------버튼
-    JButton b_ok,b_cancel;//오른쪽 확인,취소
-    JButton b_charge_ok,b_charge_cancel;//캐쉬 충전 취소
-    JButton b_discount_ok,b_discount_cancel;//할인 쿠폰 사용 취소
-    JButton b_point_ok,b_point_cancel;//포인트 사용 취소
+    JButton bt_ok,bt_cancel;//오른쪽 확인,취소
+    JButton bt_charge_ok,bt_charge_cancel;//캐쉬 충전 취소
+    JButton bt_discount_ok,bt_discount_cancel;//할인 쿠폰 사용 취소
+    JButton bt_point_ok,bt_point_cancel;//포인트 사용 취소
     private JPanel panel_1;
     
     //-------------------------------테두리
@@ -78,28 +78,28 @@ public class PayView extends JFrame {
 			p.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, 
 					Color.BLACK, Color.BLACK, Color.BLACK));
 			p.setBounds(667, 40, 470, 652);
-		la_member = new JLabel("회원등급");
-			la_member.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
+		lb_member = new JLabel("회원등급");
+			lb_member.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
 		tf_pmovie_info = new JTextField();
 			tf_pmovie_info.setText("영화정보 (날짜,시작시간,상영관)");
 		tf_grade = new JTextField();
 			tf_grade.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
 			tf_grade.setText("등급정보");
 			tf_grade.setBorder(lineb);
-		la_pay = new JLabel("결제금액");
-			la_pay.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
-		la_discount = new JLabel("할인금액");
-			la_discount.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
-		la_point = new JLabel("포인트사용");
-			la_point.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
-		la_final_pay = new JLabel("최종결제금액");
-			la_final_pay.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
-		la_have_cash = new JLabel("보유 캐쉬");
-			la_have_cash.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
-		la_balance = new JLabel("사용후 잔액");
-			la_balance.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
-		la_sc_point = new JLabel("지급예정포인트");
-			la_sc_point.setFont(new Font("맑은 고딕", Font.PLAIN, 19));
+		lb_pay = new JLabel("결제금액");
+			lb_pay.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
+		lb_discount = new JLabel("할인금액");
+			lb_discount.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
+		lb_point = new JLabel("포인트사용");
+			lb_point.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
+		lb_final_pay = new JLabel("최종결제금액");
+			lb_final_pay.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
+		lb_have_cash = new JLabel("보유 캐쉬");
+			lb_have_cash.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
+		lb_balance = new JLabel("사용후 잔액");
+			lb_balance.setFont(new Font("맑은 고딕", Font.PLAIN, 21));
+		lb_sc_point = new JLabel("지급예정포인트");
+			lb_sc_point.setFont(new Font("맑은 고딕", Font.PLAIN, 19));
 		
 		//텍스트필드	
 		tf_pay = new JTextField();
@@ -140,24 +140,24 @@ public class PayView extends JFrame {
 		
 			
 	    //버튼
-		b_ok = new JButton("확인");   		   //최종결제 확인
-		b_cancel = new JButton("취소");		   //최종결제 취소
-		b_charge_ok = new JButton("충전");	   //충전 확인
-		b_charge_cancel = new JButton("취소");  //충전 취소
-		b_discount_ok = new JButton("사용");    //쿠폰 사용
-		b_discount_cancel = new JButton("취소");//쿠폰 취소
-		b_point_ok = new JButton("사용");       //포인트 사용
-		b_point_cancel = new JButton("취소");   //포인트 취소
+		bt_ok = new JButton("확인");   		   //최종결제 확인
+		bt_cancel = new JButton("취소");		   //최종결제 취소
+		bt_charge_ok = new JButton("충전");	   //충전 확인
+		bt_charge_cancel = new JButton("취소");  //충전 취소
+		bt_discount_ok = new JButton("사용");    //쿠폰 사용
+		bt_discount_cancel = new JButton("취소");//쿠폰 취소
+		bt_point_ok = new JButton("사용");       //포인트 사용
+		bt_point_cancel = new JButton("취소");   //포인트 취소
 		
 		//라벨위치
-		la_member.setBounds(148, 30, 121, 54);//회원등급
-		la_pay.setBounds(40, 170, 121, 41);//결제금액
-		la_discount.setBounds(40, 242, 121, 41);//할인금액
-		la_point.setBounds(40, 306, 136, 41);//포인트금액
-		la_final_pay.setBounds(40, 368, 161, 41);//최종결제금액
-		la_have_cash.setBounds(40, 437, 161, 41);//보유캐쉬
-		la_balance.setBounds(40, 476, 161, 41);//사용후잔액
-		la_sc_point.setBounds(40, 529, 161, 41);//지급예정포인트
+		lb_member.setBounds(148, 30, 121, 54);//회원등급
+		lb_pay.setBounds(40, 170, 121, 41);//결제금액
+		lb_discount.setBounds(40, 242, 121, 41);//할인금액
+		lb_point.setBounds(40, 306, 136, 41);//포인트금액
+		lb_final_pay.setBounds(40, 368, 161, 41);//최종결제금액
+		lb_have_cash.setBounds(40, 437, 161, 41);//보유캐쉬
+		lb_balance.setBounds(40, 476, 161, 41);//사용후잔액
+		lb_sc_point.setBounds(40, 529, 161, 41);//지급예정포인트
 		
 		//텍스트필드
 		tf_grade.setBounds(253, 40, 161, 34);//등급정보
@@ -171,14 +171,14 @@ public class PayView extends JFrame {
 		tf_sc_point.setBounds(252, 529, 110, 37);//지급예정포인트
 			
 		//버튼 위치
-		b_ok.setBounds(118, 599, 105, 41);    		 //최종결제 확인
-		b_cancel.setBounds(271, 599, 105, 41); 		 //최종결제 취소
-		b_charge_ok.setBounds(432, 264, 61, 27);     //충전 확인
-		b_charge_cancel.setBounds(507, 264, 61, 27); //충전 취소
-		b_discount_ok.setBounds(432, 500, 61, 27);   //쿠폰 사용
-		b_discount_cancel.setBounds(507, 500, 61, 27);//쿠폰 취소
-		b_point_ok.setBounds(432, 586, 61, 27);      //포인트 사용
-		b_point_cancel.setBounds(507, 586, 61, 27);  //포인트 취소
+		bt_ok.setBounds(118, 599, 105, 41);    		 //최종결제 확인
+		bt_cancel.setBounds(271, 599, 105, 41); 		 //최종결제 취소
+		bt_charge_ok.setBounds(432, 264, 61, 27);     //충전 확인
+		bt_charge_cancel.setBounds(507, 264, 61, 27); //충전 취소
+		bt_discount_ok.setBounds(432, 500, 61, 27);   //쿠폰 사용
+		bt_discount_cancel.setBounds(507, 500, 61, 27);//쿠폰 취소
+		bt_point_ok.setBounds(432, 586, 61, 27);      //포인트 사용
+		bt_point_cancel.setBounds(507, 586, 61, 27);  //포인트 취소
 
 		
 
@@ -186,27 +186,27 @@ public class PayView extends JFrame {
 		//contentpane
 	    getContentPane().add(p);
 	    getContentPane().setLayout(null);
-	    getContentPane().add(b_charge_ok);
-		getContentPane().add(b_charge_cancel);
-		getContentPane().add(b_point_ok);
-		getContentPane().add(b_point_cancel);
-		getContentPane().add(b_discount_ok);
-		getContentPane().add(b_discount_cancel);
+	    getContentPane().add(bt_charge_ok);
+		getContentPane().add(bt_charge_cancel);
+		getContentPane().add(bt_point_ok);
+		getContentPane().add(bt_point_cancel);
+		getContentPane().add(bt_discount_ok);
+		getContentPane().add(bt_discount_cancel);
 		
 	    
 		p.setLayout(null);
-		p.add(la_member);
+		p.add(lb_member);
 		p.add(tf_pmovie_info);
 		p.add(tf_grade);
-		p.add(la_pay);
-		p.add(la_discount);
-		p.add(la_point);
-		p.add(la_final_pay);
-		p.add(la_have_cash);
-		p.add(la_balance);
-		p.add(la_sc_point);
-		p.add(b_ok);
-		p.add(b_cancel);
+		p.add(lb_pay);
+		p.add(lb_discount);
+		p.add(lb_point);
+		p.add(lb_final_pay);
+		p.add(lb_have_cash);
+		p.add(lb_balance);
+		p.add(lb_sc_point);
+		p.add(bt_ok);
+		p.add(bt_cancel);
 		p.add(tf_pay);
 		p.add(tf_discount);
 		p.add(tf_point);
@@ -217,13 +217,13 @@ public class PayView extends JFrame {
 		
 		
         //왼쪽 캐쉬 충전, 할인내역 라벨
-		la_cash = new JLabel("캐쉬");
-		la_cash.setHorizontalAlignment(SwingConstants.CENTER);
-			la_cash.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
-			la_cash.setBorder(linea);
-		la_have_cash_1 = new JLabel("보유캐쉬");
-		la_have_cash_1.setHorizontalAlignment(SwingConstants.CENTER);
-			la_have_cash_1.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
+		lb_cash = new JLabel("캐쉬");
+		lb_cash.setHorizontalAlignment(SwingConstants.CENTER);
+			lb_cash.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
+			lb_cash.setBorder(linea);
+		lb_have_cash_1 = new JLabel("보유캐쉬");
+		lb_have_cash_1.setHorizontalAlignment(SwingConstants.CENTER);
+			lb_have_cash_1.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
 	/*	tf_have_cash = new JTextField();
 			tf_have_cash.setBackground(SystemColor.text);
 			tf_have_cash.setText("30,000");	
@@ -234,12 +234,12 @@ public class PayView extends JFrame {
 			tf_have_cash.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
 			
 		//왼쪽 라벨 위치
-		la_cash.setBounds(101, 103, 109, 47);
-		la_have_cash_1.setBounds(101, 178, 109, 50);
+		lb_cash.setBounds(101, 103, 109, 47);
+		lb_have_cash_1.setBounds(101, 178, 109, 50);
 		
 		//contentpane
-		getContentPane().add(la_cash);
-		getContentPane().add(la_have_cash_1);
+		getContentPane().add(lb_cash);
+		getContentPane().add(lb_have_cash_1);
 		
 		
 		
@@ -270,12 +270,12 @@ public class PayView extends JFrame {
 				p_cash.setBounds(77, 84, 532, 259);
 				getContentPane().add(p_cash);
 				p_cash.setLayout(null);
-				la_charge_cash = new JLabel("캐쉬 충전");
-				la_charge_cash.setHorizontalAlignment(SwingConstants.CENTER);
-				la_charge_cash.setBounds(27, 167, 109, 47);
-				p_cash.add(la_charge_cash);
-				la_charge_cash.setForeground(SystemColor.desktop);
-				la_charge_cash.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
+				lb_charge_cash = new JLabel("캐쉬 충전");
+				lb_charge_cash.setHorizontalAlignment(SwingConstants.CENTER);
+				lb_charge_cash.setBounds(27, 167, 109, 47);
+				p_cash.add(lb_charge_cash);
+				lb_charge_cash.setForeground(SystemColor.desktop);
+				lb_charge_cash.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
 				tf_have_cash_1 = new JTextField();
 				tf_have_cash_1.setBounds(195, 102, 110, 37);
 				p_cash.add(tf_have_cash_1);
@@ -290,22 +290,22 @@ public class PayView extends JFrame {
 				p_discount.setBounds(77, 406, 532, 259);
 				getContentPane().add(p_discount);
 				p_discount.setLayout(null);
-				la_discount_list = new JLabel("할인내역");
-				la_discount_list.setHorizontalAlignment(SwingConstants.CENTER);
-				la_discount_list.setBorder(linea);
-				la_discount_list.setBounds(24, 12, 109, 47);
-				p_discount.add(la_discount_list);
-				la_discount_list.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
-				la_discount_coupon = new JLabel("할인 쿠폰");
-				la_discount_coupon.setHorizontalAlignment(SwingConstants.CENTER);
-				la_discount_coupon.setBounds(24, 83, 109, 50);
-				p_discount.add(la_discount_coupon);
-				la_discount_coupon.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
-				la_have_point = new JLabel("보유 포인트");
-				la_have_point.setHorizontalAlignment(SwingConstants.CENTER);
-				la_have_point.setBounds(24, 166, 129, 47);
-				p_discount.add(la_have_point);
-				la_have_point.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
+				lb_discount_list = new JLabel("할인내역");
+				lb_discount_list.setHorizontalAlignment(SwingConstants.CENTER);
+				lb_discount_list.setBorder(linea);
+				lb_discount_list.setBounds(24, 12, 109, 47);
+				p_discount.add(lb_discount_list);
+				lb_discount_list.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
+				lb_discount_coupon = new JLabel("할인 쿠폰");
+				lb_discount_coupon.setHorizontalAlignment(SwingConstants.CENTER);
+				lb_discount_coupon.setBounds(24, 83, 109, 50);
+				p_discount.add(lb_discount_coupon);
+				lb_discount_coupon.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
+				lb_have_point = new JLabel("보유 포인트");
+				lb_have_point.setHorizontalAlignment(SwingConstants.CENTER);
+				lb_have_point.setBounds(24, 166, 129, 47);
+				p_discount.add(lb_have_point);
+				lb_have_point.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
 			
 		
 		setSize(1200, 800);
