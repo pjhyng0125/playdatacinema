@@ -25,7 +25,7 @@ import javax.swing.SwingConstants;
 public class PayView extends JFrame {
 	JPanel p;
 	JPanel p_cash,p_discount;
-	
+	  
 	//-----------------------------라벨
 	JLabel la_member;//회원등급
 	JLabel la_pay;//결제금액

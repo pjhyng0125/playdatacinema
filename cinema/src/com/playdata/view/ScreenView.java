@@ -25,7 +25,8 @@ public class ScreenView extends JFrame {
 	JToggleButton b_seat_b1,b_seat_b2,b_seat_b3,b_seat_b4,b_seat_b5,b_seat_b6,b_seat_b7,b_seat_b8,b_seat_b9,b_seat_b10; //b좌석
 	JToggleButton b_seat_c1,b_seat_c2,b_seat_c3,b_seat_c4,b_seat_c5,b_seat_c6,b_seat_c7,b_seat_c8,b_seat_c9,b_seat_c10; //c좌석
 	
-	JButton select_movie,pay_view;//페이지 이동
+	public JButton select_movie;//페이지 이동
+	public JButton pay_view;
 
 	//---------------------------------------라벨
 	JLabel la_a,la_b,la_c;//좌석라벨
@@ -369,7 +370,7 @@ public class ScreenView extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 
+		
 	}
-
 }
 	
