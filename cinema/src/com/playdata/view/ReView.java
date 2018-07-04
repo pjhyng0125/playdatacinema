@@ -90,6 +90,7 @@ public class ReView extends JFrame {
 				list.get(i).setVisible(true);
 				list.get(i).la_id.setText(list_comment.get(i).getId());
 				list.get(i).la_content.setText(list_comment.get(i).getContent());
+				list.get(i).setstarSelected(list_comment.get(i).getStar());
 			}
 			else{
 				list.get(i).setVisible(false);

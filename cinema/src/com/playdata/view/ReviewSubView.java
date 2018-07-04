@@ -46,4 +46,17 @@ public class ReviewSubView extends JPanel {
 		setBackground(Color.PINK);
 		setSize(1000,100);
 	}
+	
+	public void setstarSelected(int checked) {
+		for(int k=0; k<tbt_stars.length; k++) {
+			if(k<=checked) {
+				tbt_stars[k].setSelected(true);
+				tbt_stars[k].setIcon(new ImageIcon("image/star_yellow.png"));
+			}
+			else {
+				tbt_stars[k].setSelected(false);
+				tbt_stars[k].setIcon(new ImageIcon("image/star_blank.png"));
+			}
+		}
+	}//setstarSelected
 }

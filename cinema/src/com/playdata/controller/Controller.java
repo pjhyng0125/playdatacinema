@@ -45,24 +45,28 @@ public class Controller implements ActionListener {
 		v_screen = new ScreenView();
 		v_pay = new PayView();
 		
-//show review
+//add comments in list
 		list_comment = new ArrayList<>();
 		list_comment.add(new Comment("a", "1234", 1));
 		list_comment.add(new Comment("b", "5678", 2));
-		list_comment.add(new Comment("c", "9101", 3));
+		list_comment.add(new Comment("c", "9101", 4));
 		list_comment.add(new Comment("d", "1121", 4));
-		list_comment.add(new Comment("e", "3141", 4));
+		list_comment.add(new Comment("e", "3141", 2));
 		list_comment.add(new Comment("f", "1161", 4));
-		list_comment.add(new Comment("g", "1161", 4));
+		list_comment.add(new Comment("g", "1161", 0));
 		list_comment.add(new Comment("h", "1161", 4));
-		list_comment.add(new Comment("i", "1161", 4));
-		list_comment.add(new Comment("j", "1161", 4));
-//		list_comment.add(new Comment("k", "1161", 4));
-		
+		list_comment.add(new Comment("i", "1161", 2));
+		list_comment.add(new Comment("j", "1161", 2));
+		list_comment.add(new Comment("k", "1161", 4));
+
+//review 창 후기 페이지 0으로 설정
 		v_review.rewriteReview(selectReview(list_comment, 0));
-		
 		review_maxpage = list_comment.size() / 4;
-		System.out.println("review_maxpage: "+review_maxpage);
+//set ReserView stars...
+		v_reserve.setstarSelected(0, 4);
+		v_reserve.setstarSelected(1, 3);
+		v_reserve.setstarSelected(2, 2);
+		v_reserve.setstarSelected(3, 1);
 		
 /*-------------------------------------EVENT LISTENER(익명)------------------------------------------*/
 		/*
@@ -230,27 +234,27 @@ public class Controller implements ActionListener {
 		new Controller();
 	}
 	
+	
+/*-------------------------------------EVENT LISTENER(actionPerformed)------------------------------------------*/
 	/*
 	 * 작성자: 박진형
 	 * 수정일자: 07/01 12:35
 	 * 이벤트리스너 기능: ReserveSubView에서 Selected된 별의 이미지 변경
 	 */
-	
-/*-------------------------------------EVENT LISTENER(actionPerformed)------------------------------------------*/
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object ob = e.getSource();
 		
-		for(int i=0; i<v_reserve.subv_reserve.length;i++) {
-			for(int j=0; j<v_reserve.subv_reserve[i].tbt_stars.length;j++) {
-				if(ob == v_reserve.subv_reserve[i].tbt_stars[j]) {
-					if(v_reserve.subv_reserve[i].tbt_stars[j].isSelected())
-						v_reserve.setstarSelected(i, j);
-					else
-						v_reserve.setstarSelected(i, j);
-				}
-			}//for-j
-		}//for-i
+//		for(int i=0; i<v_reserve.subv_reserve.length;i++) {
+//			for(int j=0; j<v_reserve.subv_reserve[i].tbt_stars.length;j++) {
+//				if(ob == v_reserve.subv_reserve[i].tbt_stars[j]) {
+//					if(v_reserve.subv_reserve[i].tbt_stars[j].isSelected())
+//						v_reserve.setstarSelected(i, j);
+//					else
+//						v_reserve.setstarSelected(i, j);
+//				}
+//			}//for-j
+//		}//for-i
 		
 /*---------------View Change EVENT---------------*/	
 		if(ob == v_login.bt_login) {
@@ -284,7 +288,10 @@ public class Controller implements ActionListener {
 			v_mypage.setVisible(false);
 			v_reserve.setVisible(true);
 		}
-		else if
+		else if(ob == v_review.bt_reserve) {
+			v_review.setVisible(false);
+			v_reserve.setVisible(true);
+		}
 	}//actionPerformed
 	
 }

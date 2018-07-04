@@ -8,13 +8,14 @@ import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 /*
  * 예매뷰
  */
 public class ReserView extends JFrame{
 	public JPanel p_ps, p_center;
-	public JButton bt_mypage;
+	public JButton bt_mypage, bt_logout;
 	public ReserveSubView subv_reserve[];
 	
 	public ReserView() {
@@ -22,6 +23,8 @@ public class ReserView extends JFrame{
 		p_ps = new JPanel();
 		p_center = new JPanel();
 		bt_mypage = new JButton("마이 페이지");
+		bt_logout = new JButton("로그아웃");
+		
 		subv_reserve = new ReserveSubView[4];
 		
 		setLayout(new BorderLayout());
@@ -31,15 +34,13 @@ public class ReserView extends JFrame{
 		p_ps.setLayout(null);
 		p_ps.setBackground(Color.CYAN);
 		bt_mypage.setBounds(1000, 10, 120, 40);
+		bt_logout.setBounds(60, 10, 120, 40);
 		p_ps.add(bt_mypage);
+		p_ps.add(bt_logout);	
 		
 		add(p_center, BorderLayout.CENTER);
 //p_center
 		p_center.setLayout(new GridLayout(1, 4));
-//		p_center.add(new ReserveSubView());
-//		p_center.add(new ReserveSubView());
-//		p_center.add(new ReserveSubView());
-//		p_center.add(new ReserveSubView());
 		for(int i=0; i<subv_reserve.length; i++) {
 			subv_reserve[i] = new ReserveSubView();
 			p_center.add(subv_reserve[i]);
@@ -66,4 +67,12 @@ public class ReserView extends JFrame{
 			}
 		}
 	}//setstarSelected
+	
+	public int sendConfirmedMsg(String msg) {
+		return JOptionPane.showConfirmDialog(this, msg);
+	}
+	
+	public void sendshowMsg(String msg) {
+		JOptionPane.showMessageDialog(this, msg);
+	}
 }
