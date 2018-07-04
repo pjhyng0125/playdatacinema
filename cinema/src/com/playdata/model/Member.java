@@ -1,6 +1,6 @@
 package com.playdata.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 /*
  * 멤버빈즈: 회원의 정보를 저장 관리
