@@ -40,28 +40,6 @@ public class Controller implements ActionListener {
 /*-------------------------------------EVENT LISTENER(익명)------------------------------------------*/
 		/*
 		 * 작성자: 박진형
-		 * 수정일자: 07/03 23:40
-		 * 이벤트리스너 기능: About ScreenView
-		 */
-		v_screen.pay_view.addActionListener(this);
-		v_screen.select_movie.addActionListener(this);
-		
-		/*
-		 * 작성자: 박진형
-		 * 수정일자: 07/03 23:18
-		 * 이벤트리스너 기능: ScheduleView => ScheduleTimeView Check
-		 */
-		v_schedule.bt_next.addActionListener(this);
-		
-		/*
-		 * 작성자: 박진형
-		 * 수정일자: 07/03 23:18
-		 * 이벤트리스너 기능: ReserView => MyPageView
-		 */
-		v_reserve.bt_mypage.addActionListener(this);
-		
-		/*
-		 * 작성자: 박진형
 		 * 수정일자: 07/03 23:18
 		 * 이벤트리스너 기능: ScheduleView => Check ScheduleTimeView
 		 */
@@ -158,19 +136,6 @@ public class Controller implements ActionListener {
 				}
 			});
 		
-		/*
-		 * 작성자: 박진형
-		 * 수정일자: 07/01 10:01
-		 * 이벤트리스너 기능: LoginView (bt_login) click => Move ReserView
-		 */
-		v_login.bt_login.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				v_login.setVisible(false);
-				v_reserve.setVisible(true);
-			}
-		}); //bt_login actionListener
 		
 		/*
 		 * 작성자: 박진형
@@ -180,6 +145,17 @@ public class Controller implements ActionListener {
 		for(int i=0; i<v_reserve.subv_reserve.length; i++)
 			for(int j=0; j<v_reserve.subv_reserve[i].tbt_stars.length;j++)
 				v_reserve.subv_reserve[i].tbt_stars[j].addActionListener(this);
+
+		/*
+		 * 작성자: 박진형
+		 * 수정일자: 07/01 10:01
+		 * 이벤트리스너 기능: For View Change Event
+		 */
+		v_login.bt_login.addActionListener(this);
+		v_schedule.bt_next.addActionListener(this);
+		v_screen.pay_view.addActionListener(this);
+		v_screen.select_movie.addActionListener(this);
+		v_reserve.bt_mypage.addActionListener(this);
 	}//생성자
 	
 	public static void main(String[] args) {
@@ -208,7 +184,12 @@ public class Controller implements ActionListener {
 			}//for-j
 		}//for-i
 		
-		if(ob == v_reserve.bt_mypage) {
+/*---------------View Change EVENT---------------*/	
+		if(ob == v_login.bt_login) {
+			v_login.setVisible(false);
+			v_reserve.setVisible(true);
+		}
+		else if(ob == v_reserve.bt_mypage) {
 			v_reserve.setVisible(false);
 			v_mypage.setVisible(true);
 		}
