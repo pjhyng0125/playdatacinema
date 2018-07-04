@@ -57,7 +57,7 @@ public class Controller implements ActionListener {
 		list_comment.add(new Comment("h", "1161", 4));
 		list_comment.add(new Comment("i", "1161", 4));
 		list_comment.add(new Comment("j", "1161", 4));
-		list_comment.add(new Comment("k", "1161", 4));
+//		list_comment.add(new Comment("k", "1161", 4));
 		
 		v_review.rewriteReview(selectReview(list_comment, 0));
 		
@@ -216,7 +216,7 @@ public class Controller implements ActionListener {
 	 * selectReview: ReView => 페이지에 해당하는 4개의 ReviewSubView가 담긴 벡터 반환 
 	 */
 	public ArrayList<Comment> selectReview(ArrayList<Comment> v_in, int review_page){
-		v_review.la_page.setText("- "+review_page+" -");	//review 창 페이지 라벨 텍스트 설정
+		v_review.la_page.setText("- "+(review_page+1)+" -");	//review 창 페이지 라벨 텍스트 설정
 		ArrayList<Comment> v_out = new ArrayList<>();
 		for(int i=0; i<v_in.size(); i++)
 			if((i/4) == review_page)

@@ -82,15 +82,14 @@ public class ReView extends JFrame {
 	 */
 	public void rewriteReview(ArrayList<Comment> list_comment) {
 		int list_size = list_comment.size();
-		System.out.println("list_comment size: "+ list_size);
-		for(int i=0; i<list_comment.size(); i++) {
+		for(int i=0; i<4; i++) {
 			if(i < list_size) {
+				list.get(i).setVisible(true);
 				list.get(i).la_id.setText(list_comment.get(i).getId());
 				list.get(i).la_content.setText(list_comment.get(i).getContent());
 			}
 			else{
-				list.get(i).la_id.setText(" ");
-				list.get(i).la_content.setText(" ");
+				list.get(i).setVisible(false);
 			}
 				
 		}
