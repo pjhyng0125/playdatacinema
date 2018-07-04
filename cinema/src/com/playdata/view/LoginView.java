@@ -38,7 +38,7 @@ public class LoginView extends JFrame
 		
 		panel = new JPanel();
 		panel.setLayout(null);
-		panel.setBounds(0,10,300,50);
+		panel.setBounds(0,0,300,50);
 		panel.setBackground(Color.BLACK);
 		
 		tf_id.setBounds(70,120,100,50);
