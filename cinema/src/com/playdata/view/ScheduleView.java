@@ -17,7 +17,7 @@ import javax.swing.JToggleButton;
  */
 public class ScheduleView extends JFrame {
 	public JPanel p_date, p_time, p_next;
-	public JButton bt_next;
+	public JButton bt_next, bt_back;
 	public JLabel la_title, la_date;
 	public ScheduleDateView v_sd[];
 	public ScheduleTimeView v_st[];
@@ -30,6 +30,7 @@ public class ScheduleView extends JFrame {
 		p_time = new JPanel();
 		p_next = new JPanel();
 		bt_next = new JButton("좌석 선택");
+		bt_back = new JButton("영화 선택");
 		la_title = new JLabel("영화: 탐정");
 		la_date = new JLabel("날짜: 18/07/03");
 		
@@ -64,13 +65,15 @@ public class ScheduleView extends JFrame {
 		p_date.setPreferredSize(new Dimension(0, 200));
 		p_next.setPreferredSize(new Dimension(0, 80));
 		bt_next.setBounds(1050, 25, 100, 30);
-		la_title.setBounds(50, 150, 100, 30);
+		bt_back.setBounds(50, 25, 100, 30);
+		la_title.setBounds(30, 150, 100, 30);
 		la_date.setBounds(1050, 150, 100, 30);
 //add panel to frame
 		add(p_date, BorderLayout.PAGE_START);
 		add(p_time, BorderLayout.CENTER);
 		add(p_next, BorderLayout.PAGE_END);
 		p_next.add(bt_next);
+		p_next.add(bt_back);
 		p_date.add(la_date);
 		p_date.add(la_title);
 		

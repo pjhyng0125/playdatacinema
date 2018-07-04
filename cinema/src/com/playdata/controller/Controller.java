@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import com.playdata.model.Comment;
+import com.playdata.view.CreateReView;
 import com.playdata.view.LoginView;
 import com.playdata.view.MyPageView;
 import com.playdata.view.PayView;
@@ -25,12 +26,14 @@ public class Controller implements ActionListener {
 	MyPageView v_mypage;
 	ScreenView v_screen;
 	PayView v_pay;
+	CreateReView v_createreview;
 //int
 	int seleted_date;//ScheduleDateView에서 선택된 toggle button의 index를 저장하는 변수
 	int seleted_time;//ScheduleTimeView에서 선택된 toggle button의 index를 저장하는 변수
 	int review_page; //후기 창 page 변수
 	int review_maxpage;
-	
+//String
+	String login_id="login_id";
 //arraylist
 	ArrayList<Comment> list_comment;
 	ArrayList<ReviewSubView> list_review;
@@ -44,6 +47,7 @@ public class Controller implements ActionListener {
 		v_mypage = new MyPageView();
 		v_screen = new ScreenView();
 		v_pay = new PayView();
+		v_createreview = new CreateReView(login_id);
 		
 //add comments in list
 		list_comment = new ArrayList<>();
@@ -227,6 +231,11 @@ public class Controller implements ActionListener {
 		v_reserve.bt_logout.addActionListener(this);
 		v_mypage.bt_back.addActionListener(this);
 		v_review.bt_reserve.addActionListener(this);
+		v_mypage.bt_history.addActionListener(this);
+		v_createreview.bt_mypage.addActionListener(this);
+		for(int i=0; i<v_createreview.tbt_stars.length; i++)
+			v_createreview.tbt_stars[i].addActionListener(this);
+		v_schedule.bt_back.addActionListener(this);
 	}//생성자
 	
 	/*
@@ -258,16 +267,14 @@ public class Controller implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object ob = e.getSource();
 		
-//		for(int i=0; i<v_reserve.subv_reserve.length;i++) {
-//			for(int j=0; j<v_reserve.subv_reserve[i].tbt_stars.length;j++) {
-//				if(ob == v_reserve.subv_reserve[i].tbt_stars[j]) {
-//					if(v_reserve.subv_reserve[i].tbt_stars[j].isSelected())
-//						v_reserve.setstarSelected(i, j);
-//					else
-//						v_reserve.setstarSelected(i, j);
-//				}
-//			}//for-j
-//		}//for-i
+			for(int j=0; j<v_createreview.tbt_stars.length;j++) {
+				if(ob == v_createreview.tbt_stars[j]) {
+					if(v_createreview.tbt_stars[j].isSelected())
+						v_createreview.setstarSelected(j);
+					else
+						v_createreview.setstarSelected(j);
+				}
+			}//for-j
 		
 /*---------------View Change EVENT---------------*/	
 		if(ob == v_login.bt_login) {
@@ -303,6 +310,19 @@ public class Controller implements ActionListener {
 		}
 		else if(ob == v_review.bt_reserve) {
 			v_review.setVisible(false);
+			v_reserve.setVisible(true);
+		}
+		else if(ob == v_mypage.bt_history) {
+			v_mypage.setVisible(false);
+			v_createreview.setVisible(true);
+		}
+		else if(ob == v_createreview.bt_mypage) {
+			v_createreview.setVisible(false);
+			v_createreview.ta_content.setText("");
+			v_mypage.setVisible(true);
+		}
+		else if(ob == v_schedule.bt_back) {
+			v_schedule.setVisible(false);
 			v_reserve.setVisible(true);
 		}
 	}//actionPerformed

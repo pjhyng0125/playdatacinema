@@ -9,13 +9,11 @@ import javax.swing.JToggleButton;
 
 public class ReviewSubView extends JPanel {
 	public JLabel la_id, la_content;
-	public JToggleButton []tbt_stars;
+	public JToggleButton tbt_stars[];
 	String id, content;
 	int star;
 	
 	public ReviewSubView(String id, String content, int star) {
-		this.id = id;
-		this.content = content;
 		this.star = star;
 		
 		la_id = new JLabel(id);
