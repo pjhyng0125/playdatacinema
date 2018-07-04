@@ -61,6 +61,7 @@ public class Controller implements ActionListener {
 
 //review 창 후기 페이지 0으로 설정
 		v_review.rewriteReview(selectReview(list_comment, 0));
+		v_review.bt_back.setEnabled(false);
 		review_maxpage = list_comment.size() / 4;
 //set ReserView stars...
 		v_reserve.setstarSelected(0, 4);
@@ -80,6 +81,12 @@ public class Controller implements ActionListener {
 				if(review_page >= 0 && review_page < review_maxpage) {
 					review_page++;
 					v_review.rewriteReview(selectReview(list_comment, review_page));
+					if(review_page == review_maxpage)
+						v_review.bt_next.setEnabled(false);
+					else {
+						v_review.bt_back.setEnabled(true);
+						v_review.bt_next.setEnabled(true);
+					}
 				}
 			}
 		});
@@ -89,6 +96,12 @@ public class Controller implements ActionListener {
 				if(review_page > 0 && review_page <= review_maxpage) {
 					review_page--;
 					v_review.rewriteReview(selectReview(list_comment, review_page));
+					if(review_page == 0)
+						v_review.bt_back.setEnabled(false);
+					else {
+						v_review.bt_next.setEnabled(true);
+						v_review.bt_back.setEnabled(true);
+					}
 				}
 			}
 		});

@@ -68,6 +68,19 @@ public class ReserView extends JFrame{
 		}
 	}//setstarSelected
 	
+	/*
+	 * 작성자: 박진형
+	 * 수정일자: 07/05 24:11
+	 * 이벤트리스너 기능: ReserveSubView에서 새로운 영화로 변경되었을 때는 반드시 평균평점이 0일 것 => 모든 별을 blank로 만들어주는 함수
+	 */
+	public void setAllStarBlank(int checked_i) {
+		for(int k=0; k<subv_reserve[checked_i].tbt_stars.length; k++) {
+			subv_reserve[checked_i].tbt_stars[k].setSelected(false);
+			subv_reserve[checked_i].tbt_stars[k].setIcon(new ImageIcon("image/star_blank.png"));
+		}
+	}
+
+	
 	public int sendConfirmedMsg(String msg) {
 		return JOptionPane.showConfirmDialog(this, msg);
 	}
