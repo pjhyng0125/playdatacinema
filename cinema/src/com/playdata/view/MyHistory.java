@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Font;
 
 
 public class MyHistory extends JFrame{
@@ -30,6 +31,7 @@ public class MyHistory extends JFrame{
 	JScrollPane sb_ta;
 	public JButton bt_review;	//후기 버튼
 	JPanel p_north, p_south;
+	private JLabel la_name;//고객 이름
 	
 	public MyHistory() {
 		setTitle("관람내역창");
@@ -44,25 +46,35 @@ public class MyHistory extends JFrame{
 		
 		//north 구성
 		la_myhis = new JLabel("님 관람내역");
-		la_myhis.setBounds(10, 10, 150, 50);
+		la_myhis.setForeground(Color.WHITE);
+		la_myhis.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		la_myhis.setBounds(279, 24, 89, 36);
 		p_north = new JPanel();
 		p_north.setLayout(null);
-		p_north.setBackground(Color.blue);
+		p_north.setBackground(Color.BLACK);
 		p_north.setPreferredSize(new Dimension(0, 60));
 		p_north.add(la_myhis);
 		
 		//south 구성
 		bt_review = new JButton("후기 작성하러 가기");
-		bt_review.setBounds(120, 10, 150, 70);
+		bt_review.setBounds(95, 10, 219, 70);
 		p_south = new JPanel();
+		p_south.setBackground(Color.WHITE);
 		p_south.setLayout(null);
 		p_south.setPreferredSize(new Dimension(0, 100));
 		p_south.add(bt_review);
 		
-		setLayout(new BorderLayout());
-		add("Center",sb_ta);
-		add("North",p_north);
-		add("South",p_south);
+		getContentPane().setLayout(new BorderLayout());
+		getContentPane().add("Center",sb_ta);
+		getContentPane().add("North",p_north);
+		
+		//고객 이름
+		la_name = new JLabel("gildong");
+		la_name.setForeground(Color.WHITE);
+		la_name.setFont(new Font("맑은 고딕", Font.BOLD, 23));
+		la_name.setBounds(129, 12, 140, 48);
+		p_north.add(la_name);
+		getContentPane().add("South",p_south);
 		
 		
 		
@@ -83,4 +95,7 @@ public class MyHistory extends JFrame{
 //	   }//displayTable
 //	
 	
+	public static void main(String[] args) {
+		new MyHistory();
+	}
 }
