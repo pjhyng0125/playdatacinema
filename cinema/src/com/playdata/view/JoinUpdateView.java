@@ -126,7 +126,7 @@ public class JoinUpdateView extends JFrame
 		}
 		
 		setBounds(350,200,300,450);	
-		setResizable(false);
+		setResizable(true);
 	}//»ý¼ºÀÚ  
   
   public void showMsg(String msg) {
@@ -160,6 +160,9 @@ public class JoinUpdateView extends JFrame
 	  tf_ssn2.setText(ssn2+"");
 	  cb_job.setSelectedItem(job);
   }
+  public static void main(String[] args) {
+	new JoinUpdateView();
+}
   
 }//UpdateForm
 

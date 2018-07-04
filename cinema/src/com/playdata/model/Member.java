@@ -17,14 +17,16 @@ public class Member {								// ÇÊ¿ä»çÇ× - À¯Àú ºñ¹Ð¹øÈ£ Ã£±â ±â´É Áú¹® ÇØ´ä ¾îµ
 	String mail;		// À¯Àú ¸ÞÀÏ
 	int point;			// À¯Àú ¼ÒÀ¯ Æ÷ÀÎÆ®
 	int cash;			// À¯Àú ÀÜ¾×
-	int mem_grade;		// À¯Àú µî±Þ			
+	int mem_grade;		// À¯Àú µî±Þ	
+	String hint;		// À¯Àú ºñ¹øÃ£±â Áú¹®
+	String answer;		// À¯Àú ºñ¹øÃ£±â ´ä
 	
 	public Member() {
 		
 	}
 
 	public Member(String id, String pass, String gender, String name, Date birth, String phone, String addr,
-			String mail, int point, int cash, int mem_grade) {
+			String mail, int point, int cash, int mem_grade, String hint, String answer) {
 		super();
 		this.id = id;
 		this.pass = pass;
@@ -37,7 +39,11 @@ public class Member {								// ÇÊ¿ä»çÇ× - À¯Àú ºñ¹Ð¹øÈ£ Ã£±â ±â´É Áú¹® ÇØ´ä ¾îµ
 		this.point = point;
 		this.cash = cash;
 		this.mem_grade = mem_grade;
+		this.hint = hint;
+		this.answer = answer;
 	}
+
+
 
 	public String getId() {
 		return id;
@@ -125,6 +131,22 @@ public class Member {								// ÇÊ¿ä»çÇ× - À¯Àú ºñ¹Ð¹øÈ£ Ã£±â ±â´É Áú¹® ÇØ´ä ¾îµ
 
 	public void setMem_grade(int mem_grade) {
 		this.mem_grade = mem_grade;
+	}
+
+	public String getHint() {
+		return hint;
+	}
+
+	public void setHint(String hint) {
+		this.hint = hint;
+	}
+
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
 	}
 	
 	

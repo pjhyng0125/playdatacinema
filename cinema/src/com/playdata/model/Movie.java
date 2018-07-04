@@ -11,11 +11,11 @@ public class Movie {
 	String name;			//영화 이름
 	Date run_date;			//영화 상영 기간
 	int rate;				//예매율
-	int rank;				//등급?				?
+	int rank;				//영화 순위				?
 	String genre;			//영화 장르
-	int avg_grade;			//					?
+	int avg_grade;			//영화평점					?
 	int limit;				//연령제한
-	int price;				//가격?				?
+	int price;				//가격				?
 	String path;			//					?
 	String run_time;		//영화 상영 시간
 	
