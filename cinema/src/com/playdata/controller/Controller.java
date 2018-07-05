@@ -84,7 +84,7 @@ public class Controller implements ActionListener {
 		v_reserve.setstarSelected(2, 2);
 		v_reserve.setstarSelected(3, 1);
 //ReserView => show movie list infos...
-//		list_movie = movie_dao.movieSelectAll();
+		list_movie = movie_dao.movieSelectAll();
 		list_movie = new ArrayList<>();
 		list_movie.add(new Movie("앤트맨", "액션코미디", 50.0, 4, "image/antman.png"));
 		list_movie.add(new Movie("히스토리", "멜로감동", 25.0, 3, "image/her_story.png"));
