@@ -6,7 +6,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import com.playdata.model.Comment;
+import com.playdata.model.Movie;
 import com.playdata.view.CreateReView;
 import com.playdata.view.LoginView;
 import com.playdata.view.MyPageView;
@@ -31,12 +34,13 @@ public class Controller implements ActionListener {
 	int seleted_date;//ScheduleDateView에서 선택된 toggle button의 index를 저장하는 변수
 	int seleted_time;//ScheduleTimeView에서 선택된 toggle button의 index를 저장하는 변수
 	int review_page; //후기 창 page 변수
-	int review_maxpage;
+	int review_maxpage;	//후기창 
 //String
 	String login_id="login_id";
 //arraylist
 	ArrayList<Comment> list_comment;
 	ArrayList<ReviewSubView> list_review;
+	ArrayList<Movie> list_movie;
 	
 	public Controller() {
 //new
@@ -63,15 +67,19 @@ public class Controller implements ActionListener {
 		list_comment.add(new Comment("j", "1161", 2));
 		list_comment.add(new Comment("k", "1161", 4));
 
-//review 창 후기 페이지 0으로 설정
+//review 창 후기 페이지 디폴트값 설정 ---> 후기 창을 띄울때마다 아래의 3줄을 적어주어야 한다.
 		v_review.rewriteReview(selectReview(list_comment, 0));
 		v_review.bt_back.setEnabled(false);
-		review_maxpage = list_comment.size() / 4;
+		review_maxpage = list_comment.size() / 4;	//최대 페이지 설정
 //set ReserView stars...
 		v_reserve.setstarSelected(0, 4);
 		v_reserve.setstarSelected(1, 3);
 		v_reserve.setstarSelected(2, 2);
 		v_reserve.setstarSelected(3, 1);
+//ReserView => show movie list infos...
+		list_movie = new ArrayList<>();
+		showReserveInfo(list_movie);
+		
 		
 /*-------------------------------------EVENT LISTENER(익명)------------------------------------------*/
 		/*
@@ -250,6 +258,20 @@ public class Controller implements ActionListener {
 			if((i/4) == review_page)
 				v_out.add(v_in.get(i));
 		return v_out;
+	}
+	
+	/*
+	 * 작성자: 박진형
+	 * 수정일자: 07/05 17:38
+	 * selectReview: ReserView => 4개의 영화 정보를 ReserView 화면에 뿌려주는 함수
+	 */
+	public void showReserveInfo(ArrayList<Movie> list_movie) {
+		for(int i=0; i<4; i++) {
+			v_reserve.subv_reserve[i].la_title.setText(list_movie.get(i).getName());
+			v_reserve.subv_reserve[i].la_percent.setText(list_movie.get(i).getRate()+"");
+			v_reserve.subv_reserve[i].la_genre.setText(list_movie.get(i).getGenre());
+			v_reserve.subv_reserve[i].la_image.setIcon(new ImageIcon(list_movie.get(i).getPath()));			
+		}
 	}
 	
 	public static void main(String[] args) {
