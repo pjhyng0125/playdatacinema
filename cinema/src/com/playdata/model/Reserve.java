@@ -6,7 +6,6 @@ public class Reserve {
 
 	private String id;
 	private String movie_name;
-	private String ticket_key;
 	private Date run_date;
 	private String run_time;
 	private String seatnum;
@@ -21,7 +20,6 @@ public class Reserve {
 		super();
 		this.id = id;
 		this.movie_name = movie_name;
-		this.ticket_key = ticket_key;
 		this.run_date = run_date;
 		this.run_time = run_time;
 		this.seatnum = seatnum;
@@ -44,13 +42,6 @@ public class Reserve {
 		this.movie_name = movie_name;
 	}
 
-	public String getTicket_key() {
-		return ticket_key;
-	}
-
-	public void setTicket_key(String ticket_key) {
-		this.ticket_key = ticket_key;
-	}
 
 	public Date getRun_date() {
 		return run_date;

@@ -21,7 +21,7 @@ public class TicketView extends JFrame {
 	JLabel la_reserver2, la_movie2, la_date2, la_time2, la_person2, la_seat2; 
 	
 	public TicketView() {
-		setTitle("TicketView");
+		setTitle("모바일 티켓");
 		
 		la_ticket = new JLabel("모바일 티켓");
 		la_ticket.setForeground(Color.WHITE);

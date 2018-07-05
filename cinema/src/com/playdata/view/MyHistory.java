@@ -22,7 +22,7 @@ public class MyHistory extends JFrame{
 	// 초기 담당자 : 이성훈 
 	
    
-	JLabel la_myhis;	
+	JLabel lb_myhis;	
 	public JTable table;
 	String datasort[] = {"no","영화제목 ", "관람일자 ", "인원수"};
 	Object [][]his;
@@ -31,7 +31,7 @@ public class MyHistory extends JFrame{
 	JScrollPane sb_ta;
 	public JButton bt_review;	//후기 버튼
 	JPanel p_north, p_south;
-	private JLabel la_name;//고객 이름
+	private JLabel lb_name;//고객 이름
 	
 	public MyHistory() {
 		setTitle("관람내역창");
@@ -45,15 +45,15 @@ public class MyHistory extends JFrame{
 		sb_ta = new JScrollPane(table);
 		
 		//north 구성
-		la_myhis = new JLabel("님 관람내역");
-		la_myhis.setForeground(Color.WHITE);
-		la_myhis.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		la_myhis.setBounds(279, 24, 89, 36);
+		lb_myhis = new JLabel("님 관람내역");
+		lb_myhis.setForeground(Color.WHITE);
+		lb_myhis.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lb_myhis.setBounds(279, 24, 89, 36);
 		p_north = new JPanel();
 		p_north.setLayout(null);
 		p_north.setBackground(Color.BLACK);
 		p_north.setPreferredSize(new Dimension(0, 60));
-		p_north.add(la_myhis);
+		p_north.add(lb_myhis);
 		
 		//south 구성
 		bt_review = new JButton("후기 작성하러 가기");
@@ -69,11 +69,11 @@ public class MyHistory extends JFrame{
 		getContentPane().add("North",p_north);
 		
 		//고객 이름
-		la_name = new JLabel("gildong");
-		la_name.setForeground(Color.WHITE);
-		la_name.setFont(new Font("맑은 고딕", Font.BOLD, 23));
-		la_name.setBounds(129, 12, 140, 48);
-		p_north.add(la_name);
+		lb_name = new JLabel("gildong");
+		lb_name.setForeground(Color.WHITE);
+		lb_name.setFont(new Font("맑은 고딕", Font.BOLD, 23));
+		lb_name.setBounds(129, 12, 140, 48);
+		p_north.add(lb_name);
 		getContentPane().add("South",p_south);
 		
 		

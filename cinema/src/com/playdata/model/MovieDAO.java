@@ -38,15 +38,16 @@ public class MovieDAO {
       ArrayList<Movie> movieList = new ArrayList<>();
       try {
          connect();
+<<<<<<< HEAD
          String sql = "select movie_name, rate, genre, path from movie order by rate desc";
+=======
+         String sql = "select path, movie_name, rate, genre,avg_star from movie order by rate desc";
+>>>>>>> ec81a486dabd44efccfede0ceca423782007c952
          pstmt = conn.prepareStatement(sql);
          rs = pstmt.executeQuery();
          while(rs.next()) {
-            Movie m = new Movie();
-                 m.setPath(rs.getString("path"));
-                 m.setPath(rs.getString("name"));
-                 m.setRate(rs.getDouble("rate"));
-                 m.setGenre(rs.getString("genre"));
+            Movie m = new Movie(rs.getString("movie_name"), rs.getString("genre"), 
+            		rs.getDouble("rate"), rs.getInt("avg_star"), rs.getString("path"));
             movieList.add(m);
          }
       } catch (SQLException e) {
@@ -67,20 +68,21 @@ public class MovieDAO {
       ArrayList<Object> list = new ArrayList<>();
       try {
          connect();
-         String sql="select name, start_date, director, actors, summary,id,content"
+         String sql="select movie_name, start_date, director, actors, summary,id,content,com_star"
                   + "from movie natural join movie_comment where path = ? order by no asc";
          pstmt = conn.prepareStatement(sql);
          pstmt.setString(1, path);
          rs = pstmt.executeQuery();
          while(rs.next()) {
             Movie m = new Movie();
-                 m.setName(rs.getString("name"));
+            	 m.setPath(path);
+                 m.setMovie_name(rs.getString("movie_name"));
                  m.setStart_date(rs.getDate("start_date"));
                  m.setDirector(rs.getString("director"));
                  m.setActors(rs.getString("actors"));
                  m.setSummary(rs.getString("summary"));
-            list.add(path); // 인덱스0 : 이미지경로
-            list.add(m); // 인덱스1 : movie 빈즈
+            Comment c = new Comment(rs.getString("id"), rs.getString("content"), Integer.parseInt(rs.getString("com_star")));
+          
             list.add(rs.getString("id")); // 인덱스2 : 후기 작성한 id
             list.add(rs.getString("content")); // 인덱스3 : 후기내용
          }

@@ -23,7 +23,7 @@ import java.awt.SystemColor;
 
 public class ScreenView extends JFrame {
 	
-    public JToggleButton [][]bt_seat; 
+    public JToggleButton []bt_seat; 
  
 	//----------------------------버튼
 
@@ -58,7 +58,7 @@ public class ScreenView extends JFrame {
 	
 	
 	public ScreenView() {
-		setTitle("ScreenView");
+		setTitle("좌석선택창");
 		
 		
 	
@@ -66,23 +66,22 @@ public class ScreenView extends JFrame {
 //===================== 버튼 및 라벨  =======================================================	
 	
 		//좌석버튼 배열
-		bt_seat = new JToggleButton[3][10];
+		bt_seat = new JToggleButton[10];
 		for(int i=0; i<bt_seat.length; i++) {
-			for(int j=0; j<bt_seat[i].length; j++) {
-				bt_seat[i][j] = new JToggleButton();
-				bt_seat[i][j].setForeground(Color.WHITE);
-				bt_seat[i][j].setBackground(Color.BLUE);
+				bt_seat[i] = new JToggleButton();
+				bt_seat[i].setForeground(Color.WHITE);
+				bt_seat[i].setBackground(Color.BLUE);
 			//a_bt[i].setBounds(273*(i)+70, 422, 60, 56);//x,y,가로,세로
 			//                     70, 343,  616, ..... (273간격) 273-60=213
-				bt_seat[i][j].setBounds(273+(j*75), 422+(i*65), 60, 56);//x,y,가로,세로
-			if(j>=2)
-				bt_seat[i][j].setBounds(273+(j*75)+39, 422+(i*65), 60, 56);//x,y,가로,세로
-			if(j>=5)
-				bt_seat[i][j].setBounds(273+(j*75)+78, 422+(i*65), 60, 56);//x,y,가로,세로
-			if(j>=8)
-				bt_seat[i][j].setBounds(273+(j*75)+117, 422+(i*65), 60, 56);//x,y,가로,세로
-			getContentPane().add(bt_seat[i][j]);
-			}
+				bt_seat[i].setBounds(273+(i*75), 422, 60, 56);//x,y,가로,세로
+			if(i>=2)
+				bt_seat[i].setBounds(273+(i*75)+39, 422, 60, 56);//x,y,가로,세로
+			if(i>=5)
+				bt_seat[i].setBounds(273+(i*75)+78, 422, 60, 56);//x,y,가로,세로
+			if(i>=8)
+				bt_seat[i].setBounds(273+(i*75)+117, 422, 60, 56);//x,y,가로,세로
+			getContentPane().add(bt_seat[i]);
+			
 		}
 		
 		//abc 라벨
@@ -94,10 +93,12 @@ public class ScreenView extends JFrame {
 			lb_c.setFont(new Font("굴림", Font.PLAIN, 25));
 		
 		//페이지 이동
-		select_movie = new JButton("영화선택 (이전페이지)");
+		select_movie = new JButton("영화선택(이전페이지)");
+		select_movie.setFont(new Font("굴림", Font.BOLD, 12));
 			select_movie.setBackground(Color.BLACK);
 			select_movie.setForeground(Color.WHITE);
 		pay_view = new JButton("결제");
+		pay_view.setFont(new Font("굴림", Font.BOLD, 15));
 			pay_view.setBackground(Color.BLACK);
 			pay_view.setForeground(Color.WHITE);
 		
@@ -195,6 +196,7 @@ public class ScreenView extends JFrame {
 		lb_theater.setBounds(642, 43, 113, 37);
 		
 		//contentpane
+		getContentPane().setBackground(new Color(247, 246, 239));
 		getContentPane().add(tf_info);
 		getContentPane().add(lb_theater);
 		

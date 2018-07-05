@@ -186,6 +186,7 @@ public class PayView extends JFrame {
 		//contentpane
 	    getContentPane().add(p);
 	    getContentPane().setLayout(null);
+	    getContentPane().setBackground(new Color(247, 246, 239));
 	    getContentPane().add(bt_charge_ok);
 		getContentPane().add(bt_charge_cancel);
 		getContentPane().add(bt_point_ok);

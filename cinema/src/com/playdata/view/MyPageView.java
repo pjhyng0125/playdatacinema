@@ -19,7 +19,7 @@ public class MyPageView extends JFrame {
 	// 마이페이지 뷰 
 	
 		//버튼 되돌아가기 , 예매확인,   관람내역,    회원정보수정,  캐쉬충전,   회원탈퇴,   로그아웃
-	public JButton bt_back, bt_check,bt_history, bt_revise, bt_cash, bt_drop, bt_logout;	
+	public JButton bt_back, bt_check, bt_revise, bt_cash, bt_drop, bt_logout;	
 	JPanel p_north, p_center;
 	//	      마이페이지라벨, 환영라벨,   등급라벨,   캐쉬라벨,   포인트라벨
 	JLabel la_mypage, la_greet, la_grade, la_cash, la_point;
@@ -28,34 +28,35 @@ public class MyPageView extends JFrame {
 	public JCheckBox cb_grade, cb_cash, cb_point;
 	
 	public MyPageView() {
-		setTitle("MyPageView");
+		setTitle("마이페이지");
 		
 		
 		// 라벨 
 		
-		la_mypage = new JLabel("마이페이지");
-		la_mypage.setBounds(100, 5, 300, 100);
-		la_mypage.setFont(new Font("맑은고딕", 0, 50));
+		la_mypage = new JLabel("마이페이지창");
+		la_mypage.setForeground(Color.WHITE);
+		la_mypage.setBounds(100, 16, 268, 68);
+		la_mypage.setFont(new Font("맑은 고딕", Font.BOLD, 50));
 		la_greet = new JLabel("님 환영합니다!");
-		la_greet.setBounds(20, 20, 300, 30);
+		la_greet.setBounds(150, 17, 212, 30);
 		la_greet.setFont(new Font("맑은고딕", 0, 30));
 		la_grade = new JLabel("등급 : ");
 		la_grade.setBounds(20, 70, 100, 30);
 		la_grade.setFont(new Font("맑은고딕", 0, 30));
 		la_grade2 = new JLabel("VIP");
-		la_grade2.setBounds(180, 70, 230, 30);
+		la_grade2.setBounds(180, 70, 113, 30);
 		la_grade2.setFont(new Font("맑은고딕", 0, 30));
 		la_cash = new JLabel("캐쉬 : ");
-		la_cash.setBounds(20, 120, 100, 30);
+		la_cash.setBounds(20, 130, 100, 30);
 		la_cash.setFont(new Font("맑은고딕", 0, 30));
 		la_cash2 = new JLabel("20000원");
-		la_cash2.setBounds(150, 120, 230, 30);
+		la_cash2.setBounds(150, 130, 138, 30);
 		la_cash2.setFont(new Font("맑은고딕", 0, 30));
 		la_point = new JLabel("포인트 : ");
-		la_point.setBounds(20, 170, 120, 30);
+		la_point.setBounds(20, 193, 120, 30);
 		la_point.setFont(new Font("맑은고딕", 0, 30));
 		la_point2 = new JLabel("3000P");
-		la_point2.setBounds(180, 170, 230, 30);
+		la_point2.setBounds(180, 193, 113, 30);
 		la_point2.setFont(new Font("맑은고딕", 0, 30));
 		
 		
@@ -70,23 +71,30 @@ public class MyPageView extends JFrame {
 		bt_back = new JButton(i_back);
 		bt_back.setBounds(20, 16, 65, 65);
 		bt_check = new JButton("예매 확인/취소");
-		bt_check.setFont(new Font("맑은고딕", 0, 30));
-		bt_check.setBounds(40, 220, 300, 50 );
-		bt_history = new JButton("관람내역");
-		bt_history.setFont(new Font("맑은고딕", 0, 30));
-		bt_history.setBounds(40, 290, 300, 50);
+		bt_check.setBackground(Color.BLACK);
+		bt_check.setForeground(Color.WHITE);
+		bt_check.setFont(new Font("Dialog", Font.BOLD, 30));
+		bt_check.setBounds(41, 301, 300, 50 );
 		bt_revise = new JButton("회원수정");
-		bt_revise.setFont(new Font("맑은고딕", 0, 30));
-		bt_revise.setBounds(40, 360, 300, 50);
+		bt_revise.setBackground(Color.BLACK);
+		bt_revise.setForeground(Color.WHITE);
+		bt_revise.setFont(new Font("Dialog", Font.BOLD, 30));
+		bt_revise.setBounds(41, 371, 300, 50);
 		bt_cash = new JButton("캐쉬충전");
-		bt_cash.setFont(new Font("맑은고딕", 0, 30));
-		bt_cash.setBounds(40, 430, 300, 50);
+		bt_cash.setBackground(Color.BLACK);
+		bt_cash.setForeground(Color.WHITE);
+		bt_cash.setFont(new Font("Dialog", Font.BOLD, 30));
+		bt_cash.setBounds(41, 441, 300, 50);
 		bt_drop = new JButton("회원탈퇴");
-		bt_drop.setFont(new Font("맑은고딕", 0, 30));
-		bt_drop.setBounds(40, 500, 300, 50);
+		bt_drop.setBackground(Color.BLACK);
+		bt_drop.setForeground(Color.WHITE);
+		bt_drop.setFont(new Font("Dialog", Font.BOLD, 30));
+		bt_drop.setBounds(41, 511, 300, 50);
 		bt_logout = new JButton("로그아웃");
-		bt_logout.setFont(new Font("맑은고딕", 0, 30));
-		bt_logout.setBounds(40, 570, 300, 50);
+		bt_logout.setBackground(Color.BLACK);
+		bt_logout.setForeground(Color.WHITE);
+		bt_logout.setFont(new Font("Dialog", Font.BOLD, 30));
+		bt_logout.setBounds(41, 581, 300, 50);
 		
 		//체크박스
 		cb_grade = new JCheckBox(i_grade);
@@ -101,7 +109,7 @@ public class MyPageView extends JFrame {
 		p_center = new JPanel();
 		
 		p_north.setLayout(null);
-		p_north.setBackground(Color.blue);
+		p_north.setBackground(Color.BLACK);
 		p_north.setPreferredSize(new Dimension(400, 100));
 		p_north.add(bt_back);
 		p_north.add(la_mypage);
@@ -122,18 +130,17 @@ public class MyPageView extends JFrame {
 		p_center.add(la_point2);
 		
 		p_center.add(bt_check);
-		p_center.add(bt_history);
 		p_center.add(bt_revise);
 		p_center.add(bt_cash);
 		p_center.add(bt_drop);
 		p_center.add(bt_logout);
 		
-		setLayout(new BorderLayout());
-		add("North",p_north);
-		add("Center",p_center);
+		getContentPane().setLayout(new BorderLayout());
+		getContentPane().add("North",p_north);
+		getContentPane().add("Center",p_center);
 		
 		
-		setSize(400, 950);
+		setSize(400, 814);
 		setVisible(false);
 	}//생성자
 	
