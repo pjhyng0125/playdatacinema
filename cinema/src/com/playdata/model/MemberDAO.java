@@ -67,7 +67,9 @@ public class MemberDAO {
 		}
 	}// diss()
 
-	// 로그인 기능
+	/*
+	 * 작성자 : 이성훈 작성일자 :07.04 기능설명 : 로그인 기능
+	 */
 	public boolean login(String id, String pass) {
 		connection();
 		String sql = "select id, pass from member where id=? and pass=?";
@@ -88,7 +90,9 @@ public class MemberDAO {
 		return false;
 	}// login
 
-	// 회원가입
+	/*
+	 * 작성자 : 이성훈 작성일자 :07.04 기능설명 : 회원가입창 - 회원가입 버튼 클릭시
+	 */
 	public boolean join(Member m) {
 		connection(); // id,pass,gender,name,birth,phone,addr,mail,point,cash,memgrade,hint,answer
 		String sql = "insert into member value (?,?,?,?,?,?,?,?,?,?,?,?,?) ";
@@ -121,7 +125,9 @@ public class MemberDAO {
 		return false;
 	}// join()
 
-	// 회원가입창 - 중복확인기능
+	/*
+	 * 작성자 : 이성훈 작성일자 :07.04 기능설명 : 회원가입 창 - 아이디 중복체크 기능
+	 */
 	public boolean duplicate(String id) {
 		connection();
 		String sql = "select id from emp where id=?";
@@ -141,7 +147,9 @@ public class MemberDAO {
 		return false;
 	}// duplicate()
 
-	// 아이디찾기 이름 이메일
+	/*
+	 * 작성자 : 이성훈 작성일자 :07.04 기능설명 : 로그인 화면 - 아이디 찾기
+	 */ // 이름 이메일
 	public String idfind(String name, String email) {
 		connection();
 		String sql = "select id from member where name=? and email=?";
@@ -164,7 +172,10 @@ public class MemberDAO {
 		return "fail";
 	}// idfind()
 
-	// 비밀번호 찾기 비밀번호 찾을 id, 힌트, 힌트 답
+	/*
+	 * 작성자 : 이성훈 작성일자 :07.04 기능설명 : 로그인 화면 - 비밀번호 찾기
+	 */
+	// 비밀번호 찾을 id, 힌트, 힌트 답
 	public String passfind(String id, String hint, String answer) {
 		connection();
 		String sql = "select pass from member where id=? and hint=? and answer=?";
@@ -188,7 +199,9 @@ public class MemberDAO {
 		return "fail";
 	}
 
-	// 마이페이지창- 회원정보수정
+	/*
+	 * 작성자 : 이성훈 작성일자 :07.04 기능설명 : 마이페이지창 - 회원정보수정
+	 */
 	public boolean updateMember(Member m) {
 		connection(); // id,pass,gender,name,birth,phone,addr,mail,point,cash,memgrade,hint,answer
 		String sql = "update member set pass=?, phone=?, addr=?, mail=?, hint=?,answer=?";
@@ -214,7 +227,9 @@ public class MemberDAO {
 		return false;
 	}// updateMember
 
-	// 마이페이지 - 회원탈퇴
+	/*
+	 * 작성자 : 이성훈 작성일자 :07.04 기능설명 : 마이페이지창 - 회원탈퇴
+	 */
 	public boolean deleteMember(String id) {
 		connection();
 		String sql = "delete from member where id=?";
@@ -234,7 +249,9 @@ public class MemberDAO {
 		return false;
 	}// deleteMember
 
-	// 마이페이지창- 예매 확인/취소
+	/*
+	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 마이페이지창 - 예매 확인/취소
+	 */
 	public ArrayList<Reserve> moviecheck(String id) {
 		connection();
 		ArrayList<Reserve> list = new ArrayList<>();
@@ -253,8 +270,7 @@ public class MemberDAO {
 				String m_seatnum = reserve.getSeatnum();
 				String m_screencode = reserve.getScreen_code();
 
-				Reserve send_reserve = new Reserve(m_id, m_moviename, m_run_date, m_run_time, m_seatnum,
-						m_screencode);
+				Reserve send_reserve = new Reserve(m_id, m_moviename, m_run_date, m_run_time, m_seatnum, m_screencode);
 				list.add(send_reserve);
 
 			}
@@ -267,75 +283,275 @@ public class MemberDAO {
 		return list; // list 안에 id, 영화 제목, 상영일자, 상영시간, 좌석번호
 
 	}
-
-	// 마이페이지창- 예매확인/취소창 - 취소버튼 클릭시
-	public boolean deleteMovie(String name,String moive_name) {
+	/*												컨트롤러는 3단계를 쓰세요
+	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 :  마이페이지창- 예매확인/취소창 - 취소버튼 클릭시 1단계 환불
+	 */
+	private boolean refund(String id, String movie_name) {
 		connection();
-		String sql1 = "select price from movie m, reserve r where r.movie_name= m.name and r.movie_name=?";
-		String sql2 = "delete from reserve where id=?";
-		
-		
+		String sql1 = "select r.price from movie m, reserve r where r.movie_name= m.name and r.movie_name=?";// 환불할 티켓가격
+		String sql2 = "select cash from member where id=?"; // 환불할 사람 잔액 조회
+		String sql3 = "update member set cash=? where id=?"; // 환불할 사람 잔액에 티켓가격 추가
+
+		try {
+			prestmt = conn.prepareStatement(sql1);
+			prestmt.setString(1, movie_name);
+			rs = prestmt.executeQuery();
+
+			if (rs.next()) {
+				int refund = rs.getInt(1);
+				prestmt = conn.prepareStatement(sql2);
+				prestmt.setString(1, id);
+				rs = prestmt.executeQuery();
+
+				if (rs.next()) {
+					int cash = rs.getInt(1);
+					prestmt = conn.prepareStatement(sql3);
+					prestmt.setInt(1, (cash + refund));
+					prestmt.setString(2, id);
+
+					int t = prestmt.executeUpdate();
+					if (t > 0) {
+						return true;
+					}
+				}
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			diss();
+		}
 		return false;
 	}
 
-	// 마이페이지창 - 관람내역 - 후기 작성 버튼
-	 public boolean write_review(String id, String movie_name, int star, String
-	 comment ) {
-	 connection();
-	
-	 String sql = "insert into movie_comment values(?,?,?,?)";
-	 try {
-	 prestmt = conn.prepareStatement(sql);
-	 prestmt.setString(1, id);
-	 prestmt.setString(2, movie_name);
-	 prestmt.setInt(3, star);
-	 prestmt.setString(4, comment);
-	 int t = prestmt.executeUpdate();
-	
-	 if(t>0) {
-	 return true;
-	 }
-	 } catch (SQLException e) {
-	 e.printStackTrace();
-	 } finally {
-	 diss();
-	 }
-	 return false;
-	 }
-	 
-	 // 후기 작성 버전2 - 보류
-//	public boolean write_review(String id, String movie_name, int star, String comment) {
-//		connection();
-//		String sql = "select count(*) from movie_comment where id=? and movie_name=?";
-//		String sql2 = "insert into movie_comment values(?,?,?,?)";
-//		try {
-//
-//			prestmt = conn.prepareStatement(sql);
-//			prestmt.setString(1, id);
-//			prestmt.setString(2, movie_name);
-//			rs= prestmt.executeQuery();
-//			rs.next();
-//			int j = rs.getInt(1);
-//			
-//			if (!(j > 0)) {
-//
-//				prestmt = conn.prepareStatement(sql2);
-//				prestmt.setString(1, id);
-//				prestmt.setString(2, movie_name);
-//				prestmt.setInt(3, star);
-//				prestmt.setString(4, comment);
-//				int t = prestmt.executeUpdate();
-//
-//				if (t > 0) {
-//					return true;
-//				}
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			diss();
-//		}
-//		return false;
-//	}
+	/*												컨트롤러는 3단계를 쓰세요
+	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 :  마이페이지창- 예매확인/취소창 - 취소버튼 클릭시 2단계 삭제
+	 */
+	private boolean delete_reserve(String id, String movie_name) {
+		connection();
+		String sql = "delete from reserve where id=? and movie_name =?"; // 환불자 예약 삭제
+		try {
+			prestmt = conn.prepareStatement(sql);
+			prestmt.setString(1, id);
+			prestmt.setString(2, movie_name);
+			int t = prestmt.executeUpdate();
+
+			if (t > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			diss();
+		}
+		return false;
+	}
+
+	/*												
+	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 :  마이페이지창- 예매확인/취소창 - 취소버튼 클릭시 3단계 환불+삭제
+	 */
+	public boolean cancel(String id, String movie_name) {
+
+		if (refund(id, movie_name)) {
+			if (delete_reserve(id, movie_name)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+	/*												
+	 * 작성자 : 이성훈 작성일자 :07.04 기능설명 :  마이페이지창 - 관람내역 - 후기 작성 버튼
+	 */
+	public boolean write_review(String id, String movie_name, int star, String comment) {
+		connection();
+
+		String sql = "insert into movie_comment values(?,?,?,?)";
+		try {
+			prestmt = conn.prepareStatement(sql);
+			prestmt.setString(1, id);
+			prestmt.setString(2, movie_name);
+			prestmt.setInt(3, star);
+			prestmt.setString(4, comment);
+			int t = prestmt.executeUpdate();
+
+			if (t > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			diss();
+		}
+		return false;
+	}
+
+	/*												
+	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 포인트 추가
+	 */
+	public boolean point_plus(String id, int point) {
+		connection();
+		String sql1 = "select point from member where id=?";// 유저 잔액포인트 조회
+		String sql2 = "update member set point=? where id=?"; // 차감한 포인트 업데이트
+
+		try {
+			prestmt = conn.prepareStatement(sql1);
+			prestmt.setString(1, id);
+			rs = prestmt.executeQuery();
+
+			if (rs.next()) {
+				int mypoint = rs.getInt(1);
+				prestmt = conn.prepareStatement(sql2);
+				prestmt.setInt(1, (mypoint + point));
+				prestmt.setString(2, id);
+				int t = prestmt.executeUpdate();
+
+				if (t > 0) {
+					return true;
+				}
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			diss();
+		}
+		return false;
+	}
+
+	/*												
+	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 포인트 차감
+	 */
+	public boolean point_minus(String id, int point) {
+		connection();
+		String sql1 = "select point from member where id=?";// 유저 잔액포인트 조회
+		String sql2 = "update member set point=? where id=?"; // 차감한 포인트 업데이트
+
+		try {
+			prestmt = conn.prepareStatement(sql1);
+			prestmt.setString(1, id);
+			rs = prestmt.executeQuery();
+
+			if (rs.next()) {
+				int mypoint = rs.getInt(1);
+				prestmt = conn.prepareStatement(sql2);
+				prestmt.setInt(1, (mypoint - point));
+				prestmt.setString(2, id);
+				int t = prestmt.executeUpdate();
+
+				if (t > 0) {
+					return true;
+				}
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			diss();
+		}
+		return false;
+	}
+
+	/*												
+	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 캐시 추가
+	 */
+	public boolean cash_plus(String id, int cash) {
+		connection();
+		String sql1 = "select cash from member where id=?";// 유저 잔액포인트 조회
+		String sql2 = "update member set cash=? where id=?"; // 차감한 포인트 업데이트
+
+		try {
+			prestmt = conn.prepareStatement(sql1);
+			prestmt.setString(1, id);
+			rs = prestmt.executeQuery();
+
+			if (rs.next()) {
+				int mycash = rs.getInt(1);
+				prestmt = conn.prepareStatement(sql2);
+				prestmt.setInt(1, (mycash + cash));
+				prestmt.setString(2, id);
+				int t = prestmt.executeUpdate();
+
+				if (t > 0) {
+					return true;
+				}
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			diss();
+		}
+		return false;
+	}
+
+	/*												
+	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 캐시 차감
+	 */
+	public boolean cash_minus(String id, int cash) {
+		connection();
+		String sql1 = "select cash from member where id=?";// 유저 잔액포인트 조회
+		String sql2 = "update member set cash=? where id=?"; // 차감한 포인트 업데이트
+
+		try {
+			prestmt = conn.prepareStatement(sql1);
+			prestmt.setString(1, id);
+			rs = prestmt.executeQuery();
+
+			if (rs.next()) {
+				int mycash = rs.getInt(1);
+				prestmt = conn.prepareStatement(sql2);
+				prestmt.setInt(1, (mycash - cash));
+				prestmt.setString(2, id);
+				int t = prestmt.executeUpdate();
+
+				if (t > 0) {
+					return true;
+				}
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			diss();
+		}
+		return false;
+	}
+	// 후기 작성 버전2 - 보류
+	// public boolean write_review(String id, String movie_name, int star, String
+	// comment) {
+	// connection();
+	// String sql = "select count(*) from movie_comment where id=? and
+	// movie_name=?";
+	// String sql2 = "insert into movie_comment values(?,?,?,?)";
+	// try {
+	//
+	// prestmt = conn.prepareStatement(sql);
+	// prestmt.setString(1, id);
+	// prestmt.setString(2, movie_name);
+	// rs= prestmt.executeQuery();
+	// rs.next();
+	// int j = rs.getInt(1);
+	//
+	// if (!(j > 0)) {
+	//
+	// prestmt = conn.prepareStatement(sql2);
+	// prestmt.setString(1, id);
+	// prestmt.setString(2, movie_name);
+	// prestmt.setInt(3, star);
+	// prestmt.setString(4, comment);
+	// int t = prestmt.executeUpdate();
+	//
+	// if (t > 0) {
+	// return true;
+	// }
+	// }
+	// } catch (SQLException e) {
+	// e.printStackTrace();
+	// } finally {
+	// diss();
+	// }
+	// return false;
+	// }
 
 }
