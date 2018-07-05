@@ -6,7 +6,7 @@ package com.playdata.model;
 import java.sql.Date;
 
 public class Movie {
-	private String movie_code;
+	private String movie_name;
 	private String name;
 	private String director;
 	private String actors;
@@ -38,11 +38,11 @@ public class Movie {
 
 
 
-	public Movie(String movie_code, String name, String director, String actors, String summary, String genre,
+	public Movie(String movie_name, String name, String director, String actors, String summary, String genre,
 			double rate, int rank, int avg_star, int limit, int price, String path, Date start_date, Date run_date,
 			int run_time) {
 		super();
-		this.movie_code = movie_code;
+		this.movie_name = movie_name;
 		this.name = name;
 		this.director = director;
 		this.actors = actors;
@@ -61,18 +61,18 @@ public class Movie {
 
 	@Override
 	public String toString() {
-		return "Movie [movie_code=" + movie_code + ", name=" + name + ", director=" + director + ", actors=" + actors
+		return "Movie [movie_name=" + movie_name + ", name=" + name + ", director=" + director + ", actors=" + actors
 				+ ", summary=" + summary + ", genre=" + genre + ", rate=" + rate + ", rank=" + rank + ", avg_star="
 				+ avg_star + ", limit=" + limit + ", price=" + price + ", path=" + path + ", start_date=" + start_date
 				+ ", run_date=" + run_date + ", run_time=" + run_time + "]";
 	}
 
-	public String getMovie_code() {
-		return movie_code;
+	public String getMovie_name() {
+		return movie_name;
 	}
 
-	public void setMovie_code(String movie_code) {
-		this.movie_code = movie_code;
+	public void setMovie_name(String movie_name) {
+		this.movie_name = movie_name;
 	}
 
 	public String getName() {

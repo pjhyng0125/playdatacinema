@@ -38,13 +38,13 @@ public class MovieDAO {
       ArrayList<Movie> movieList = new ArrayList<>();
       try {
          connect();
-         String sql = "select path, name, rate, genre from movie order by rate desc";
+         String sql = "select path, movie_name, rate, genre from movie order by rate desc";
          pstmt = conn.prepareStatement(sql);
          rs = pstmt.executeQuery();
          while(rs.next()) {
             Movie m = new Movie();
                  m.setPath(rs.getString("path"));
-                 m.setPath(rs.getString("name"));
+                 m.setPath(rs.getString("movie_name"));
                  m.setRate(rs.getDouble("rate"));
                  m.setGenre(rs.getString("genre"));
             movieList.add(m);
@@ -67,14 +67,14 @@ public class MovieDAO {
       ArrayList<Object> list = new ArrayList<>();
       try {
          connect();
-         String sql="select name, start_date, director, actors, summary,id,content"
+         String sql="select movie_name, start_date, director, actors, summary,id,content"
                   + "from movie natural join movie_comment where path = ? order by no asc";
          pstmt = conn.prepareStatement(sql);
          pstmt.setString(1, path);
          rs = pstmt.executeQuery();
          while(rs.next()) {
             Movie m = new Movie();
-                 m.setName(rs.getString("name"));
+                 m.setName(rs.getString("movie_name"));
                  m.setStart_date(rs.getDate("start_date"));
                  m.setDirector(rs.getString("director"));
                  m.setActors(rs.getString("actors"));
