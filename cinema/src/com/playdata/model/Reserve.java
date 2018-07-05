@@ -15,7 +15,7 @@ public class Reserve {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Reserve(String id, String movie_name, String ticket_key, Date run_date, String run_time, String seatnum,
+	public Reserve(String id, String movie_name, Date run_date, String run_time, String seatnum,
 			String screen_code) {
 		super();
 		this.id = id;
