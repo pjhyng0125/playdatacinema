@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Properties;
 import java.util.Vector;
 
-
 /*
  * 멤버DAO: 회원의 정보 - DB
  * 초기 작성자 : 이성훈
@@ -28,12 +27,12 @@ public class MemberDAO {
 	ResultSet rs;
 	Member m;
 	Reserve reserve;
-	
+
 	ArrayList<Member> list;
-	
+
 	public MemberDAO() {
 		list = new ArrayList<>();
-		
+
 		pro = new Properties();
 		try {
 			pro.load(new FileReader("conn/conn.properties"));
@@ -45,50 +44,53 @@ public class MemberDAO {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}//생성자
-	
-	public void connection() {	
+	}// 생성자
+
+	public void connection() {
 		try {
-			conn = DriverManager.getConnection(pro.getProperty("url"),pro);
+			conn = DriverManager.getConnection(pro.getProperty("url"), pro);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
+		}
 	}// connection()
-	
-	public void diss() {	
+
+	public void diss() {
 		try {
-			if(rs!=null) rs.close();
-			if(prestmt != null) prestmt.close();
-			if(conn != null) conn.close();
+			if (rs != null)
+				rs.close();
+			if (prestmt != null)
+				prestmt.close();
+			if (conn != null)
+				conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		}
 	}// diss()
-	
-	// 로그인 기능 
-	public boolean login(String id, String pass) {		
+
+	// 로그인 기능
+	public boolean login(String id, String pass) {
 		connection();
-		String sql = "select id, pass from member where id=? and pass=?"; 
+		String sql = "select id, pass from member where id=? and pass=?";
 		try {
 			prestmt = conn.prepareStatement(sql);
 			prestmt.setString(1, id);
 			prestmt.setString(2, pass);
-			rs=prestmt.executeQuery();
-			
-			if(rs.next()) {
+			rs = prestmt.executeQuery();
+
+			if (rs.next()) {
 				return true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			diss();
-		}	
+		}
 		return false;
 	}// login
-	
+
 	// 회원가입
-	public boolean join(Member m) {	
-		connection();						//id,pass,gender,name,birth,phone,addr,mail,point,cash,memgrade,hint,answer
+	public boolean join(Member m) {
+		connection(); // id,pass,gender,name,birth,phone,addr,mail,point,cash,memgrade,hint,answer
 		String sql = "insert into member value (?,?,?,?,?,?,?,?,?,?,?,?,?) ";
 		try {
 			prestmt = conn.prepareStatement(sql);
@@ -96,7 +98,7 @@ public class MemberDAO {
 			prestmt.setString(2, m.getPass());
 			prestmt.setString(3, m.getGender());
 			prestmt.setString(4, m.getName());
-			prestmt.setDate(5,   m.getBirth());			
+			prestmt.setDate(5, m.getBirth());
 			prestmt.setString(6, m.getPhone());
 			prestmt.setString(7, m.getAddr());
 			prestmt.setString(8, m.getMail());
@@ -105,10 +107,10 @@ public class MemberDAO {
 			prestmt.setInt(11, m.getMem_grade());
 			prestmt.setString(12, m.getHint());
 			prestmt.setString(13, m.getAnswer());
-			
+
 			int t = prestmt.executeUpdate();
-			
-			if(t>0) {
+
+			if (t > 0) {
 				return true;
 			}
 		} catch (SQLException e) {
@@ -118,17 +120,17 @@ public class MemberDAO {
 		}
 		return false;
 	}// join()
-	
-	//회원가입창 - 중복확인기능
-	public boolean duplicate(String id) {		
+
+	// 회원가입창 - 중복확인기능
+	public boolean duplicate(String id) {
 		connection();
-		String sql="select id from emp where id=?";
+		String sql = "select id from emp where id=?";
 		try {
 			prestmt = conn.prepareStatement(sql);
 			prestmt.setString(1, id);
 			rs = prestmt.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				return true;
 			}
 		} catch (SQLException e) {
@@ -137,20 +139,20 @@ public class MemberDAO {
 			diss();
 		}
 		return false;
-	}//duplicate()
-	
-	// 아이디찾기				이름			이메일
+	}// duplicate()
+
+	// 아이디찾기 이름 이메일
 	public String idfind(String name, String email) {
 		connection();
-		String sql ="select id from member where name=? and email=?";
+		String sql = "select id from member where name=? and email=?";
 		String id;
 		try {
 			prestmt = conn.prepareStatement(sql);
 			prestmt.setString(1, name);
 			prestmt.setString(2, email);
 			rs = prestmt.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				id = rs.getString("id");
 				return id;
 			}
@@ -159,12 +161,11 @@ public class MemberDAO {
 		} finally {
 			diss();
 		}
-		return "fail";				
+		return "fail";
 	}// idfind()
-	
-	
-	// 비밀번호 찾기				비밀번호 찾을  id, 힌트, 힌트 답
-	public String passfind(String id, String hint, String answer) {	
+
+	// 비밀번호 찾기 비밀번호 찾을 id, 힌트, 힌트 답
+	public String passfind(String id, String hint, String answer) {
 		connection();
 		String sql = "select pass from member where id=? and hint=? and answer=?";
 		String pass;
@@ -174,9 +175,9 @@ public class MemberDAO {
 			prestmt.setString(2, hint);
 			prestmt.setString(3, answer);
 			rs = prestmt.executeQuery();
-			
-			if(rs.next()) {
-				pass= rs.getString("pass");
+
+			if (rs.next()) {
+				pass = rs.getString("pass");
 				return pass;
 			}
 		} catch (SQLException e) {
@@ -186,10 +187,10 @@ public class MemberDAO {
 		}
 		return "fail";
 	}
-	
-	// 마이페이지창- 회원정보수정						
+
+	// 마이페이지창- 회원정보수정
 	public boolean updateMember(Member m) {
-		connection();			//id,pass,gender,name,birth,phone,addr,mail,point,cash,memgrade,hint,answer
+		connection(); // id,pass,gender,name,birth,phone,addr,mail,point,cash,memgrade,hint,answer
 		String sql = "update member set pass=?, phone=?, addr=?, mail=?, hint=?,answer=?";
 		try {
 			prestmt = conn.prepareStatement(sql);
@@ -200,8 +201,8 @@ public class MemberDAO {
 			prestmt.setString(5, m.getHint());
 			prestmt.setString(6, m.getAnswer());
 			int t = prestmt.executeUpdate();
-			
-			if(t>0) {
+
+			if (t > 0) {
 				return true;
 			}
 		} catch (SQLException e) {
@@ -209,20 +210,20 @@ public class MemberDAO {
 		} finally {
 			diss();
 		}
-		
+
 		return false;
-	}//updateMember
-	
-	//마이페이지 - 회원탈퇴
+	}// updateMember
+
+	// 마이페이지 - 회원탈퇴
 	public boolean deleteMember(String id) {
 		connection();
-		String sql="delete from member where id=?";
+		String sql = "delete from member where id=?";
 		try {
 			prestmt = conn.prepareStatement(sql);
 			prestmt.setString(1, id);
-			int t= prestmt.executeUpdate();
-			
-			if(t>0) {
+			int t = prestmt.executeUpdate();
+
+			if (t > 0) {
 				return true;
 			}
 		} catch (SQLException e) {
@@ -231,47 +232,110 @@ public class MemberDAO {
 			diss();
 		}
 		return false;
-	}//deleteMember
-	
-	//마이페이지창- 예매 확인/취소
+	}// deleteMember
+
+	// 마이페이지창- 예매 확인/취소
 	public ArrayList<Reserve> moviecheck(String id) {
 		connection();
-		ArrayList<Reserve>list = new ArrayList<>();
+		ArrayList<Reserve> list = new ArrayList<>();
 		String sql = "select * from reserve where id=?";
 		try {
 			prestmt = conn.prepareStatement(sql);
 			prestmt.setString(1, id);
-			
+
 			rs = prestmt.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				String m_id = reserve.getId();
 				String m_moviename = reserve.getMovie_name();
-				String m_ticket_key = reserve.getTicket_key();
-				Date m_run_date= reserve.getRun_date();
+				Date m_run_date = reserve.getRun_date();
 				String m_run_time = reserve.getRun_time();
 				String m_seatnum = reserve.getSeatnum();
 				String m_screencode = reserve.getScreen_code();
-				
-				Reserve send_reserve = new Reserve(m_id, m_moviename, m_ticket_key, m_run_date, m_run_time, m_seatnum, m_screencode);
+
+				Reserve send_reserve = new Reserve(m_id, m_moviename, m_run_date, m_run_time, m_seatnum,
+						m_screencode);
 				list.add(send_reserve);
-				
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			diss();
 		}
-		
-		return list;		// list  안에 id, 영화 제목, 상영일자, 상영시간, 좌석번호  
-		
+
+		return list; // list 안에 id, 영화 제목, 상영일자, 상영시간, 좌석번호
+
 	}
-	
-	//마이페이지창- 예매확인/취소창 - 취소버튼 클릭시 
-	public boolean deleteMovie(String moive_name) {
-		
+
+	// 마이페이지창- 예매확인/취소창 - 취소버튼 클릭시
+	public boolean deleteMovie(String name,String moive_name) {
+		connection();
+		String sql1 = "select price from movie m, reserve r where r.movie_name= m.name and r.movie_name=?";
+		String sql2 = "delete from reserve where id=?";
 		
 		
 		return false;
 	}
+
+	// 마이페이지창 - 관람내역 - 후기 작성 버튼
+	 public boolean write_review(String id, String movie_name, int star, String
+	 comment ) {
+	 connection();
+	
+	 String sql = "insert into movie_comment values(?,?,?,?)";
+	 try {
+	 prestmt = conn.prepareStatement(sql);
+	 prestmt.setString(1, id);
+	 prestmt.setString(2, movie_name);
+	 prestmt.setInt(3, star);
+	 prestmt.setString(4, comment);
+	 int t = prestmt.executeUpdate();
+	
+	 if(t>0) {
+	 return true;
+	 }
+	 } catch (SQLException e) {
+	 e.printStackTrace();
+	 } finally {
+	 diss();
+	 }
+	 return false;
+	 }
+	 
+	 // 후기 작성 버전2 - 보류
+//	public boolean write_review(String id, String movie_name, int star, String comment) {
+//		connection();
+//		String sql = "select count(*) from movie_comment where id=? and movie_name=?";
+//		String sql2 = "insert into movie_comment values(?,?,?,?)";
+//		try {
+//
+//			prestmt = conn.prepareStatement(sql);
+//			prestmt.setString(1, id);
+//			prestmt.setString(2, movie_name);
+//			rs= prestmt.executeQuery();
+//			rs.next();
+//			int j = rs.getInt(1);
+//			
+//			if (!(j > 0)) {
+//
+//				prestmt = conn.prepareStatement(sql2);
+//				prestmt.setString(1, id);
+//				prestmt.setString(2, movie_name);
+//				prestmt.setInt(3, star);
+//				prestmt.setString(4, comment);
+//				int t = prestmt.executeUpdate();
+//
+//				if (t > 0) {
+//					return true;
+//				}
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			diss();
+//		}
+//		return false;
+//	}
+
 }
