@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Font;
 
 public class AdminView extends JFrame implements Runnable {
 	JPanel p_member; // 회원정보 패널
@@ -53,7 +54,7 @@ public class AdminView extends JFrame implements Runnable {
 	 * 작성자:박형진 수정일자:07/03/21:24 
 	 */
 	public AdminView() {
-		setTitle("AdminView");
+		setTitle("관리자창");
 //		memberInf(); //회원정보 패널 메소드
 		history(); //결제정보 패널 메소드
 		
@@ -126,11 +127,14 @@ public class AdminView extends JFrame implements Runnable {
 			p_history.setLayout(null);
 			p_history.setBounds(0, 0, 1036, 800);
 		la_profitInf = new JLabel("수익정보");
-			la_profitInf.setBounds(150, 72, 100, 30);
+		la_profitInf.setFont(new Font("맑은 고딕", Font.BOLD, 22));
+			la_profitInf.setBounds(150, 82, 100, 30);
 		la_payHistory = new JLabel("결제내역");
-			la_payHistory.setBounds(539, 72, 100, 30);
+		la_payHistory.setFont(new Font("맑은 고딕", Font.BOLD, 22));
+			la_payHistory.setBounds(550, 82, 100, 30);
 		la_totProfit = new JLabel("총수익");
-			la_totProfit.setBounds(250, 675, 100, 30);
+		la_totProfit.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+			la_totProfit.setBounds(250, 675, 47, 30);
 			
 		bt_canclePay = new JButton("결제취소");
 			bt_canclePay.setBounds(750, 675, 100, 30);
