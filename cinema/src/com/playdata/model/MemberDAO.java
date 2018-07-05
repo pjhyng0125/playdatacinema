@@ -283,8 +283,10 @@ public class MemberDAO {
 		return list; // list 안에 id, 영화 제목, 상영일자, 상영시간, 좌석번호
 
 	}
-	/*												컨트롤러는 3단계를 쓰세요
-	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 :  마이페이지창- 예매확인/취소창 - 취소버튼 클릭시 1단계 환불
+
+	/*
+	 * 컨트롤러는 3단계를 쓰세요 작성자 : 이성훈 작성일자 :07.05 기능설명 : 마이페이지창- 예매확인/취소창 - 취소버튼 클릭시 1단계
+	 * 환불
 	 */
 	private boolean refund(String id, String movie_name) {
 		connection();
@@ -324,8 +326,9 @@ public class MemberDAO {
 		return false;
 	}
 
-	/*												컨트롤러는 3단계를 쓰세요
-	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 :  마이페이지창- 예매확인/취소창 - 취소버튼 클릭시 2단계 삭제
+	/*
+	 * 컨트롤러는 3단계를 쓰세요 작성자 : 이성훈 작성일자 :07.05 기능설명 : 마이페이지창- 예매확인/취소창 - 취소버튼 클릭시 2단계
+	 * 삭제
 	 */
 	private boolean delete_reserve(String id, String movie_name) {
 		connection();
@@ -347,8 +350,8 @@ public class MemberDAO {
 		return false;
 	}
 
-	/*												
-	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 :  마이페이지창- 예매확인/취소창 - 취소버튼 클릭시 3단계 환불+삭제
+	/*
+	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 마이페이지창- 예매확인/취소창 - 취소버튼 클릭시 3단계 환불+삭제
 	 */
 	public boolean cancel(String id, String movie_name) {
 
@@ -360,8 +363,9 @@ public class MemberDAO {
 
 		return false;
 	}
-	/*												
-	 * 작성자 : 이성훈 작성일자 :07.04 기능설명 :  마이페이지창 - 관람내역 - 후기 작성 버튼
+
+	/*
+	 * 작성자 : 이성훈 작성일자 :07.04 기능설명 : 마이페이지창 - 관람내역 - 후기 작성 버튼
 	 */
 	public boolean write_review(String id, String movie_name, int star, String comment) {
 		connection();
@@ -386,7 +390,7 @@ public class MemberDAO {
 		return false;
 	}
 
-	/*												
+	/*
 	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 포인트 추가
 	 */
 	public boolean point_plus(String id, int point) {
@@ -419,7 +423,7 @@ public class MemberDAO {
 		return false;
 	}
 
-	/*												
+	/*
 	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 포인트 차감
 	 */
 	public boolean point_minus(String id, int point) {
@@ -452,7 +456,7 @@ public class MemberDAO {
 		return false;
 	}
 
-	/*												
+	/*
 	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 캐시 추가
 	 */
 	public boolean cash_plus(String id, int cash) {
@@ -485,7 +489,7 @@ public class MemberDAO {
 		return false;
 	}
 
-	/*												
+	/*
 	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 캐시 차감
 	 */
 	public boolean cash_minus(String id, int cash) {
