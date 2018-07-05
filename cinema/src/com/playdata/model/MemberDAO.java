@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -25,6 +26,8 @@ public class MemberDAO {
 	Connection conn;
 	PreparedStatement prestmt;
 	ResultSet rs;
+	Member m;
+	Reserve reserve;
 	
 	ArrayList<Member> list;
 	
@@ -208,10 +211,10 @@ public class MemberDAO {
 		}
 		
 		return false;
-	}
+	}//updateMember
 	
 	//마이페이지 - 회원탈퇴
-	public boolean delete(String id) {
+	public boolean deleteMember(String id) {
 		connection();
 		String sql="delete from member where id=?";
 		try {
@@ -228,5 +231,47 @@ public class MemberDAO {
 			diss();
 		}
 		return false;
-	}	
+	}//deleteMember
+	
+	//마이페이지창- 예매 확인/취소
+	public ArrayList<Reserve> moviecheck(String id) {
+		connection();
+		ArrayList<Reserve>list = new ArrayList<>();
+		String sql = "select * from reserve where id=?";
+		try {
+			prestmt = conn.prepareStatement(sql);
+			prestmt.setString(1, id);
+			
+			rs = prestmt.executeQuery();
+			
+			while(rs.next()) {
+				String m_id = reserve.getId();
+				String m_moviename = reserve.getMovie_name();
+				String m_ticket_key = reserve.getTicket_key();
+				Date m_run_date= reserve.getRun_date();
+				String m_run_time = reserve.getRun_time();
+				String m_seatnum = reserve.getSeatnum();
+				String m_screencode = reserve.getScreen_code();
+				
+				Reserve send_reserve = new Reserve(m_id, m_moviename, m_ticket_key, m_run_date, m_run_time, m_seatnum, m_screencode);
+				list.add(send_reserve);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			diss();
+		}
+		
+		return list;		// list  안에 id, 영화 제목, 상영일자, 상영시간, 좌석번호  
+		
+	}
+	
+	//마이페이지창- 예매확인/취소창 - 취소버튼 클릭시 
+	public boolean deleteMovie(String moive_name) {
+		
+		
+		
+		return false;
+	}
 }
