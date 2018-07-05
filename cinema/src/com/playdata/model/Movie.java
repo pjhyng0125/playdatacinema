@@ -7,7 +7,6 @@ import java.sql.Date;
 
 public class Movie {
 	private String movie_name;
-	private String name;
 	private String director;
 	private String actors;
 	private String summary;
@@ -27,23 +26,23 @@ public class Movie {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Movie(String name, String genre, double rate, int avg_star, String path) {
+	public Movie(String movie_name, String genre, double rate, int avg_star, String path) { // reserView¿ë
 		super();
-		this.name = name;
+		this.movie_name = movie_name;
 		this.genre = genre;
 		this.rate = rate;
 		this.avg_star = avg_star;
 		this.path = path;
 	}
+	
+	
 
 
-
-	public Movie(String movie_name, String name, String director, String actors, String summary, String genre,
+	public Movie(String movie_name, String director, String actors, String summary, String genre,
 			double rate, int rank, int avg_star, int limit, int price, String path, Date start_date, Date run_date,
 			int run_time) {
 		super();
 		this.movie_name = movie_name;
-		this.name = name;
 		this.director = director;
 		this.actors = actors;
 		this.summary = summary;
@@ -61,7 +60,7 @@ public class Movie {
 
 	@Override
 	public String toString() {
-		return "Movie [movie_name=" + movie_name + ", name=" + name + ", director=" + director + ", actors=" + actors
+		return "Movie [movie_name=" + movie_name + ", director=" + director + ", actors=" + actors
 				+ ", summary=" + summary + ", genre=" + genre + ", rate=" + rate + ", rank=" + rank + ", avg_star="
 				+ avg_star + ", limit=" + limit + ", price=" + price + ", path=" + path + ", start_date=" + start_date
 				+ ", run_date=" + run_date + ", run_time=" + run_time + "]";
@@ -73,14 +72,6 @@ public class Movie {
 
 	public void setMovie_name(String movie_name) {
 		this.movie_name = movie_name;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getDirector() {
