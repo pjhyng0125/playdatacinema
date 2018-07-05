@@ -34,8 +34,8 @@ public class ScheduleView extends JFrame {
 		la_title = new JLabel("영화: 탐정");
 		la_date = new JLabel("날짜: 18/07/03");
 		
-		v_sd = new ScheduleDateView[7];
-		v_st = new ScheduleTimeView[8];
+		v_sd = new ScheduleDateView[4];
+		v_st = new ScheduleTimeView[4];
 		
 		
 //set layout null
@@ -45,16 +45,13 @@ public class ScheduleView extends JFrame {
 //add ScheduleDateView
 		for(int i=0; i<v_sd.length; i++) {
 			v_sd[i] = new ScheduleDateView();
-			v_sd[i].setBounds(170*(i)+30, 20, 100, 80);
+			v_sd[i].setBounds(250*(i)+180, 20, 100, 80);
 			p_date.add(v_sd[i]);
 		}
 //add ScheduleTimeView
 		for(int i=0; i<v_st.length; i++) {
 			v_st[i] = new ScheduleTimeView();
-			if(i>3)
-				v_st[i].setBounds(300*(i-4)+40, 270, 200, 160);
-			else
-				v_st[i].setBounds(300*(i)+40, 50, 200, 160);
+			v_st[i].setBounds(300*(i)+40, 140, 200, 160);
 			p_time.add(v_st[i]);
 		}
 //set Background

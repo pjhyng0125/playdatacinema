@@ -22,7 +22,7 @@ import com.playdata.view.ReviewSubView;
 import com.playdata.view.ScheduleView;
 import com.playdata.view.ScreenView;
 
-public class Controller implements ActionListener {	
+public class Controller extends MouseAdapter implements ActionListener {	
 //view
 	LoginView v_login;
 	ReserView v_reserve;
@@ -35,9 +35,10 @@ public class Controller implements ActionListener {
 //dao
 	MovieDAO movie_dao;
 //int
-	int seleted_date;//ScheduleDateView에서 선택된 toggle button의 index를 저장하는 변수
-	int seleted_time;//ScheduleTimeView에서 선택된 toggle button의 index를 저장하는 변수
-	int seleted_movie; //선택한 영화의 index를 저장하는 변수 ... 0,1,2,3
+	int selected_date;//ScheduleDateView에서 선택된 toggle button의 index를 저장하는 변수
+	int selected_time;//ScheduleTimeView에서 선택된 toggle button의 index를 저장하는 변수
+	String selected_movie; //선택한 영화의 index를 저장하는 변수 ... 0,1,2,3
+	
 	int review_page; //후기 창 page 변수
 	int review_maxpage;	//후기창 
 	
@@ -84,7 +85,7 @@ public class Controller implements ActionListener {
 		v_reserve.setstarSelected(2, 2);
 		v_reserve.setstarSelected(3, 1);
 //ReserView => show movie list infos...
-		list_movie = movie_dao.movieSelectAll();
+//		list_movie = movie_dao.movieSelectAll();
 		list_movie = new ArrayList<>();
 		list_movie.add(new Movie("앤트맨", "액션코미디", 50.0, 4, "image/antman.png"));
 		list_movie.add(new Movie("히스토리", "멜로감동", 25.0, 3, "image/her_story.png"));
@@ -145,7 +146,7 @@ public class Controller implements ActionListener {
 				for(int i=0; i<v_schedule.v_st.length; i++) {
 					if(v_schedule.v_st[i].tbt_time.isSelected()) {
 						flag = true;
-						seleted_time = i;
+						selected_time = i;
 					}
 				}
 				
@@ -156,7 +157,7 @@ public class Controller implements ActionListener {
 				}
 				else {
 					for(int j=0; j<v_schedule.v_st.length; j++)
-						if(seleted_time != j)
+						if(selected_time != j)
 							v_schedule.v_st[j].tbt_time.setEnabled(false);
 				}
 				}//mouseReleased	
@@ -181,7 +182,7 @@ public class Controller implements ActionListener {
 				for(int i=0; i<v_schedule.v_sd.length; i++) {
 					if(v_schedule.v_sd[i].isSelected()) {
 						flag = true;
-						seleted_date = i;
+						selected_date = i;
 					}
 				}
 				
@@ -192,7 +193,7 @@ public class Controller implements ActionListener {
 				}
 				else {
 					for(int j=0; j<v_schedule.v_sd.length; j++)
-						if(seleted_date != j)
+						if(selected_date != j)
 							v_schedule.v_sd[j].setEnabled(false);
 								
 				}
@@ -206,13 +207,7 @@ public class Controller implements ActionListener {
 		 * 이벤트리스너 기능: ReserView => Move ReView
 		 */
 		for(int i=0; i<v_reserve.subv_reserve.length; i++)
-			v_reserve.subv_reserve[i].la_image.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					v_reserve.setVisible(false);
-					v_review.setVisible(true);
-				}
-			});
+			v_reserve.subv_reserve[i].la_image.addMouseListener(this);
 		
 		/*
 		 * 작성자: 박진형
@@ -292,7 +287,24 @@ public class Controller implements ActionListener {
 	public static void main(String[] args) {
 		new Controller();
 	}
-	
+	@Override
+/*-------------------------------------EVENT LISTENER(mouseclicked)------------------------------------------*/
+		public void mouseClicked(MouseEvent e) {
+			Object ob = e.getSource();
+		/*
+		 * 작성자: 박진형
+		 * 수정일자: 07/03 20:13
+		 * 이벤트리스너 기능: ReserView => Move ReView
+		 */
+		for(int i=0; i<v_reserve.subv_reserve.length; i++)
+			if(ob == v_reserve.subv_reserve[i].la_image){
+					v_reserve.setVisible(false);
+					v_review.setVisible(true);
+					
+					selected_movie = list_movie.get(i).getName();
+					System.out.println("selected_movie = "+selected_movie);
+				}
+		}
 	
 /*-------------------------------------EVENT LISTENER(actionPerformed)------------------------------------------*/
 	/*
@@ -312,11 +324,12 @@ public class Controller implements ActionListener {
 						v_createreview.setstarSelected(j);
 				}
 			}//for-j
-			
+
+			//ReserView에서 예매 버튼 클릭시
 			for(int i=0; i<4; i++) {
 				if(ob ==v_reserve.subv_reserve[i].bt_reserve) {
-					seleted_movie = i;
-					System.out.println(seleted_movie);
+					selected_movie = list_movie.get(i).getName();
+					System.out.println(selected_movie);
 				}//if
 			}//for
 		

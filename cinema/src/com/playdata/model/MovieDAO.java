@@ -38,7 +38,7 @@ public class MovieDAO {
       ArrayList<Movie> movieList = new ArrayList<>();
       try {
          connect();
-         String sql = "select path, name, rate, genre from movie order by rate desc";
+         String sql = "select movie_name, rate, genre, path from movie order by rate desc";
          pstmt = conn.prepareStatement(sql);
          rs = pstmt.executeQuery();
          while(rs.next()) {
