@@ -7,19 +7,19 @@ import java.sql.Date;
  */
 public class Member {								// 필요사항 - 유저 비밀번호 찾기 기능 질문 해답 어디에 저장?
 		
-	String id;			// 유저 id
-	String pass;		// 유저 비밀번호
-	String gender;		// 유저 성별
-	String name;		// 유저 이름
-	Date birth;			// 유저 생년월일
-	String phone;		// 유저 전화번호	
-	String addr;		// 유저 주소 -> 필요한가?
-	String mail;		// 유저 메일
-	int point;			// 유저 소유 포인트
-	int cash;			// 유저 잔액
-	int mem_grade;		// 유저 등급	
-	String hint;		// 유저 비번찾기 질문
-	String answer;		// 유저 비번찾기 답
+	private String id;			// 유저 id
+	private String pass;		// 유저 비밀번호
+	private String gender;		// 유저 성별
+	private String name;		// 유저 이름
+	private Date birth;			// 유저 생년월일
+	private String phone;		// 유저 전화번호	
+	private String addr;		// 유저 주소 -> 필요한가?
+	private String mail;		// 유저 메일
+	private int point;			// 유저 소유 포인트
+	private int cash;			// 유저 잔액
+	private int mem_grade;		// 유저 등급	
+	private String hint;		// 유저 비번찾기 질문
+	private String answer;		// 유저 비번찾기 답
 	
 	public Member() {
 		
