@@ -124,10 +124,10 @@ public class JoinView extends JFrame
 		tf_addr.setBounds(80,500,200,25);
 		tf_addr2.setBounds(80,530,150,25);
 		
-		bt_submit.setBounds(50,600,90,25);
+		bt_submit.setBounds(70,600,90,25);
 		bt_submit.setBackground(Color.BLACK);
 		bt_submit.setForeground(Color.WHITE);
-		bt_reset.setBounds(150,600,90,25);
+		bt_reset.setBounds(180,600,90,25);
 		bt_reset.setBackground(Color.BLACK);
 		bt_reset.setForeground(Color.WHITE);
 		bt_checkid.setBounds(190,100,90,25);

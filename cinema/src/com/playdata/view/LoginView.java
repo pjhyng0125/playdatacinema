@@ -41,8 +41,8 @@ public class LoginView extends JFrame
 		panel.setBounds(0,0,300,50);
 		panel.setBackground(Color.BLACK);
 		
-		tf_id.setBounds(70,120,100,50);
-		tf_pass.setBounds(70,180,100,50);
+		tf_id.setBounds(70,120,100,45);
+		tf_pass.setBounds(70,180,100,45);
 		bt_login.setBounds(180,140,100,60);
 		bt_login.setBackground(Color.BLACK);
 		bt_login.setForeground(Color.WHITE);
@@ -94,11 +94,3 @@ public class LoginView extends JFrame
 	}
       
 }//LoginForm
-
-
-
-
-
-
-
-

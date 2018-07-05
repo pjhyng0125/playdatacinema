@@ -120,10 +120,10 @@ public class JoinUpdateView extends JFrame
 		tf_addr.setBounds(80,500,200,25);
 		tf_addr2.setBounds(80,530,150,25);
 		
-		bt_submit.setBounds(50,600,90,25);
+		bt_submit.setBounds(70,600,90,25);
 		bt_submit.setBackground(Color.BLACK);
 		bt_submit.setForeground(Color.WHITE);
-		bt_reset.setBounds(150,600,90,25);
+		bt_reset.setBounds(180,600,90,25);
 		bt_reset.setBackground(Color.BLACK);
 		bt_reset.setForeground(Color.WHITE);
 		bt_checkid.setBounds(190,100,90,25);
@@ -147,7 +147,7 @@ public class JoinUpdateView extends JFrame
 		la_ex2.setBounds(90,480,150,20);
 		la_ex2.setFont(new Font("±Ã¼­Ã¼", Font.PLAIN, 12));
 		la_addr.setBounds(10,500,100,25);
-		la_title.setBounds(80,15,200,50);
+		la_title.setBounds(100,15,200,50);
 		la_title.setFont(new Font("µ¸¿ò", Font.PLAIN, 30));
 		la_title.setForeground(Color.WHITE);
 		
