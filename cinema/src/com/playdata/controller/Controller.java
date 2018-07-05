@@ -5,11 +5,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 
 import com.playdata.model.Comment;
 import com.playdata.model.Movie;
+import com.playdata.model.MovieDAO;
 import com.playdata.view.CreateReView;
 import com.playdata.view.LoginView;
 import com.playdata.view.MyPageView;
@@ -20,7 +22,7 @@ import com.playdata.view.ReviewSubView;
 import com.playdata.view.ScheduleView;
 import com.playdata.view.ScreenView;
 
-public class Controller implements ActionListener {
+public class Controller implements ActionListener {	
 //view
 	LoginView v_login;
 	ReserView v_reserve;
@@ -30,11 +32,15 @@ public class Controller implements ActionListener {
 	ScreenView v_screen;
 	PayView v_pay;
 	CreateReView v_createreview;
+//dao
+	MovieDAO movie_dao;
 //int
 	int seleted_date;//ScheduleDateView에서 선택된 toggle button의 index를 저장하는 변수
 	int seleted_time;//ScheduleTimeView에서 선택된 toggle button의 index를 저장하는 변수
+	int seleted_movie; //선택한 영화의 index를 저장하는 변수 ... 0,1,2,3
 	int review_page; //후기 창 page 변수
 	int review_maxpage;	//후기창 
+	
 //String
 	String login_id="login_id";
 //arraylist
@@ -52,7 +58,8 @@ public class Controller implements ActionListener {
 		v_screen = new ScreenView();
 		v_pay = new PayView();
 		v_createreview = new CreateReView(login_id);
-		
+//dao
+		movie_dao = new MovieDAO();
 //add comments in list
 		list_comment = new ArrayList<>();
 		list_comment.add(new Comment("a", "1234", 1));
@@ -77,11 +84,16 @@ public class Controller implements ActionListener {
 		v_reserve.setstarSelected(2, 2);
 		v_reserve.setstarSelected(3, 1);
 //ReserView => show movie list infos...
+//		list_movie = movie_dao.movieSelectAll();
 		list_movie = new ArrayList<>();
+		list_movie.add(new Movie("앤트맨", "액션코미디", 50.0, 4, "image/antman.png"));
+		list_movie.add(new Movie("히스토리", "멜로감동", 25.0, 3, "image/her_story.png"));
+		list_movie.add(new Movie("탐점", "액션코미디", 20.0, 2, "image/returns.png"));
+		list_movie.add(new Movie("마녀", "액션코미디", 15.0, 0, "image/witch.png"));
 		showReserveInfo(list_movie);
 		
-		
 /*-------------------------------------EVENT LISTENER(익명)------------------------------------------*/
+		
 		/*
 		 * 작성자: 박진형
 		 * 수정일자: 07/03 23:18
@@ -244,6 +256,8 @@ public class Controller implements ActionListener {
 		for(int i=0; i<v_createreview.tbt_stars.length; i++)
 			v_createreview.tbt_stars[i].addActionListener(this);
 		v_schedule.bt_back.addActionListener(this);
+		for(int i=0; i<4; i++)
+			v_reserve.subv_reserve[i].bt_reserve.addActionListener(this);
 	}//생성자
 	
 	/*
@@ -268,9 +282,10 @@ public class Controller implements ActionListener {
 	public void showReserveInfo(ArrayList<Movie> list_movie) {
 		for(int i=0; i<4; i++) {
 			v_reserve.subv_reserve[i].la_title.setText(list_movie.get(i).getName());
-			v_reserve.subv_reserve[i].la_percent.setText(list_movie.get(i).getRate()+"");
+			v_reserve.subv_reserve[i].la_percent.setText(list_movie.get(i).getRate()+" %");
 			v_reserve.subv_reserve[i].la_genre.setText(list_movie.get(i).getGenre());
-			v_reserve.subv_reserve[i].la_image.setIcon(new ImageIcon(list_movie.get(i).getPath()));			
+			v_reserve.subv_reserve[i].la_image.setIcon(new ImageIcon(list_movie.get(i).getPath()));
+			v_reserve.setstarSelected(i, list_movie.get(i).getAvg_star());
 		}
 	}
 	
@@ -297,6 +312,13 @@ public class Controller implements ActionListener {
 						v_createreview.setstarSelected(j);
 				}
 			}//for-j
+			
+			for(int i=0; i<4; i++) {
+				if(ob ==v_reserve.subv_reserve[i].bt_reserve) {
+					seleted_movie = i;
+					System.out.println(seleted_movie);
+				}//if
+			}//for
 		
 /*---------------View Change EVENT---------------*/	
 		if(ob == v_login.bt_login) {

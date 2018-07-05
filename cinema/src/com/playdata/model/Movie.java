@@ -26,6 +26,17 @@ public class Movie {
 	public Movie() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Movie(String name, String genre, double rate, int avg_star, String path) {
+		super();
+		this.name = name;
+		this.genre = genre;
+		this.rate = rate;
+		this.avg_star = avg_star;
+		this.path = path;
+	}
+
+
 
 	public Movie(String movie_code, String name, String director, String actors, String summary, String genre,
 			double rate, int rank, int avg_star, int limit, int price, String path, Date start_date, Date run_date,
