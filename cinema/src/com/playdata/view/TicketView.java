@@ -25,7 +25,7 @@ public class TicketView extends JFrame {
 		
 		la_ticket = new JLabel("¸ð¹ÙÀÏ Æ¼ÄÏ");
 		la_ticket.setForeground(Color.WHITE);
-		la_ticket.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 22));
+		la_ticket.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 22));
 		la_ticket.setBounds(14, 12, 172, 80);
 		la_reserver = new JLabel("¿µÈ­ ¿¹¸ÅÀÚ : ");
 		la_reserver.setFont(new Font("¸¼Àº°íµñ", 0, 30));

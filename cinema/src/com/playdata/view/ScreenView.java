@@ -9,6 +9,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
+
+
+
 import javax.swing.JTabbedPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -19,12 +22,11 @@ import java.awt.Font;
 import java.awt.SystemColor;
 
 public class ScreenView extends JFrame {
-
-	//----------------------------¹öÆ°
-	JToggleButton bt_seat_a1,bt_seat_a2,bt_seat_a3,bt_seat_a4,bt_seat_a5,bt_seat_a6,bt_seat_a7,bt_seat_a8,bt_seat_a9,bt_seat_a10; //aÁÂ¼®
-	JToggleButton bt_seat_b1,bt_seat_b2,bt_seat_b3,bt_seat_b4,bt_seat_b5,bt_seat_b6,bt_seat_b7,bt_seat_b8,bt_seat_b9,bt_seat_b10; //bÁÂ¼®
-	JToggleButton bt_seat_c1,bt_seat_c2,bt_seat_c3,bt_seat_c4,bt_seat_c5,bt_seat_c6,bt_seat_c7,bt_seat_c8,bt_seat_c9,bt_seat_c10; //cÁÂ¼®
 	
+    public JToggleButton [][]bt_seat; 
+ 
+	//----------------------------¹öÆ°
+
 	public JButton select_movie;//ÆäÀÌÁö ÀÌµ¿
 	public JButton pay_view;
 
@@ -51,107 +53,37 @@ public class ScreenView extends JFrame {
 	ImageIcon image_witch;
 	ImageIcon imageicon_select,imageicon_selecting,imageicon_unselect;
 	
+	private JLabel lb_1,lb_2,lb_3,lb_4,lb_5,lb_6,lb_7,lb_8,lb_9,lb_10;
+	
+	
 	
 	public ScreenView() {
 		setTitle("ScreenView");
-
+		
+		
+	
+		
 //===================== ¹öÆ° ¹× ¶óº§  =======================================================	
-		//aÁÂ¼®
-		bt_seat_a1 = new JToggleButton("1");
-			bt_seat_a1.setForeground(Color.WHITE);
-			bt_seat_a1.setBackground(Color.BLUE);
-		bt_seat_a2 = new JToggleButton("2");
-			bt_seat_a2.setForeground(Color.WHITE);
-			bt_seat_a2.setBackground(Color.BLUE);
-		bt_seat_a3 = new JToggleButton("3");
-			bt_seat_a3.setForeground(Color.WHITE);
-			bt_seat_a3.setBackground(Color.BLUE);
-		bt_seat_a4 = new JToggleButton("4");
-			bt_seat_a4.setForeground(Color.WHITE);
-			bt_seat_a4.setBackground(Color.BLUE);
-		bt_seat_a5 = new JToggleButton("5");
-			bt_seat_a5.setForeground(Color.WHITE);
-			bt_seat_a5.setBackground(Color.BLUE);
-		bt_seat_a6 = new JToggleButton("6");
-			bt_seat_a6.setForeground(Color.WHITE);
-			bt_seat_a6.setBackground(Color.BLUE);
-		bt_seat_a7 = new JToggleButton("7");
-			bt_seat_a7.setForeground(Color.WHITE);
-			bt_seat_a7.setBackground(Color.BLUE);
-		bt_seat_a8 = new JToggleButton("8");
-			bt_seat_a8.setForeground(Color.WHITE);
-			bt_seat_a8.setBackground(Color.BLUE);
-		bt_seat_a9 = new JToggleButton("9");
-			bt_seat_a9.setForeground(Color.WHITE);
-			bt_seat_a9.setBackground(Color.BLUE);
-		bt_seat_a10 = new JToggleButton("10");
-			bt_seat_a10.setForeground(Color.WHITE);
-			bt_seat_a10.setBackground(Color.BLUE);
-		
-
-		//bÁÂ¼®
-		bt_seat_b1 = new JToggleButton("1");
-			bt_seat_b1.setForeground(Color.WHITE);
-			bt_seat_b1.setBackground(Color.BLUE);
-		bt_seat_b2 = new JToggleButton("2");
-			bt_seat_b2.setForeground(Color.WHITE);
-			bt_seat_b2.setBackground(Color.BLUE);
-		bt_seat_b3 = new JToggleButton("3");
-			bt_seat_b3.setForeground(Color.WHITE);
-			bt_seat_b3.setBackground(Color.BLUE);
-		bt_seat_b4 = new JToggleButton("4");
-			bt_seat_b4.setForeground(Color.WHITE);
-			bt_seat_b4.setBackground(Color.BLUE);
-		bt_seat_b5 = new JToggleButton("5");
-			bt_seat_b5.setForeground(Color.WHITE);
-			bt_seat_b5.setBackground(Color.BLUE);
-		bt_seat_b6 = new JToggleButton("6");
-			bt_seat_b6.setForeground(Color.WHITE);
-			bt_seat_b6.setBackground(Color.BLUE);
-		bt_seat_b7 = new JToggleButton("7");
-			bt_seat_b7.setForeground(Color.WHITE);
-			bt_seat_b7.setBackground(Color.BLUE);
-		bt_seat_b8 = new JToggleButton("8");
-			bt_seat_b8.setForeground(Color.WHITE);
-			bt_seat_b8.setBackground(Color.BLUE);
-		bt_seat_b9 = new JToggleButton("9");
-			bt_seat_b9.setForeground(Color.WHITE);
-			bt_seat_b9.setBackground(Color.BLUE);
-		bt_seat_b10 = new JToggleButton("10");
-			bt_seat_b10.setForeground(Color.WHITE);
-			bt_seat_b10.setBackground(Color.BLUE);
-		
-		//cÁÂ¼®
-		bt_seat_c1 = new JToggleButton("1");
-			bt_seat_c1.setForeground(Color.WHITE);
-			bt_seat_c1.setBackground(Color.BLUE);
-		bt_seat_c2 = new JToggleButton("2");
-			bt_seat_c2.setForeground(Color.WHITE);
-			bt_seat_c2.setBackground(Color.BLUE);
-		bt_seat_c3 = new JToggleButton("3");
-			bt_seat_c3.setForeground(Color.WHITE);
-			bt_seat_c3.setBackground(Color.BLUE);
-		bt_seat_c4 = new JToggleButton("4");
-			bt_seat_c4.setForeground(Color.WHITE);
-			bt_seat_c4.setBackground(Color.BLUE);
-		bt_seat_c5 = new JToggleButton("5");
-			bt_seat_c5.setForeground(Color.WHITE);
-			bt_seat_c5.setBackground(Color.BLUE);
-		bt_seat_c6 = new JToggleButton("6");
-			bt_seat_c6.setForeground(Color.WHITE);
-			bt_seat_c6.setBackground(Color.BLUE);
-		bt_seat_c7 = new JToggleButton("7");
-			bt_seat_c7.setForeground(Color.WHITE);
-			bt_seat_c7.setBackground(Color.BLUE);
-		bt_seat_c8 = new JToggleButton("8");
-			bt_seat_c8.setForeground(Color.WHITE);
-			bt_seat_c8.setBackground(Color.BLUE);
-		bt_seat_c9 = new JToggleButton("9");
-			bt_seat_c9.setForeground(Color.WHITE);
-			bt_seat_c9.setBackground(Color.BLUE);
-		bt_seat_c10 = new JToggleButton("10");
-			bt_seat_c10.setForeground(Color.WHITE);
-			bt_seat_c10.setBackground(Color.BLUE);
+	
+		//ÁÂ¼®¹öÆ° ¹è¿­
+		bt_seat = new JToggleButton[3][10];
+		for(int i=0; i<bt_seat.length; i++) {
+			for(int j=0; j<bt_seat[i].length; j++) {
+				bt_seat[i][j] = new JToggleButton();
+				bt_seat[i][j].setForeground(Color.WHITE);
+				bt_seat[i][j].setBackground(Color.BLUE);
+			//a_bt[i].setBounds(273*(i)+70, 422, 60, 56);//x,y,°¡·Î,¼¼·Î
+			//                     70, 343,  616, ..... (273°£°Ý) 273-60=213
+				bt_seat[i][j].setBounds(273+(j*75), 422+(i*65), 60, 56);//x,y,°¡·Î,¼¼·Î
+			if(j>=2)
+				bt_seat[i][j].setBounds(273+(j*75)+39, 422+(i*65), 60, 56);//x,y,°¡·Î,¼¼·Î
+			if(j>=5)
+				bt_seat[i][j].setBounds(273+(j*75)+78, 422+(i*65), 60, 56);//x,y,°¡·Î,¼¼·Î
+			if(j>=8)
+				bt_seat[i][j].setBounds(273+(j*75)+117, 422+(i*65), 60, 56);//x,y,°¡·Î,¼¼·Î
+			getContentPane().add(bt_seat[i][j]);
+			}
+		}
 		
 		//abc ¶óº§
 		lb_a = new JLabel(" A");
@@ -181,49 +113,13 @@ public class ScreenView extends JFrame {
 		imageicon_unselect = new ImageIcon("image/unselect.png");
 
 		//¼±ÅÃ,ºÒ°¡´É,°¡´É ÀÌ¹ÌÁö
-		image_select = new JLabel(imageicon_select);
+		image_select = new JLabel(imageicon_selecting);
 		image_unselecting = new JLabel(imageicon_unselect);
-		image_selecting = new JLabel(imageicon_selecting);
+		image_selecting = new JLabel(imageicon_select);
 		
 		
 //===================== À§Ä¡ =======================================================	
-		//aÁÂ¼® À§Ä¡
-		bt_seat_a1.setBounds(273, 422, 60, 56);
-		bt_seat_a2.setBounds(347, 422, 60, 56);
-		bt_seat_a3.setBounds(462, 422, 60, 56);
-		bt_seat_a4.setBounds(536, 422, 60, 56);
-		bt_seat_a5.setBounds(610, 422, 60, 56);
-		bt_seat_a6.setBounds(726, 422, 60, 56);
-		bt_seat_a7.setBounds(800, 422, 60, 56);
-		bt_seat_a8.setBounds(874, 422, 60, 56);
-		bt_seat_a9.setBounds(989, 422, 60, 56);
-		bt_seat_a10.setBounds(1063, 422, 60, 56);
-		
-		//bÁÂ¼® À§Ä¡
-		bt_seat_b1.setBounds(273, 490, 60, 56);
-		bt_seat_b2.setBounds(347, 490, 60, 56);
-		bt_seat_b3.setBounds(462, 490, 60, 56);
-		bt_seat_b4.setBounds(536, 490, 60, 56);
-		bt_seat_b5.setBounds(610, 490, 60, 56);
-		bt_seat_b6.setBounds(726, 490, 60, 56);
-		bt_seat_b7.setBounds(800, 490, 60, 56);
-		bt_seat_b8.setBounds(874, 490, 60, 56);
-		bt_seat_b9.setBounds(989, 490, 60, 56);
-		bt_seat_b10.setBounds(1063, 490, 60, 56);
 
-		//cÁÂ¼® À§Ä¡
-		bt_seat_c1.setBounds(273, 558, 60, 56);
-		bt_seat_c2.setBounds(347, 558, 60, 56);
-		bt_seat_c3.setBounds(462, 558, 60, 56);
-		bt_seat_c4.setBounds(536, 558, 60, 56);
-		bt_seat_c5.setBounds(610, 558, 60, 56);
-		bt_seat_c6.setBounds(726, 558, 60, 56);
-		bt_seat_c7.setBounds(800, 558, 60, 56);
-		bt_seat_c8.setBounds(874, 558, 60, 56);
-		bt_seat_c9.setBounds(989, 558, 60, 56);
-		bt_seat_c10 .setBounds(1063, 558, 60, 56);
-	
-		
 		//abc ¶óº§ À§Ä¡
 		lb_a.setBounds(216, 432, 43, 37);
 		lb_b.setBounds(216, 498, 43, 37);
@@ -244,43 +140,12 @@ public class ScreenView extends JFrame {
 		image_selecting.setBounds(14, 558, 62, 56);
 
 //===================== contentpane =======================================================	
-		//aÁÂ¼® contentpane
+		//contentpane
 		getContentPane().setLayout(null);
-		getContentPane().add(bt_seat_a1);
-		getContentPane().add(bt_seat_a2);
-		getContentPane().add(bt_seat_a3);
-		getContentPane().add(bt_seat_a4);
-		getContentPane().add(bt_seat_a5);
-		getContentPane().add(bt_seat_a6);
-		getContentPane().add(bt_seat_a7);
-		getContentPane().add(bt_seat_a8);
-		getContentPane().add(bt_seat_a9);
-		getContentPane().add(bt_seat_a10);
+
 		
 		
-		//bÁÂ¼® contentpane
-		getContentPane().add(bt_seat_b1);
-		getContentPane().add(bt_seat_b2);
-		getContentPane().add(bt_seat_b3);
-		getContentPane().add(bt_seat_b4);
-		getContentPane().add(bt_seat_b5);
-		getContentPane().add(bt_seat_b6);
-		getContentPane().add(bt_seat_b7);
-		getContentPane().add(bt_seat_b8);
-		getContentPane().add(bt_seat_b9);
-		getContentPane().add(bt_seat_b10);
-		
-		//cÁÂ¼® contentpane
-		getContentPane().add(bt_seat_c1);
-		getContentPane().add(bt_seat_c2);
-		getContentPane().add(bt_seat_c3);
-		getContentPane().add(bt_seat_c4);
-		getContentPane().add(bt_seat_c5);
-		getContentPane().add(bt_seat_c6);
-		getContentPane().add(bt_seat_c7);
-		getContentPane().add(bt_seat_c8);
-		getContentPane().add(bt_seat_c9);
-		getContentPane().add(bt_seat_c10);
+
 		
 		//abc¶óº§ contentpane
 		getContentPane().add(lb_a);
@@ -364,6 +229,70 @@ public class ScreenView extends JFrame {
 		getContentPane().add(tf_seat_info);
 		getContentPane().add(lb_movie_image);
 		getContentPane().add(tf_movie_info);
+		
+		
+		//±×³É ÁÂ¼® ¼ýÀÚ
+		lb_1 = new JLabel("1");
+		lb_1.setFont(new Font("±¼¸²", Font.BOLD, 15));
+		lb_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_1.setBounds(273, 398, 62, 18);
+		getContentPane().add(lb_1);
+		
+		lb_2 = new JLabel("2");
+		lb_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_2.setFont(new Font("±¼¸²", Font.BOLD, 15));
+		lb_2.setBounds(347, 398, 62, 18);
+		getContentPane().add(lb_2);
+		
+		lb_3 = new JLabel("3");
+		lb_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_3.setFont(new Font("±¼¸²", Font.BOLD, 15));
+		lb_3.setBounds(460, 398, 62, 18);
+		getContentPane().add(lb_3);
+		
+		lb_4 = new JLabel("4");
+		lb_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_4.setFont(new Font("±¼¸²", Font.BOLD, 15));
+		lb_4.setBounds(536, 398, 62, 18);
+		getContentPane().add(lb_4);
+		
+		lb_5 = new JLabel("5");
+		lb_5.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_5.setFont(new Font("±¼¸²", Font.BOLD, 15));
+		lb_5.setBounds(610, 398, 62, 18);
+		getContentPane().add(lb_5);
+		
+		lb_6 = new JLabel("6");
+		lb_6.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_6.setFont(new Font("±¼¸²", Font.BOLD, 15));
+		lb_6.setBounds(724, 398, 62, 18);
+		getContentPane().add(lb_6);
+		
+		lb_7 = new JLabel("7");
+		lb_7.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_7.setFont(new Font("±¼¸²", Font.BOLD, 15));
+		lb_7.setBounds(798, 398, 62, 18);
+		getContentPane().add(lb_7);
+		
+		lb_8 = new JLabel("8");
+		lb_8.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_8.setFont(new Font("±¼¸²", Font.BOLD, 15));
+		lb_8.setBounds(872, 398, 62, 18);
+		getContentPane().add(lb_8);
+		
+		lb_9 = new JLabel("9");
+		lb_9.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_9.setFont(new Font("±¼¸²", Font.BOLD, 15));
+		lb_9.setBounds(989, 398, 62, 18);
+		getContentPane().add(lb_9);
+		
+		lb_10 = new JLabel("10");
+		lb_10.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_10.setFont(new Font("±¼¸²", Font.BOLD, 15));
+		lb_10.setBounds(1063, 398, 62, 18);
+		getContentPane().add(lb_10);
+		
+		
 		
 		
 		setBounds(10, 10, 1300, 1000);
