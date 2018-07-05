@@ -33,6 +33,7 @@ public class MyPageView extends JFrame {
 		
 		// 라벨 
 		
+		
 		la_mypage = new JLabel("마이페이지창");
 		la_mypage.setForeground(Color.WHITE);
 		la_mypage.setBounds(100, 16, 268, 68);
