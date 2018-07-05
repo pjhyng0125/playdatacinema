@@ -246,7 +246,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 		v_reserve.bt_logout.addActionListener(this);
 		v_mypage.bt_back.addActionListener(this);
 		v_review.bt_reserve.addActionListener(this);
-		v_mypage.bt_history.addActionListener(this);
+		v_mypage.bt_check.addActionListener(this);
 		v_createreview.bt_mypage.addActionListener(this);
 		for(int i=0; i<v_createreview.tbt_stars.length; i++)
 			v_createreview.tbt_stars[i].addActionListener(this);
@@ -276,7 +276,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 	 */
 	public void showReserveInfo(ArrayList<Movie> list_movie) {
 		for(int i=0; i<4; i++) {
-			v_reserve.subv_reserve[i].la_title.setText(list_movie.get(i).getName());
+			v_reserve.subv_reserve[i].la_title.setText(list_movie.get(i).getMovie_name());
 			v_reserve.subv_reserve[i].la_percent.setText(list_movie.get(i).getRate()+" %");
 			v_reserve.subv_reserve[i].la_genre.setText(list_movie.get(i).getGenre());
 			v_reserve.subv_reserve[i].la_image.setIcon(new ImageIcon(list_movie.get(i).getPath()));
@@ -301,7 +301,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 					v_reserve.setVisible(false);
 					v_review.setVisible(true);
 					
-					selected_movie = list_movie.get(i).getName();
+					selected_movie = list_movie.get(i).getMovie_name();
 					System.out.println("selected_movie = "+selected_movie);
 				}
 		}
@@ -328,7 +328,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 			//ReserView에서 예매 버튼 클릭시
 			for(int i=0; i<4; i++) {
 				if(ob ==v_reserve.subv_reserve[i].bt_reserve) {
-					selected_movie = list_movie.get(i).getName();
+					selected_movie = list_movie.get(i).getMovie_name();
 					System.out.println(selected_movie);
 				}//if
 			}//for
@@ -369,7 +369,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 			v_review.setVisible(false);
 			v_reserve.setVisible(true);
 		}
-		else if(ob == v_mypage.bt_history) {
+		else if(ob == v_mypage.bt_check) {
 			v_mypage.setVisible(false);
 			v_createreview.setVisible(true);
 		}
