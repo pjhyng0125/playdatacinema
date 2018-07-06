@@ -26,6 +26,7 @@ public class ScheduleView extends JFrame {
 	public ScheduleTimeView v_st[];
 	boolean flag;
 	LineBorder bta;
+	String start="900";
 	
 	
 	public ScheduleView() {
@@ -65,7 +66,7 @@ public class ScheduleView extends JFrame {
 		}
 //add ScheduleTimeView
 		for(int i=0; i<v_st.length; i++) {
-			v_st[i] = new ScheduleTimeView();
+			v_st[i] = new ScheduleTimeView(plusTime(start, i));
 			v_st[i].setBounds(300*(i)+40, 140, 200, 160);
 			p_time.add(v_st[i]);
 		}
@@ -92,4 +93,7 @@ public class ScheduleView extends JFrame {
 		setSize(1200, 800);
 		setVisible(false);
 	}//»ý¼ºÀÚ
+	public String plusTime(String time, int i) {
+		return Integer.parseInt(time)+i*300+"";
+	}
 }

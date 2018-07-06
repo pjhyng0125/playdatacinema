@@ -9,9 +9,9 @@ import javax.swing.JToggleButton;
 public class ScheduleTimeView extends JPanel {
 	public JToggleButton tbt_time;
 	public JLabel la_seat;
-	public ScheduleTimeView() {
+	public ScheduleTimeView(String start) {
 //new
-		tbt_time = new JToggleButton("07:00~08:30");
+		tbt_time = new JToggleButton(start+"~830");
 		la_seat = new JLabel("0 / 20¼®");
 //panel set
 		setBackground(Color.GRAY);
