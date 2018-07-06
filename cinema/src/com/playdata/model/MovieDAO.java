@@ -100,6 +100,7 @@ public class MovieDAO {
 	        	 sql = "update movie set onshow=0 where movie_name=?";	        	 
 	         }
 	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, movie_name);
 	         int t = pstmt.executeUpdate();
 	         if(t>0) return true;
 	      } catch (SQLException e) {
@@ -110,6 +111,26 @@ public class MovieDAO {
 	   return false;
    }
 
+   
+   /*
+    * 작성자:박형진 수정일자:07/06/21:41 클래스(함수)기능: 영화이름을 받아 삭제하기
+    */
+   public boolean deleteMovie(String movie_name) {
+	    try {
+	         connect();
+	         String sql = "delete from movie where movie_name=?";
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, movie_name);
+	         int t = pstmt.executeUpdate();
+	         if(t>0) return true;
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         disconnect();
+	      }
+	    return false;
+   }
+   
    /*
     * 작성자:박형진 수정일자:07/05/00:42 클래스(함수)기능: Review에 반영하는 메소드.
     */
@@ -167,20 +188,6 @@ public class MovieDAO {
          disconnect();
       }
       return list;
-   }
-
-   
-
-   public void insert() {
-
-   }
-
-   public void update() {
-
-   }
-
-   public void delete() {
-
    }
 
    private void connect() {
