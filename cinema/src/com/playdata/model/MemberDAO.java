@@ -265,7 +265,7 @@ public class MemberDAO {
 			while (rs.next()) {
 				String m_id = reserve.getId();
 				String m_moviename = reserve.getMovie_name();
-				Date m_run_date = reserve.getRun_date();
+				String m_run_date = reserve.getRun_date();
 				String m_run_time = reserve.getRun_time();
 				String m_seatnum = reserve.getSeatnum();
 				String m_screencode = reserve.getScreen_code();

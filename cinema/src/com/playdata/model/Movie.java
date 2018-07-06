@@ -13,15 +13,16 @@ public class Movie {
 	private String genre;
 	
 	private double rate;
-	private int rank;
 	private int avg_star;
 	private int limit;
 	private int price;
 	private String path;
-	private Date start_date;
-	private Date run_date;
+	private String start_date;
+	private String run_date;
 	private int run_time;
+	private int onshow;
 	
+
 	public Movie() {
 		// TODO Auto-generated constructor stub
 	}
@@ -34,13 +35,11 @@ public class Movie {
 		this.avg_star = avg_star;
 		this.path = path;
 	}
-	
+
 	
 
-
-	public Movie(String movie_name, String director, String actors, String summary, String genre,
-			double rate, int rank, int avg_star, int limit, int price, String path, Date start_date, Date run_date,
-			int run_time) {
+	public Movie(String movie_name, String director, String actors, String summary, String genre, double rate, int rank,
+			int avg_star, int limit, int price, String path, String start_date, String run_date, int run_time, int onshow) {
 		super();
 		this.movie_name = movie_name;
 		this.director = director;
@@ -48,7 +47,6 @@ public class Movie {
 		this.summary = summary;
 		this.genre = genre;
 		this.rate = rate;
-		this.rank = rank;
 		this.avg_star = avg_star;
 		this.limit = limit;
 		this.price = price;
@@ -56,14 +54,23 @@ public class Movie {
 		this.start_date = start_date;
 		this.run_date = run_date;
 		this.run_time = run_time;
+		this.onshow = onshow;
 	}
 
 	@Override
 	public String toString() {
-		return "Movie [movie_name=" + movie_name + ", director=" + director + ", actors=" + actors
-				+ ", summary=" + summary + ", genre=" + genre + ", rate=" + rate + ", rank=" + rank + ", avg_star="
-				+ avg_star + ", limit=" + limit + ", price=" + price + ", path=" + path + ", start_date=" + start_date
-				+ ", run_date=" + run_date + ", run_time=" + run_time + "]";
+		return "Movie [movie_name=" + movie_name + ", director=" + director + ", actors=" + actors + ", summary="
+				+ summary + ", genre=" + genre + ", rate=" + rate + ", avg_star=" + avg_star
+				+ ", limit=" + limit + ", price=" + price + ", path=" + path + ", start_date=" + start_date
+				+ ", run_date=" + run_date + ", run_time=" + run_time + ", onshow=" + onshow + "]";
+	}
+
+	public int getOnshow() {
+		return onshow;
+	}
+	
+	public void setOnshow(int onshow) {
+		this.onshow = onshow;
 	}
 
 	public String getMovie_name() {
@@ -114,14 +121,6 @@ public class Movie {
 		this.rate = rate;
 	}
 
-	public int getRank() {
-		return rank;
-	}
-
-	public void setRank(int rank) {
-		this.rank = rank;
-	}
-
 	public int getAvg_star() {
 		return avg_star;
 	}
@@ -154,19 +153,19 @@ public class Movie {
 		this.path = path;
 	}
 
-	public Date getStart_date() {
+	public String getStart_date() {
 		return start_date;
 	}
 
-	public void setStart_date(Date start_date) {
+	public void setStart_date(String start_date) {
 		this.start_date = start_date;
 	}
 
-	public Date getRun_date() {
+	public String getRun_date() {
 		return run_date;
 	}
 
-	public void setRun_date(Date run_date) {
+	public void setRun_date(String run_date) {
 		this.run_date = run_date;
 	}
 

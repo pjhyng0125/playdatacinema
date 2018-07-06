@@ -6,7 +6,7 @@ public class Reserve {
 
 	private String id;
 	private String movie_name;
-	private Date run_date;
+	private String run_date;
 	private String run_time;
 	private String seatnum;
 	private String screen_code;
@@ -15,7 +15,7 @@ public class Reserve {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Reserve(String id, String movie_name, Date run_date, String run_time, String seatnum,
+	public Reserve(String id, String movie_name, String run_date, String run_time, String seatnum,
 			String screen_code) {
 		super();
 		this.id = id;
@@ -43,11 +43,11 @@ public class Reserve {
 	}
 
 
-	public Date getRun_date() {
+	public String getRun_date() {
 		return run_date;
 	}
 
-	public void setRun_date(Date run_date) {
+	public void setRun_date(String run_date) {
 		this.run_date = run_date;
 	}
 
