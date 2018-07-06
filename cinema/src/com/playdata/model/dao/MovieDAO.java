@@ -1,4 +1,4 @@
-package com.playdata.model;
+package com.playdata.model.dao;
 
 import java.io.FileReader;
 import java.sql.Connection;
@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
+
+import com.playdata.model.vo.Comment;
+import com.playdata.model.vo.Movie;
 
 /*
  * 무비DAO: 영화의 정보 - DB

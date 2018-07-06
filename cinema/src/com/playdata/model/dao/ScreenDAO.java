@@ -1,4 +1,4 @@
-package com.playdata.model;
+package com.playdata.model.dao;
 
 import java.io.FileReader;
 import java.sql.Connection;
@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
+
+import com.playdata.model.vo.Movie;
+import com.playdata.model.vo.Screen;
 
 public class ScreenDAO {
 	Connection conn;

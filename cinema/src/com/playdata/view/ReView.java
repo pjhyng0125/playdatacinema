@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.playdata.model.Comment;
+import com.playdata.model.vo.Comment;
 /*
  * ÈÄ±âºä
  */

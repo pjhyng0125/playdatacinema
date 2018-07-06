@@ -1,4 +1,4 @@
-package com.playdata.model;
+package com.playdata.model.vo;
 
 /*
  * ScreenView용 빈즈, 상영관번호, 상영시간, 좌석번호, 잔석여부

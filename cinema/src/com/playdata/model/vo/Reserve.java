@@ -1,4 +1,4 @@
-package com.playdata.model;
+package com.playdata.model.vo;
 
 import java.sql.Date;
 

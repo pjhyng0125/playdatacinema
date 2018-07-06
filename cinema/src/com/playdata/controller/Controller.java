@@ -9,9 +9,9 @@ import java.util.Calendar;
 
 import javax.swing.ImageIcon;
 
-import com.playdata.model.Comment;
-import com.playdata.model.Movie;
-import com.playdata.model.MovieDAO;
+import com.playdata.model.dao.MovieDAO;
+import com.playdata.model.vo.Comment;
+import com.playdata.model.vo.Movie;
 import com.playdata.view.CreateReView;
 import com.playdata.view.LoginView;
 import com.playdata.view.MyPageView;

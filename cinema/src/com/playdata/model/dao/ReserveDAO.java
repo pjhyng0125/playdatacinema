@@ -1,4 +1,4 @@
-package com.playdata.model;
+package com.playdata.model.dao;
 
 import java.io.FileReader;
 import java.sql.Connection;
