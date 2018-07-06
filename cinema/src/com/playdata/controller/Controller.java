@@ -39,9 +39,8 @@ public class Controller extends MouseAdapter implements ActionListener {
 	int selected_date;//ScheduleDateView에서 선택된 toggle button의 index를 저장하는 변수
 	int selected_time;//ScheduleTimeView에서 선택된 toggle button의 index를 저장하는 변수
 
-	String DB_movie; //선택한 영화의 이름을 저장하는 변수 ... 0,1,2,3
-	String DB_date; //Schedule 창에서 선택한 날짜를 저장하는 변수 ... 7/19
-	String DB_time; //Schedule 창에서 선택한 시간을 저장하는 변수 ... 7/19
+	String DB_movie; //선택한 영화의 index를 저장하는 변수 ... 0,1,2,3
+	String DB_date; //선택한 날짜를 저장하는 변수 ... 7/19
 	
 	int review_page; //후기 창 page 변수
 	int review_maxpage;	//후기창
@@ -77,6 +76,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 			v_schedule.v_sd[i].setText(combineDate(month, day)+" ("+yoils[yoil]+")");
 			addDate();
 		}
+		
 		v_schedule.la_date.setText("날짜 : "+today);
 		
 //add comments in list
@@ -178,8 +178,6 @@ public class Controller extends MouseAdapter implements ActionListener {
 						if(selected_time != j)
 							v_schedule.v_st[j].tbt_time.setEnabled(false);
 				}
-				DB_time = v_schedule.v_st[selected_time].tbt_time.getText();
-				System.out.println("DB_time : "+DB_time);
 				}//mouseReleased	
 			});//v_schedule.v_st[i].addMouseListener
 		}//for
