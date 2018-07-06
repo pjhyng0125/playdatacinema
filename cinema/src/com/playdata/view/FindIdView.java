@@ -29,7 +29,7 @@ public class FindIdView extends JFrame{
 			at[i]=new JLabel("@");
 		}
 		
-		String emailT[]= {"naver.com", "gmail.com", "yahoo.com", "daum.net"};
+		String emailT[]= {"Á÷Á¢ÀÔ·Â", "naver.com", "gmail.com", "yahoo.com", "daum.net"};
 		
 		tf_name = new JTextField();
 		tf_email1 = new JTextField();
@@ -59,8 +59,10 @@ public class FindIdView extends JFrame{
 	    la_title.setBounds(140,20,150,30);
         la_title.setFont(new Font("µ¸¿ò", Font.PLAIN, 30));
 	    la_title.setForeground(Color.WHITE);
-        la_name.setBounds(20,130,100,25);
-	    la_email.setBounds(20,180,100,25);
+        la_name.setBounds(10,130,100,25);
+        la_name.setFont(new Font("µ¸¿ò", Font.BOLD, 18));
+	    la_email.setBounds(10,180,100,25);
+	    la_email.setFont(new Font("µ¸¿ò", Font.BOLD, 18));
 	       
 	    bt_find.setBounds(70,250,90,25);
 	    bt_find.setBackground(Color.BLACK);
