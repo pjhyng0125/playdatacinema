@@ -162,7 +162,7 @@ public class MemberDAO {
 
 			if (rs.next()) {
 				id = rs.getString("id");
-				return id;
+				return "id";
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -189,7 +189,7 @@ public class MemberDAO {
 
 			if (rs.next()) {
 				pass = rs.getString("pass");
-				return pass;
+				return "pass";
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -462,6 +462,39 @@ public class MemberDAO {
 		}
 		return false;
 	}
+	/*
+	 * 작성자 : 이성훈 작성일자 :07.06 기능설명 : 회원조회
+	 */						// 		아이디		
+	public Member select_member(String id) {
+		connection();
+		String sql = "select * from member where id=?";
+		try {
+			prestmt = conn.prepareStatement(sql);
+			prestmt.setString(1, id);
+			rs=prestmt.executeQuery();
+			if(rs.next()) {
+				m= new Member(rs.getString("id"), rs.getString("pass"), rs.getString("gender"), rs.getString("name"), rs.getDate("birth"),
+						rs.getString("phone"), rs.getString("addr"), rs.getString("mail"), rs.getInt("point"), rs.getInt("cash"), 
+						rs.getInt("mem_grade"), rs.getString("hint"), rs.getString("answer"));
+				
+				return m;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			diss();
+		}
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	// ************************************  보류할 메소드 참조할 필요 없습니다 ***************************************
