@@ -45,14 +45,13 @@ public class CheckView extends JFrame{
 			p_center.add(sub_view[i]);
 			
 			
+			
+			
 		}
 	
 		
 		setSize(450, 650);
-		setVisible(true);
+		setVisible(false);
 	}
 	
-	public static void main(String[] args) {
-		new CheckView();
-	}
 }

@@ -92,14 +92,11 @@ public class FindIdView extends JFrame{
 		}
 		
 		setBounds(400,300,380,350);
-	    setVisible(true);
+	    setVisible(false);
 	    setResizable(false);
 	    setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
-	public static void main(String[] args) {
-		new FindIdView();
-	}
 
 }
 

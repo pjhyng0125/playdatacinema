@@ -73,7 +73,7 @@ public class TicketView extends JFrame {
 		p_north.add(la_ticket);
 		
 		p_center = new JPanel();
-		p_center.setBackground(Color.WHITE);
+		p_center.setBackground(new Color(245,201,203));
 		p_center.setLayout(null);
 		p_center.setPreferredSize(new Dimension(500, 600));
 		p_center.add(la_reserver);
@@ -96,10 +96,7 @@ public class TicketView extends JFrame {
 		
 		
 		setSize(500, 700);
-		setVisible(true);
+		setVisible(false);
 	}//»ý¼ºÀÚ
-	public static void main(String[] args) {
-		new TicketView();
-	}
-	
+
 }

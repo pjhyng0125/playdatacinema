@@ -1,6 +1,7 @@
 package com.playdata.view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -12,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Font;
 
@@ -69,20 +71,25 @@ public class AdminView extends JFrame implements Runnable {
 			getContentPane().add(p_history);
 			bt_cmtManage = new JButton("후기관리");
 			bt_cmtManage.setBounds(1050, 563, 100, 30);
+			bt_cmtManage.setBackground(Color.BLACK);
+			bt_cmtManage.setForeground(Color.WHITE);
 			getContentPane().add(bt_cmtManage);
 			
 			bt_postManage = new JButton("게시물관리");
 			bt_postManage.setBounds(1050, 521, 100, 30);
+			bt_postManage.setBackground(Color.black);
+			bt_postManage.setForeground(Color.white);
 			getContentPane().add(bt_postManage);
 			cb_menu = new JComboBox<>();
 			cb_menu.setBounds(1050, 606, 100, 30);
+			
 			getContentPane().add(cb_menu);
 			cb_menu.addItem("회원정보");
 			cb_menu.addItem("결제정보");
 		Thread t = new Thread(this);
 		t.start();
-		setBounds(300, 400, 1200, 800);
-		setVisible(true);
+		setBounds(500, 100, 1200, 800);
+		setVisible(false);
 	}// 생성자
 
 	public void memberInf() { //회원정보 패널
@@ -93,10 +100,16 @@ public class AdminView extends JFrame implements Runnable {
 			la_memberInf.setBounds(150, 58, 100, 30);
 		bt_selectAll = new JButton("전체조회");
 			bt_selectAll.setBounds(689, 651, 100, 30);
+			bt_selectAll.setBackground(Color.BLACK);
+			bt_selectAll.setForeground(Color.WHITE);
 		bt_select = new JButton("선택조회");
 			bt_select.setBounds(803, 651, 100, 30);
+			bt_select.setBackground(Color.BLACK);
+			bt_select.setForeground(Color.white);
 		bt_delete = new JButton("삭제");
 			bt_delete.setBounds(917, 651, 80, 30);
+			bt_delete.setBackground(Color.BLACK);
+			bt_delete.setForeground(Color.WHITE);
 		Object[] memberCol = { "아이디", "성별", "이름", "생년월일", "연락처", "주소", "이메일", "포인트", "캐쉬", "회원등급" };
 		dtm_member = new DefaultTableModel(memberCol, 32);
 		t_memberInf = new JTable(dtm_member);
@@ -126,18 +139,22 @@ public class AdminView extends JFrame implements Runnable {
 		p_history = new JPanel();
 			p_history.setLayout(null);
 			p_history.setBounds(0, 0, 1036, 800);
+			p_history.setBackground(Color.pink);
+			p_history.setPreferredSize(new Dimension(500,500));
 		la_profitInf = new JLabel("수익정보");
 		la_profitInf.setFont(new Font("맑은 고딕", Font.BOLD, 22));
 			la_profitInf.setBounds(150, 82, 100, 30);
 		la_payHistory = new JLabel("결제내역");
 		la_payHistory.setFont(new Font("맑은 고딕", Font.BOLD, 22));
 			la_payHistory.setBounds(550, 82, 100, 30);
-		la_totProfit = new JLabel("총수익");
-		la_totProfit.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-			la_totProfit.setBounds(250, 675, 47, 30);
+		la_totProfit = new JLabel("총수익:");
+		la_totProfit.setFont(new Font("맑은 고딕", Font.BOLD, 16));
+			la_totProfit.setBounds(240, 675, 70, 30);
 			
 		bt_canclePay = new JButton("결제취소");
 			bt_canclePay.setBounds(750, 675, 100, 30);
+			bt_canclePay.setBackground(Color.black);
+			bt_canclePay.setForeground(Color.white);			
 		cb_month = new JComboBox<>();
 			cb_month.setBounds(864, 126, 70, 30);
 		for(int i=1;i<13;i++) {
@@ -147,7 +164,9 @@ public class AdminView extends JFrame implements Runnable {
 		tf_totProfit = new JTextField("0000000원");
 			tf_totProfit.setEditable(false);
 			tf_totProfit.setBounds(300, 675, 150, 30);
+			tf_totProfit.setBorder(new BevelBorder(0, Color.BLACK, Color.BLACK));
 		tf_totProfit.setHorizontalAlignment(JTextField.RIGHT);
+		
 
 
 		Object[] payCol = { "아이디", "결제일", "티켓코드" };
@@ -165,8 +184,10 @@ public class AdminView extends JFrame implements Runnable {
 
 		sp_pay = new JScrollPane(t_payHistory);
 			sp_pay.setBounds(150, 124, 300, 537);
+			sp_pay.setBorder(new BevelBorder(0, Color.BLACK, Color.BLACK));
 		sp_pro = new JScrollPane(t_profitInf);
 			sp_pro.setBounds(550, 124, 300, 537);
+			sp_pro.setBorder(new BevelBorder(0, Color.BLACK, Color.BLACK));
 		
 		p_history.add(cb_month);
 		p_history.add(la_payHistory);
@@ -178,7 +199,7 @@ public class AdminView extends JFrame implements Runnable {
 
 		p_history.add(bt_canclePay);
 		p_history.add(tf_totProfit);
-		p_history.setVisible(true);
+		p_history.setVisible(false);
 	}
 
 	@Override
@@ -220,8 +241,5 @@ public class AdminView extends JFrame implements Runnable {
 		}
 	}
 
-	public static void main(String[] args) {
-		new AdminView();
-	}
 
 }
