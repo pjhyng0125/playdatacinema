@@ -302,7 +302,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 					v_review.setVisible(true);
 					
 					selected_movie = list_movie.get(i).getMovie_name();
-					System.out.println("selected_movie = "+selected_movie);
+					System.out.println("selected_movie (라벨 버튼) = "+selected_movie);
 				}
 		}
 	
@@ -329,7 +329,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 			for(int i=0; i<4; i++) {
 				if(ob ==v_reserve.subv_reserve[i].bt_reserve) {
 					selected_movie = list_movie.get(i).getMovie_name();
-					System.out.println(selected_movie);
+					System.out.println("selected_movie (예매 버튼) = "+selected_movie);
 				}//if
 			}//for
 		
