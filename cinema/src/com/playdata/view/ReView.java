@@ -50,16 +50,22 @@ public class ReView extends JFrame {
 		setLayout(new BorderLayout());
 		
 //setBackground
-		p_content.setBackground(Color.CYAN);
-		p_reviews.setBackground(Color.green);
+		p_content.setBackground(Color.cyan);
+		p_reviews.setBackground(Color.white);
 //setSize
 		p_content.setPreferredSize(new Dimension(0, 300));
 		p_bottom.setPreferredSize(new Dimension(0, 50));
 		la_page.setBounds(600, 10, 50, 30);
 		la_page.setFont(new Font("TimesRoman", Font.PLAIN, 25));
 		bt_back.setBounds(360, 10, 70, 30);
+		bt_back.setBackground(Color.black);
+		bt_back.setForeground(Color.white);
 		bt_next.setBounds(800, 10, 70, 30);
+		bt_next.setBackground(Color.black);
+		bt_next.setForeground(Color.WHITE);
 		bt_reserve.setBounds(60, 10, 120, 30);
+		bt_reserve.setBackground(Color.black);
+		bt_reserve.setForeground(Color.white);
 //add to frame
 		add(p_content, BorderLayout.PAGE_START);
 		add(p_reviews, BorderLayout.CENTER);
@@ -98,4 +104,5 @@ public class ReView extends JFrame {
 				
 		}
 	}
+
 }

@@ -92,4 +92,5 @@ public class ScheduleView extends JFrame {
 		setSize(1200, 800);
 		setVisible(false);
 	}//»ý¼ºÀÚ
+
 }
