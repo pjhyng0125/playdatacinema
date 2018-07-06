@@ -6,7 +6,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.swing.ImageIcon;
 
@@ -39,16 +38,20 @@ public class Controller extends MouseAdapter implements ActionListener {
 //int
 	int selected_date;//ScheduleDateView에서 선택된 toggle button의 index를 저장하는 변수
 	int selected_time;//ScheduleTimeView에서 선택된 toggle button의 index를 저장하는 변수
-	String selected_movie; //선택한 영화의 index를 저장하는 변수 ... 0,1,2,3
+
+	String DB_movie; //선택한 영화의 index를 저장하는 변수 ... 0,1,2,3
+	String DB_date; //선택한 날짜를 저장하는 변수 ... 7/19
 	
 	int review_page; //후기 창 page 변수
 	int review_maxpage;	//후기창
 //date
+	String yoils[] = {"","일","월","화","수","목","금","토"};
 	int month = cal.get(Calendar.MONTH) + 1;
 	int day = cal.get(Calendar.DATE);
 	int yoil = cal.get(Calendar.DAY_OF_WEEK);
-	String yoils[] = {"토","일","월","화","수","목","금"};
+	String today = month+"/"+day+""+" ("+yoils[yoil]+")"; //month/day (yoil)
 	
+
 //String
 	String login_id="login_id";
 //arraylist
@@ -58,7 +61,6 @@ public class Controller extends MouseAdapter implements ActionListener {
 	
 	public Controller() {
 //new
-		System.out.println("month:"+month+", day:"+day+", yoil:"+yoils[yoil]);
 		v_login = new LoginView();
 		v_reserve = new ReserView();
 		v_review = new ReView();
@@ -69,6 +71,14 @@ public class Controller extends MouseAdapter implements ActionListener {
 		v_createreview = new CreateReView(login_id);
 //dao
 		movie_dao = new MovieDAO();
+//ScheduleDate
+		for(int i=0; i<v_schedule.v_sd.length; i++) {
+			v_schedule.v_sd[i].setText(combineDate(month, day)+" ("+yoils[yoil]+")");
+			addDate();
+		}
+		
+		v_schedule.la_date.setText("날짜 : "+today);
+		
 //add comments in list
 		list_comment = new ArrayList<>();
 		list_comment.add(new Comment("a", "1234", 1));
@@ -97,7 +107,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 		list_movie = new ArrayList<>();
 		list_movie.add(new Movie("앤트맨", "액션코미디", 50.0, 4, "image/antman.png"));
 		list_movie.add(new Movie("히스토리", "멜로감동", 25.0, 3, "image/her_story.png"));
-		list_movie.add(new Movie("탐점", "액션코미디", 20.0, 2, "image/returns.png"));
+		list_movie.add(new Movie("탐정", "액션코미디", 20.0, 2, "image/returns.png"));
 		list_movie.add(new Movie("마녀", "액션코미디", 15.0, 0, "image/witch.png"));
 		showReserveInfo(list_movie);
 		
@@ -185,7 +195,6 @@ public class Controller extends MouseAdapter implements ActionListener {
 			@Override
 				public void mouseReleased(MouseEvent e) {		
 				boolean flag = false;	//toggle button이 선택되었는지 여부를 확인하는 변수
-				
 			/*--------------------toggle button 체크 확인------------------*/
 				for(int i=0; i<v_schedule.v_sd.length; i++) {
 					if(v_schedule.v_sd[i].isSelected()) {
@@ -205,6 +214,8 @@ public class Controller extends MouseAdapter implements ActionListener {
 							v_schedule.v_sd[j].setEnabled(false);
 								
 				}
+				DB_date = splitTbtText(v_schedule.v_sd[selected_date].getText());
+				System.out.println("DB_date : "+DB_date);
 				}//mouseReleased	
 			});//v_schedule.v_sd[i].addMouseListener
 		}//for
@@ -297,7 +308,39 @@ public class Controller extends MouseAdapter implements ActionListener {
 	 * 수정일자: 07/05 17:38
 	 * Date 3개 요소 1 더해주는 함수
 	 */
+	public void addDate() {
+		cal.add(Calendar.DATE, 1);
+//		cal.add(cal.DATE, 1);
+		month = cal.get(Calendar.MONTH) + 1;
+		day = cal.get(Calendar.DATE);
+		yoil = cal.get(Calendar.DAY_OF_WEEK);
+	}
 	
+	//혹시 몰라서 날짜 조정하는 함수
+	public void setDate(int day) {
+		cal.set(Calendar.DATE, day);
+		month = cal.get(Calendar.MONTH) + 1;
+		day = cal.get(Calendar.DATE);
+		yoil = cal.get(Calendar.DAY_OF_WEEK);
+	}
+	/*
+	 * 작성자: 박진형
+	 * 수정일자: 07/05 17:38
+	 * Date => 4 5 ---> 4/5
+	 */
+	public String combineDate(int m, int d) {
+		return month+"/"+day+"";
+	}
+	public void splitDate(String date) {
+		String arr[] = date.split("/");
+		month = Integer.parseInt(arr[0]);
+		day = Integer.parseInt(arr[1]);
+	}
+	public String splitTbtText(String date) {
+		String arr[] = date.split(" ");
+		return arr[0];
+	}
+//main
 	public static void main(String[] args) {
 		new Controller();
 	}
@@ -315,11 +358,11 @@ public class Controller extends MouseAdapter implements ActionListener {
 					v_reserve.setVisible(false);
 					v_review.setVisible(true);
 					
-					selected_movie = list_movie.get(i).getMovie_name();
-					System.out.println("selected_movie (라벨 버튼) = "+selected_movie);
+					DB_movie = list_movie.get(i).getMovie_name();
+					System.out.println("DB_movie (라벨 버튼) = "+DB_movie);
 				}
 		}
-	
+		
 /*-------------------------------------EVENT LISTENER(actionPerformed)------------------------------------------*/
 	/*
 	 * 작성자: 박진형
@@ -342,8 +385,8 @@ public class Controller extends MouseAdapter implements ActionListener {
 			//ReserView에서 예매 버튼 클릭시
 			for(int i=0; i<4; i++) {
 				if(ob ==v_reserve.subv_reserve[i].bt_reserve) {
-					selected_movie = list_movie.get(i).getMovie_name();
-					System.out.println("selected_movie (예매 버튼) = "+selected_movie);
+					DB_movie = list_movie.get(i).getMovie_name();
+					System.out.println("DB_movie (예매 버튼) = "+DB_movie);
 				}//if
 			}//for
 		
