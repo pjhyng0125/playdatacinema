@@ -21,7 +21,7 @@ public class JoinUpdateView extends JFrame
 	public JButton bt_submit,bt_reset,bt_checkid;
 	JLabel la_id,la_pass1,la_pass2,la_name,la_phone,la_addr,la_addr2,la_hint1,la_gender,la_email,
 		   la_man,la_woman,la_birth,la_title,la_ex1,la_ex2;
-	public JComboBox<String> cb_hint,cb_birth; 
+	public JComboBox<String> cb_hint,cb_email; 
 	JLabel jb[],at[];
 	public JRadioButton rb_gender1, rb_gender2;
 	JPanel panel;
@@ -47,7 +47,7 @@ public class JoinUpdateView extends JFrame
 		String birthT[]= {"naver.com", "gmail.com", "yahoo.com", "daum.net"};
 		
 		
-		tf_id = new JTextField();
+		tf_id = new JTextField(null);
 		tf_pass = new JPasswordField();
 		tf_pass2 = new JPasswordField();
 		tf_name = new JTextField();
@@ -91,7 +91,7 @@ public class JoinUpdateView extends JFrame
 		panel.setBackground(Color.BLACK);
 		
 		cb_hint = new JComboBox<String>(hintT);
-		cb_birth = new JComboBox<String>(birthT);
+		cb_email = new JComboBox<String>(birthT);
 		
 		rb_gender1 = new JRadioButton();
 		rb_gender2 = new JRadioButton();
@@ -155,7 +155,7 @@ public class JoinUpdateView extends JFrame
 		
 		
 		cb_hint.setBounds(80,220,130,25);
-		cb_birth.setBounds(255,460,100,25);
+		cb_email.setBounds(255,460,100,25);
 		
 		rb_gender1.setBounds(80,380,25,25);
 		rb_gender2.setBounds(140,380,25,25);
@@ -206,7 +206,7 @@ public class JoinUpdateView extends JFrame
 		add(rb_gender2);
 		
 		add(cb_hint);
-		add(cb_birth);
+		add(cb_email);
 		
 		for(int i=0; i<jb.length; i++)
 		{
@@ -245,7 +245,7 @@ public class JoinUpdateView extends JFrame
 	  tf_birth2.setText("");
 	  tf_birth3.setText("");
 	  cb_hint.setSelectedIndex(0);
-	  cb_birth.setSelectedIndex(0);
+	  cb_email.setSelectedIndex(0);
   }
   
   public void setTexts(String id, String addr, String name, String pass, String pass2, String phone1, String phone2, String phone3,
