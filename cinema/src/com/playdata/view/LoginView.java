@@ -72,7 +72,7 @@ public class LoginView extends JFrame
 		panel.add(la_title);
 		
 		setBounds(400,300,300,400);
-		setVisible(true);
+		setVisible(false);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}//»ý¼ºÀÚ
@@ -89,8 +89,5 @@ public class LoginView extends JFrame
   		tf_id.setText("");
   		tf_pass.setText("");
   	}
-  	public static void main(String[] args) {
-		new LoginView();
-	}
       
 }//LoginForm

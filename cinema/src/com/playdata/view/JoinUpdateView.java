@@ -47,7 +47,7 @@ public class JoinUpdateView extends JFrame
 		String emailT[]= {"流立涝仿", "naver.com", "gmail.com", "yahoo.com", "daum.net"};
 		
 		
-		tf_id = new JTextField(null);
+		tf_id = new JTextField(0);
 		tf_pass = new JPasswordField();
 		tf_pass2 = new JPasswordField();
 		tf_name = new JTextField();
@@ -222,7 +222,7 @@ public class JoinUpdateView extends JFrame
 		
 		setBounds(350,200,370,700);	
 		setResizable(false);
-		setVisible(true);
+		setVisible(false);
 	}//积己磊  
   public void showMsg(String msg) {
 		JOptionPane.showMessageDialog(this, msg);
@@ -259,9 +259,6 @@ public class JoinUpdateView extends JFrame
 	  tf_phone2.setText(phone2);
 	  tf_phone3.setText(phone3);
   }
-  public static void main(String[] args) {
-	new JoinUpdateView();
-}
   
 }//UpdateForm
 

@@ -1,9 +1,13 @@
 package com.playdata.view;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
@@ -14,6 +18,7 @@ public class CreateReView extends JFrame {
 	public JTextArea ta_content;
 	public JToggleButton tbt_stars[];
 	public JScrollPane sp;
+	public JPanel panel;
 	public CreateReView(String id) {
 		setTitle("CreateReView");
 		setLayout(null);
@@ -22,8 +27,12 @@ public class CreateReView extends JFrame {
 		bt_create = new JButton("후기 입력");
 		bt_mypage = new JButton("마이 페이지");
 		ta_content = new JTextArea();
+		
 		sp = new JScrollPane(ta_content);
 		tbt_stars = new JToggleButton[5];
+		
+		panel = new JPanel();
+		panel.setBackground(new Color(245,201,203));//연한핑크색
 //set starts
 		for(int i=0; i<tbt_stars.length; i++) {
 			tbt_stars[i] = new JToggleButton(new ImageIcon("image/star_blank.png"));
@@ -43,9 +52,18 @@ public class CreateReView extends JFrame {
 		sp.setBounds(43, 200, 400, 100);
 		add(sp);
 		bt_mypage.setBounds(320, 350, 120, 40);
+		bt_mypage.setBackground(Color.black);
+		bt_mypage.setForeground(Color.white);
 		bt_create.setBounds(40, 350, 120, 40);
+		bt_create.setBackground(Color.BLACK);
+		bt_create.setForeground(Color.white);
+		
+		
+		
+		setLayout(new BorderLayout());
 		add(bt_create);
 		add(bt_mypage);
+		add(panel);
 		setSize(500,450);
 		setVisible(false);
 	}
@@ -61,6 +79,7 @@ public class CreateReView extends JFrame {
 			}
 		}
 	}//setstarSelected
+
 }
 
 

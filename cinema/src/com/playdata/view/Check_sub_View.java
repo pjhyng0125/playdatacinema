@@ -33,7 +33,7 @@ public class Check_sub_View extends JPanel {
 		add(bt_cancel);
 		
 		setSize(450, 60);
-		setVisible(true);
+		setVisible(false);
 	}
 	
 

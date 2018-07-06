@@ -37,10 +37,16 @@ public class CashView extends JFrame{
 		
 		bt_cash = new JButton("카드");
 			bt_cash.setBounds(24, 82, 114, 60);
+			bt_cash.setBackground(Color.black);
+			bt_cash.setForeground(Color.white);
 		bt_paper = new JButton("문화상품권");
 			bt_paper.setBounds(189, 82, 114, 60);
+			bt_paper.setBackground(Color.black);
+			bt_paper.setForeground(Color.white);
 		bt_phone = new JButton("휴대폰결제");
 			bt_phone.setBounds(352, 82, 114, 60);
+			bt_phone.setBackground(Color.black);
+			bt_phone.setForeground(Color.white);
 		
 		p_up.setLayout(null);
 		p_up.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK,Color.BLACK, Color.BLACK, Color.BLACK));
@@ -90,17 +96,19 @@ public class CashView extends JFrame{
 		//결제 금액 확인
 		bt_charge_ok = new JButton("확인");
 		bt_charge_ok.setBounds(109, 115, 87, 27);
+		bt_charge_ok.setBackground(Color.BLACK);
+		bt_charge_ok.setForeground(Color.WHITE);
 		p_center.add(bt_charge_ok);
 		
 		//결제 금액 취소
 		bt_charge_cancle = new JButton("취소");
 		bt_charge_cancle.setBounds(244, 115, 87, 27);
+		bt_charge_cancle.setBackground(Color.black);
+		bt_charge_cancle.setForeground(Color.WHITE);
 		p_center.add(bt_charge_cancle);
 		
 		setSize(512, 440);
-		setVisible(true);
-		
-		
-		
+		setVisible(false);
 	}
+
 }
