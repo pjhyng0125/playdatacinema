@@ -365,7 +365,7 @@ public class MemberDAO {
 	}
 
 	/*
-	 * 작성자 : 이성훈 작성일자 :07.04 기능설명 : 마이페이지창 - 관람내역 - 후기 작성 버튼
+	 * 작성자 : 이성훈 작성일자 :07.04 기능설명 : 마이페이지창 - 관람내역 - 후기 작성 버튼 
 	 */
 	public boolean write_review(String id, String movie_name, int star, String comment) {
 		connection();
