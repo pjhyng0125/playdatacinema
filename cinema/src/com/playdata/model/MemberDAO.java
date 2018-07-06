@@ -391,9 +391,9 @@ public class MemberDAO {
 	}
 
 	/*
-	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 포인트 추가
-	 */
-	public boolean point_plus(String id, int point) {
+	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 포인트 추가 / 차감
+	 */							//	아이디      포인트		기호 +,- 추가는 +, 차감은 -를 파라미터로 받아야 한다. 
+	public boolean point_plma(String id, int point, String symbol) {
 		connection();
 		String sql1 = "select point from member where id=?";// 유저 잔액포인트 조회
 		String sql2 = "update member set point=? where id=?"; // 차감한 포인트 업데이트
@@ -405,8 +405,9 @@ public class MemberDAO {
 
 			if (rs.next()) {
 				int mypoint = rs.getInt(1);
+				String result = mypoint+symbol+point;
 				prestmt = conn.prepareStatement(sql2);
-				prestmt.setInt(1, (mypoint + point));
+				prestmt.setInt(1, Integer.parseInt(result));
 				prestmt.setString(2, id);
 				int t = prestmt.executeUpdate();
 
@@ -422,48 +423,15 @@ public class MemberDAO {
 		}
 		return false;
 	}
-
+	
 	/*
-	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 포인트 차감
-	 */
-	public boolean point_minus(String id, int point) {
-		connection();
-		String sql1 = "select point from member where id=?";// 유저 잔액포인트 조회
-		String sql2 = "update member set point=? where id=?"; // 차감한 포인트 업데이트
-
-		try {
-			prestmt = conn.prepareStatement(sql1);
-			prestmt.setString(1, id);
-			rs = prestmt.executeQuery();
-
-			if (rs.next()) {
-				int mypoint = rs.getInt(1);
-				prestmt = conn.prepareStatement(sql2);
-				prestmt.setInt(1, (mypoint - point));
-				prestmt.setString(2, id);
-				int t = prestmt.executeUpdate();
-
-				if (t > 0) {
-					return true;
-				}
-
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			diss();
-		}
-		return false;
-	}
-
-	/*
-	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 캐시 추가
-	 */
-	public boolean cash_plus(String id, int cash) {
+	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 캐시 추가 감소
+	 */						// 아이디		캐쉬			+/- 기호  +는 추가 -는 감소
+	public boolean cash_plma(String id, int cash, String symbol) {
 		connection();
 		String sql1 = "select cash from member where id=?";// 유저 잔액포인트 조회
 		String sql2 = "update member set cash=? where id=?"; // 차감한 포인트 업데이트
-
+		int result;
 		try {
 			prestmt = conn.prepareStatement(sql1);
 			prestmt.setString(1, id);
@@ -471,8 +439,14 @@ public class MemberDAO {
 
 			if (rs.next()) {
 				int mycash = rs.getInt(1);
+				if(symbol.equals("+")) {
+					result = mycash+cash;
+				}else {
+					result = mycash-cash;
+				}
+				
 				prestmt = conn.prepareStatement(sql2);
-				prestmt.setInt(1, (mycash + cash));
+				prestmt.setInt(1, result);
 				prestmt.setString(2, id);
 				int t = prestmt.executeUpdate();
 
@@ -488,39 +462,77 @@ public class MemberDAO {
 		}
 		return false;
 	}
+	
+	
+	// ************************************  보류할 메소드 참조할 필요 없습니다 ***************************************
 
-	/*
-	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 캐시 차감
-	 */
-	public boolean cash_minus(String id, int cash) {
-		connection();
-		String sql1 = "select cash from member where id=?";// 유저 잔액포인트 조회
-		String sql2 = "update member set cash=? where id=?"; // 차감한 포인트 업데이트
+//	/*
+//	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 포인트 차감
+//	 */
+//	public boolean point_minus(String id, int point) {
+//		connection();
+//		String sql1 = "select point from member where id=?";// 유저 잔액포인트 조회
+//		String sql2 = "update member set point=? where id=?"; // 차감한 포인트 업데이트
+//
+//		try {
+//			prestmt = conn.prepareStatement(sql1);
+//			prestmt.setString(1, id);
+//			rs = prestmt.executeQuery();
+//
+//			if (rs.next()) {
+//				int mypoint = rs.getInt(1);
+//				prestmt = conn.prepareStatement(sql2);
+//				prestmt.setInt(1, (mypoint - point));
+//				prestmt.setString(2, id);
+//				int t = prestmt.executeUpdate();
+//
+//				if (t > 0) {
+//					return true;
+//				}
+//
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			diss();
+//		}
+//		return false;
+//	}
 
-		try {
-			prestmt = conn.prepareStatement(sql1);
-			prestmt.setString(1, id);
-			rs = prestmt.executeQuery();
 
-			if (rs.next()) {
-				int mycash = rs.getInt(1);
-				prestmt = conn.prepareStatement(sql2);
-				prestmt.setInt(1, (mycash - cash));
-				prestmt.setString(2, id);
-				int t = prestmt.executeUpdate();
-
-				if (t > 0) {
-					return true;
-				}
-
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			diss();
-		}
-		return false;
-	}
+//
+//	/*
+//	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 캐시 차감
+//	 */
+//	public boolean cash_minus(String id, int cash) {
+//		connection();
+//		String sql1 = "select cash from member where id=?";// 유저 잔액포인트 조회
+//		String sql2 = "update member set cash=? where id=?"; // 차감한 포인트 업데이트
+//
+//		try {
+//			prestmt = conn.prepareStatement(sql1);
+//			prestmt.setString(1, id);
+//			rs = prestmt.executeQuery();
+//
+//			if (rs.next()) {
+//				int mycash = rs.getInt(1);
+//				prestmt = conn.prepareStatement(sql2);
+//				prestmt.setInt(1, (mycash - cash));
+//				prestmt.setString(2, id);
+//				int t = prestmt.executeUpdate();
+//
+//				if (t > 0) {
+//					return true;
+//				}
+//
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			diss();
+//		}
+//		return false;
+//	}
 	// 후기 작성 버전2 - 보류
 	// public boolean write_review(String id, String movie_name, int star, String
 	// comment) {
