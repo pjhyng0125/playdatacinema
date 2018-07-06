@@ -107,7 +107,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 		list_movie = new ArrayList<>();
 		list_movie.add(new Movie("앤트맨", "액션코미디", 50.0, 4, "image/antman.png"));
 		list_movie.add(new Movie("히스토리", "멜로감동", 25.0, 3, "image/her_story.png"));
-		list_movie.add(new Movie("탐점", "액션코미디", 20.0, 2, "image/returns.png"));
+		list_movie.add(new Movie("탐정", "액션코미디", 20.0, 2, "image/returns.png"));
 		list_movie.add(new Movie("마녀", "액션코미디", 15.0, 0, "image/witch.png"));
 		showReserveInfo(list_movie);
 		
@@ -195,7 +195,6 @@ public class Controller extends MouseAdapter implements ActionListener {
 			@Override
 				public void mouseReleased(MouseEvent e) {		
 				boolean flag = false;	//toggle button이 선택되었는지 여부를 확인하는 변수
-				
 			/*--------------------toggle button 체크 확인------------------*/
 				for(int i=0; i<v_schedule.v_sd.length; i++) {
 					if(v_schedule.v_sd[i].isSelected()) {
@@ -215,6 +214,8 @@ public class Controller extends MouseAdapter implements ActionListener {
 							v_schedule.v_sd[j].setEnabled(false);
 								
 				}
+				DB_date = splitTbtText(v_schedule.v_sd[selected_date].getText());
+				System.out.println("DB_date : "+DB_date);
 				}//mouseReleased	
 			});//v_schedule.v_sd[i].addMouseListener
 		}//for
@@ -335,10 +336,9 @@ public class Controller extends MouseAdapter implements ActionListener {
 		month = Integer.parseInt(arr[0]);
 		day = Integer.parseInt(arr[1]);
 	}
-	public void splitTbtText(String date) {
+	public String splitTbtText(String date) {
 		String arr[] = date.split(" ");
-		month = Integer.parseInt(arr[0]);
-		day = Integer.parseInt(arr[1]);
+		return arr[0];
 	}
 //main
 	public static void main(String[] args) {
