@@ -226,7 +226,7 @@ public class JoinView extends JFrame
 		
 		setBounds(350,200,370,700);	
 		setResizable(false);
-		setVisible(true);
+		setVisible(false);
 	}//»ý¼ºÀÚ  
   public void showMsg(String msg) {
 		JOptionPane.showMessageDialog(this, msg);
@@ -251,9 +251,7 @@ public class JoinView extends JFrame
 	  cb_hint.setSelectedIndex(0);
 	  cb_email.setSelectedIndex(0);
   }
-  public static void main(String[] args) {
-	new JoinView();
-}
+
 
 }//JoinForm
 
