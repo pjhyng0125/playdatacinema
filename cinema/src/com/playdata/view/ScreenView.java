@@ -9,9 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
-
-
-
+import javax.swing.border.LineBorder;
 import javax.swing.JTabbedPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -27,8 +25,7 @@ public class ScreenView extends JFrame {
  
 	//----------------------------버튼
 
-	public JButton select_movie;//페이지 이동
-	public JButton pay_view; 
+	public JButton select_movie,pay_view;//페이지 이동 
 
 	//---------------------------------------라벨
 	JLabel lb_a,lb_b,lb_c;//좌석라벨
@@ -57,16 +54,16 @@ public class ScreenView extends JFrame {
 	//--------------------------------------번호라벨
 	private JLabel lb_1,lb_2,lb_3,lb_4,lb_5,lb_6,lb_7,lb_8,lb_9,lb_10;
 	
-	
+
 	
 	public ScreenView() {
 		setTitle("좌석선택창");
 		
 		
 	
-		
+
 //===================== 버튼 및 라벨  =======================================================	
-	
+		
 		//좌석버튼 배열
 		bt_seat = new JToggleButton[30];
 		for(int i=0; i<bt_seat.length; i++) {
@@ -85,19 +82,19 @@ public class ScreenView extends JFrame {
 			if(i>9)
 				bt_seat[i].setBounds((i*75)-477, 490, 60, 56);//x,y,가로,세로
 			if(i>11)
-				bt_seat[i].setBounds((i*75)-477 +39, 490, 60, 56);//x,y,가로,세로
+				bt_seat[i].setBounds((i*75)-438, 490, 60, 56);//x,y,가로,세로
 			if(i>14)
-				bt_seat[i].setBounds((i*75)-477 +78, 490, 60, 56);//x,y,가로,세로
+				bt_seat[i].setBounds((i*75)-399, 490, 60, 56);//x,y,가로,세로
 			if(i>17)
-				bt_seat[i].setBounds((i*75)-477 +117, 490, 60, 56);//x,y,가로,세로
+				bt_seat[i].setBounds((i*75)-360, 490, 60, 56);//x,y,가로,세로
 			if(i>19)
 				bt_seat[i].setBounds((i*75)-1227, 558, 60, 56);//x,y,가로,세로
 			if(i>21)
-				bt_seat[i].setBounds((i*75)-1227 +39, 558, 60, 56);//x,y,가로,세로
+				bt_seat[i].setBounds((i*75)-1188, 558, 60, 56);//x,y,가로,세로
 			if(i>24)
-				bt_seat[i].setBounds((i*75)-1227 +78, 558, 60, 56);//x,y,가로,세로
+				bt_seat[i].setBounds((i*75)-1149, 558, 60, 56);//x,y,가로,세로
 			if(i>27)
-				bt_seat[i].setBounds((i*75)-1227 +117, 558, 60, 56);//x,y,가로,세로
+				bt_seat[i].setBounds((i*75)-1110, 558, 60, 56);//x,y,가로,세로
 
 			getContentPane().add(bt_seat[i]);
 			
@@ -114,11 +111,12 @@ public class ScreenView extends JFrame {
 		//페이지 이동
 		select_movie = new JButton("영화선택(이전페이지)");
 		select_movie.setFont(new Font("굴림", Font.BOLD, 12));
-			select_movie.setBackground(Color.BLACK);
+			select_movie.setBackground(new Color(52,52,51));
 			select_movie.setForeground(Color.WHITE);
+		
 		pay_view = new JButton("결제");
 		pay_view.setFont(new Font("굴림", Font.BOLD, 15));
-			pay_view.setBackground(Color.BLACK);
+			pay_view.setBackground(new Color(52,52,51));
 			pay_view.setForeground(Color.WHITE);
 		
 		//선택,불가능,가능 라벨
@@ -222,15 +220,15 @@ public class ScreenView extends JFrame {
 		
 //========================== 가격, 좌석, 영화 정보 ============================
 		tf_select_pay = new JTextField();
-		tf_select_pay.setBackground(Color.BLACK);
+		tf_select_pay.setBackground(new Color(52,52,51));
 		tf_select_pay.setForeground(SystemColor.text);
 		tf_seat_info = new JTextField();
 		tf_seat_info.setForeground(Color.WHITE);
-		tf_seat_info.setBackground(Color.BLACK);
+		tf_seat_info.setBackground(new Color(52,52,51));
 		lb_movie_image = new JLabel(image_witch);
 		lb_movie_image.setText("");
 		tf_movie_info = new JTextField();
-		tf_movie_info.setBackground(Color.BLACK);
+		tf_movie_info.setBackground(new Color(52,52,51));
 		tf_movie_info.setForeground(Color.WHITE);
 		
 		//텍스트 에어리어
