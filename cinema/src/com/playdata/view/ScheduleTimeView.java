@@ -8,7 +8,7 @@ import javax.swing.JToggleButton;
 
 public class ScheduleTimeView extends JPanel {
 	public JToggleButton tbt_time;
-	JLabel la_seat;
+	public JLabel la_seat;
 	public ScheduleTimeView() {
 //new
 		tbt_time = new JToggleButton("07:00~08:30");
