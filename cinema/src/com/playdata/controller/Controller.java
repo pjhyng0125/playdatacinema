@@ -39,9 +39,9 @@ public class Controller extends MouseAdapter implements ActionListener {
 	int selected_date;//ScheduleDateView에서 선택된 toggle button의 index를 저장하는 변수
 	int selected_time;//ScheduleTimeView에서 선택된 toggle button의 index를 저장하는 변수
 
-	String DB_movie; //선택한 영화의 index를 저장하는 변수 ... 0,1,2,3
-	String DB_date; //선택한 날짜를 저장하는 변수 ... 7/19
-	String DB_time;
+	String DB_movie; //선택한 영화의 이름을 저장하는 변수 ... 0,1,2,3
+	String DB_date; //Schedule 창에서 선택한 날짜를 저장하는 변수 ... 7/19
+	String DB_time; //Schedule 창에서 선택한 시간을 저장하는 변수 ... 7/19
 	
 	int review_page; //후기 창 page 변수
 	int review_maxpage;	//후기창

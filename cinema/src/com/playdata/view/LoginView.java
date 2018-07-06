@@ -72,7 +72,7 @@ public class LoginView extends JFrame
 		panel.add(la_title);
 		
 		setBounds(400,300,300,400);
-		setVisible(false);
+		setVisible(true);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}//»ý¼ºÀÚ
