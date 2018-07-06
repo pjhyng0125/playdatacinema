@@ -28,7 +28,7 @@ public class ScreenView extends JFrame {
 	//----------------------------버튼
 
 	public JButton select_movie;//페이지 이동
-	public JButton pay_view;
+	public JButton pay_view; 
 
 	//---------------------------------------라벨
 	JLabel lb_a,lb_b,lb_c;//좌석라벨
@@ -53,6 +53,8 @@ public class ScreenView extends JFrame {
 	ImageIcon image_witch;
 	ImageIcon imageicon_select,imageicon_selecting,imageicon_unselect;
 	
+	
+	//--------------------------------------번호라벨
 	private JLabel lb_1,lb_2,lb_3,lb_4,lb_5,lb_6,lb_7,lb_8,lb_9,lb_10;
 	
 	
@@ -66,7 +68,7 @@ public class ScreenView extends JFrame {
 //===================== 버튼 및 라벨  =======================================================	
 	
 		//좌석버튼 배열
-		bt_seat = new JToggleButton[10];
+		bt_seat = new JToggleButton[30];
 		for(int i=0; i<bt_seat.length; i++) {
 				bt_seat[i] = new JToggleButton();
 				bt_seat[i].setForeground(Color.WHITE);
@@ -80,6 +82,23 @@ public class ScreenView extends JFrame {
 				bt_seat[i].setBounds(273+(i*75)+78, 422, 60, 56);//x,y,가로,세로
 			if(i>=8)
 				bt_seat[i].setBounds(273+(i*75)+117, 422, 60, 56);//x,y,가로,세로
+			if(i>9)
+				bt_seat[i].setBounds((i*75)-477, 490, 60, 56);//x,y,가로,세로
+			if(i>11)
+				bt_seat[i].setBounds((i*75)-477 +39, 490, 60, 56);//x,y,가로,세로
+			if(i>14)
+				bt_seat[i].setBounds((i*75)-477 +78, 490, 60, 56);//x,y,가로,세로
+			if(i>17)
+				bt_seat[i].setBounds((i*75)-477 +117, 490, 60, 56);//x,y,가로,세로
+			if(i>19)
+				bt_seat[i].setBounds((i*75)-1227, 558, 60, 56);//x,y,가로,세로
+			if(i>21)
+				bt_seat[i].setBounds((i*75)-1227 +39, 558, 60, 56);//x,y,가로,세로
+			if(i>24)
+				bt_seat[i].setBounds((i*75)-1227 +78, 558, 60, 56);//x,y,가로,세로
+			if(i>27)
+				bt_seat[i].setBounds((i*75)-1227 +117, 558, 60, 56);//x,y,가로,세로
+
 			getContentPane().add(bt_seat[i]);
 			
 		}
@@ -304,5 +323,6 @@ public class ScreenView extends JFrame {
 
 		
 	}
+
 }
 	
