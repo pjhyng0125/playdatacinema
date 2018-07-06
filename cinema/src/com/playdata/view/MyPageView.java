@@ -28,16 +28,16 @@ public class MyPageView extends JFrame {
 	public JCheckBox cb_grade, cb_cash, cb_point;
 	
 	public MyPageView() {
-		setTitle("마이페이지");
+		setTitle("마이페이지창");
 		
 		
 		// 라벨 
 		
 		
-		la_mypage = new JLabel("마이페이지창");
+		la_mypage = new JLabel("마이페이지");
 		la_mypage.setForeground(Color.WHITE);
 		la_mypage.setBounds(100, 16, 268, 68);
-		la_mypage.setFont(new Font("맑은 고딕", Font.BOLD, 50));
+		la_mypage.setFont(new Font("맑은 고딕", Font.BOLD, 41));
 		la_greet = new JLabel("님 환영합니다!");
 		la_greet.setBounds(150, 17, 212, 30);
 		la_greet.setFont(new Font("맑은고딕", 0, 30));

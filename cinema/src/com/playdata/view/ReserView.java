@@ -10,6 +10,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
+
+import java.awt.Font;
 /*
  * ¿¹¸Åºä
  */
@@ -23,24 +26,32 @@ public class ReserView extends JFrame{
 		p_ps = new JPanel();
 		p_center = new JPanel();
 		bt_mypage = new JButton("¸¶ÀÌ ÆäÀÌÁö");
+		bt_mypage.setForeground(Color.WHITE);
+		bt_mypage.setBackground(Color.BLACK);
+		bt_mypage.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
 		bt_logout = new JButton("·Î±×¾Æ¿ô");
+		bt_logout.setForeground(Color.WHITE);
+		bt_logout.setBackground(Color.BLACK);
+		bt_logout.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
 		
 		subv_reserve = new ReserveSubView[4];
 		
-		setLayout(new BorderLayout());
+		getContentPane().setLayout(new BorderLayout());
 //p_ps
 		p_ps.setPreferredSize(new Dimension(0, 60));
-		add(p_ps, BorderLayout.PAGE_START);
+		getContentPane().add(p_ps, BorderLayout.PAGE_START);
 		p_ps.setLayout(null);
-		p_ps.setBackground(Color.CYAN);
+		p_ps.setBackground(Color.WHITE);
+		p_ps.setBackground(new Color(247, 246, 239));
 		bt_mypage.setBounds(1000, 10, 120, 40);
 		bt_logout.setBounds(60, 10, 120, 40);
 		p_ps.add(bt_mypage);
 		p_ps.add(bt_logout);	
 		
-		add(p_center, BorderLayout.CENTER);
+		getContentPane().add(p_center, BorderLayout.CENTER);
 //p_center
 		p_center.setLayout(new GridLayout(1, 4));
+		p_center.setBackground(new Color(247, 246, 239));
 		for(int i=0; i<subv_reserve.length; i++) {
 			subv_reserve[i] = new ReserveSubView();
 			p_center.add(subv_reserve[i]);
