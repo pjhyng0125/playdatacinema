@@ -48,7 +48,7 @@ public class JoinView extends JFrame
 		
 		
 		String hintT[]= {"초등학교 이름은?", "좋아하는책은?", "태어난곳은?", "어릴적 별명은?", "좋아하는 게임은?"};
-		String birthT[]= {"naver.com", "gmail.com", "yahoo.com", "daum.net"};
+		String emailT[]= {"직접입력", "naver.com", "gmail.com", "yahoo.com", "daum.net"};
 		
 		
 		tf_id = new JTextField();
@@ -95,7 +95,7 @@ public class JoinView extends JFrame
 		panel.setBackground(Color.BLACK);
 		
 		cb_hint = new JComboBox<String>(hintT);
-		cb_email = new JComboBox<String>(birthT);
+		cb_email = new JComboBox<String>(emailT);
 		
 		rb_gender1 = new JRadioButton();
 		rb_gender2 = new JRadioButton();

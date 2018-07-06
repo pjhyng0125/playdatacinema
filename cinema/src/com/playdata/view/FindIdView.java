@@ -29,7 +29,7 @@ public class FindIdView extends JFrame{
 			at[i]=new JLabel("@");
 		}
 		
-		String emailT[]= {"naver.com", "gmail.com", "yahoo.com", "daum.net"};
+		String emailT[]= {"직접입력", "naver.com", "gmail.com", "yahoo.com", "daum.net"};
 		
 		tf_name = new JTextField();
 		tf_email1 = new JTextField();
