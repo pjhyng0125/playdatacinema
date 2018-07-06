@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.ImageIcon;
@@ -32,6 +33,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 	ScreenView v_screen;
 	PayView v_pay;
 	CreateReView v_createreview;
+	Calendar cal = Calendar.getInstance();
 //dao
 	MovieDAO movie_dao;
 //int
@@ -40,7 +42,12 @@ public class Controller extends MouseAdapter implements ActionListener {
 	String selected_movie; //선택한 영화의 index를 저장하는 변수 ... 0,1,2,3
 	
 	int review_page; //후기 창 page 변수
-	int review_maxpage;	//후기창 
+	int review_maxpage;	//후기창
+//date
+	int month = cal.get(Calendar.MONTH) + 1;
+	int day = cal.get(Calendar.DATE);
+	int yoil = cal.get(Calendar.DAY_OF_WEEK);
+	String yoils[] = {"토","일","월","화","수","목","금"};
 	
 //String
 	String login_id="login_id";
@@ -51,6 +58,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 	
 	public Controller() {
 //new
+		System.out.println("month:"+month+", day:"+day+", yoil:"+yoils[yoil]);
 		v_login = new LoginView();
 		v_reserve = new ReserView();
 		v_review = new ReView();
@@ -283,6 +291,12 @@ public class Controller extends MouseAdapter implements ActionListener {
 			v_reserve.setstarSelected(i, list_movie.get(i).getAvg_star());
 		}
 	}
+	
+	/*
+	 * 작성자: 박진형
+	 * 수정일자: 07/05 17:38
+	 * Date 3개 요소 1 더해주는 함수
+	 */
 	
 	public static void main(String[] args) {
 		new Controller();
