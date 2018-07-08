@@ -83,6 +83,7 @@ public class MemberDAO {
 			rs = prestmt.executeQuery();
 
 			if (rs.next()) {
+				System.out.println("in dao:" + id+","+pass);
 				return true;
 			}
 		} catch (SQLException e) {
@@ -98,7 +99,7 @@ public class MemberDAO {
 	 */
 	public boolean join(Member m) {
 		connection(); // id,pass,gender,name,birth,phone,addr,mail,point,cash,memgrade,hint,answer
-		String sql = "insert into member value (?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+		String sql = "insert into member values (?,?,?,?,?,?,?,?,?,?,?,?,?) ";
 		try {
 			prestmt = conn.prepareStatement(sql);
 			prestmt.setString(1, m.getId());

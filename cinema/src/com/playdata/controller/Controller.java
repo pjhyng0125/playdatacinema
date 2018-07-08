@@ -8,11 +8,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
+import com.playdata.model.dao.MemberDAO;
 import com.playdata.model.dao.MovieDAO;
 import com.playdata.model.vo.Comment;
 import com.playdata.model.vo.Movie;
 import com.playdata.view.CreateReView;
+import com.playdata.view.FindIdView;
+import com.playdata.view.FindPwView;
+import com.playdata.view.JoinView;
 import com.playdata.view.LoginView;
 import com.playdata.view.MyPageView;
 import com.playdata.view.PayView;
@@ -32,9 +37,14 @@ public class Controller extends MouseAdapter implements ActionListener {
    ScreenView v_screen;
    PayView v_pay;
    CreateReView v_createreview;
+   JoinView v_join;
+   FindIdView v_findid;
+   FindPwView v_findpw;
+   
    Calendar cal = Calendar.getInstance();
 //dao
    MovieDAO movie_dao;
+   MemberDAO member_dao;
 //int
    int selected_date;//ScheduleDateView에서 선택된 toggle button의 index를 저장하는 변수
    int selected_time;//ScheduleTimeView에서 선택된 toggle button의 index를 저장하는 변수
@@ -70,8 +80,13 @@ public class Controller extends MouseAdapter implements ActionListener {
       v_screen = new ScreenView();
       v_pay = new PayView();
       v_createreview = new CreateReView(login_id);
+      v_join = new JoinView();
+      v_findid = new FindIdView();
+      v_findpw = new FindPwView();
+     
 //dao
       movie_dao = new MovieDAO();
+      member_dao = new MemberDAO();
 //ScheduleDate
       for(int i=0; i<v_schedule.v_sd.length; i++) {
          v_schedule.v_sd[i].setText(combineDate(month, day)+" ("+yoils[yoil]+")");
@@ -259,6 +274,7 @@ public class Controller extends MouseAdapter implements ActionListener {
        * 수정일자: 07/01 10:01
        * 이벤트리스너 기능: For View Change Event
        */
+//화면 전환
       v_login.bt_login.addActionListener(this);
       v_schedule.bt_next.addActionListener(this);
       v_screen.pay_view.addActionListener(this);
@@ -269,6 +285,11 @@ public class Controller extends MouseAdapter implements ActionListener {
       v_review.bt_reserve.addActionListener(this);
       v_mypage.bt_check.addActionListener(this);
       v_createreview.bt_mypage.addActionListener(this);
+      v_login.bt_find.addActionListener(this);
+      v_login.bt_join.addActionListener(this);
+      v_join.bt_reset.addActionListener(this);
+      v_join.bt_submit.addActionListener(this);
+      
       for(int i=0; i<v_createreview.tbt_stars.length; i++)
          v_createreview.tbt_stars[i].addActionListener(this);
       v_schedule.bt_back.addActionListener(this);
@@ -394,8 +415,18 @@ public class Controller extends MouseAdapter implements ActionListener {
       
 /*---------------View Change EVENT---------------*/   
       if(ob == v_login.bt_login) {
-         v_login.setVisible(false);
-         v_reserve.setVisible(true);
+    	 String id = v_login.tf_id.getText();
+    	 String pass = new String(v_login.tf_pass.getPassword());
+    	 
+    	 if(member_dao.login(id, pass)){
+    		 System.out.println(id +","+pass);
+    		 JOptionPane.showMessageDialog(v_login,id+" 로그인 성공!");
+    		 v_login.setVisible(false);
+    		 v_reserve.setVisible(true);
+    	 }else {
+    		 JOptionPane.showMessageDialog(v_login,id+" 로그인 실패!");    		 
+    	 }
+    	 
       }
       else if(ob == v_reserve.bt_mypage) {
          v_reserve.setVisible(false);
@@ -440,6 +471,23 @@ public class Controller extends MouseAdapter implements ActionListener {
       else if(ob == v_schedule.bt_back) {
          v_schedule.setVisible(false);
          v_reserve.setVisible(true);
+      }
+      else if(ob == v_login.bt_find) {
+    	  v_login.setVisible(false);
+    	  v_findid.setVisible(true);
+    	  v_findpw.setVisible(true);
+      }
+      else if(ob == v_login.bt_join) {
+    	  v_login.setVisible(false);
+    	  v_join.setVisible(true);
+      }
+      else if(ob == v_join.bt_reset) {
+    	  v_join.setVisible(false);
+    	  v_login.setVisible(true);
+      }
+      else if(ob == v_join.bt_submit) {
+    	  v_join.setVisible(false);
+    	  v_login.setVisible(true);
       }
    }//actionPerformed
    
