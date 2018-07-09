@@ -2,6 +2,13 @@ package com.playdata.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -15,7 +22,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
-import java.awt.Font;
 
 public class AdminView extends JFrame implements Runnable {
 	JPanel p_member; // 회원정보 패널
@@ -218,8 +224,81 @@ public class AdminView extends JFrame implements Runnable {
 			e.printStackTrace();
 		}
 	}
+	/*
+	 * 작성자:박진형 수정일자:07/09/ 19:09 
+	 * Server class
+	 */
+	public class Server implements Runnable{
+		ArrayList<Service> clients;
+		public Server() {
+			clients = new ArrayList<>();
+			
+			new Thread(this).start();
+		}//생성자
+		@Override
+		public void run() {
+			try {
+				ServerSocket socketserver = new ServerSocket(5000);
+				System.out.println("Start Server......");
+				while(true) {
+					Socket socket = socketserver.accept();//client 접속 대기
+					Service client = new Service(socket, this);
+					clients.add(client);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
-	public void dispTable(ArrayList<Object[]> list,String table) { //table : "회원정보" "수익정보" "결제내역"
+	/*
+	 * 작성자:박진형 수정일자:07/09/ 19:09 
+	 * Server class
+	 */
+	public class Service extends Thread{
+	//소켓관련 입출력서비스
+		BufferedReader in;
+		OutputStream out;
+	//소켓
+		Socket socket;
+		
+		public Service(Socket socket, Server server) {
+			this.socket = socket;
+			try {
+				in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				out = socket.getOutputStream();
+				
+				start();	//스레드 시작
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}//생성자
+		@Override
+			public void run() {
+				try {
+					while(true) {
+						String msg = in.readLine();//client로부터 메세지 받기
+						if(msg == null) return;
+						if(msg.trim().length()>0) {
+							System.out.println("from Client: "+ msg +":"+
+					                  socket.getInetAddress().getHostAddress());
+						}
+						String msgs[] = msg.split("\\|");
+						String protocol = msgs[0];
+						
+						switch(protocol) {
+						case "100":
+							
+							break;
+						}//서버 switch
+					}//while(true)
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}//run
+	}
+	
+ 	public void dispTable(ArrayList<Object[]> list,String table) { //table : "회원정보" "수익정보" "결제내역"
 		if(table.equals("회원정보")) {
 			dtm_member.setRowCount(0); // 출력될 포인트 행을 0으로 셋팅!!
 			for(int i=0; i < list.size();i++) {
