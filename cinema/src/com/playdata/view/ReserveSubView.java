@@ -19,7 +19,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Font;
 public class ReserveSubView extends JPanel {
-	public JButton bt_reserve;
+	public JButton bt_reserve;//예매, 영화 변경
 	public JLabel la_image, la_title, la_percent, la_genre;
 	public JToggleButton []tbt_stars;
 	JPanel p_image, p_content, p_stars, p_ps, p_pe, p_ls, p_le, p_center;

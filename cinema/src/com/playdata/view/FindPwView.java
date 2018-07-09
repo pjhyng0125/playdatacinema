@@ -29,7 +29,9 @@ public class FindPwView extends JFrame{
       tf_hint = new JTextField();
       
       bt_find = new JButton("√£ ±‚");
+      bt_find.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.BOLD, 15));
       bt_reset = new JButton("√Î º“");
+      bt_reset.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.BOLD, 15));
       
       la_title = new JLabel("PW√£±‚");
       la_id = new JLabel("*I D:");
@@ -65,16 +67,16 @@ public class FindPwView extends JFrame{
       
       cb_hint.setBounds(120,170,100,25);
       
-      setLayout(null);
-      add(tf_id);
-      add(tf_hint);
-      add(bt_find);
-      add(bt_reset);
-      add(la_title);
-      add(la_id);
-      add(la_hint);
-      add(cb_hint);
-      add(panel);
+      getContentPane().setLayout(null);
+      getContentPane().add(tf_id);
+      getContentPane().add(tf_hint);
+      getContentPane().add(bt_find);
+      getContentPane().add(bt_reset);
+      getContentPane().add(la_title);
+      getContentPane().add(la_id);
+      getContentPane().add(la_hint);
+      getContentPane().add(cb_hint);
+      getContentPane().add(panel);
       
       
       setBounds(400,300,340,350);

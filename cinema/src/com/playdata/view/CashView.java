@@ -36,14 +36,17 @@ public class CashView extends JFrame{
 		p_up.setBackground(Color.BLACK);
 		
 		bt_cash = new JButton("Ä«µå");
+		bt_cash.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
 			bt_cash.setBounds(24, 82, 114, 60);
 			bt_cash.setBackground(Color.black);
 			bt_cash.setForeground(Color.white);
 		bt_paper = new JButton("¹®È­»óÇ°±Ç");
+		bt_paper.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
 			bt_paper.setBounds(189, 82, 114, 60);
 			bt_paper.setBackground(Color.black);
 			bt_paper.setForeground(Color.white);
 		bt_phone = new JButton("ÈÞ´ëÆù°áÁ¦");
+		bt_phone.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
 			bt_phone.setBounds(352, 82, 114, 60);
 			bt_phone.setBackground(Color.black);
 			bt_phone.setForeground(Color.white);
@@ -95,6 +98,7 @@ public class CashView extends JFrame{
 		
 		//°áÁ¦ ±Ý¾× È®ÀÎ
 		bt_charge_ok = new JButton("È®ÀÎ");
+		bt_charge_ok.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
 		bt_charge_ok.setBounds(109, 115, 87, 27);
 		bt_charge_ok.setBackground(Color.BLACK);
 		bt_charge_ok.setForeground(Color.WHITE);
@@ -102,6 +106,7 @@ public class CashView extends JFrame{
 		
 		//°áÁ¦ ±Ý¾× Ãë¼Ò
 		bt_charge_cancle = new JButton("Ãë¼Ò");
+		bt_charge_cancle.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
 		bt_charge_cancle.setBounds(244, 115, 87, 27);
 		bt_charge_cancle.setBackground(Color.black);
 		bt_charge_cancle.setForeground(Color.WHITE);

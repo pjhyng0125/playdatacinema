@@ -3,6 +3,8 @@ package com.playdata.view;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Font;
 
 public class Check_sub_View extends JPanel {
 	// 초기 작성자 : 이성훈 
@@ -23,6 +25,9 @@ public class Check_sub_View extends JPanel {
 		la_screen = new JLabel("a상영관 b열 3석");
 		la_screen.setBounds(250, 10, 200, 40);
 		bt_cancel = new JButton("취소");
+		bt_cancel.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		bt_cancel.setForeground(Color.WHITE);
+		bt_cancel.setBackground(Color.BLACK);
 		bt_cancel.setBounds(370, 10, 60, 40);
 		
 		setLayout(null);

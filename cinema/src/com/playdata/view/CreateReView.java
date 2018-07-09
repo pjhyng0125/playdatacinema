@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
+import java.awt.Font;
 
 public class CreateReView extends JFrame {
 	JLabel la_id;
@@ -21,11 +22,13 @@ public class CreateReView extends JFrame {
 	public JPanel panel;
 	public CreateReView(String id) {
 		setTitle("CreateReView");
-		setLayout(null);
+		getContentPane().setLayout(null);
 //new
 		la_id = new JLabel(id);
 		bt_create = new JButton("»ƒ±‚ ¿‘∑¬");
+		bt_create.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.BOLD, 15));
 		bt_mypage = new JButton("∏∂¿Ã ∆‰¿Ã¡ˆ");
+		bt_mypage.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.BOLD, 15));
 		ta_content = new JTextArea();
 		
 		sp = new JScrollPane(ta_content);
@@ -43,14 +46,14 @@ public class CreateReView extends JFrame {
 //add stars
 		for(int i=0; i<tbt_stars.length; i++) {
 			tbt_stars[i].setBounds(50*(i)+120, 100, 50, 50);
-			add(tbt_stars[i]);
+			getContentPane().add(tbt_stars[i]);
 		}
 		setstarSelected(0);
 //add
 		la_id.setBounds(200, 50, 100, 30);
-		add(la_id);
+		getContentPane().add(la_id);
 		sp.setBounds(43, 200, 400, 100);
-		add(sp);
+		getContentPane().add(sp);
 		bt_mypage.setBounds(320, 350, 120, 40);
 		bt_mypage.setBackground(Color.black);
 		bt_mypage.setForeground(Color.white);
@@ -60,10 +63,10 @@ public class CreateReView extends JFrame {
 		
 		
 		
-		setLayout(new BorderLayout());
-		add(bt_create);
-		add(bt_mypage);
-		add(panel);
+		getContentPane().setLayout(new BorderLayout());
+		getContentPane().add(bt_create);
+		getContentPane().add(bt_mypage);
+		getContentPane().add(panel);
 		setSize(500,450);
 		setVisible(false);
 	}
