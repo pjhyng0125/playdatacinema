@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 
 public class JoinUpdateView extends JFrame 
 {
-	public JTextField tf_id,tf_name,tf_phone1,tf_phone2,tf_phone3,tf_addr,tf_addr2,
+	public JTextField tf_id,tf_name,tf_phone1,tf_phone2,tf_phone3,tf_addr,
 	  tf_hint2,tf_email1,tf_email2,tf_birth1,tf_birth2,tf_birth3;
 	public JPasswordField tf_pass,tf_pass2;
 	public JButton bt_submit,bt_reset,bt_checkid;
@@ -58,7 +58,6 @@ public class JoinUpdateView extends JFrame
 		tf_phone2 = new JTextField();
 		tf_phone3 = new JTextField();
 		tf_addr = new JTextField();
-		tf_addr2 = new JTextField();
 		tf_hint2 = new JTextField();
 		tf_email1 = new JTextField();
 		tf_email2 = new JTextField();
@@ -118,12 +117,11 @@ public class JoinUpdateView extends JFrame
 		tf_email2.setBounds(180,460,70,25);
 		
 		tf_addr.setBounds(80,500,200,25);
-		tf_addr2.setBounds(80,530,150,25);
 		
-		bt_submit.setBounds(70,600,90,25);
+		bt_submit.setBounds(70,560,90,25);
 		bt_submit.setBackground(Color.BLACK);
 		bt_submit.setForeground(Color.WHITE);
-		bt_reset.setBounds(180,600,90,25);
+		bt_reset.setBounds(180,560,90,25);
 		bt_reset.setBackground(Color.BLACK);
 		bt_reset.setForeground(Color.WHITE);
 		bt_checkid.setBounds(190,100,90,25);
@@ -169,7 +167,6 @@ public class JoinUpdateView extends JFrame
 		add(tf_phone2); 
 		add(tf_phone3); 
 		add(tf_addr); 
-		add(tf_addr2);
 		add(tf_hint2);
 		add(tf_email1);
 		add(tf_email2);
@@ -220,7 +217,7 @@ public class JoinUpdateView extends JFrame
 		
 				
 		
-		setBounds(350,200,370,700);	
+		setBounds(350,200,370,680);	
 		setResizable(false);
 		setVisible(false);
 	}//»ý¼ºÀÚ  
@@ -231,7 +228,6 @@ public class JoinUpdateView extends JFrame
   public void setEmpty() {
 	  tf_id.setText("");
 	  tf_addr.setText("");
-	  tf_addr2.setText("");
 	  tf_name.setText("");
 	  tf_pass.setText("");
 	  tf_pass2.setText("");
@@ -259,6 +255,7 @@ public class JoinUpdateView extends JFrame
 	  tf_phone2.setText(phone2);
 	  tf_phone3.setText(phone3);
   }
+
   
 }//UpdateForm
 
