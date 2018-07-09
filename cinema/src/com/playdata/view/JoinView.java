@@ -21,7 +21,8 @@ public class JoinView extends JFrame
 	public JPasswordField tf_pass,tf_pass2;
 	public JButton bt_submit,bt_reset,bt_checkid;
 	JLabel la_id,la_pass1,la_pass2,la_name,la_phone,la_addr,la_addr2,la_hint1,la_gender,la_email,
-		   la_man,la_woman,la_birth,la_title,la_ex1,la_ex2;
+		   la_birth,la_title,la_ex1,la_ex2;
+	public JLabel la_man,la_woman;
 	public JComboBox<String> cb_hint,cb_email; 
 	JLabel jb[],at[];
 	public JRadioButton rb_gender1, rb_gender2;
@@ -253,6 +254,12 @@ public class JoinView extends JFrame
   }
 
 
-
+  public boolean showConfirmMsg(String msg) {
+	  int t = JOptionPane.showConfirmDialog(this, msg);
+	  if(t==0) {
+		  return true;
+	  }
+	  return false;
+  }
 }//JoinForm
 
