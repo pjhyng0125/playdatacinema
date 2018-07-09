@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import com.playdata.model.dao.MemberDAO;
 import com.playdata.model.dao.MovieDAO;
 import com.playdata.model.vo.Comment;
+import com.playdata.model.vo.Member;
 import com.playdata.model.vo.Movie;
 import com.playdata.view.CreateReView;
 import com.playdata.view.FindIdView;
@@ -65,10 +66,13 @@ public class Controller extends MouseAdapter implements ActionListener {
 
 //String
    String login_id="login_id";
+   String login_checkid=""; //로그인 중복확인
 //arraylist
    ArrayList<Comment> list_comment;
    ArrayList<ReviewSubView> list_review;
    ArrayList<Movie> list_movie;
+//boolean   
+   boolean checkId = false; //중복 체크
    
    public Controller() {
 //new
@@ -289,7 +293,7 @@ public class Controller extends MouseAdapter implements ActionListener {
       v_login.bt_join.addActionListener(this);
       v_join.bt_reset.addActionListener(this);
       v_join.bt_submit.addActionListener(this);
-      
+      v_join.bt_checkid.addActionListener(this);
       for(int i=0; i<v_createreview.tbt_stars.length; i++)
          v_createreview.tbt_stars[i].addActionListener(this);
       v_schedule.bt_back.addActionListener(this);
@@ -415,18 +419,18 @@ public class Controller extends MouseAdapter implements ActionListener {
       
 /*---------------View Change EVENT---------------*/   
       if(ob == v_login.bt_login) {
-    	 String id = v_login.tf_id.getText();
-    	 String pass = new String(v_login.tf_pass.getPassword());
-    	 
-    	 if(member_dao.login(id, pass)){
-    		 System.out.println(id +","+pass);
-    		 JOptionPane.showMessageDialog(v_login,id+" 로그인 성공!");
-    		 v_login.setVisible(false);
-    		 v_reserve.setVisible(true);
-    	 }else {
-    		 JOptionPane.showMessageDialog(v_login,id+" 로그인 실패!");    		 
-    	 }
-    	 
+        String id = v_login.tf_id.getText();
+        String pass = new String(v_login.tf_pass.getPassword());
+        
+        if(member_dao.login(id, pass)){
+           System.out.println(id +","+pass);
+           JOptionPane.showMessageDialog(v_login,id+" 로그인 성공!");
+           v_login.setVisible(false);
+           v_reserve.setVisible(true);
+        }else {
+           JOptionPane.showMessageDialog(v_login,id+" 로그인 실패!");           
+        }
+        
       }
       else if(ob == v_reserve.bt_mypage) {
          v_reserve.setVisible(false);
@@ -473,21 +477,138 @@ public class Controller extends MouseAdapter implements ActionListener {
          v_reserve.setVisible(true);
       }
       else if(ob == v_login.bt_find) {
-    	  v_login.setVisible(false);
-    	  v_findid.setVisible(true);
-    	  v_findpw.setVisible(true);
+         v_login.setVisible(false);
+         v_findid.setVisible(true);
+         v_findpw.setVisible(true);
       }
-      else if(ob == v_login.bt_join) {
-    	  v_login.setVisible(false);
-    	  v_join.setVisible(true);
+      else if(ob == v_login.bt_join) {//회원가입폼으로 이동.
+         v_join.tf_id.requestFocus(); //아이디 텍스트필드 포커스.
+         v_login.setVisible(false);
+         v_join.setVisible(true);
       }
-      else if(ob == v_join.bt_reset) {
-    	  v_join.setVisible(false);
-    	  v_login.setVisible(true);
+      else if(ob == v_join.bt_checkid) {//아이디 중복확인
+         String id = v_join.tf_id.getText(); 
+         if(new MemberDAO().duplicate(id)) {
+            v_join.showMsg("이미 존재하는 아이디입니다!");
+            v_join.tf_id.setText("");
+            v_join.tf_id.requestFocus();
+         }else {
+            if(v_join.showConfirmMsg("사용가능합니다! 현재 아이디를 사용하시겠습니까?")) {
+               checkId = true;
+               login_checkid = id;
+            }else {
+               checkId = false;
+               login_checkid = "";
+            }
+         }
+      }
+      else if(ob == v_join.bt_reset) {//회원가입 등록.
+         v_join.setVisible(false);
+         v_login.setVisible(true);
       }
       else if(ob == v_join.bt_submit) {
-    	  v_join.setVisible(false);
-    	  v_login.setVisible(true);
+         String id = v_join.tf_id.getText();
+         String pass = new String(v_join.tf_pass.getPassword());
+         String pass2 = new String(v_join.tf_pass2.getPassword());
+         String hint = v_join.cb_hint.getSelectedItem().toString();
+         String answer = v_join.tf_hint2.getText();
+         String name = v_join.tf_name.getText();
+         String birth1 = v_join.tf_birth1.getText();
+         String birth2 = v_join.tf_birth2.getText();
+         String birth3 = v_join.tf_birth3.getText();
+             
+         String gender="";
+         if(v_join.rb_gender1.isSelected()) {
+            gender = v_join.la_man.getText().substring(0,1);
+         }else if(v_join.rb_gender2.isSelected()){
+            gender = v_join.la_woman.getText().substring(0,1);            
+         }
+         
+         String phone1 = v_join.tf_phone1.getText();
+         String phone2 = v_join.tf_phone2.getText();
+         String phone3 = v_join.tf_phone3.getText();
+         
+         String email1 = v_join.tf_email1.getText();
+         String email2 = v_join.tf_email2.getText();
+         
+         String addr1 = v_join.tf_addr.getText();
+         String addr2 = v_join.tf_addr2.getText();
+         
+         
+         // 빈값 체크
+         if(id.length()== 0) {
+            v_join.showMsg("아이디를 입력해주세요!");
+            return;
+         }
+         else if(pass.length()==0 || pass2.length()==0) {
+            v_join.showMsg("비밀번호를 입력해주세요!");
+            if(pass.length()==0) v_join.tf_pass.requestFocus();
+            else v_join.tf_pass.requestFocus();
+            return;
+         }
+         else if(answer.length()==0) {
+            v_join.showMsg("힌트에 대한 답을 입력해주세요!");
+            return;
+         }
+         else if(name.length()==0) {
+            v_join.showMsg("이름을 입력해주세요!");
+            return;
+         }
+         else if(birth1.length()==0 || birth2.length()==0 || birth3.length() ==0) {
+            v_join.showMsg("생년월일을 입력해주세요!");
+            if(birth1.length()==0) v_join.tf_birth1.requestFocus();
+            else if(birth1.length()==0) v_join.tf_birth2.requestFocus();
+            else v_join.tf_birth3.requestFocus();
+            return;
+         }
+         else if(gender.length()==0) {
+            v_join.showMsg("성별을 체크해주세요!");
+            return;
+         }
+         else if(phone1.length()==0 || phone2.length()==0 || phone3.length()==0) {
+            v_join.showMsg("연락처를 입력해주세요!");
+            if(phone1.length()==0)v_join.tf_phone1.requestFocus();
+            else if(phone1.length()==0)v_join.tf_phone2.requestFocus();
+            else v_join.tf_phone3.requestFocus();
+            return;
+         }
+         else if(email1.length()==0 || email2.length()==0) {
+            v_join.showMsg("이메일을 입력해주세요!");
+            if(email1.length()==0) v_join.tf_email1.requestFocus();
+            else v_join.tf_email2.requestFocus();
+            return;
+         }
+         else if(addr1.length()==0 || addr2.length()==0) {
+            v_join.showMsg("주소를 입력해주세요!");
+            if(addr1.length()==0) v_join.tf_addr.requestFocus();
+            else v_join.tf_addr2.requestFocus();
+            return;
+         }else if(!pass.equals(pass2)){//비밀번호 확인 일치 여부
+            v_join.showMsg("비밀번호가 일치하지 않습니다!");
+            return;
+         }
+        String birth = birth1+birth2+birth3;
+        String phone = phone1+phone2+phone3;
+        String email = email1+email2;
+        String addr = addr1+addr2; //주소 텍스트필드 2개 필요한지.
+        
+        //-------------유효성 검사!!---------------------------------
+        
+         //중복체크 여부 확인
+         if(checkId==true && (login_checkid.equals(id))) {
+            if(new MemberDAO().join(new Member(id, pass, gender, name, birth, 
+                     phone, addr, email, 0, 0, 0, hint, answer))) {
+             v_join.showMsg("회원가입을 축하드립니다 ^*^");  
+             v_join.setVisible(false);
+             v_login.setVisible(true);            
+            }else {
+              v_join.showMsg("회원가입을 실패하였습니다!");
+            }
+         }else {
+            checkId=false;
+            login_checkid="";
+            v_join.showMsg("아이디 중복확인을 해주세요!");
+         }
       }
    }//actionPerformed
    
