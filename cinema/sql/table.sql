@@ -36,7 +36,7 @@ director varchar2(9), --감독명
 actors varchar2(21), --주연배우들
 summary varchar2(50), --줄거리
 genre varchar2(10), --장르
-rate number(2,1) default 0, --예매율
+rate number , --예매율
 avg_star number(1) default 0, --평점
 limit number, --제한나이
 price number, --가격
@@ -44,7 +44,7 @@ path varchar2(30),--이미지 경로
 start_date char(10), --개봉일자
 run_date char(10), --상영 일자
 run_time char(6), --런타임
-onshow	number(1) default 0-- 1이면 상영중
+onshow	number(1)-- 1이면 상영중
 );
 
 create table movie_comment

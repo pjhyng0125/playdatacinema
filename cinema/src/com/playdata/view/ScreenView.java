@@ -28,12 +28,13 @@ public class ScreenView extends JFrame {
 	public JButton select_movie,pay_view;//페이지 이동 
 
 	//---------------------------------------라벨
-	JLabel lb_a,lb_b,lb_c;//좌석라벨
+	JLabel lb_a;//좌석라벨
 	JLabel lb_select,lb_unselectable,lb_selecting;//선택,가능 불가능 라벨
 	JLabel image_select, image_unselecting,image_selecting;//선택,가능 불가능 이미지 라벨
 	JLabel lb_screen;//스크린 라벨
 	JLabel lb_theater;//1관,2관....
 	JLabel lb_movie_image;//영화 포스터
+	
 	
 	//--------------------------------------패널
 	JPanel p;//screen 패널
@@ -51,8 +52,14 @@ public class ScreenView extends JFrame {
 	ImageIcon imageicon_select,imageicon_selecting,imageicon_unselect;
 	
 	
+	LineBorder linea;
+	
 	//--------------------------------------번호라벨
-	private JLabel lb_1,lb_2,lb_3,lb_4,lb_5,lb_6,lb_7,lb_8,lb_9,lb_10;
+	private JLabel lb_1,lb_2,lb_3,lb_4,lb_5,lb_6,lb_7,lb_8,lb_9,lb_10,lb_table1,lb_table2,lb_table3,lb_table4,lb_table5;
+	private JLabel label;
+	private JLabel label_1;
+	private JLabel label_2;
+	private JLabel label_3;
 	
 
 	
@@ -65,48 +72,35 @@ public class ScreenView extends JFrame {
 //===================== 버튼 및 라벨  =======================================================	
 		
 		//좌석버튼 배열
-		bt_seat = new JToggleButton[30];
+		bt_seat = new JToggleButton[10];
+		int cnt;
 		for(int i=0; i<bt_seat.length; i++) {
+				
 				bt_seat[i] = new JToggleButton();
 				bt_seat[i].setForeground(Color.WHITE);
 				bt_seat[i].setBackground(Color.BLUE);
 			//a_bt[i].setBounds(273*(i)+70, 422, 60, 56);//x,y,가로,세로
 			//                     70, 343,  616, ..... (273간격) 273-60=213
-				bt_seat[i].setBounds(273+(i*75), 422, 60, 56);//x,y,가로,세로
+				bt_seat[i].setBounds(273+(i*75), 509, 60, 56);//x,y,가로,세로
 			if(i>=2)
-				bt_seat[i].setBounds(273+(i*75)+39, 422, 60, 56);//x,y,가로,세로
-			if(i>=5)
-				bt_seat[i].setBounds(273+(i*75)+78, 422, 60, 56);//x,y,가로,세로
+				bt_seat[i].setBounds(273+(i*75)+39, 509, 60, 56);//x,y,가로,세로
+			if(i>=4)
+				bt_seat[i].setBounds(273+(i*75)+78, 509, 60, 56);//x,y,가로,세로
+			if(i>=6)
+				bt_seat[i].setBounds(273+(i*75)+117, 509, 60, 56);//x,y,가로,세로
 			if(i>=8)
-				bt_seat[i].setBounds(273+(i*75)+117, 422, 60, 56);//x,y,가로,세로
-			if(i>9)
-				bt_seat[i].setBounds((i*75)-477, 490, 60, 56);//x,y,가로,세로
-			if(i>11)
-				bt_seat[i].setBounds((i*75)-438, 490, 60, 56);//x,y,가로,세로
-			if(i>14)
-				bt_seat[i].setBounds((i*75)-399, 490, 60, 56);//x,y,가로,세로
-			if(i>17)
-				bt_seat[i].setBounds((i*75)-360, 490, 60, 56);//x,y,가로,세로
-			if(i>19)
-				bt_seat[i].setBounds((i*75)-1227, 558, 60, 56);//x,y,가로,세로
-			if(i>21)
-				bt_seat[i].setBounds((i*75)-1188, 558, 60, 56);//x,y,가로,세로
-			if(i>24)
-				bt_seat[i].setBounds((i*75)-1149, 558, 60, 56);//x,y,가로,세로
-			if(i>27)
-				bt_seat[i].setBounds((i*75)-1110, 558, 60, 56);//x,y,가로,세로
+				bt_seat[i].setBounds(273+(i*75)+156, 509, 60, 56);//x,y,가로,세로
+		
 
 			getContentPane().add(bt_seat[i]);
 			
 		}
+		//라벨 테두리
+		linea = new LineBorder(new Color(153, 56, 0),2);
 		
 		//abc 라벨
 		lb_a = new JLabel(" A");
 			lb_a.setFont(new Font("굴림", Font.PLAIN, 25));
-		lb_b = new JLabel(" B");
-			lb_b.setFont(new Font("굴림", Font.PLAIN, 25));
-		lb_c = new JLabel(" C");
-			lb_c.setFont(new Font("굴림", Font.PLAIN, 25));
 		
 		//페이지 이동
 		select_movie = new JButton("영화선택(이전페이지)");
@@ -139,9 +133,7 @@ public class ScreenView extends JFrame {
 //===================== 위치 =======================================================	
 
 		//abc 라벨 위치
-		lb_a.setBounds(216, 432, 43, 37);
-		lb_b.setBounds(216, 498, 43, 37);
-		lb_c.setBounds(216, 568, 43, 37);
+		lb_a.setBounds(216, 522, 43, 37);
 		
 		//페이지 이동 위치
 		select_movie.setBounds(50, 804, 170, 125);
@@ -167,8 +159,6 @@ public class ScreenView extends JFrame {
 		
 		//abc라벨 contentpane
 		getContentPane().add(lb_a);
-		getContentPane().add(lb_b);
-		getContentPane().add(lb_c);
 		
 		//페이지 이동 contentpane
 		getContentPane().add(select_movie);
@@ -254,62 +244,115 @@ public class ScreenView extends JFrame {
 		lb_1 = new JLabel("1");
 		lb_1.setFont(new Font("굴림", Font.BOLD, 15));
 		lb_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lb_1.setBounds(273, 398, 62, 18);
+		lb_1.setBounds(273, 483, 62, 18);
 		getContentPane().add(lb_1);
 		
 		lb_2 = new JLabel("2");
 		lb_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_2.setFont(new Font("굴림", Font.BOLD, 15));
-		lb_2.setBounds(347, 398, 62, 18);
+		lb_2.setBounds(345, 483, 62, 18);
 		getContentPane().add(lb_2);
 		
 		lb_3 = new JLabel("3");
 		lb_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_3.setFont(new Font("굴림", Font.BOLD, 15));
-		lb_3.setBounds(460, 398, 62, 18);
+		lb_3.setBounds(459, 483, 62, 18);
 		getContentPane().add(lb_3);
 		
 		lb_4 = new JLabel("4");
 		lb_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_4.setFont(new Font("굴림", Font.BOLD, 15));
-		lb_4.setBounds(536, 398, 62, 18);
+		lb_4.setBounds(534, 483, 62, 18);
 		getContentPane().add(lb_4);
 		
 		lb_5 = new JLabel("5");
 		lb_5.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_5.setFont(new Font("굴림", Font.BOLD, 15));
-		lb_5.setBounds(610, 398, 62, 18);
+		lb_5.setBounds(648, 483, 62, 18);
 		getContentPane().add(lb_5);
 		
 		lb_6 = new JLabel("6");
 		lb_6.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_6.setFont(new Font("굴림", Font.BOLD, 15));
-		lb_6.setBounds(724, 398, 62, 18);
+		lb_6.setBounds(723, 483, 62, 18);
 		getContentPane().add(lb_6);
 		
 		lb_7 = new JLabel("7");
 		lb_7.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_7.setFont(new Font("굴림", Font.BOLD, 15));
-		lb_7.setBounds(798, 398, 62, 18);
+		lb_7.setBounds(837, 483, 62, 18);
 		getContentPane().add(lb_7);
 		
 		lb_8 = new JLabel("8");
 		lb_8.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_8.setFont(new Font("굴림", Font.BOLD, 15));
-		lb_8.setBounds(872, 398, 62, 18);
+		lb_8.setBounds(912, 483, 62, 18);
 		getContentPane().add(lb_8);
 		
 		lb_9 = new JLabel("9");
 		lb_9.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_9.setFont(new Font("굴림", Font.BOLD, 15));
-		lb_9.setBounds(989, 398, 62, 18);
+		lb_9.setBounds(1026, 483, 62, 18);
 		getContentPane().add(lb_9);
 		
 		lb_10 = new JLabel("10");
 		lb_10.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_10.setFont(new Font("굴림", Font.BOLD, 15));
-		lb_10.setBounds(1063, 398, 62, 18);
+		lb_10.setBounds(1101, 483, 62, 18);
 		getContentPane().add(lb_10);
+		
+		//테이블
+		lb_table1 = new JLabel("table");
+		lb_table1.setBackground(Color.WHITE);
+		lb_table1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
+		lb_table1.setForeground(Color.BLACK);
+		lb_table1.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_table1.setOpaque(true);
+		lb_table1.setBorder(linea);
+		lb_table1.setBounds(304, 453, 75, 18);
+		getContentPane().add(lb_table1);
+		
+		lb_table2 = new JLabel("table");
+		lb_table2.setOpaque(true);
+		lb_table2.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_table2.setForeground(Color.BLACK);
+		lb_table2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
+		lb_table2.setBorder(linea);
+		lb_table2.setOpaque(true);
+		lb_table2.setBorder(linea);
+		lb_table2.setBackground(Color.WHITE);
+		lb_table2.setBounds(492, 453, 75, 18);
+		getContentPane().add(lb_table2);
+		
+		lb_table3 = new JLabel("table");
+		lb_table3.setOpaque(true);
+		lb_table3.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_table3.setForeground(Color.BLACK);
+		lb_table3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
+		lb_table3.setBorder(linea);
+		lb_table3.setBackground(Color.WHITE);
+		lb_table3.setBounds(680, 453, 75, 18);
+		getContentPane().add(lb_table3);
+		
+		lb_table4 = new JLabel("table");
+		lb_table4.setOpaque(true);
+		lb_table4.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_table4.setForeground(Color.BLACK);
+		lb_table4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
+		lb_table4.setBorder(linea);
+		lb_table4.setBackground(Color.WHITE);
+		lb_table4.setBounds(869, 453, 75, 18);
+		getContentPane().add(lb_table4);
+		
+		lb_table5 = new JLabel("table");
+		lb_table5.setOpaque(true);
+		lb_table5.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_table5.setForeground(Color.BLACK);
+		lb_table5.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
+		lb_table5.setBorder(linea);
+		lb_table5.setBackground(Color.WHITE);
+		lb_table5.setBounds(1059, 453, 75, 18);
+		getContentPane().add(lb_table5);
 		
 		
 		
@@ -321,6 +364,5 @@ public class ScreenView extends JFrame {
 
 		
 	}
-
 }
 	

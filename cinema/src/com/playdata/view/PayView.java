@@ -149,13 +149,37 @@ public class PayView extends JFrame {
 			
 	    //버튼
 		bt_ok = new JButton("확인");   		   //최종결제 확인
+		bt_ok.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		bt_ok.setBackground(Color.BLACK);
+		bt_ok.setForeground(Color.WHITE);
 		bt_cancel = new JButton("취소");		   //최종결제 취소
+		bt_cancel.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		bt_cancel.setBackground(Color.BLACK);
+		bt_cancel.setForeground(Color.WHITE);
 		bt_charge_ok = new JButton("충전");	   //충전 확인
+		bt_charge_ok.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		bt_charge_ok.setBackground(Color.BLACK);
+		bt_charge_ok.setForeground(Color.WHITE);
 		bt_charge_cancel = new JButton("취소");  //충전 취소
+		bt_charge_cancel.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		bt_charge_cancel.setBackground(Color.BLACK);
+		bt_charge_cancel.setForeground(Color.WHITE);
 		bt_discount_ok = new JButton("사용");    //쿠폰 사용
+		bt_discount_ok.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		bt_discount_ok.setBackground(Color.BLACK);
+		bt_discount_ok.setForeground(Color.WHITE);
 		bt_discount_cancel = new JButton("취소");//쿠폰 취소
+		bt_discount_cancel.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		bt_discount_cancel.setBackground(Color.BLACK);
+		bt_discount_cancel.setForeground(Color.WHITE);
 		bt_point_ok = new JButton("사용");       //포인트 사용
+		bt_point_ok.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		bt_point_ok.setBackground(Color.BLACK);
+		bt_point_ok.setForeground(Color.WHITE);
 		bt_point_cancel = new JButton("취소");   //포인트 취소
+		bt_point_cancel.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		bt_point_cancel.setBackground(Color.BLACK);
+		bt_point_cancel.setForeground(Color.WHITE);
 		
 		//라벨위치
 		lb_member.setBounds(148, 30, 121, 54);//회원등급
