@@ -66,6 +66,7 @@ public class AdminView extends JFrame implements Runnable {
 //		memberInf(); //회원정보 패널 메소드
 		history(); //결제정보 패널 메소드
 		
+		new Server();
 
 		la_time = new JLabel();
 			la_time.setBounds(980, 30, 200, 30);
@@ -244,12 +245,13 @@ public class AdminView extends JFrame implements Runnable {
 					Socket socket = socketserver.accept();//client 접속 대기
 					Service client = new Service(socket, this);
 					clients.add(client);
+					System.out.println("Server> Client 추가!");
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-	}
+	}//Server
 	
 	/*
 	 * 작성자:박진형 수정일자:07/09/ 19:09 
@@ -277,16 +279,16 @@ public class AdminView extends JFrame implements Runnable {
 			public void run() {
 				try {
 					while(true) {
-						String msg = in.readLine();//client로부터 메세지 받기
+						String msg = in.readLine();//Client로부터 메세지 받기
 						if(msg == null) return;
 						if(msg.trim().length()>0) {
-							System.out.println("from Client: "+ msg +":"+
+							System.out.println("from Client> "+ msg +":"+
 					                  socket.getInetAddress().getHostAddress());
 						}
 						String msgs[] = msg.split("\\|");
 						String protocol = msgs[0];
 						
-						switch(protocol) {
+						switch(protocol) {	//통신규약에 따라 Client로부터 메세지 받기
 						case "100":
 							
 							break;
@@ -296,7 +298,14 @@ public class AdminView extends JFrame implements Runnable {
 					e.printStackTrace();
 				}
 			}//run
-	}
+		public void sendMsg(String msg, char type) {
+			try {
+				out.write((type + msg + "\n").getBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}//sendMsg
+	}//Service
 	
  	public void dispTable(ArrayList<Object[]> list,String table) { //table : "회원정보" "수익정보" "결제내역"
 		if(table.equals("회원정보")) {

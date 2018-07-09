@@ -45,7 +45,7 @@ public class ReView extends JFrame {
 		la_image = new JLabel();
 		la_name = new JLabel("영화이름: ");
 		la_genre = new JLabel("영화장르: ");
-		//la_logo = new JLabel("icon1");
+		la_logo = new JLabel("icon1");
 		
 		
 		list = new ArrayList<>();
