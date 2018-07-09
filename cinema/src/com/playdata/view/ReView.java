@@ -7,10 +7,13 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
 
 import com.playdata.model.vo.Comment;
 /*
@@ -19,12 +22,19 @@ import com.playdata.model.vo.Comment;
 public class ReView extends JFrame {
 	public JPanel p_content, p_reviews, p_bottom;
 	public JButton bt_back, bt_next, bt_reserve;
-	public JLabel la_page, la_image, la_name, la_genre;
+	public JLabel la_page, la_image, la_name, la_genre, la_logo;
 	public ArrayList<ReviewSubView> list;
+	LineBorder linea;
+	//public ImageIcon icon1;
 	
 	public ReView() {
 		setTitle("ReView");
 //new
+		
+		
+		//icon1 = new ImageIcon("image/logo.png");
+		
+		linea = new LineBorder(Color.black,8);
 		p_content = new JPanel();
 		p_reviews = new JPanel();
 		p_bottom = new JPanel();
@@ -35,6 +45,8 @@ public class ReView extends JFrame {
 		la_image = new JLabel();
 		la_name = new JLabel("영화이름: ");
 		la_genre = new JLabel("영화장르: ");
+		//la_logo = new JLabel("icon1");
+		
 		
 		list = new ArrayList<>();
 		ReviewSubView rsv1 = new ReviewSubView("blank", "blank", 1);
@@ -53,7 +65,8 @@ public class ReView extends JFrame {
 		setLayout(new BorderLayout());
 		
 //setBackground
-		p_content.setBackground(Color.cyan);
+		p_content.setBackground(Color.orange);
+		p_content.setBorder(linea);
 		p_reviews.setBackground(Color.white);
 //setSize
 		p_content.setPreferredSize(new Dimension(0, 300));
@@ -87,9 +100,12 @@ public class ReView extends JFrame {
 		la_image.setBounds(100, 50, 200, 200);
 		la_name.setBounds(500, 50, 100, 30);
 		la_genre.setBounds(500, 100, 100, 30);
+		la_logo.setBounds(100, 100, 100, 100);
 		p_content.add(la_image);
 		p_content.add(la_name);
 		p_content.add(la_genre);
+		//p_content.add(la_logo);
+		
 		
 		setSize(1200, 800);
 		setVisible(false);
@@ -115,5 +131,6 @@ public class ReView extends JFrame {
 				
 		}
 	}
+
 
 }

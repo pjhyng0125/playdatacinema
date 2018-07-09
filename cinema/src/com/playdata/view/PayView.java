@@ -18,6 +18,7 @@ import java.awt.SystemColor;
 import javax.swing.JList;
 import java.awt.Choice;
 import javax.swing.DropMode;
+import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 /*
  * 결제뷰
@@ -40,6 +41,8 @@ public class PayView extends JFrame {
 	JLabel lb_charge_cash;//캐쉬충전
 	JLabel lb_discount_list, lb_discount_coupon,lb_have_point;//할인내역,할인쿠폰,보유포인트
 	Choice ch_copoun;//쿠폰 선택
+	JLabel la_logo;
+	JLabel la_cinema;
 	
 	//-----------------------------텍스트필드
 	JTextField tf_grade;//등급정보
@@ -64,6 +67,11 @@ public class PayView extends JFrame {
     
     //-------------------------------테두리
     LineBorder lineb,linea;
+    
+    
+    //-------------------------------로고이미지
+    ImageIcon icon1;
+    
     
 
 	
@@ -180,7 +188,14 @@ public class PayView extends JFrame {
 		bt_point_ok.setBounds(432, 586, 61, 27);      //포인트 사용
 		bt_point_cancel.setBounds(507, 586, 61, 27);  //포인트 취소
 
+		//이미지 로고
+		icon1 = new ImageIcon("image/logo.png");
 		
+		la_logo = new JLabel(icon1);
+		la_logo.setBounds(200, 20, 50, 50);
+		la_cinema = new JLabel("Cinema");
+		la_cinema.setBounds(130, 20, 100, 50);
+		la_cinema.setFont(new Font("도움", Font.HANGING_BASELINE, 20));
 
 		
 		//contentpane
@@ -215,6 +230,8 @@ public class PayView extends JFrame {
 		p.add(tf_have_cash);
 		p.add(tf_balance);
 		p.add(tf_sc_point);
+		add(la_logo);
+		add(la_cinema);
 		
 		
         //왼쪽 캐쉬 충전, 할인내역 라벨
@@ -310,7 +327,10 @@ public class PayView extends JFrame {
 			
 		
 		setSize(1200, 800);
-		setVisible(false);
+		setVisible(true);
 		
 	}//생성자
+	public static void main(String[] args) {
+		new PayView();
+	}
 }
