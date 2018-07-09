@@ -291,77 +291,12 @@ public class MemberDAO {
    }
 
    /*
-    * 컨트롤러는 3단계를 쓰세요 작성자 : 이성훈 작성일자 :07.05 기능설명 : 마이페이지창- 예매확인/취소창 - 취소버튼 클릭시 1단계
-    * 환불
-    */
-   private boolean refund(String id, String movie_name) {
-      connection();
-      String sql1 = "select r.price from movie m, reserve r where r.movie_name= m.name and r.movie_name=?";// 환불할 티켓가격
-      String sql2 = "select cash from member where id=?"; // 환불할 사람 잔액 조회
-      String sql3 = "update member set cash=? where id=?"; // 환불할 사람 잔액에 티켓가격 추가
-
-      try {
-         prestmt = conn.prepareStatement(sql1);
-         prestmt.setString(1, movie_name);
-         rs = prestmt.executeQuery();
-
-         if (rs.next()) {
-            int refund = rs.getInt(1);
-            prestmt = conn.prepareStatement(sql2);
-            prestmt.setString(1, id);
-            rs = prestmt.executeQuery();
-
-            if (rs.next()) {
-               int cash = rs.getInt(1);
-               prestmt = conn.prepareStatement(sql3);
-               prestmt.setInt(1, (cash + refund));
-               prestmt.setString(2, id);
-
-               int t = prestmt.executeUpdate();
-               if (t > 0) {
-                  return true;
-               }
-            }
-
-         }
-      } catch (SQLException e) {
-         e.printStackTrace();
-      } finally {
-         diss();
-      }
-      return false;
-   }
-
-   /*
-    * 컨트롤러는 3단계를 쓰세요 작성자 : 이성훈 작성일자 :07.05 기능설명 : 마이페이지창- 예매확인/취소창 - 취소버튼 클릭시 2단계
-    * 삭제
-    */
-   private boolean delete_reserve(String id, String movie_name) {
-      connection();
-      String sql = "delete from reserve where id=? and movie_name =?"; // 환불자 예약 삭제
-      try {
-         prestmt = conn.prepareStatement(sql);
-         prestmt.setString(1, id);
-         prestmt.setString(2, movie_name);
-         int t = prestmt.executeUpdate();
-
-         if (t > 0) {
-            return true;
-         }
-      } catch (SQLException e) {
-         e.printStackTrace();
-      } finally {
-         diss();
-      }
-      return false;
-   }
-
-   /*
-    * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 마이페이지창- 예매확인/취소창 - 취소버튼 클릭시 3단계 환불+삭제
+    * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 마이페이지창- 예매확인/취소창 - 취소버튼 클릭시 4단계 환불+이익반환+삭제
     */
    public boolean cancel(String id, String movie_name) {
 
-      if (refund(id, movie_name)) {
+	   int t = refund(id, movie_name);
+      if (profit_minus(t,id)) {
          if (delete_reserve(id, movie_name)) {
             return true;
          }
@@ -447,8 +382,10 @@ public class MemberDAO {
             int mycash = rs.getInt(1);
             if(symbol.equals("+")) {
                result = mycash+cash;
+               profit_ck(cash, symbol);
             }else {
                result = mycash-cash;
+               profit_ck(cash, symbol);
             }
             
             prestmt = conn.prepareStatement(sql2);
@@ -494,16 +431,130 @@ public class MemberDAO {
    }
    
    
+   // ************************************  참조할 필요 없습니다        ***************************************  
    
    
+   /*
+    * 컨트롤러는 3단계를 쓰세요 작성자 : 이성훈 작성일자 :07.05 기능설명 : 마이페이지창- 예매확인/취소창 - 취소버튼 클릭시 1단계
+    * 환불
+    */
+   private int refund(String id, String movie_name) {
+      connection();
+      String sql1 = "select r.price from movie m, reserve r where r.movie_name= m.name and r.movie_name=?";// 환불할 티켓가격
+      String sql2 = "select cash from member where id=?"; // 환불할 사람 잔액 조회
+      String sql3 = "update member set cash=? where id=?"; // 환불할 사람 잔액에 티켓가격 추가
+      
+
+      try {
+         prestmt = conn.prepareStatement(sql1);
+         prestmt.setString(1, movie_name);
+         rs = prestmt.executeQuery();
+
+         if (rs.next()) {
+            int refund = rs.getInt(1);
+            prestmt = conn.prepareStatement(sql2);
+            prestmt.setString(1, id);
+            rs = prestmt.executeQuery();
+
+            if (rs.next()) {
+               int cash = rs.getInt(1);
+               prestmt = conn.prepareStatement(sql3);
+               prestmt.setInt(1, (cash + refund));
+               prestmt.setString(2, id);
+
+               int t = prestmt.executeUpdate();
+               if (t > 0) {
+                  return refund;
+               }
+            }
+
+         }
+      } catch (SQLException e) {
+         e.printStackTrace();
+      } finally {
+         diss();
+      }
+      return 0;
+   }
    
+   /*
+    * 작성자 : 이성훈 작성일자 :07.09 기능설명 : 마이페이지창- 예매확인/취소창 - 취소버튼 클릭시 2단계 이익반환
+    */
+   private boolean profit_minus(int ticket_price,String id) {
+	   connection();
+	   String sql1 = "select profit from admin"; // profit 조회
+	   String sql2 = "update admin set profit=?"; // profit에 티켓가격 차감
+	   try {
+		prestmt = conn.prepareStatement(sql1);
+		   rs = prestmt.executeQuery();
+		   if(rs.next()) {
+			   int new_profit = rs.getInt(1)-ticket_price;
+			   prestmt = conn.prepareStatement(sql2);
+			   prestmt.setInt(1, new_profit);
+			   int t = prestmt.executeUpdate();
+			   if(t>0) {
+				   return true;
+			   }
+		   }
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		diss();
+	}
+	   return false;
+   }
+
+   /*
+    * 컨트롤러는 3단계를 쓰세요 작성자 : 이성훈 작성일자 :07.05 기능설명 : 마이페이지창- 예매확인/취소창 - 취소버튼 클릭시 3단계
+    * 삭제
+    */
+   private boolean delete_reserve(String id, String movie_name) {
+      connection();
+      String sql = "delete from reserve where id=? and movie_name =?"; // 환불자 예약 삭제
+      try {
+         prestmt = conn.prepareStatement(sql);
+         prestmt.setString(1, id);
+         prestmt.setString(2, movie_name);
+         int t = prestmt.executeUpdate();
+
+         if (t > 0) {
+            return true;
+         }
+      } catch (SQLException e) {
+         e.printStackTrace();
+      } finally {
+         diss();
+      }
+      return false;
+   }
    
-   
-   
-   
-   
-   
-   // ************************************  보류할 메소드 참조할 필요 없습니다 ***************************************
+   private void profit_ck(int ticket_price, String symbol) {
+	   connection();
+	   String sql1 = "select profit from admin"; // profit 조회
+	   String sql2 = "update admin set profit=?"; // profit에 티켓가격 차감
+	   try {
+		prestmt = conn.prepareStatement(sql1);
+		   rs = prestmt.executeQuery();
+		   if(rs.next()) {
+			   int new_profit = rs.getInt(1);
+			   if(symbol.equals("+")) {
+				   new_profit = rs.getInt(1)+ticket_price;
+			   }else {
+				   new_profit = rs.getInt(1)-ticket_price;
+			   }
+			   
+			   prestmt = conn.prepareStatement(sql2);
+			   prestmt.setInt(1, new_profit);
+			   int t = prestmt.executeUpdate();
+			 
+		   }
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		diss();
+	}
+	  
+   }
 
 //   /*
 //    * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 포인트 차감

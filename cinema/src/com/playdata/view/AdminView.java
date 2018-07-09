@@ -89,7 +89,7 @@ public class AdminView extends JFrame implements Runnable {
 		Thread t = new Thread(this);
 		t.start();
 		setBounds(500, 100, 1200, 800);
-		setVisible(false);
+		setVisible(true);
 	}// 생성자
 
 	public void memberInf() { //회원정보 패널
@@ -132,7 +132,7 @@ public class AdminView extends JFrame implements Runnable {
 		p_member.add(bt_select);
 		p_member.add(bt_delete);
 
-		p_member.setVisible(false);
+		p_member.setVisible(true);
 	}
  
 	public void history() {// 결제정보(수익정보, 결제내역) 패널
@@ -199,7 +199,7 @@ public class AdminView extends JFrame implements Runnable {
 
 		p_history.add(bt_canclePay);
 		p_history.add(tf_totProfit);
-		p_history.setVisible(false);
+		p_history.setVisible(true);
 	}
 
 	@Override
@@ -239,6 +239,9 @@ public class AdminView extends JFrame implements Runnable {
 				dtm_pay.addRow(rowData);
 			}			
 		}
+	}
+	public static void main(String[] args) {
+		new AdminView();
 	}
 
 
