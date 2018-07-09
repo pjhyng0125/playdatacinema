@@ -40,12 +40,10 @@ public class FindIdPwView extends JFrame{
 		add(panel);
 		
 		setBounds(400,300,300,300);
-		setVisible(true);
+		setVisible(false);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
-	public static void main(String[] args) {
-		new FindIdPwView();
-	}
+
 }
