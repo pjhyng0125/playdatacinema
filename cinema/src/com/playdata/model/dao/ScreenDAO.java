@@ -78,7 +78,31 @@ public class ScreenDAO {
          return list;
       }
       
-   
+      
+      /*
+      작성자:박형진 수정일자:07/09/18:18
+      클래스(함수)기능: 결제후 screenFlag 변경  
+    */
+   public boolean updateSeatFlag(Screen s) {
+	    try {
+	         connect();
+	         String sql = "update screen set flag=1 where screen_code=? and start_time=? and seatnum=?";
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setInt(1, s.getScreen_code());
+	         pstmt.setString(2, s.getStart_time());
+	         pstmt.setString(3, s.getSeatnum());
+	         
+	         int t = pstmt.executeUpdate();
+	         if(t>0) return true;
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         disconnect();
+	      }
+	    return false;
+   }
+      
+      
    private void connect() {
          try {
             conn = DriverManager.getConnection(pro.getProperty("url"), pro);

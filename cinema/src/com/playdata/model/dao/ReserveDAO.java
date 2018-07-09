@@ -115,6 +115,32 @@ public class ReserveDAO {
       return list;
    }
    
+   /*
+   작성자:박형진 수정일자:07/09/18:18
+   클래스(함수)기능: 결제후 reserveTable에 insert  
+ */
+   public boolean insertReserve(Reserve r) {
+	    try {
+	         connect();
+	         String sql = "insert into reserve values (?,?,?,?,?,?,?)";
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, r.getId());
+	         pstmt.setString(2, r.getMovie_name());
+	         pstmt.setString(3, r.getRun_date());
+	         pstmt.setString(4, r.getStart_time());
+	         pstmt.setString(5, r.getSeatnum());
+	         pstmt.setInt(6, r.getScreen_code());
+	         pstmt.setInt(7,r.getPerson_cnt());
+	         
+	         int t = pstmt.executeUpdate();
+	         if(t>0) return true;
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         disconnect();
+	      }
+	   return false;
+   }
    
    private void connect() {
          try {
