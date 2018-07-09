@@ -257,7 +257,7 @@ public class MemberDAO {
    /*
     * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 마이페이지창 - 예매 확인/취소
     */
- /*  public ArrayList<Reserve> moviecheck(String id) {
+   public ArrayList<Reserve> moviecheck(String id) {
       connection();
       ArrayList<Reserve> list = new ArrayList<>();
       String sql = "select * from reserve where id=?";
@@ -271,11 +271,12 @@ public class MemberDAO {
             String m_id = reserve.getId();
             String m_moviename = reserve.getMovie_name();
             String m_run_date = reserve.getRun_date();
-            String m_run_time = reserve.getRun_time();
+            String m_run_time = reserve.getStart_time();
             String m_seatnum = reserve.getSeatnum();
-            String m_screencode = reserve.getScreen_code();
+            int m_screencode = reserve.getScreen_code();
+            int m_person_cnt = reserve.getPerson_cnt();
 
-            Reserve send_reserve = new Reserve(m_id, m_moviename, m_run_date, m_run_time, m_seatnum, m_screencode);
+            Reserve send_reserve = new Reserve(m_id, m_moviename, m_run_date, m_run_time, m_seatnum, m_screencode,m_person_cnt);
             list.add(send_reserve);
 
          }
@@ -287,7 +288,7 @@ public class MemberDAO {
 
       return list; // list 안에 id, 영화 제목, 상영일자, 상영시간, 좌석번호
 
-   }*/
+   }
 
    /*
     * 컨트롤러는 3단계를 쓰세요 작성자 : 이성훈 작성일자 :07.05 기능설명 : 마이페이지창- 예매확인/취소창 - 취소버튼 클릭시 1단계
