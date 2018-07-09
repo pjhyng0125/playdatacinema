@@ -90,6 +90,8 @@ public class ScheduleView extends JFrame {
 		p_date.add(la_date);
 		p_date.add(la_title);
 		
+		bt_next.setEnabled(false);
+		
 		setSize(1200, 800);
 		setVisible(false);
 	}//»ý¼ºÀÚ

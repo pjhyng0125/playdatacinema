@@ -54,6 +54,9 @@ public class Controller extends MouseAdapter implements ActionListener {
    String DB_date; //Schedule 창에서 선택한 날짜를 저장하는 변수 ... 7/19
    String DB_time; //Schedule 창에서 선택한 시간을 저장하는 변수 ... 7/19
    
+   boolean flag_date;
+   boolean flag_time;
+   
    int review_page; //후기 창 page 변수
    int review_maxpage;   //후기창
 //date
@@ -176,13 +179,21 @@ public class Controller extends MouseAdapter implements ActionListener {
       for(int i=0; i<v_schedule.v_st.length; i++) {
          v_schedule.v_st[i].tbt_time.addMouseListener(new MouseAdapter() {
          @Override
+        	public void mouseClicked(MouseEvent e) {
+        	 if(flag_time && flag_date)
+    			 v_schedule.bt_next.setEnabled(true);
+    		 else
+    			 v_schedule.bt_next.setEnabled(false);
+         }
+         @Override
             public void mouseReleased(MouseEvent e) {      
+        	flag_time = false;
             boolean flag = false;   //toggle button이 선택되었는지 여부를 확인하는 변수
-            
          /*--------------------toggle button 체크 확인------------------*/
             for(int i=0; i<v_schedule.v_st.length; i++) {
                if(v_schedule.v_st[i].tbt_time.isSelected()) {
                   flag = true;
+                  flag_time = true;
                   selected_time = i;
                }
             }
@@ -213,13 +224,23 @@ public class Controller extends MouseAdapter implements ActionListener {
        */
       for(int i=0; i<v_schedule.v_sd.length; i++) {
          v_schedule.v_sd[i].addMouseListener(new MouseAdapter() {
+        	 @Override
+        		public void mouseClicked(MouseEvent e) {
+        		 if(flag_date && flag_time)
+        			 v_schedule.bt_next.setEnabled(true);
+        		 else
+        			 v_schedule.bt_next.setEnabled(false);
+        	 }
          @Override
             public void mouseReleased(MouseEvent e) {      
+        	flag_date = false;
             boolean flag = false;   //toggle button이 선택되었는지 여부를 확인하는 변수
          /*--------------------toggle button 체크 확인------------------*/
             for(int i=0; i<v_schedule.v_sd.length; i++) {
                if(v_schedule.v_sd[i].isSelected()) {
                   flag = true;
+                  flag_date = true;
+               
                   selected_date = i;
                }
             }
@@ -317,6 +338,18 @@ public class Controller extends MouseAdapter implements ActionListener {
    
    /*
     * 작성자: 박진형
+    * 수정일자: 07/08 18:05
+    * selectReview: ReView => 화면에 책 정보 뿌려주는 함수
+    */
+ //진형추가0708
+   public void showMovieInfo(ArrayList<Movie>list_movie, int index) {
+	   v_review.la_image.setIcon(new ImageIcon(list_movie.get(index).getPath()));
+	   v_review.la_name.setText(list_movie.get(index).getMovie_name());
+	   v_review.la_genre.setText(list_movie.get(index).getGenre());	   
+   }
+   
+   /*
+    * 작성자: 박진형
     * 수정일자: 07/05 17:38
     * selectReview: ReserView => 4개의 영화 정보를 ReserView 화면에 뿌려주는 함수
     */
@@ -385,6 +418,7 @@ public class Controller extends MouseAdapter implements ActionListener {
                v_reserve.setVisible(false);
                v_review.setVisible(true);
                
+               showMovieInfo(list_movie, i);
                DB_movie = list_movie.get(i).getMovie_name();
                System.out.println("DB_movie (라벨 버튼) = "+DB_movie);
             }
