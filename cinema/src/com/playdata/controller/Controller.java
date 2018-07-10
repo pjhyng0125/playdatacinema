@@ -53,9 +53,9 @@ public class Controller extends MouseAdapter implements ActionListener {
    FindIdPwView v_findidpw;
    CashView v_cash;
    CheckView v_check;
-   AdminView v_admin;
    Check_sub_View v_check_sub;
    Calendar cal = Calendar.getInstance();
+   AdminView v_admin;
 //dao
    MovieDAO movie_dao;
    MemberDAO member_dao;
@@ -512,23 +512,23 @@ public class Controller extends MouseAdapter implements ActionListener {
          }//for
       
 /*---------------View Change EVENT---------------*/   
-      if(ob == v_login.bt_login) {
-        String id = v_login.tf_id.getText();
-        String pass = new String(v_login.tf_pass.getPassword());
-        if(id.equals("admin") && pass.equals("1234")) {
-        	v_admin = new AdminView();
-        	v_login.setVisible(false);
-        	v_admin.setVisible(true);
-        }
+       if(ob == v_login.bt_login) {
+         String id = v_login.tf_id.getText();
+         String pass = new String(v_login.tf_pass.getPassword());
+
+         if(id.equals("admin") && pass.equals("1234")) {
+        	 v_admin = new AdminView();
+        	 v_login.setVisible(false);
+        	 v_admin.setVisible(true);
+         }
         else if(member_dao.login(id, pass)){
            System.out.println(id +","+pass);
            JOptionPane.showMessageDialog(v_login,id+" 로그인 성공!");
-           new Client();
            login_id = id;
-           
            //--------------------------------------reserve 뿌리기
            list_movie = new MovieDAO().selectAllMovie();
         	   showReserveInfo(list_movie);
+        	   new Client();
            v_login.setVisible(false);
            v_reserve.setVisible(true);
         }else {
@@ -589,10 +589,56 @@ public class Controller extends MouseAdapter implements ActionListener {
       }
       else if(ob == v_mypage.bt_revise) {//회원정보 수정-----------------------------------------
     	  Member m = new MemberDAO().select_member(login_id);
-//    	  v_joinupdate
+    	  v_joinupdate.tf_id.setText(login_id);
+    	  v_joinupdate.tf_name.setText(m.getName());
+    	  String birth = m.getBirth();
+    	  v_joinupdate.tf_birth1.setText(birth.substring(0, 4));
+    	  v_joinupdate.tf_birth2.setText(birth.substring(4,6));
+    	  v_joinupdate.tf_birth3.setText(birth.substring(7));	
+    	  v_joinupdate.fixRb(m.getGender());
+    	  v_joinupdate.cb_hint.setSelectedItem(m.getHint());
+    	  v_joinupdate.tf_hint2.setText(m.getAnswer());
+    	  String[] phones = m.getPhone().split("-");
+    	  	v_joinupdate.tf_phone1.setText(phones[0]);
+    	  	v_joinupdate.tf_phone2.setText(phones[1]);
+    	  	v_joinupdate.tf_phone3.setText(phones[2]);
+    	  String[] emails = m.getEmail().split("@");
+    	  	v_joinupdate.tf_email1.setText(emails[0]);
+    	  	v_joinupdate.tf_email2.setText(emails[1]);
+    	  	v_joinupdate.cb_email.setEditable(false);
+    	  v_joinupdate.tf_addr.setText(m.getAddr());
+    	 
     	  v_joinupdate.setVisible(true);
       }
       else if(ob == v_joinupdate.bt_submit){
+    	  String pass = new String(v_joinupdate.tf_pass.getPassword());
+    	  String pass2 = new String(v_joinupdate.tf_pass2.getPassword());
+    	  String hint = v_joinupdate.cb_hint.getSelectedItem().toString();
+    	  String answer = v_joinupdate.tf_hint2.getText();
+    	  if(pass.length()==0 || pass2.length()==0) {
+    		  v_joinupdate.showMsg("비밀번호를 적어주세요!");
+    		  v_joinupdate.tf_pass.setText("");
+    		  v_joinupdate.tf_pass2.setText("");
+    		  v_joinupdate.requestFocus();
+    	  }
+    	  else if(answer.length()==0) {
+    		  v_joinupdate.showMsg("힌트에 대한 답을 적어주세요!");
+    	  }
+    	  if(pass.equals(pass2)) {
+    		  Member m = new Member();
+    		  m.setId(login_id);
+    		  m.setPass(pass);
+    		  m.setHint(hint);
+    		  m.setAnswer(answer);
+    		  if(new MemberDAO().updateMember(m)) {
+    			 v_joinupdate.showMsg("변경이 완료되었습니다!");
+    			 v_joinupdate.setVisible(false);
+    		  }else {
+    			  v_joinupdate.showMsg("변경에 실패하였습니다!");    			  
+    		  }
+    	  }else {
+    		  v_joinupdate.showMsg("비밀번호를 확인해주세요!");
+    	  }
     	  
       }
       else if(ob == v_joinupdate.bt_reset){

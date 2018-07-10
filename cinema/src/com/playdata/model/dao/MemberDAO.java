@@ -207,29 +207,23 @@ public class MemberDAO {
     * 작성자 : 이성훈 작성일자 :07.04 기능설명 : 마이페이지창 - 회원정보수정
     */
    public boolean updateMember(Member m) {
-      connection(); // id,pass,gender,name,birth,phone,addr,email,point,cash,memgrade,hint,answer
-      String sql = "update member set pass=?, phone=?, addr=?, email=?, hint=?,answer=? where id =?";
-      try {
-         prestmt = conn.prepareStatement(sql);
-         prestmt.setString(1, m.getPass());
-         prestmt.setString(2, m.getPhone());
-         prestmt.setString(3, m.getAddr());
-         prestmt.setString(4, m.getEmail());
-         prestmt.setString(5, m.getHint());
-         prestmt.setString(6, m.getAnswer());
-         prestmt.setString(7, m.getId());
-         int t = prestmt.executeUpdate();
-
-         if (t > 0) {
-            return true;
-         }
-      } catch (SQLException e) {
-         e.printStackTrace();
-      } finally {
-         diss();
-      }
-
-      return false;
+	   try {
+	         connection();
+	         String sql = "update member set pass=?,hint=?,answer=? where id=? ";
+	         prestmt = conn.prepareStatement(sql);
+	         prestmt.setString(1, m.getPass());
+	         prestmt.setString(2, m.getHint());
+	         prestmt.setString(3, m.getAnswer());
+	         prestmt.setString(4, m.getId());
+	         
+	         int t = prestmt.executeUpdate();
+	         if(t>0) return true;
+	    } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         diss();
+	      }
+	    return false;
    }// updateMember
 
    /*

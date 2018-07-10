@@ -3,6 +3,7 @@ package com.playdata.view;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -23,8 +24,10 @@ public class JoinUpdateView extends JFrame
 		   la_man,la_woman,la_birth,la_title,la_ex1,la_ex2;
 	public JComboBox<String> cb_hint,cb_email; 
 	JLabel jb[],at[];
+	ButtonGroup bg;
 	public JRadioButton rb_gender1, rb_gender2;
 	JPanel panel;
+	
 	
 	
 	public JoinUpdateView()
@@ -63,7 +66,7 @@ public class JoinUpdateView extends JFrame
 		tf_email2 = new JTextField();
 		
 		
-	    bt_submit = new JButton("등록");
+	    bt_submit = new JButton("변경");
 	    bt_reset = new JButton("취소");
 		
 		la_id = new JLabel("*I  D:");
@@ -79,7 +82,7 @@ public class JoinUpdateView extends JFrame
 		la_man = new JLabel("남자");
 		la_woman = new JLabel("여자");
 		la_birth = new JLabel("*생년월일:");
-		la_title = new JLabel("회원정보수정");
+		la_title = new JLabel("회원정보 수정");
 		la_ex1 = new JLabel("ex)1999.05.15");
 		la_ex2 = new JLabel("ex)a123@naver.com");
 		
@@ -93,7 +96,9 @@ public class JoinUpdateView extends JFrame
 		
 		rb_gender1 = new JRadioButton();
 		rb_gender2 = new JRadioButton();
-		
+		bg = new ButtonGroup();
+		bg.add(rb_gender1);
+		bg.add(rb_gender2);
 		
 		
 		tf_id.setBounds(80,100,100,25);
@@ -159,7 +164,7 @@ public class JoinUpdateView extends JFrame
 		
 		cb_hint.setBounds(80,220,130,25);
 		cb_email.setBounds(255,460,100,25);
-		
+		cb_email.setEnabled(false);
 		rb_gender1.setBounds(80,380,25,25);
 		rb_gender2.setBounds(140,380,25,25);
 		
@@ -262,12 +267,21 @@ public class JoinUpdateView extends JFrame
   
   public void fixRb(String gender) {
 	  if(gender.equals(la_man.getText())) {
-		  
+		  rb_gender1.setSelected(true);		  
+	  }else if(gender.equals(la_woman.getText())){
+		  rb_gender2.setSelected(true);		  
 	  }
-	  
+	  rb_gender1.setEnabled(false);
+	  rb_gender2.setEnabled(false);
   }
 
-  
+  public boolean showConfirmMsg(String msg) {
+	  int t = JOptionPane.showConfirmDialog(this,msg,"회원가입 등록",JOptionPane.YES_NO_OPTION);
+	  if(t==0) {
+		  return true;
+	  }
+	  return false;
+  }
 }//UpdateForm
 
 
