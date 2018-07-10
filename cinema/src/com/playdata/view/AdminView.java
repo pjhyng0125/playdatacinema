@@ -15,6 +15,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -26,11 +27,7 @@ import javax.swing.JTextField;
 import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.playdata.model.client.Server;
-
 public class AdminView extends JFrame implements Runnable {
-	static final String LOGIN = "li";
-	
 	JPanel p_member; // 회원정보 패널
 	JPanel p_history; // 결제정보(수익정보, 결제내역) 패널
 
@@ -51,6 +48,7 @@ public class AdminView extends JFrame implements Runnable {
 	JLabel la_payHistory;
 	JLabel la_totProfit;
 	JLabel la_time;
+	JLabel la_logo,la_cinema;
 
 	JButton bt_selectAll;
 	JButton bt_select;
@@ -62,9 +60,12 @@ public class AdminView extends JFrame implements Runnable {
 	JScrollPane sp_member;
 	JScrollPane sp_pro;
 	JScrollPane sp_pay;
+	
+	ImageIcon icon1;
 
 	Calendar c;
 	Server server;
+	boolean serverrun;
 	/*
 	 * 작성자:박형진 수정일자:07/03/21:24 
 	 */
@@ -72,8 +73,11 @@ public class AdminView extends JFrame implements Runnable {
 		setTitle("관리자창");
 //		memberInf(); //회원정보 패널 메소드
 		history(); //결제정보 패널 메소드
+		
+		
+		
+		serverrun = true;
 		server = new Server();
-		server.serverrun = true;
 
 		la_time = new JLabel();
 			la_time.setBounds(980, 30, 200, 30);
@@ -88,6 +92,7 @@ public class AdminView extends JFrame implements Runnable {
 			bt_cmtManage.setBackground(Color.BLACK);
 			bt_cmtManage.setForeground(Color.WHITE);
 			getContentPane().add(bt_cmtManage);
+			
 			
 			bt_postManage = new JButton("게시물관리");
 			bt_postManage.setBounds(1050, 521, 100, 30);
@@ -108,7 +113,7 @@ public class AdminView extends JFrame implements Runnable {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				server.turnOff();
+				turnOff();
 			}
 		});
 		
@@ -154,7 +159,7 @@ public class AdminView extends JFrame implements Runnable {
 		p_member.add(bt_select);
 		p_member.add(bt_delete);
 
-		p_member.setVisible(false);
+		p_member.setVisible(true);
 	}
  
 	public void history() {// 결제정보(수익정보, 결제내역) 패널
@@ -173,7 +178,14 @@ public class AdminView extends JFrame implements Runnable {
 		la_totProfit.setFont(new Font("맑은 고딕", Font.BOLD, 16));
 			la_totProfit.setBounds(240, 675, 70, 30);
 			
-		bt_canclePay = new JButton("결제취소");
+			icon1 = new ImageIcon("image/logo.png");
+			la_logo = new JLabel(icon1);
+			la_logo.setBounds(80, 700, 50, 50);
+			la_cinema = new JLabel("Cinema");
+			la_cinema.setBounds(10, 700, 100, 50);
+			la_cinema.setFont(new Font("도움", Font.HANGING_BASELINE, 20));
+		
+			bt_canclePay = new JButton("결제취소");
 			bt_canclePay.setBounds(750, 675, 100, 30);
 			bt_canclePay.setBackground(Color.black);
 			bt_canclePay.setForeground(Color.white);			
@@ -221,6 +233,8 @@ public class AdminView extends JFrame implements Runnable {
 
 		p_history.add(bt_canclePay);
 		p_history.add(tf_totProfit);
+		p_history.add(la_logo);
+		p_history.add(la_cinema);
 		p_history.setVisible(true);
 	}
 
@@ -240,7 +254,108 @@ public class AdminView extends JFrame implements Runnable {
 			e.printStackTrace();
 		}
 	}
+	/*
+	 * 작성자:박진형 수정일자:07/09/ 19:09 
+	 * Server class
+	 */
+	public class Server implements Runnable{
+		ArrayList<Service> clients;
+		ServerSocket socketserver;
+		public Server() {
+			clients = new ArrayList<>();
+			
+			new Thread(this).start();
+		}//생성자
+		@Override
+		public void run() {
+			try {
+				socketserver = new ServerSocket(5000);
+				System.out.println("Start Server......");
+				while(serverrun) {
+					Socket socket = socketserver.accept();//client 접속 대기
+					Service client = new Service(socket, this);
+					clients.add(client);
+					System.out.println("Server> Client 추가!");
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}//Server
 	
+	public void turnOn() {	//관리자 로그인 시
+		server = new Server();
+	}
+	
+	public void turnOff() {	//관리자 종료 시
+		serverrun = false;
+		try { 
+			for(int i=0; i<server.clients.size(); i++) {				
+				server.clients.get(i).sendMsg("end", 'x');// 클라이언트들에게 서비스 종료 메세지를 보냄
+				server.clients.get(i).in.close();
+				server.clients.get(i).out.close();
+				server.clients.get(i).socket.close();	//서비스 관련 스트림 끊기
+			}
+//			server.socketserver.close();	//서버 관련 스트림 끊기
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/*
+	 * 작성자:박진형 수정일자:07/09/ 19:09 
+	 * Server class
+	 */
+	public class Service extends Thread{
+	//소켓관련 입출력서비스
+		public BufferedReader in;
+		public OutputStream out;
+	//소켓
+		public Socket socket;
+		
+		public Service(Socket socket, Server server) {
+			this.socket = socket;
+			try {
+				in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+				out = socket.getOutputStream();
+				
+				start();	//스레드 시작
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}//생성자
+		@Override
+			public void run() {
+				try {
+					while(serverrun) {
+						String msg = in.readLine();//Client로부터 메세지 받기
+						if(msg == null) return;
+						if(msg.trim().length()>0) {
+							System.out.println("from Client> "+ msg +":"+
+					                  socket.getInetAddress().getHostAddress());
+						}
+						String msgs[] = msg.split("\\|");
+						String protocol = msgs[0];
+						String clientmsg = msgs[1];
+						
+						switch(protocol) {	//통신규약에 따라 Client로부터 메세지 받기
+						case "h":
+							System.out.println(clientmsg);
+							break;
+						}//서버 switch
+					}//while(true)
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}//run
+		public void sendMsg(String msg, char type) {
+			try {
+				out.write((type +"|"+ msg + "\n").getBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}//sendMsg
+	}//Service
 	
  	public void dispTable(ArrayList<Object[]> list,String table) { //table : "회원정보" "수익정보" "결제내역"
 		if(table.equals("회원정보")) {
@@ -263,5 +378,9 @@ public class AdminView extends JFrame implements Runnable {
 			}			
 		}
 	}
+	public static void main(String[] args) {
+		new AdminView();
+	}
+
 
 }
