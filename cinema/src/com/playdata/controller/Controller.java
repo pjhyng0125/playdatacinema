@@ -789,7 +789,6 @@ public class Controller extends MouseAdapter implements ActionListener {
          String email2 = v_join.tf_email2.getText();
          
          String addr1 = v_join.tf_addr.getText();
-         String addr2 = v_join.tf_addr2.getText();
          
          
          // 빈값 체크
@@ -835,10 +834,9 @@ public class Controller extends MouseAdapter implements ActionListener {
             else v_join.tf_email2.requestFocus();
             return;
          }
-         else if(addr1.length()==0 || addr2.length()==0) {
+         else if(addr1.length()==0) {
             v_join.showMsg("주소를 입력해주세요!");
-            if(addr1.length()==0) v_join.tf_addr.requestFocus();
-            else v_join.tf_addr2.requestFocus();
+            v_join.tf_addr.requestFocus();
             return;
          }else if(!pass.equals(pass2)){//비밀번호 확인 일치 여부
             v_join.showMsg("비밀번호가 일치하지 않습니다!");
@@ -847,7 +845,7 @@ public class Controller extends MouseAdapter implements ActionListener {
         String birth = birth1+birth2+birth3;
         String phone = phone1+phone2+phone3;
         String email = email1+email2;
-        String addr = addr1+addr2; //주소 텍스트필드 2개 필요한지.
+        String addr = addr1; //주소 텍스트필드 2개 필요한지.
         
         //-------------유효성 검사!!---------------------------------
         
