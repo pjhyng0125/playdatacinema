@@ -5,54 +5,57 @@ id varchar2(20) primary key,
 pass varchar2(20) not null,
 gender varchar2(4),
 name varchar2(15),
-birth number(8),
-phone varchar2(13),
+birth number(16),
+phone varchar2(22),
 addr varchar2(50),
 mail varchar2(50),
-point number,
-cash number,
+point number(16),
+cash number(16),
 mem_grade number,
-hint varchar2(30),
+hint varchar2(40),
 answer varchar2(30)
 );
 
 create table reserve
 (
-   id varchar2(20), --아이디
-   movie_name varchar2(20),
-   run_date char(5), --상영일자
-   start_time char(5),
-   seatnum char(2), --좌석번호
+   id varchar2(30), --아이디
+   movie_name varchar2(60),
+   run_date char(20), --상영일자
+   start_time char(20),--영화 시작 시간
+   seatnum char(4), --좌석번호
    screen_code char(2), --상영관 번호
-   person_cnt number,--인원수
+   person_cnt number(4),--인원수
    primary key(id,seatnum),
    foreign key (id) references member(id)
 );
 
+
 create table movie
 (
-movie_name varchar2(20) primary key, --영화이름
-director varchar2(9), --감독명
-actors varchar2(21), --주연배우들
-summary varchar2(50), --줄거리
-genre varchar2(10), --장르
-rate number , --예매율
-avg_star number(1) default 0, --평점
-limit number, --제한나이
-price number, --가격
+movie_name varchar2(30) primary key, --영화이름
+director varchar2(15), --감독명
+actors varchar2(45), --주연배우들
+summary varchar2(100), --줄거리
+genre varchar2(30), --장르
+rate number(15) , --예매율
+avg_star number(2) default 0, --평점
+limit number(4), --제한나이
+price number(10), --가격
 path varchar2(30),--이미지 경로
 start_date char(10), --개봉일자
 run_date char(10), --상영 일자
 run_time char(6), --런타임
-onshow	number(1)-- 1이면 상영중
+onshow	number(2)-- 1이면 상영중
 );
+
+
 
 create table movie_comment
 (
 id varchar2(20),
-movie_name varchar2(20),
+movie_name varchar2(30),
 no number, --com_seq
-com_star number(1) not null,
+com_star number(2) not null,
 content varchar2(100),
 primary key(movie_name,no),
 foreign key(movie_name) references movie(movie_name)
@@ -60,10 +63,10 @@ foreign key(movie_name) references movie(movie_name)
 
 create table screen
 (
-screen_code number(1),
+screen_code number(2),
 start_time char(4), -- 시작상영시간-끝시간
-seatnum char(2) unique,
-flag number(1) not null, --1이면 매진석
+seatnum char(4) unique,
+flag number(2) not null, --1이면 매진석
 primary key(screen_code,start_time)
 );
 
@@ -92,72 +95,67 @@ create sequence com_seq
 drop sequence com_seq;
 
 -------------------------------------------------------insert-----------------------------------------------
-create table member
-(
-id varchar2(20) primary key,
-pass varchar2(20) not null,
-gender varchar2(4),
-name varchar2(15),
-birth number(8),
-phone varchar2(13),
-addr varchar2(50),
-mail varchar2(50),
-point number,
-cash number,
-mem_grade number,
-hint varchar2(30),
-answer varchar2(30)
-);
 
-insert into member(id,pass,gender,name,birth,phone,addr,mail,point,cash,mem_grade,hint,answer)
-         values ('encore1','1234','남자','김주원','19920121','01012341234','encore1@naver.com',0,0,0,);
-         
-         
-insert into member(id,pass,gender,name,birth,phone,addr,mail,point,cash,mem_grade)
-         values ('encore2','1234','남','이주원','920121','01012341234','encore2@naver.com',3000,2000,'VIP');
-insert into member(id,pass,gender,name,birth,phone,addr,mail,point,cash,mem_grade)
-         values ('encore3','1234','남','박주원','920121','01012341234','encore3@naver.com',1000,7000,'VVIP');
-insert into member(id,pass,gender,name,birth,phone,addr,mail,point,cash,mem_grade)
-         values ('encore4','1234','남','길주원','920121','01012341234','encore4@naver.com',5000,12000,'일반');
-insert into member(id,pass,gender,name,birth,phone,addr,mail,point,cash,mem_grade)
-         values ('encore5','1234','남','주주원','920121','01012341234','encore5@naver.com',2000,11000,'VIP');
-insert into member(id,pass,gender,name,birth,phone,addr,mail,point,cash,mem_grade)
-         values ('encore6','1234','남','조주원','920121','01012341234','encore6@naver.com',3000,10000,'일반');
-insert into member(id,pass,gender,name,birth,phone,addr,mail,point,cash,mem_grade)
-         values ('encore7','1234','남','차주원','920121','01012341234','encore7@naver.com',7000,2000,'일반');
-insert into member(id,pass,gender,name,birth,phone,addr,mail,point,cash,mem_grade)
-         values ('encore8','1234','남','나주원','920121','01012341234','encore8',3000,1000,'일반');
+insert into member values ('encore11','1234','남자','김주원','19920121','01012341234','서울','encore1@naver.com','2000',17000,0,'초등학교 이름은?','온곡');
+insert into member values ('encore2','1234','여자','이주원','19920123','01023412341','대전','encore2@naver.com',5000,20000,1,'좋아하는책은?','파수꾼');
+insert into member values ('encore3','1234','남자','박주원','19920811','01034123412','대구','encore3@naver.com',1000,15000,2,'태어난곳은?','여수');
+insert into member values ('encore4','1234','여자','나주원','19920623','01041234123','부산','encore4@naver.com',100,3000,0,'어릴적 별명은?','몰라');
+insert into member values ('encore5','1234','남자','차주원','19920401','01023452345','여수','encore5@naver.com',5000,18000,1,'좋아하는 게임은?','배그');
+insert into member values ('encore6','1234','여자','길라임','19920520','01034523452','제주도','encore6@naver.com',800,10000,0,'초등학교 이름은?','상계');
+insert into member values ('encore7','1234','남자','나라임','19920529','01045234523','강원도 강릉','encore7@naver.com',50,20000,0,'좋아하는책은??','종이약국');
+insert into member values ('encore8','1234','여자','박라임','19920402','01052345234','서울 마포','encore8@naver.com',780,5000,0,'태어난곳은?','노원');
+insert into member values ('encore9','1234','남자','유시진','19921116','01034563456','서울 서초','encore9@naver.com',700,2000,0,'어릴적 별명은?','남터');
+insert into member values ('encore10','1234','여자','강모연','19920930','01045634563','속초','encore10@naver.com',8000,900000,2,'초등학교 이름은?','계상');
+insert into member values ('encore11','1234','남자','강동원','19920205','01056345634','별내','encore11@naver.com',50,1000,0,'좋아하는 게임은?','메이플');
+insert into member values ('encore12','1234','여자','한지민','19921104','01063456345','전주','encore12@naver.com',0,5000,0,'좋아하는책은?','상실의시대');
+insert into member values ('encore13','1234','남자','현빈','19920509','01011122211','담양','encore13@naver.com',0,0,0,'태어난곳은?','제주도');
 
 
+insert into movie values ('마녀','박찬욱','김다미,성동일','마녀가 나타났다!','액션',20,3,15,8000,'image/witch.png','6/28','7/05',120,1);
+insert into movie values ('탐정','이언희','권상우,성동일','역대급 미제 사건을 해결한 추리 콤비','코미디,범죄',32,4,15,8000,'image/returns.png','6/28','7/05',120,1);
+insert into movie values ('허스토리','민규동','김해숙,김희애','재판받는 이야기','드라마',12,3,7,8000,'image/her_story.png','6/28','7/05',120,1);
+insert into movie values ('앤트맨과와스프','페이트 리드','폴러드,에반젤린 릴리','가장의 은둔히어로 스토리!','액션',37,4,12,8000,'image/antman.png','6/28','7/05',120,1);
+insert into movie values ('독전','이창동','김다미,성동일','독전이 나타났다!','액션',25,4,15,8000,'image/antman.png','6/28','7/05',120,2);
+insert into movie values ('베테랑','이병헌','김다미,성동일','베테랑이 나타났다!','액션',20,2,15,8000,'image/her_story.png','6/28','7/05',120,3);
+insert into movie values ('실미도','박찬욱','김다미,성동일','실미도가 나타났다!','액션',15,1,15,8000,'image/returns.png','6/28','7/05',120,4);
 
-insert into reserve (id,seatnum,movie_name)values ('encore1','A1','마녀');
+insert into RESERVE values ('encore1','마녀','7/05','12:30','2',1,2);
+insert into RESERVE values ('encore2','마녀','7/06','12:30','4',1,2);
+insert into RESERVE values ('encore3','마녀','7/06','12:30','6',1,2);
+insert into RESERVE values ('encore4','마녀','7/07','12:30','8',1,2);
+insert into RESERVE values ('encore1','탐정','7/06','12:30','2',2,2);
 
-drop table movie;
-create table movie
-(
-movie_name varchar2(20) primary key, --영화이름
-director varchar2(9), --감독명
-actors varchar2(21), --주연배우들
-summary varchar2(50), --줄거리
-genre varchar2(10), --장르
-rate number , --예매율
-avg_star number(1) default 0, --평점
-limit number, --제한나이
-price number, --가격
-path varchar2(30),--이미지 경로
-start_date char(10), --개봉일자
-run_date char(10), --상영 일자
-run_time char(6), --런타임
-onshow	number(1)-- 1이면 상영중
-);
+insert into moive_comment values ('encore5','마녀',1,1,'노잼');
+insert into moive_comment values ('encore6','마녀',2,2,'노잼');
+insert into moive_comment values ('encore7','마녀',3,3,'보통');
+insert into moive_comment values ('encore8','마녀',4,4,'잼');
+insert into moive_comment values ('encore9','마녀',5,3,'보통');
+insert into moive_comment values ('encore5','마녀',6,2,'노잼');
 
-insert into movie values ('마녀','박찬욱','김다미,성동일','마녀가 나타났다!','액션',50,5,15,8000,'path','0628','0705',120,1);
-insert into movie values ('독전','이창동','김다미,성동일','독전이 나타났다!','액션',25,4,15,8000,'path','0628','0705',120,2);
-insert into movie values ('베테랑','이병헌','김다미,성동일','베테랑이 나타났다!','액션',20,2,15,8000,'path','0628','0705',120,3);
-insert into movie values ('실미도','박찬욱','김다미,성동일','실미도가 나타났다!','액션',15,1,15,8000,'path','0628','0705',120,4);
-insert into movie values ('독전','이창동','김다미,성동일','독전이 나타났다!','액션',0,0,15,8000,'path','0628','0705','07:00',120,0);
-insert into movie values ('베테랑','이병헌','김다미,성동일','베테랑이 나타났다!','액션',0,0,15,8000,'path','0628','0705','07:00',120,0);
-insert into movie values ('실미도','박찬욱','김다미,성동일','실미도가 나타났다!','액션',0,0,15,8000,'path','0628','0705','07:00',120,0);
+insert into moive_comment values ('encore5','탐정',1,1,'노잼');
+insert into moive_comment values ('encore6','탐정',2,5,'유잼');
+insert into moive_comment values ('encore7','탐정',3,4,'잼');
+insert into moive_comment values ('encore8','탐정',4,3,'잼');
+insert into moive_comment values ('encore9','탐정',5,2,'노잼');
+
+insert into moive_comment values ('encore5','허스토리',1,1,'노잼');
+insert into moive_comment values ('encore6','허스토리',2,2,'리뷰 몇글자 까지 가능한지 한번보자');
+insert into moive_comment values ('encore7','허스토리',3,3,'');
+insert into moive_comment values ('encore8','허스토리',4,4,'3번은 일부러 노댓글');
+insert into moive_comment values ('encore9','허스토리',5,5,'노잼');
+insert into moive_comment values ('encore10','허스토리',6,1,'노잼');
+insert into moive_comment values ('encore11','허스토리',7,2,'노잼');
+insert into moive_comment values ('encore12','허스토리',8,3,'노잼');
+insert into moive_comment values ('encore13','허스토리',9,4,'노잼');
+
+insert into moive_comment values ('encore5','앤트맨과와스프',1,1,'노잼');
+insert into moive_comment values ('encore6','앤트맨과와스프',2,5,'노잼');
+insert into moive_comment values ('encore7','앤트맨과와스프',3,5,'댓글세개');
+
+insert into screen values (1,'09:30',5,0);
+insert into screen values (2,'09:30',10,0);
+insert into screen values (3,'09:30',10,0);
+insert into screen values (4,'09:30',10,0);
 
 
 ------------------------------------------------------------------create trigger-----------------------------------------------------------
