@@ -3,6 +3,9 @@ package com.playdata.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -68,7 +71,7 @@ public class AdminView extends JFrame implements Runnable {
 		history(); //결제정보 패널 메소드
 		
 		serverrun = true;
-		new Server();
+		server = new Server();
 
 		la_time = new JLabel();
 			la_time.setBounds(980, 30, 200, 30);
@@ -99,6 +102,14 @@ public class AdminView extends JFrame implements Runnable {
 		t.start();
 		setBounds(500, 100, 1200, 800);
 		setVisible(true);
+		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				turnOff();
+			}
+		});
+		
 	}// 생성자
 
 	public void memberInf() { //회원정보 패널
@@ -244,7 +255,7 @@ public class AdminView extends JFrame implements Runnable {
 			try {
 				socketserver = new ServerSocket(5000);
 				System.out.println("Start Server......");
-				while(true) {
+				while(serverrun) {
 					Socket socket = socketserver.accept();//client 접속 대기
 					Service client = new Service(socket, this);
 					clients.add(client);
@@ -261,14 +272,15 @@ public class AdminView extends JFrame implements Runnable {
 	}
 	
 	public void turnOff() {	//관리자 종료 시
+		serverrun = false;
 		try {
 			for(int i=0; i<server.clients.size(); i++) {				
-				server.clients.get(i).out.write(new String("exit").getBytes());// 클라이언트들에게 서비스 종료 메세지를 보냄
-				server.clients.get(i).socket.close();	//서비스 관련 스트림 끊기
+				server.clients.get(i).sendMsg("end", 'x');// 클라이언트들에게 서비스 종료 메세지를 보냄
 				server.clients.get(i).in.close();
 				server.clients.get(i).out.close();
+				server.clients.get(i).socket.close();	//서비스 관련 스트림 끊기
 			}
-			server.socketserver.close();	//서버 관련 스트림 끊기
+//			server.socketserver.close();	//서버 관련 스트림 끊기
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -299,7 +311,7 @@ public class AdminView extends JFrame implements Runnable {
 		@Override
 			public void run() {
 				try {
-					while(true) {
+					while(serverrun) {
 						String msg = in.readLine();//Client로부터 메세지 받기
 						if(msg == null) return;
 						if(msg.trim().length()>0) {
@@ -311,8 +323,8 @@ public class AdminView extends JFrame implements Runnable {
 						String clientmsg = msgs[1];
 						
 						switch(protocol) {	//통신규약에 따라 Client로부터 메세지 받기
-						case "100":
-							
+						case "h":
+							System.out.println(clientmsg);
 							break;
 						}//서버 switch
 					}//while(true)

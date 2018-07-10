@@ -13,14 +13,16 @@ public class Client extends Thread {
 	public BufferedReader in;
 	public OutputStream out;
 	
-	String connect_flag;
+	boolean clientrun;
 	
 	static final int PORT_NUM = 5000;
 	
 	public Client()  {
 		connect();
-		start();
 		System.out.println("Client> 연결 성공!");
+		clientrun = true;
+		start();
+		System.out.println("Client> 메세지 받을 준비 끝!");
 	}
 	
 	
@@ -30,6 +32,7 @@ public class Client extends Thread {
 			socket = new Socket(localHost.getHostAddress(), 5000);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = socket.getOutputStream();
+			sendMsg("hello", 'h');
 			
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
@@ -40,7 +43,7 @@ public class Client extends Thread {
 
 	@Override
 	public void run() {
-		while(true) {
+		while(clientrun) {
 			try {
 				String msg = in.readLine();//Server로부터 메세지 받기
 				if(msg == null) return;
@@ -53,7 +56,12 @@ public class Client extends Thread {
 				String servermsg = msgs[1];
 				
 				switch(protocol){	//통신규약에 따라 Server로부터 메세지 받기
-				case "300": 
+				case "x":
+					System.out.println(servermsg);
+					clientrun = false;
+					in.close();
+					out.close();
+					socket.close();
 					break;
 				}
 			} catch (IOException e) {
