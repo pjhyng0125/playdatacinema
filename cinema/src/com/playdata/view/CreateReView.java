@@ -76,13 +76,10 @@ public class CreateReView extends JFrame {
 			p_center.add(subv_create[i]);
 		}
 		setSize(800,800);
-		setVisible(true);
+		setVisible(false);
 		
 		
 	}
 	
-	public static void main(String[] args) {
-		new CreateReView();
-	}
 }
 
