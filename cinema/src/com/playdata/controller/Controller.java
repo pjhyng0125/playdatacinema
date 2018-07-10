@@ -10,12 +10,14 @@ import java.util.Calendar;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import com.playdata.model.client.Client;
 import com.playdata.model.dao.CommentDAO;
 import com.playdata.model.dao.MemberDAO;
 import com.playdata.model.dao.MovieDAO;
 import com.playdata.model.vo.Comment;
 import com.playdata.model.vo.Member;
 import com.playdata.model.vo.Movie;
+import com.playdata.view.AdminView;
 import com.playdata.view.CashView;
 import com.playdata.view.CheckView;
 import com.playdata.view.Check_sub_View;
@@ -51,6 +53,7 @@ public class Controller extends MouseAdapter implements ActionListener {
    FindIdPwView v_findidpw;
    CashView v_cash;
    CheckView v_check;
+   AdminView v_admin;
    Check_sub_View v_check_sub;
    Calendar cal = Calendar.getInstance();
 //dao
@@ -512,10 +515,15 @@ public class Controller extends MouseAdapter implements ActionListener {
       if(ob == v_login.bt_login) {
         String id = v_login.tf_id.getText();
         String pass = new String(v_login.tf_pass.getPassword());
-        
-        if(member_dao.login(id, pass)){
+        if(id.equals("admin") && pass.equals("1234")) {
+        	v_admin = new AdminView();
+        	v_login.setVisible(false);
+        	v_admin.setVisible(true);
+        }
+        else if(member_dao.login(id, pass)){
            System.out.println(id +","+pass);
            JOptionPane.showMessageDialog(v_login,id+" 로그인 성공!");
+           new Client();
            login_id = id;
            
            //--------------------------------------reserve 뿌리기

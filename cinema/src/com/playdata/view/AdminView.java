@@ -27,6 +27,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
 
 public class AdminView extends JFrame implements Runnable {
+	static final String LOGIN = "li";
+	
 	JPanel p_member; // 회원정보 패널
 	JPanel p_history; // 결제정보(수익정보, 결제내역) 패널
 
@@ -152,7 +154,7 @@ public class AdminView extends JFrame implements Runnable {
 		p_member.add(bt_select);
 		p_member.add(bt_delete);
 
-		p_member.setVisible(true);
+		p_member.setVisible(false);
 	}
  
 	public void history() {// 결제정보(수익정보, 결제내역) 패널
@@ -292,6 +294,7 @@ public class AdminView extends JFrame implements Runnable {
 	 */
 	public class Service extends Thread{
 	//소켓관련 입출력서비스
+		
 		public BufferedReader in;
 		public OutputStream out;
 	//소켓
@@ -362,9 +365,5 @@ public class AdminView extends JFrame implements Runnable {
 			}			
 		}
 	}
-	public static void main(String[] args) {
-		new AdminView();
-	}
-
 
 }
