@@ -22,7 +22,7 @@ import com.playdata.model.vo.Comment;
 public class ReView extends JFrame {
 	public JPanel p_content, p_reviews, p_bottom;
 	public JButton bt_back, bt_next, bt_reserve;
-	public JLabel la_page, la_image, la_name, la_genre;
+	public JLabel la_page, la_image, la_name, la_genre, la_logo;
 	public ArrayList<ReviewSubView> list;
 	LineBorder linea;
 
@@ -30,9 +30,6 @@ public class ReView extends JFrame {
 	public ReView() {
 		setTitle("ReView");
 //new
-		
-		
-
 		
 		linea = new LineBorder(Color.black,8);
 		p_content = new JPanel();
@@ -45,13 +42,9 @@ public class ReView extends JFrame {
 		la_image = new JLabel();
 		la_name = new JLabel("영화이름: ");
 		la_genre = new JLabel("영화장르: ");
-<<<<<<< HEAD
-
-=======
 		la_logo = new JLabel();
 		
 		//la_logo = new JLabel("icon1");
->>>>>>> 95eccfdbf74f745e2ad31a8a56357b751710bf35
 		
 		
 		list = new ArrayList<>();
