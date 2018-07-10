@@ -112,9 +112,9 @@ answer varchar2(30)
 insert into member(id,pass,gender,name,birth,phone,addr,mail,point,cash,mem_grade,hint,answer)
          values ('encore1','1234','남자','김주원','19920121','01012341234','우리집','encore1@naver.com',0,0,0,'좋아하는책은?','홍길동전');
 insert into member(id,pass,gender,name,birth,phone,addr,mail,point,cash,mem_grade,hint,answer)
-         values ('encore2','1234','여자','홍길동','19920121','01012341234','우리집2','encore1@naver.com',0,0,0,'좋아하는책은?','홍길동전');
+         values ('encore8','1234','여자','홍길순','19920121','01012341234','우리집2','encore1@naver.com','1000','17000','1','좋아하는책은?','홍길동전');
 insert into member(id,pass,gender,name,birth,phone,addr,mail,point,cash,mem_grade,hint,answer)
-         values ('encore3','1234','남자','길라임','19920121','01012341234','우리집3','encore1@naver.com',0,0,0,'좋아하는책은?','홍길동전');
+         values ('encore9','1234','남자','길라임','19920121','01012341234','우리집3','encore1@naver.com','500','21000','2','좋아하는책은?','홍길동전');
 insert into member(id,pass,gender,name,birth,phone,addr,mail,point,cash,mem_grade,hint,answer)
          values ('encore4','1234','여자','김주연','19920121','01012341234','우리집4','encore1@naver.com',0,0,0,'좋아하는책은?','홍길동전');
 insert into member(id,pass,gender,name,birth,phone,addr,mail,point,cash,mem_grade,hint,answer)
