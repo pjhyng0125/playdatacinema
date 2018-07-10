@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.io.IOException;
+import java.net.Socket;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
+
+import com.playdata.model.client.Client;
 
 import java.awt.Font;
 /*
@@ -68,7 +72,7 @@ public class ReserView extends JFrame{
 	 */
 	public void setstarSelected(int checked_i, int checked_j) {
 		for(int k=0; k<subv_reserve[checked_i].tbt_stars.length; k++) {
-			if(k<=checked_j) {
+			if(k<checked_j) {
 				subv_reserve[checked_i].tbt_stars[k].setSelected(true);
 				subv_reserve[checked_i].tbt_stars[k].setIcon(new ImageIcon("image/star_yellow.png"));
 			}

@@ -138,16 +138,15 @@ public class MovieDAO {
     * 작성자:박형진 수정일자:07/05/00:42 클래스(함수)기능: Review에 반영하는 메소드.
     */
    /* 이미지경로, 영화제목, 개봉일자, 감독명, 주연배우, 줄거리, 아이디, 후기 */
-   public ArrayList<Object> selectReview(String movie_name) {
-      ArrayList<Object> list = new ArrayList<>();
+   public Movie selectReview(String movie_name) {
+      ArrayList<Movie> list = new ArrayList<>();
       try {
          connect();
-         String sql = "select path, start_date, director, actors, summary,id,content,com_star"
-               + "from movie natural join movie_comment where movie_name = ? order by no asc";
+         String sql = "select path,start_date,director,actors,summary from movie where movie_name = ?";
          pstmt = conn.prepareStatement(sql);
          pstmt.setString(1, movie_name);
          rs = pstmt.executeQuery();
-         while (rs.next()) {
+         if (rs.next()) {
             Movie m = new Movie();
                m.setMovie_name(movie_name);
                m.setPath(rs.getString("path"));
@@ -155,18 +154,15 @@ public class MovieDAO {
                m.setDirector(rs.getString("director"));
                m.setActors(rs.getString("actors"));
                m.setSummary(rs.getString("summary"));
-            Comment c = new Comment(rs.getString("id"), rs.getString("content"),
-                  Integer.parseInt(rs.getString("com_star")));
-
-            list.add(m); // 영화에 관한것
-            list.add(c); // id, content, 개인평점
+            
+            return m; // 영화에 관한것
          }
       } catch (SQLException e) {
          e.printStackTrace();
       } finally {
          disconnect();
       }
-      return list;
+      return null;
    }
 
    public int selectSchedule(String movie_name) {

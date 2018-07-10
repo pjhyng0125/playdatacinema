@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
@@ -22,7 +23,7 @@ public class CashView extends JFrame{
 	public JButton bt_charge_ok, bt_charge_cancle;//결제 확인 버튼
 	JLabel lb_text;
 	private JLabel lb_pay_window, lb_cash_way;;
-	private JTextField tf_charge_cash; //결제금액 입력 필드
+	public JTextField tf_charge_cash; //결제금액 입력 필드
 	
 	public CashView() {
 		setTitle("캐쉬충전창");
@@ -114,6 +115,14 @@ public class CashView extends JFrame{
 		
 		setSize(512, 440);
 		setVisible(false);
+	}
+	
+	public boolean showYesNOmsg(String msg) {
+		int t = JOptionPane.showConfirmDialog(this, msg,"캐쉬충전",JOptionPane.YES_NO_OPTION);
+		System.out.println(t);
+		if(t==0)return true;
+		
+		return false;
 	}
 
 }

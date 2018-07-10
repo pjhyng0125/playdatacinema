@@ -22,7 +22,7 @@ public class MyPageView extends JFrame {
 	public JButton bt_back, bt_check, bt_revise, bt_cash, bt_drop, bt_logout;	
 	JPanel p_north, p_center;
 	//	      마이페이지라벨, 환영라벨,   등급라벨,   캐쉬라벨,   포인트라벨
-	JLabel la_mypage, la_greet, la_grade, la_cash, la_point;
+	public JLabel la_mypage, la_greet, la_grade, la_cash, la_point;
 	public JLabel la_grade2, la_cash2, la_point2;	// 값 표시 위한 라벨
 	public ImageIcon i_grade, i_cash, i_point, i_back;
 	public JCheckBox cb_grade, cb_cash, cb_point;

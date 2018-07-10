@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -85,7 +86,9 @@ public class FindPwView extends JFrame{
       setDefaultCloseOperation(EXIT_ON_CLOSE);
       
    }
-
+	public void showMsg(String msg) {
+		JOptionPane.showMessageDialog(this, msg);
+	}
 }
 
 
