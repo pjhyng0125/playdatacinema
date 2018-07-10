@@ -361,8 +361,6 @@ public class ScreenView extends JFrame {
 		setVisible(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-
-		
 	}
 }
 	
