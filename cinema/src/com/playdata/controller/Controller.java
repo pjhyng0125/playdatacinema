@@ -162,6 +162,7 @@ public class Controller extends MouseAdapter implements ActionListener {
        * 수정일자: 07/03 23:18
        * 이벤트리스너 기능: ReView => 다음 버튼 클릭 & 이전 버튼 클릭
        */
+      
       v_review.bt_next.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
@@ -852,18 +853,15 @@ public class Controller extends MouseAdapter implements ActionListener {
         
          //중복체크 여부 확인
          if(checkId==true && (login_checkid.equals(id))) {
-            if(new MemberDAO().join(new Member(id, pass, gender, name, birth, 
-                     phone, addr, email, 0, 0, 0, hint, answer))) {
+           user = new Client();
             String msg = id+"&"+pass+"&"+gender+"&"+name+"&"+birth+"&"+phone+"&"+addr+"&"+
                           email+"&"+0+"&"+0+"&"+0+"&"+hint+"&"+answer;
-            user.sendMsg(msg, "ij");
+             user.sendMsg(msg, "ij");
             	
-             v_join.showMsg("회원가입을 축하드립니다 ^*^");  
+             
              v_join.setVisible(false);
              v_login.setVisible(true);            
-            }else {
-              v_join.showMsg("회원가입을 실패하였습니다!");
-            }
+            
          }else {
             checkId=false;
             login_checkid="";
