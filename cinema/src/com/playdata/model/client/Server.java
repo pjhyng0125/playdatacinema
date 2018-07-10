@@ -87,21 +87,25 @@ public class Server implements Runnable{
 			try {
 				while(serverrun) {
 					String msg = in.readLine();//Client로부터 메세지 받기
+					System.out.println("1");
 					if(msg == null) return;
 					if(msg.trim().length()>0) {
-						System.out.println("from Client> "+ msg +":"+
-								socket.getInetAddress().getHostAddress());
+						System.out.println("from Client> "+ msg);
 					}
+					System.out.println("2");
 					String msgs[] = msg.split("\\|");
 					String protocol = msgs[0];
 					String clientmsg = msgs[1];
-					
+					System.out.println(protocol);
+					System.out.println(clientmsg);
 					switch(protocol) {	//통신규약에 따라 Client로부터 메세지 받기
 					case "h":
 						System.out.println(clientmsg);
 						break;
 					case "ij":
 						String ms[] = clientmsg.split("&");
+						for(int i=0; i<ms.length; i++)
+							System.out.println(ms[i]);
 						Member m = new Member(
 							ms[0], ms[1], ms[2], ms[3], ms[4],
 							ms[5], ms[6], ms[7], Integer.parseInt(ms[8]), Integer.parseInt(ms[9]),
