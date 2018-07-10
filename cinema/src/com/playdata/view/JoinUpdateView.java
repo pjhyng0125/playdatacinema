@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -21,12 +22,13 @@ public class JoinUpdateView extends JFrame
 	public JPasswordField tf_pass,tf_pass2;
 	public JButton bt_submit,bt_reset;
 	JLabel la_id,la_pass1,la_pass2,la_name,la_phone,la_addr,la_addr2,la_hint1,la_gender,la_email,
-		   la_man,la_woman,la_birth,la_title,la_ex1,la_ex2;
+		   la_man,la_woman,la_birth,la_title,la_ex1,la_ex2,la_logo,la_cinema;
 	public JComboBox<String> cb_hint,cb_email; 
 	JLabel jb[],at[];
 	ButtonGroup bg;
 	public JRadioButton rb_gender1, rb_gender2;
 	JPanel panel;
+	ImageIcon icon1;
 	
 	
 	
@@ -86,6 +88,13 @@ public class JoinUpdateView extends JFrame
 		la_ex1 = new JLabel("ex)1999.05.15");
 		la_ex2 = new JLabel("ex)a123@naver.com");
 		
+		icon1 = new ImageIcon("image/logo.png");
+		la_logo = new JLabel(icon1);
+		la_logo.setBounds(300, 590, 50, 50);
+		la_cinema = new JLabel("Cinema");
+		la_cinema.setBounds(230, 590, 100, 50);
+		la_cinema.setFont(new Font("µµ¿ò", Font.HANGING_BASELINE, 20));
+		
 		panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBounds(0,0,370,70);
@@ -134,7 +143,7 @@ public class JoinUpdateView extends JFrame
 		bt_submit.setBounds(70,560,90,25);
 		bt_submit.setBackground(Color.BLACK);
 		bt_submit.setForeground(Color.WHITE);
-		bt_reset.setBounds(180,560,90,25);
+		bt_reset.setBounds(190,560,90,25);
 		bt_reset.setBackground(Color.BLACK);
 		bt_reset.setForeground(Color.WHITE);
 		
@@ -204,6 +213,8 @@ public class JoinUpdateView extends JFrame
 		add(la_title);
 		add(la_ex1);
 		add(la_ex2);
+		add(la_logo);
+		add(la_cinema);
 		
 		add(panel);
 		panel.add(la_title);
