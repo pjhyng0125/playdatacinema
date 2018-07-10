@@ -2,6 +2,7 @@ package com.playdata.view;
 
 import java.awt.GridLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,12 +22,22 @@ public class CashView extends JFrame{
 	JPanel p_up, p_down,p_center;
 	public JButton bt_cash, bt_phone, bt_paper;
 	public JButton bt_charge_ok, bt_charge_cancle;//결제 확인 버튼
-	JLabel lb_text;
+	JLabel lb_text, lb_logo, lb_cinema;
 	private JLabel lb_pay_window, lb_cash_way;;
 	public JTextField tf_charge_cash; //결제금액 입력 필드
+	ImageIcon icon1;
 	
 	public CashView() {
 		setTitle("캐쉬충전창");
+		
+		icon1 = new ImageIcon("image/logo.png");
+		lb_logo = new JLabel(icon1);
+		lb_logo.setBounds(430, 30, 50, 50);
+		lb_cinema = new JLabel("Cinema");
+		lb_cinema.setBounds(355, 30, 100, 50);
+		lb_cinema.setFont(new Font("도움", Font.HANGING_BASELINE, 20));
+		lb_cinema.setForeground(Color.white);
+		
 
 		p_down = new JPanel();
 		p_down.setBounds(0, 239, 494, 154);
@@ -68,6 +79,8 @@ public class CashView extends JFrame{
 		lb_cash_way.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		lb_cash_way.setBounds(14, 12, 140, 50);
 		p_up.add(lb_cash_way);
+		p_up.add(lb_logo);
+		p_up.add(lb_cinema);
 		getContentPane().add(p_down);
 		
 		lb_text = new JLabel("결제 방식 선택");
