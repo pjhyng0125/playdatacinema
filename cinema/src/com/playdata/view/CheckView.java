@@ -53,5 +53,5 @@ public class CheckView extends JFrame{
 		setSize(450, 650);
 		setVisible(false);
 	}
-	
+
 }

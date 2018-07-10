@@ -26,12 +26,21 @@ public class MyPageView extends JFrame {
 	public JLabel la_grade2, la_cash2, la_point2;	// 값 표시 위한 라벨
 	public ImageIcon i_grade, i_cash, i_point, i_back;
 	public JCheckBox cb_grade, cb_cash, cb_point;
+	public JLabel la_logo, la_cinema;
+	ImageIcon icon1;
 	
 	public MyPageView() {
 		setTitle("마이페이지창");
 		
 		
 		// 라벨 
+		
+		icon1 = new ImageIcon("image/logo.png");
+		la_logo = new JLabel(icon1);
+		la_logo.setBounds(320, 615, 50, 50);
+		la_cinema = new JLabel("Cinema");
+		la_cinema.setBounds(250,615,100, 50);
+		la_cinema.setFont(new Font("도움", Font.HANGING_BASELINE, 20));
 		
 		
 		la_mypage = new JLabel("마이페이지");
@@ -75,27 +84,27 @@ public class MyPageView extends JFrame {
 		bt_check.setBackground(Color.BLACK);
 		bt_check.setForeground(Color.WHITE);
 		bt_check.setFont(new Font("Dialog", Font.BOLD, 30));
-		bt_check.setBounds(41, 301, 300, 50 );
+		bt_check.setBounds(41, 281, 300, 50 );
 		bt_revise = new JButton("회원수정");
 		bt_revise.setBackground(Color.BLACK);
 		bt_revise.setForeground(Color.WHITE);
 		bt_revise.setFont(new Font("Dialog", Font.BOLD, 30));
-		bt_revise.setBounds(41, 371, 300, 50);
+		bt_revise.setBounds(41, 351, 300, 50);
 		bt_cash = new JButton("캐쉬충전");
 		bt_cash.setBackground(Color.BLACK);
 		bt_cash.setForeground(Color.WHITE);
 		bt_cash.setFont(new Font("Dialog", Font.BOLD, 30));
-		bt_cash.setBounds(41, 441, 300, 50);
+		bt_cash.setBounds(41, 421, 300, 50);
 		bt_drop = new JButton("회원탈퇴");
 		bt_drop.setBackground(Color.BLACK);
 		bt_drop.setForeground(Color.WHITE);
 		bt_drop.setFont(new Font("Dialog", Font.BOLD, 30));
-		bt_drop.setBounds(41, 511, 300, 50);
+		bt_drop.setBounds(41, 491, 300, 50);
 		bt_logout = new JButton("로그아웃");
 		bt_logout.setBackground(Color.BLACK);
 		bt_logout.setForeground(Color.WHITE);
 		bt_logout.setFont(new Font("Dialog", Font.BOLD, 30));
-		bt_logout.setBounds(41, 581, 300, 50);
+		bt_logout.setBounds(41, 561, 300, 50);
 		
 		//체크박스
 		cb_grade = new JCheckBox(i_grade);
@@ -135,6 +144,9 @@ public class MyPageView extends JFrame {
 		p_center.add(bt_cash);
 		p_center.add(bt_drop);
 		p_center.add(bt_logout);
+		
+		p_center.add(la_logo);
+		p_center.add(la_cinema);
 		
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add("North",p_north);

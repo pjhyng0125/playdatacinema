@@ -21,10 +21,11 @@ public class CreateReView extends JFrame {
 	public JToggleButton tbt_stars[];
 	public JScrollPane sp;
 	public JPanel panel;
+	ImageIcon icon1;
 	public CreateReView(String id) {
 		setTitle("CreateReView");
 		getContentPane().setLayout(null);
-//new
+//new	
 		la_id = new JLabel(id);
 		bt_create = new JButton("ÈÄ±â ÀÔ·Â");
 		bt_create.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
@@ -68,6 +69,7 @@ public class CreateReView extends JFrame {
 		getContentPane().add(bt_create);
 		getContentPane().add(bt_mypage);
 		getContentPane().add(panel);
+		//add(la_cinema);
 		setSize(500,450);
 		setVisible(false);
 	}

@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,6 +21,8 @@ public class LoginView extends JFrame
     public JButton bt_login,bt_join,bt_find;
 	JLabel la_id, la_pass, la_title;
 	JPanel panel;
+	JLabel la_logo, la_cinema;
+	ImageIcon icon1;
 	
   public LoginView()
 	{		
@@ -60,6 +63,13 @@ public class LoginView extends JFrame
 		la_title.setFont(new Font("µ¸¿ò", Font.PLAIN, 30));
 		la_title.setForeground(Color.WHITE);
 		
+		icon1 = new ImageIcon("image/logo.png");
+		la_logo = new JLabel(icon1);
+		la_logo.setBounds(150, 50, 50, 50);
+		la_cinema = new JLabel("Cinema");
+		la_cinema.setBounds(80, 50, 100, 50);
+		la_cinema.setFont(new Font("µµ¿ò", Font.HANGING_BASELINE, 20));
+		
 		setLayout(null);
 		add(tf_id);
 		add(tf_pass);
@@ -68,6 +78,8 @@ public class LoginView extends JFrame
 		add(bt_find);
 		add(la_id);
 		add(la_pass);
+		add(la_logo);
+		add(la_cinema);
 		add(panel);
 		panel.add(la_title);
 		
