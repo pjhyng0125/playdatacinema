@@ -9,9 +9,9 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 public class Client extends Thread {
-	Socket socket;
-	BufferedReader in;
-	OutputStream out;
+	public Socket socket;
+	public BufferedReader in;
+	public OutputStream out;
 	
 	String connect_flag;
 	
@@ -41,7 +41,6 @@ public class Client extends Thread {
 	@Override
 	public void run() {
 		while(true) {
-			String protocol;
 			try {
 				String msg = in.readLine();//Server로부터 메세지 받기
 				if(msg == null) return;
@@ -50,7 +49,9 @@ public class Client extends Thread {
 							socket.getInetAddress().getHostAddress());
 				}
 				String msgs[] = msg.split("\\|");
-				protocol = msgs[0];
+				String protocol = msgs[0];
+				String servermsg = msgs[1];
+				
 				switch(protocol){	//통신규약에 따라 Server로부터 메세지 받기
 				case "300": 
 					break;
@@ -63,7 +64,7 @@ public class Client extends Thread {
 	
 	public void sendMsg(String msg, char type) {
 		try {
-			out.write((type + msg + "\n").getBytes());
+			out.write((type + "|" + msg + "\n").getBytes());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

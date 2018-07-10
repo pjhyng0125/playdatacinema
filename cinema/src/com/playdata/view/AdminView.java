@@ -57,7 +57,7 @@ public class AdminView extends JFrame implements Runnable {
 	JScrollPane sp_pay;
 
 	Calendar c;
-
+	Server server;
 	/*
 	 * 작성자:박형진 수정일자:07/03/21:24 
 	 */
@@ -231,6 +231,7 @@ public class AdminView extends JFrame implements Runnable {
 	 */
 	public class Server implements Runnable{
 		ArrayList<Service> clients;
+		ServerSocket socketserver;
 		public Server() {
 			clients = new ArrayList<>();
 			
@@ -239,7 +240,7 @@ public class AdminView extends JFrame implements Runnable {
 		@Override
 		public void run() {
 			try {
-				ServerSocket socketserver = new ServerSocket(5000);
+				socketserver = new ServerSocket(5000);
 				System.out.println("Start Server......");
 				while(true) {
 					Socket socket = socketserver.accept();//client 접속 대기
@@ -253,16 +254,34 @@ public class AdminView extends JFrame implements Runnable {
 		}
 	}//Server
 	
+	public void turnOn() {	//관리자 로그인 시
+		server = new Server();
+	}
+	
+	public void turnOff() {	//관리자 종료 시
+		try {
+			for(int i=0; i<server.clients.size(); i++) {				
+				server.clients.get(i).out.write(new String("exit").getBytes());// 클라이언트들에게 서비스 종료 메세지를 보냄
+				server.clients.get(i).socket.close();	//서비스 관련 스트림 끊기
+				server.clients.get(i).in.close();
+				server.clients.get(i).out.close();
+			}
+			server.socketserver.close();	//서버 관련 스트림 끊기
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/*
 	 * 작성자:박진형 수정일자:07/09/ 19:09 
 	 * Server class
 	 */
 	public class Service extends Thread{
 	//소켓관련 입출력서비스
-		BufferedReader in;
-		OutputStream out;
+		public BufferedReader in;
+		public OutputStream out;
 	//소켓
-		Socket socket;
+		public Socket socket;
 		
 		public Service(Socket socket, Server server) {
 			this.socket = socket;
@@ -287,6 +306,7 @@ public class AdminView extends JFrame implements Runnable {
 						}
 						String msgs[] = msg.split("\\|");
 						String protocol = msgs[0];
+						String clientmsg = msgs[1];
 						
 						switch(protocol) {	//통신규약에 따라 Client로부터 메세지 받기
 						case "100":
@@ -300,7 +320,7 @@ public class AdminView extends JFrame implements Runnable {
 			}//run
 		public void sendMsg(String msg, char type) {
 			try {
-				out.write((type + msg + "\n").getBytes());
+				out.write((type +"|"+ msg + "\n").getBytes());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
