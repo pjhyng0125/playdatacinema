@@ -8,6 +8,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
+import com.playdata.model.dao.MemberDAO;
+import com.playdata.model.vo.Member;
+
 
 
 /*
@@ -18,9 +23,11 @@ public class Server implements Runnable{
 	ArrayList<Service> clients;
 	ServerSocket socketserver;
 	public boolean serverrun;
+	MemberDAO mem_dao;
+	
 	public Server() {
 		clients = new ArrayList<>();
-		
+		mem_dao = new MemberDAO();
 		new Thread(this).start();
 	}//생성자
 	@Override
@@ -93,6 +100,16 @@ public class Server implements Runnable{
 					case "h":
 						System.out.println(clientmsg);
 						break;
+					case "ij":
+						String ms[] = clientmsg.split("&");
+						Member m = new Member(
+							ms[0], ms[1], ms[2], ms[3], ms[4],
+							ms[5], ms[6], ms[7], Integer.parseInt(ms[8]), Integer.parseInt(ms[9]),
+							Integer.parseInt(ms[10]), ms[11], ms[12]
+								);
+						if(mem_dao.join(m)) {
+							System.out.println("회원가입 성공");
+						}
 					}//서버 switch
 				}//while(true)
 			} catch (IOException e) {
