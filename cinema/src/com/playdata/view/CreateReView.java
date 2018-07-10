@@ -2,84 +2,103 @@ package com.playdata.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
-
-import com.playdata.view.CreateReSubView;
-
-
 import java.awt.Font;
-import java.awt.GridLayout;
-
 
 public class CreateReView extends JFrame {
-
-	public JPanel p_center,p_north;
-	public CreateReSubView[] subv_create;
-	public JLabel lb_movie_name,lb_runtime,lb_seat;
-	private JLabel label;
-	private JLabel la_logo;
+	public JLabel la_id;
+	public JButton bt_create, bt_mypage;
+	public JTextArea ta_content;
+	public JToggleButton tbt_stars[];
+	public JScrollPane sp;
+	public JPanel panel;
+	ImageIcon icon1;
+	public CreateReView(String id) {
+		setTitle("CreateReView");
+		getContentPane().setLayout(null);
+//new	
+		la_id = new JLabel(id);
+		bt_create = new JButton("후기 입력");
+		bt_create.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		bt_mypage = new JButton("마이 페이지");
+		bt_mypage.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		ta_content = new JTextArea();
 		
-	public CreateReView() {
-		setTitle("예매확인/취소 창");
+		sp = new JScrollPane(ta_content);
+		tbt_stars = new JToggleButton[5];
 		
-	
-		
-		p_center = new JPanel();
-		
-		subv_create = new CreateReSubView[5];
-		
-		//p_center
-		getContentPane().add(p_center, BorderLayout.CENTER);
-		p_center.setLayout(new GridLayout(5,1));
-		p_north = new JPanel();
-		lb_movie_name = new JLabel("영화이름");
-		lb_movie_name.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		lb_runtime = new JLabel("좌석 번호");
-		lb_runtime.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		lb_seat = new JLabel("상영 시간");
-		lb_seat.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		
-		//p_north
-		p_north.setPreferredSize(new Dimension(0, 60));
-		p_north.setBackground(Color.ORANGE);
-		getContentPane().add(p_north, BorderLayout.PAGE_START);
-		p_north.setLayout(null);
-		
-		
-		//라벨
-		lb_movie_name.setBounds(50, 0, 69, 60);
-		p_north.add(lb_movie_name);
-		
-		label = new JLabel("상영 날짜");
-		label.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		label.setBounds(203, 0, 69, 60);
-		p_north.add(label);
-		lb_runtime.setBounds(516, 0, 69, 60);
-		p_north.add(lb_runtime);
-		lb_seat.setBounds(363, 0, 69, 60);
-		p_north.add(lb_seat);
-		
-		
-		
-		
-		for(int i=0; i<subv_create.length; i++) {
-			subv_create[i] = new CreateReSubView();
-			p_center.add(subv_create[i]);
+		panel = new JPanel();
+		panel.setBackground(new Color(245,201,203));//연한핑크색
+//set starts
+		for(int i=0; i<tbt_stars.length; i++) {
+			tbt_stars[i] = new JToggleButton(new ImageIcon("image/star_blank.png"));
+			tbt_stars[i].setBorderPainted(false);	//tbt Border 없애주기
+			tbt_stars[i].setContentAreaFilled(false);	//tbt 내용영역 채우지 않음
+			tbt_stars[i].setFocusPainted(false);	//tbt 선택 테두리 사용 안함
+			}
+//add stars
+		for(int i=0; i<tbt_stars.length; i++) {
+			tbt_stars[i].setBounds(50*(i)+120, 100, 50, 50);
+			getContentPane().add(tbt_stars[i]);
 		}
-		setSize(800,800);
+		setstarSelected(0);
+//add
+		la_id.setBounds(200, 50, 100, 30);
+		getContentPane().add(la_id);
+		sp.setBounds(43, 200, 400, 100);
+		getContentPane().add(sp);
+		bt_mypage.setBounds(320, 350, 120, 40);
+		bt_mypage.setBackground(Color.black);
+		bt_mypage.setForeground(Color.white);
+		bt_create.setBounds(40, 350, 120, 40);
+		bt_create.setBackground(Color.BLACK);
+		bt_create.setForeground(Color.white);
+		
+		
+		
+		getContentPane().setLayout(new BorderLayout());
+		getContentPane().add(bt_create);
+		getContentPane().add(bt_mypage);
+		getContentPane().add(panel);
+		//add(la_cinema);
+		setSize(500,450);
 		setVisible(false);
-		
-		
 	}
+	public void setstarSelected(int checked) {
+		for(int k=0; k<tbt_stars.length; k++) {
+			if(k<=checked) {
+				tbt_stars[k].setSelected(true);
+				tbt_stars[k].setIcon(new ImageIcon("image/star_yellow.png"));
+			}
+			else {
+				tbt_stars[k].setSelected(false);
+				tbt_stars[k].setIcon(new ImageIcon("image/star_blank.png"));
+			}
+		}
+	}//setstarSelected
 	
+	
+	public boolean showConfirmMsg(String msg) {
+		int t = JOptionPane.showConfirmDialog(this,msg,"회원가입 등록",JOptionPane.YES_NO_OPTION);
+		  if(t==0) {
+			  return true;
+		  }
+		  return false;
+	  }
+	
+	public void showMsg(String msg) {
+		JOptionPane.showMessageDialog(this, msg);
+	}
+
 }
+
 
