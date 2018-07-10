@@ -24,7 +24,6 @@ public class ReserView extends JFrame{
 	public JPanel p_ps, p_center;
 	public JButton bt_mypage, bt_logout;
 	public ReserveSubView subv_reserve[];
-	Client client;
 	
 	public ReserView() {
 		setTitle("ReserView");
@@ -65,28 +64,6 @@ public class ReserView extends JFrame{
 		setSize(1200, 800);
 		setVisible(false);
 	}//생성자
-	
-	/*
-	 * 작성자: 박진형
-	 * 수정일자: 07/01 12:34
-	 * 이벤트리스너 기능: Client class => Server On/Off
-	 */
-	public void turnOn() {
-		client = new Client();	//클라이언트가 로그인 성공시 객체 생성한 후
-		client.sendMsg("", 'o');//서버에 login 성공 메세지를 보낸다
-	}
-	
-	public void turnOff() {
-		try {
-			client.sendMsg("", 'x');	//클라이언트가 접속을 끊었을 때 서버에 logout 메세지 보내고
-			client.in.close();			//접속 종료
-			client.out.close();
-			client.socket.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-	}
 	
 	/*
 	 * 작성자: 박진형
