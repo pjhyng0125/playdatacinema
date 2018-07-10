@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,11 +23,13 @@ public class ScheduleView extends JFrame {
 	public JPanel p_date, p_time, p_next;
 	public JButton bt_next, bt_back;
 	public JLabel la_title, la_date;
+	public JLabel la_logo, la_cinema;
 	public ScheduleDateView v_sd[];
 	public ScheduleTimeView v_st[];
 	boolean flag;
 	LineBorder bta;
 	String start="900";
+	ImageIcon icon1;
 	
 	
 	public ScheduleView() {
@@ -53,6 +56,13 @@ public class ScheduleView extends JFrame {
 		v_sd = new ScheduleDateView[4];
 		v_st = new ScheduleTimeView[4];
 		
+		icon1 = new ImageIcon("image/logo.png");
+		la_logo = new JLabel(icon1);
+		la_logo.setBounds(1100, 620, 50, 50);
+		la_cinema = new JLabel("Cinema");
+		la_cinema.setBounds(1025, 620, 100, 50);
+		la_cinema.setFont(new Font("µµ¿ò", Font.HANGING_BASELINE, 20));
+		
 		
 //set layout null
 		p_date.setLayout(null);
@@ -69,6 +79,9 @@ public class ScheduleView extends JFrame {
 			v_st[i] = new ScheduleTimeView(plusTime(start, i));
 			v_st[i].setBounds(300*(i)+40, 140, 200, 160);
 			p_time.add(v_st[i]);
+			
+			add(la_logo);
+			add(la_cinema);
 		}
 //set Background
 		p_date.setBackground(Color.orange);
@@ -91,6 +104,7 @@ public class ScheduleView extends JFrame {
 		p_date.add(la_title);
 		
 		bt_next.setEnabled(false);
+		
 		
 		setSize(1200, 800);
 		setVisible(false);
