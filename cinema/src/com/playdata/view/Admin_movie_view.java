@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -32,6 +33,8 @@ public class Admin_movie_view extends JFrame implements Runnable {
 	JLabel la_memberInf;
 	JLabel la_profitInf;
 	JLabel la_time;
+	JLabel la_logo;
+	JLabel la_cinema;
 
 	JButton bt_selectAll;
 	JButton bt_select;
@@ -43,6 +46,8 @@ public class Admin_movie_view extends JFrame implements Runnable {
 	JScrollPane sp_pay;
 
 	Calendar c;
+	
+	ImageIcon icon1;
 
 	/*
 	 * 작성자:박형진 수정일자:07/03/21:24 
@@ -141,6 +146,13 @@ public class Admin_movie_view extends JFrame implements Runnable {
 				cb_month.addItem(i+"월");			
 			}
 		
+		icon1 = new ImageIcon("image/logo.png");
+		la_logo = new JLabel(icon1);
+		la_logo.setBounds(1150, 700, 50, 50);
+		la_cinema = new JLabel("Cinema");
+		la_cinema.setBounds(1040, 700, 150, 50);
+		la_cinema.setFont(new Font("도움", Font.HANGING_BASELINE, 30));
+		
 
 
 
@@ -193,6 +205,8 @@ public class Admin_movie_view extends JFrame implements Runnable {
 		p_history.add(la_profitInf);
 		
 		p_history.add(sp_pay);
+		p_history.add(la_logo);
+		p_history.add(la_cinema);	
 		p_history.setVisible(true);
 	}
 
