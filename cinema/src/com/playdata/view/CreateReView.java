@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -14,7 +15,7 @@ import javax.swing.JToggleButton;
 import java.awt.Font;
 
 public class CreateReView extends JFrame {
-	JLabel la_id;
+	public JLabel la_id;
 	public JButton bt_create, bt_mypage;
 	public JTextArea ta_content;
 	public JToggleButton tbt_stars[];
@@ -82,6 +83,19 @@ public class CreateReView extends JFrame {
 			}
 		}
 	}//setstarSelected
+	
+	
+	public boolean showConfirmMsg(String msg) {
+		int t = JOptionPane.showConfirmDialog(this,msg,"회원가입 등록",JOptionPane.YES_NO_OPTION);
+		  if(t==0) {
+			  return true;
+		  }
+		  return false;
+	  }
+	
+	public void showMsg(String msg) {
+		JOptionPane.showMessageDialog(this, msg);
+	}
 
 }
 

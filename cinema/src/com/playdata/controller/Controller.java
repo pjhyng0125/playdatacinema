@@ -17,6 +17,8 @@ import com.playdata.model.vo.Comment;
 import com.playdata.model.vo.Member;
 import com.playdata.model.vo.Movie;
 import com.playdata.view.CashView;
+import com.playdata.view.CheckView;
+import com.playdata.view.Check_sub_View;
 import com.playdata.view.CreateReView;
 import com.playdata.view.FindIdPwView;
 import com.playdata.view.FindIdView;
@@ -48,6 +50,8 @@ public class Controller extends MouseAdapter implements ActionListener {
    FindPwView v_findpw;
    FindIdPwView v_findidpw;
    CashView v_cash;
+   CheckView v_check;
+   Check_sub_View v_check_sub;
    Calendar cal = Calendar.getInstance();
 //dao
    MovieDAO movie_dao;
@@ -100,6 +104,8 @@ public class Controller extends MouseAdapter implements ActionListener {
       v_findpw = new FindPwView();
       v_findidpw = new FindIdPwView();
       v_cash = new CashView();
+      v_check = new CheckView();
+      v_check_sub = new Check_sub_View();
 //dao
       movie_dao = new MovieDAO();
       member_dao = new MemberDAO();
@@ -186,7 +192,7 @@ public class Controller extends MouseAdapter implements ActionListener {
        * 이벤트리스너 기능: ScheduleView => Check ScheduleTimeView
        */
       for(int i=0; i<v_schedule.v_st.length; i++) {
-         v_schedule.v_st[i].tbt_time.addMouseListener(new MouseAdapter() {
+         v_schedule.v_st[i].tbt_time.addMouseListener(new MouseAdapter() {//지금예매 버튼 클릭!!
          @Override
         	public void mouseClicked(MouseEvent e) {
         	 if(flag_time && flag_date)
@@ -249,15 +255,16 @@ public class Controller extends MouseAdapter implements ActionListener {
                if(v_schedule.v_sd[i].isSelected()) {
                   flag = true;
                   flag_date = true;
-               
                   selected_date = i;
+                  v_schedule.la_date.setText(v_schedule.v_sd[i].getText());
                }
             }
             
       /*--------------------toggle button 체크 여부에 따라 setEnabled() 호출 ------------------*/
             if(!flag) {   
-               for(int j=0; j<v_schedule.v_sd.length; j++)
-                  v_schedule.v_sd[j].setEnabled(true);
+               for(int j=0; j<v_schedule.v_sd.length; j++) {
+            	   v_schedule.v_sd[j].setEnabled(true);            	   
+               }
             }
             else {
                for(int j=0; j<v_schedule.v_sd.length; j++)
@@ -266,6 +273,8 @@ public class Controller extends MouseAdapter implements ActionListener {
                         
             }
             DB_date = splitTbtText(v_schedule.v_sd[selected_date].getText());
+            String[] dates = DB_date.split("/");
+            String run_date = dates[0]+dates[1];
             System.out.println("DB_date : "+DB_date);
             }//mouseReleased   
          });//v_schedule.v_sd[i].addMouseListener
@@ -288,6 +297,7 @@ public class Controller extends MouseAdapter implements ActionListener {
          v_reserve.subv_reserve[i].bt_reserve.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	
                v_reserve.setVisible(false);
                v_schedule.setVisible(true);
             }
@@ -340,6 +350,9 @@ public class Controller extends MouseAdapter implements ActionListener {
       v_cash.bt_cash.addActionListener(this);
       v_cash.bt_charge_cancle.addActionListener(this);
       v_cash.bt_charge_ok.addActionListener(this);
+      
+//      v_check.bt_cancel.addActionListener(this);
+//      v_check_sub.bt_cancel.addActionListener(this);
       for(int i=0; i<v_createreview.tbt_stars.length; i++)
          v_createreview.tbt_stars[i].addActionListener(this);
       v_schedule.bt_back.addActionListener(this);
@@ -482,10 +495,15 @@ public class Controller extends MouseAdapter implements ActionListener {
             }
          }//for-j
 
-         //ReserView에서 예매 버튼 클릭시
+         //ReserView에서 예매 버튼 클릭시------------------------------------------------
          for(int i=0; i<4; i++) {
             if(ob ==v_reserve.subv_reserve[i].bt_reserve) {
                DB_movie = list_movie.get(i).getMovie_name();
+         	   v_schedule.la_title.setText(DB_movie);
+         	   v_schedule.la_date.setText(v_schedule.v_sd[0].getText());
+         	   
+         	   v_reserve.setVisible(false);
+               v_schedule.setVisible(true);
                System.out.println("DB_movie (예매 버튼) = "+DB_movie);
             }//if
          }//for
@@ -520,11 +538,6 @@ public class Controller extends MouseAdapter implements ActionListener {
     	  
          v_reserve.setVisible(false);
          v_mypage.setVisible(true);
-      }//--------------------------------------------지금예매 버튼 클릭
-      else if(ob == v_reserve.subv_reserve[0].bt_reserve) {
-    	  String movie_name = v_reserve.subv_reserve[0].la_title.getText();
-    	  v_schedule.la_title.setText(movie_name);
-    	  
       }
       else if(ob == v_schedule.bt_next) {
          v_schedule.setVisible(false);
@@ -566,7 +579,9 @@ public class Controller extends MouseAdapter implements ActionListener {
       else if(ob == v_cash.bt_charge_cancle) {
     	  v_cash.setVisible(false);
       }
-      else if(ob == v_mypage.bt_revise) {
+      else if(ob == v_mypage.bt_revise) {//회원정보 수정-----------------------------------------
+    	  Member m = new MemberDAO().select_member(login_id);
+//    	  v_joinupdate
     	  v_joinupdate.setVisible(true);
       }
       else if(ob == v_joinupdate.bt_submit){
@@ -580,8 +595,28 @@ public class Controller extends MouseAdapter implements ActionListener {
          v_reserve.setVisible(true);
       }
       else if(ob == v_mypage.bt_check) {
+//    	 v_check.setVisible(true);
+//    	 v_check_sub.setVisible(true);
+    	 v_createreview.la_id.setText(login_id+"님");
          v_mypage.setVisible(false);
          v_createreview.setVisible(true);
+      }
+      else if(ob == v_createreview.bt_create) { //개인 후기 등록!--------------------------------
+     	 int com_star = 0;
+     	 for(int i=0;i<v_createreview.tbt_stars.length;i++) {
+     		 if(v_createreview.tbt_stars[i].isSelected()) com_star++;
+     	 }
+     	 String content = v_createreview.ta_content.getText();   	 
+     	 Comment c = new Comment(login_id, DB_movie, content, com_star);
+     	 if(new CommentDAO().insertComment(c)) {
+     		 if(v_createreview.showConfirmMsg("후기를 등록하시겠습니까?")) {
+     			 v_createreview.showMsg("후기가 등록되었습니다.");
+     		 }else {
+     			 v_createreview.showMsg("후기등록이 취소되었습니다.");
+     		 }
+     	 }else {
+     		 v_createreview.showMsg("후기등록이 취소되었습니다.");
+     	 }
       }
       else if(ob == v_createreview.bt_mypage) {
          v_createreview.setVisible(false);

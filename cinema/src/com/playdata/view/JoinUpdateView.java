@@ -13,12 +13,12 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-public class JoinUpdateView extends JFrame 
+public class JoinUpdateView extends JFrame 	
 {
 	public JTextField tf_id,tf_name,tf_phone1,tf_phone2,tf_phone3,tf_addr,
 	  tf_hint2,tf_email1,tf_email2,tf_birth1,tf_birth2,tf_birth3;
 	public JPasswordField tf_pass,tf_pass2;
-	public JButton bt_submit,bt_reset,bt_checkid;
+	public JButton bt_submit,bt_reset;
 	JLabel la_id,la_pass1,la_pass2,la_name,la_phone,la_addr,la_addr2,la_hint1,la_gender,la_email,
 		   la_man,la_woman,la_birth,la_title,la_ex1,la_ex2;
 	public JComboBox<String> cb_hint,cb_email; 
@@ -65,7 +65,6 @@ public class JoinUpdateView extends JFrame
 		
 	    bt_submit = new JButton("등록");
 	    bt_reset = new JButton("취소");
-		bt_checkid = new JButton("중복확인");
 		
 		la_id = new JLabel("*I  D:");
 		la_pass1 = new JLabel("*비  번:");
@@ -98,25 +97,34 @@ public class JoinUpdateView extends JFrame
 		
 		
 		tf_id.setBounds(80,100,100,25);
+			tf_id.setEditable(false);
 		tf_pass.setBounds(80,140,100,25);
 		tf_pass2.setBounds(80,180,100,25);
 		tf_hint2.setBounds(80,250,100,25);
 		tf_name.setBounds(80,300,100,25);
+			tf_name.setEditable(false);
 		tf_birth1.setBounds(80,340,50,25);
 		tf_birth2.setBounds(140,340,25,25);
 		tf_birth3.setBounds(170,340,25,25);
+			tf_birth1.setEditable(false);
+			tf_birth2.setEditable(false);
+			tf_birth3.setEditable(false);
 		
 		tf_phone1.setBounds(80,420,40,25);
 		jb[0].setBounds(121,420,8,25);
 		tf_phone2.setBounds(130,420,40,25);
 		jb[1].setBounds(171,420,8,25);
 		tf_phone3.setBounds(180,420,40,25);
-		
+			tf_phone1.setEditable(false);
+			tf_phone2.setEditable(false);
+			tf_phone3.setEditable(false);
 		tf_email1.setBounds(80,460,80,25);
 		at[0].setBounds(163,460,25,25);
 		tf_email2.setBounds(180,460,70,25);
-		
+			tf_email1.setEditable(false);
+			tf_email2.setEditable(false);
 		tf_addr.setBounds(80,500,200,25);
+			tf_addr.setEditable(false);
 		
 		bt_submit.setBounds(70,560,90,25);
 		bt_submit.setBackground(Color.BLACK);
@@ -124,9 +132,6 @@ public class JoinUpdateView extends JFrame
 		bt_reset.setBounds(180,560,90,25);
 		bt_reset.setBackground(Color.BLACK);
 		bt_reset.setForeground(Color.WHITE);
-		bt_checkid.setBounds(190,100,90,25);
-		bt_checkid.setBackground(Color.BLACK);
-		bt_checkid.setForeground(Color.WHITE);
 		
 		
 		la_id.setBounds(10,100,100,25);
@@ -177,7 +182,6 @@ public class JoinUpdateView extends JFrame
 		
 		add(bt_submit);
 		add(bt_reset);
-		add(bt_checkid);
 		
 		add(la_id); 
 		add(la_pass1); 
@@ -254,6 +258,13 @@ public class JoinUpdateView extends JFrame
 	  tf_phone1.setText(phone1);
 	  tf_phone2.setText(phone2);
 	  tf_phone3.setText(phone3);
+  }
+  
+  public void fixRb(String gender) {
+	  if(gender.equals(la_man.getText())) {
+		  
+	  }
+	  
   }
 
   

@@ -11,7 +11,7 @@ public class ScheduleTimeView extends JPanel {
    public JLabel la_seat;
    public ScheduleTimeView(String start) {
 //new
-      tbt_time = new JToggleButton(start+"~830");
+      tbt_time = new JToggleButton(start);
       la_seat = new JLabel("0 / 20¼®");
 //panel set
       setBackground(Color.GRAY);
