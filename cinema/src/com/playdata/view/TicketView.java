@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,10 +19,19 @@ public class TicketView extends JFrame {
 	JPanel p_north, p_center;
 	//		모바일티켓		영화예매자		예매영화	 관림일자	   관람시각		예매인원	   예매좌석
 	JLabel la_ticket, la_reserver, la_movie, la_date, la_time, la_person, la_seat;
-	JLabel la_reserver2, la_movie2, la_date2, la_time2, la_person2, la_seat2; 
+	JLabel la_reserver2, la_movie2, la_date2, la_time2, la_person2, la_seat2;
+	JLabel la_logo, la_cinema;
+	ImageIcon icon1;
 	
 	public TicketView() {
 		setTitle("모바일 티켓");
+		
+		icon1 = new ImageIcon("image/logo.png");
+		la_logo = new JLabel(icon1);
+		la_logo.setBounds(390, 490, 50, 50);
+		la_cinema = new JLabel("Cinema");
+		la_cinema.setBounds(315, 490, 100, 50);
+		la_cinema.setFont(new Font("도움", Font.HANGING_BASELINE, 20));
 		
 		la_ticket = new JLabel("모바일 티켓");
 		la_ticket.setForeground(Color.WHITE);
@@ -89,6 +99,9 @@ public class TicketView extends JFrame {
 		p_center.add(la_time2);
 		p_center.add(la_person2);
 		p_center.add(la_seat2);
+		
+		p_center.add(la_logo);
+		p_center.add(la_cinema);
 		
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add("North",p_north);
