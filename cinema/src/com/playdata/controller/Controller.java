@@ -37,6 +37,9 @@ import com.playdata.view.ScheduleView;
 import com.playdata.view.ScreenView;
 
 public class Controller extends MouseAdapter implements ActionListener {   
+//client
+	Client user;
+	
 //view
    LoginView v_login;
    ReserView v_reserve;
@@ -118,6 +121,7 @@ public class Controller extends MouseAdapter implements ActionListener {
          addDate();
       }
       v_schedule.la_date.setText("³¯Â¥ : "+today);
+ 
       
 //add comments in list
 //      list_comment = new ArrayList<>();
@@ -528,7 +532,7 @@ public class Controller extends MouseAdapter implements ActionListener {
            //--------------------------------------reserve »Ñ¸®±â
            list_movie = new MovieDAO().selectAllMovie();
         	   showReserveInfo(list_movie);
-        	   new Client();
+        	   user = new Client();
            v_login.setVisible(false);
            v_reserve.setVisible(true);
         }else {

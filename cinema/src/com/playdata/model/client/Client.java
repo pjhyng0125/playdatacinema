@@ -32,7 +32,7 @@ public class Client extends Thread {
 			socket = new Socket(localHost.getHostAddress(), 5000);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = socket.getOutputStream();
-			sendMsg("hello", 'h');
+			sendMsg("hello", "h");
 			
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
@@ -70,7 +70,7 @@ public class Client extends Thread {
 		}
 	}//run
 	
-	public void sendMsg(String msg, char type) {
+	public void sendMsg(String msg, String type) {
 		try {
 			out.write((type + "|" + msg + "\n").getBytes());
 		} catch (IOException e) {
@@ -85,12 +85,12 @@ public class Client extends Thread {
 	 */
 	public void turnOn() {
 		new Client();	//클라이언트가 로그인 성공시 객체 생성한 후
-		sendMsg("", 'o');//서버에 login 성공 메세지를 보낸다
+		sendMsg("", "o");//서버에 login 성공 메세지를 보낸다
 	}
 	
 	public void turnOff() {
 		try {
-			sendMsg("", 'x');	//클라이언트가 접속을 끊었을 때 서버에 logout 메세지 보내고
+			sendMsg("", "x");	//클라이언트가 접속을 끊었을 때 서버에 logout 메세지 보내고
 			in.close();			//접속 종료
 			out.close();
 			socket.close();

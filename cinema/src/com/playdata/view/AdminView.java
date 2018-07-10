@@ -277,7 +277,7 @@ public class AdminView extends JFrame implements Runnable {
 		serverrun = false;
 		try { 
 			for(int i=0; i<server.clients.size(); i++) {				
-				server.clients.get(i).sendMsg("end", 'x');// 클라이언트들에게 서비스 종료 메세지를 보냄
+				server.clients.get(i).sendMsg("end", "x");// 클라이언트들에게 서비스 종료 메세지를 보냄
 				server.clients.get(i).in.close();
 				server.clients.get(i).out.close();
 				server.clients.get(i).socket.close();	//서비스 관련 스트림 끊기
@@ -335,7 +335,7 @@ public class AdminView extends JFrame implements Runnable {
 					e.printStackTrace();
 				}
 			}//run
-		public void sendMsg(String msg, char type) {
+		public void sendMsg(String msg, String type) {
 			try {
 				out.write((type +"|"+ msg + "\n").getBytes());
 			} catch (IOException e) {
