@@ -62,7 +62,7 @@ public class ReserView extends JFrame{
 		}
 		
 		setSize(1200, 800);
-		setVisible(true);
+		setVisible(false);
 	}//»ý¼ºÀÚ
 	
 	/*
@@ -102,8 +102,5 @@ public class ReserView extends JFrame{
 	
 	public void sendshowMsg(String msg) {
 		JOptionPane.showMessageDialog(this, msg);
-	}
-	public static void main(String[] args) {
-		new ReserView();
 	}
 }
