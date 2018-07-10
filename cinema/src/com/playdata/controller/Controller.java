@@ -854,6 +854,10 @@ public class Controller extends MouseAdapter implements ActionListener {
          if(checkId==true && (login_checkid.equals(id))) {
             if(new MemberDAO().join(new Member(id, pass, gender, name, birth, 
                      phone, addr, email, 0, 0, 0, hint, answer))) {
+            String msg = id+"&"+pass+"&"+gender+"&"+name+"&"+birth+"&"+phone+"&"+addr+"&"+
+                          email+"&"+0+"&"+0+"&"+0+"&"+hint+"&"+answer;
+            user.sendMsg(msg, "ij");
+            	
              v_join.showMsg("회원가입을 축하드립니다 ^*^");  
              v_join.setVisible(false);
              v_login.setVisible(true);            
