@@ -15,11 +15,7 @@ import javax.swing.JToggleButton;
 import java.awt.Font;
 
 public class CreateReView extends JFrame {
-<<<<<<< HEAD
-	JLabel la_id, la_logo, la_cinema;
-=======
 	public JLabel la_id;
->>>>>>> de72aae49677f2b4b3253f64d1c5458cf6e25d09
 	public JButton bt_create, bt_mypage;
 	public JTextArea ta_content;
 	public JToggleButton tbt_stars[];
@@ -29,16 +25,7 @@ public class CreateReView extends JFrame {
 	public CreateReView(String id) {
 		setTitle("CreateReView");
 		getContentPane().setLayout(null);
-//new
-		
-		icon1 = new ImageIcon("image/logo.png");
-		la_logo = new JLabel(icon1);
-		la_logo.setBounds(200, 50, 50, 50);
-		//la_cinema = new JLabel("Cinema");
-		//la_cinema.setBounds(0, 0, 150, 50);
-		//la_cinema.setFont(new Font("µµ¿ò", Font.HANGING_BASELINE, 20));
-		
-		
+//new	
 		la_id = new JLabel(id);
 		bt_create = new JButton("ÈÄ±â ÀÔ·Â");
 		bt_create.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
@@ -82,10 +69,9 @@ public class CreateReView extends JFrame {
 		getContentPane().add(bt_create);
 		getContentPane().add(bt_mypage);
 		getContentPane().add(panel);
-		add(la_logo);
 		//add(la_cinema);
 		setSize(500,450);
-		setVisible(true);
+		setVisible(false);
 	}
 	public void setstarSelected(int checked) {
 		for(int k=0; k<tbt_stars.length; k++) {
@@ -99,10 +85,6 @@ public class CreateReView extends JFrame {
 			}
 		}
 	}//setstarSelected
-<<<<<<< HEAD
-	public static void main(String[] args) {
-		new CreateReView(null);
-=======
 	
 	
 	public boolean showConfirmMsg(String msg) {
@@ -115,7 +97,6 @@ public class CreateReView extends JFrame {
 	
 	public void showMsg(String msg) {
 		JOptionPane.showMessageDialog(this, msg);
->>>>>>> de72aae49677f2b4b3253f64d1c5458cf6e25d09
 	}
 
 }
