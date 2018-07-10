@@ -58,6 +58,7 @@ public class AdminView extends JFrame implements Runnable {
 
 	Calendar c;
 	Server server;
+	boolean serverrun;
 	/*
 	 * 작성자:박형진 수정일자:07/03/21:24 
 	 */
@@ -66,6 +67,7 @@ public class AdminView extends JFrame implements Runnable {
 //		memberInf(); //회원정보 패널 메소드
 		history(); //결제정보 패널 메소드
 		
+		serverrun = true;
 		new Server();
 
 		la_time = new JLabel();
