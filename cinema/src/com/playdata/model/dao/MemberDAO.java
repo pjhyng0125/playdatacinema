@@ -166,14 +166,14 @@ public class MemberDAO {
 
          if (rs.next()) {
             id = rs.getString("id");
-            return "id";
+            return id;
          }
       } catch (SQLException e) {
          e.printStackTrace();
       } finally {
          diss();
       }
-      return "fail";
+      return null;
    }// idfind()
 
    /*
@@ -200,7 +200,7 @@ public class MemberDAO {
       } finally {
          diss();
       }
-      return "비밀번호를 찾을 수 없습니다!";
+      return null;
    }
 
    /*

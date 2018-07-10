@@ -68,7 +68,7 @@ public class ReserView extends JFrame{
 	 */
 	public void setstarSelected(int checked_i, int checked_j) {
 		for(int k=0; k<subv_reserve[checked_i].tbt_stars.length; k++) {
-			if(k<=checked_j) {
+			if(k<checked_j) {
 				subv_reserve[checked_i].tbt_stars[k].setSelected(true);
 				subv_reserve[checked_i].tbt_stars[k].setIcon(new ImageIcon("image/star_yellow.png"));
 			}
