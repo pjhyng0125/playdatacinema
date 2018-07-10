@@ -255,7 +255,7 @@ public class JoinView extends JFrame
 
 
   public boolean showConfirmMsg(String msg) {
-	  int t = JOptionPane.showConfirmDialog(this, msg);
+	  int t = JOptionPane.showConfirmDialog(this,msg,"회원가입 등록",JOptionPane.YES_NO_OPTION);
 	  if(t==0) {
 		  return true;
 	  }

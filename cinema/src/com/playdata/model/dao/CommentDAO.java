@@ -28,7 +28,22 @@ public class CommentDAO {
 		}
 	}
 	
-	
+	public boolean insertComment(Comment c) {
+	    try {
+	         connect();
+	         String sql = "";
+	         pstmt = conn.prepareStatement(sql);
+	         rs = pstmt.executeQuery();
+	         while (rs.next()) {
+
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         disconnect();
+	      }
+	    return false;
+	}
 	
 	
 	   /*
@@ -44,7 +59,7 @@ public class CommentDAO {
 	         pstmt.setString(1, movie_name);
 	         rs = pstmt.executeQuery();
 	         while (rs.next()) {
-	        	 Comment c = new Comment(rs.getString("id"), rs.getString("content"),
+	        	 Comment c = new Comment(rs.getString("id"),movie_name, rs.getString("content"),
 	        	            Integer.parseInt(rs.getString("com_star")));
 	        		
 	        		list.add(c); // id, content, 개인평점

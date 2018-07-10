@@ -112,4 +112,30 @@ public class ScheduleView extends JFrame {
 	public String plusTime(String time, int i) {
 		return Integer.parseInt(time)+i*300+"";
 	}
+	
+	public String timeCount(String screen_time,int run_time) {
+		String[] screen_timeArray = screen_time.split(":");
+		int hour = Integer.parseInt(screen_timeArray[0]);
+		int minute = Integer.parseInt(screen_timeArray[1]);
+		
+		int plusHour = run_time/60;
+		int plusMinute = run_time%60;
+		
+		hour += plusHour;
+		minute += plusMinute;
+		
+		String returnTime="";
+		if(hour<10) {
+			returnTime += ("0"+hour);
+		}else {
+			returnTime += hour;
+		}
+		if(minute<10) {
+			returnTime += (":0"+minute);
+		}else {
+			returnTime += ":"+minute;
+		}
+		System.out.println("시작시간: "+screen_time+" \n끝시간: "+returnTime);
+		return returnTime;
+	}
 }
