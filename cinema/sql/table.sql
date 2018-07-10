@@ -3,7 +3,7 @@ create table member
 (
 id varchar2(20) primary key,
 pass varchar2(20) not null,
-gender varchar2(4),
+gender varchar2(6),
 name varchar2(15),
 birth number(16),
 phone varchar2(22),
@@ -16,7 +16,7 @@ hint varchar2(40),
 answer varchar2(30)
 );
 
-create table reserve
+create table reserve													--문제발생
 (
    id varchar2(30), --아이디
    movie_name varchar2(60),
@@ -25,7 +25,7 @@ create table reserve
    seatnum char(4), --좌석번호
    screen_code char(2), --상영관 번호
    person_cnt number(4),--인원수
-   primary key(id,seatnum),
+   primary key(movie_name,seatnum,start_time),
    foreign key (id) references member(id)
 );
 
@@ -33,7 +33,7 @@ create table reserve
 create table movie
 (
 movie_name varchar2(30) primary key, --영화이름
-director varchar2(15), --감독명
+director varchar2(30), --감독명
 actors varchar2(45), --주연배우들
 summary varchar2(100), --줄거리
 genre varchar2(30), --장르
@@ -61,11 +61,11 @@ primary key(movie_name,no),
 foreign key(movie_name) references movie(movie_name)
 );
 
-create table screen
+create table screen														-- 문제 발생
 (
 screen_code number(2),
-start_time char(4), -- 시작상영시간-끝시간
-seatnum char(4) unique,
+start_time char(6), -- 시작상영시간-끝시간
+seatnum char(4),
 flag number(2) not null, --1이면 매진석
 primary key(screen_code,start_time)
 );
@@ -96,7 +96,7 @@ drop sequence com_seq;
 
 -------------------------------------------------------insert-----------------------------------------------
 
-insert into member values ('encore11','1234','남자','김주원','19920121','01012341234','서울','encore1@naver.com','2000',17000,0,'초등학교 이름은?','온곡');
+insert into member values ('encore1','1234','남자','김주원','19920121','01012341234','서울','encore1@naver.com','2000',17000,0,'초등학교 이름은?','온곡');
 insert into member values ('encore2','1234','여자','이주원','19920123','01023412341','대전','encore2@naver.com',5000,20000,1,'좋아하는책은?','파수꾼');
 insert into member values ('encore3','1234','남자','박주원','19920811','01034123412','대구','encore3@naver.com',1000,15000,2,'태어난곳은?','여수');
 insert into member values ('encore4','1234','여자','나주원','19920623','01041234123','부산','encore4@naver.com',100,3000,0,'어릴적 별명은?','몰라');
@@ -124,33 +124,34 @@ insert into RESERVE values ('encore2','마녀','7/06','12:30','4',1,2);
 insert into RESERVE values ('encore3','마녀','7/06','12:30','6',1,2);
 insert into RESERVE values ('encore4','마녀','7/07','12:30','8',1,2);
 insert into RESERVE values ('encore1','탐정','7/06','12:30','2',2,2);
+insert into RESERVE values ('encore5','탐정','7/06','14:30','2',2,2);
 
-insert into moive_comment values ('encore5','마녀',1,1,'노잼');
-insert into moive_comment values ('encore6','마녀',2,2,'노잼');
-insert into moive_comment values ('encore7','마녀',3,3,'보통');
-insert into moive_comment values ('encore8','마녀',4,4,'잼');
-insert into moive_comment values ('encore9','마녀',5,3,'보통');
-insert into moive_comment values ('encore5','마녀',6,2,'노잼');
+insert into movie_comment values ('encore5','마녀',1,1,'노잼');
+insert into movie_comment values ('encore6','마녀',2,2,'노잼');
+insert into movie_comment values ('encore7','마녀',3,3,'보통');
+insert into movie_comment values ('encore8','마녀',4,4,'잼');
+insert into movie_comment values ('encore9','마녀',5,3,'보통');
+insert into movie_comment values ('encore5','마녀',6,2,'노잼');
 
-insert into moive_comment values ('encore5','탐정',1,1,'노잼');
-insert into moive_comment values ('encore6','탐정',2,5,'유잼');
-insert into moive_comment values ('encore7','탐정',3,4,'잼');
-insert into moive_comment values ('encore8','탐정',4,3,'잼');
-insert into moive_comment values ('encore9','탐정',5,2,'노잼');
+insert into movie_comment values ('encore5','탐정',1,1,'노잼');
+insert into movie_comment values ('encore6','탐정',2,5,'유잼');
+insert into movie_comment values ('encore7','탐정',3,4,'잼');
+insert into movie_comment values ('encore8','탐정',4,3,'잼');
+insert into movie_comment values ('encore9','탐정',5,2,'노잼');
 
-insert into moive_comment values ('encore5','허스토리',1,1,'노잼');
-insert into moive_comment values ('encore6','허스토리',2,2,'리뷰 몇글자 까지 가능한지 한번보자');
-insert into moive_comment values ('encore7','허스토리',3,3,'');
-insert into moive_comment values ('encore8','허스토리',4,4,'3번은 일부러 노댓글');
-insert into moive_comment values ('encore9','허스토리',5,5,'노잼');
-insert into moive_comment values ('encore10','허스토리',6,1,'노잼');
-insert into moive_comment values ('encore11','허스토리',7,2,'노잼');
-insert into moive_comment values ('encore12','허스토리',8,3,'노잼');
-insert into moive_comment values ('encore13','허스토리',9,4,'노잼');
+insert into movie_comment values ('encore5','허스토리',1,1,'노잼');
+insert into movie_comment values ('encore6','허스토리',2,2,'리뷰 몇글자 까지 가능한지 한번보자');
+insert into movie_comment values ('encore7','허스토리',3,3,'');
+insert into movie_comment values ('encore8','허스토리',4,4,'3번은 일부러 노댓글');
+insert into movie_comment values ('encore9','허스토리',5,5,'노잼');
+insert into movie_comment values ('encore10','허스토리',6,1,'노잼');
+insert into movie_comment values ('encore11','허스토리',7,2,'노잼');
+insert into movie_comment values ('encore12','허스토리',8,3,'노잼');
+insert into movie_comment values ('encore13','허스토리',9,4,'노잼');
 
-insert into moive_comment values ('encore5','앤트맨과와스프',1,1,'노잼');
-insert into moive_comment values ('encore6','앤트맨과와스프',2,5,'노잼');
-insert into moive_comment values ('encore7','앤트맨과와스프',3,5,'댓글세개');
+insert into movie_comment values ('encore5','앤트맨과와스프',1,1,'노잼');
+insert into movie_comment values ('encore6','앤트맨과와스프',2,5,'노잼');
+insert into movie_comment values ('encore7','앤트맨과와스프',3,5,'댓글세개');
 
 insert into screen values (1,'09:30',5,0);
 insert into screen values (2,'09:30',10,0);
