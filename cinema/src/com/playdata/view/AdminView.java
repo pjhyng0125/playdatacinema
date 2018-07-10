@@ -273,7 +273,7 @@ public class AdminView extends JFrame implements Runnable {
 	
 	public void turnOff() {	//관리자 종료 시
 		serverrun = false;
-		try {
+		try { 
 			for(int i=0; i<server.clients.size(); i++) {				
 				server.clients.get(i).sendMsg("end", 'x');// 클라이언트들에게 서비스 종료 메세지를 보냄
 				server.clients.get(i).in.close();
