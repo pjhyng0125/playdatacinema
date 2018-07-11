@@ -21,7 +21,8 @@ import java.awt.SystemColor;
 
 public class ScreenView extends JFrame {
 	
-    public JToggleButton []bt_seat; 
+    public JToggleButton []bt_seat;
+
  
 	//----------------------------버튼
 
@@ -73,25 +74,20 @@ public class ScreenView extends JFrame {
 		
 		//좌석버튼 배열
 		bt_seat = new JToggleButton[10];
-		int cnt;
+		int rightShift=0;
 		for(int i=0; i<bt_seat.length; i++) {
 				
 				bt_seat[i] = new JToggleButton();
 				bt_seat[i].setForeground(Color.WHITE);
 				bt_seat[i].setBackground(Color.BLUE);
-			//a_bt[i].setBounds(273*(i)+70, 422, 60, 56);//x,y,가로,세로
-			//                     70, 343,  616, ..... (273간격) 273-60=213
-				bt_seat[i].setBounds(273+(i*75), 509, 60, 56);//x,y,가로,세로
-			if(i>=2)
-				bt_seat[i].setBounds(273+(i*75)+39, 509, 60, 56);//x,y,가로,세로
-			if(i>=4)
-				bt_seat[i].setBounds(273+(i*75)+78, 509, 60, 56);//x,y,가로,세로
-			if(i>=6)
-				bt_seat[i].setBounds(273+(i*75)+117, 509, 60, 56);//x,y,가로,세로
-			if(i>=8)
-				bt_seat[i].setBounds(273+(i*75)+156, 509, 60, 56);//x,y,가로,세로
+				
+				//bt_seat[i].setBounds(273+(i*75), 509, 60, 56);//x,y,가로,세로
+				bt_seat[i].setBounds(273+(i*75)+rightShift, 509, 60, 56);//x,y,가로,세로
+			if(i%2!=0) {
+				rightShift+=39;
+			}
+			
 		
-
 			getContentPane().add(bt_seat[i]);
 			
 		}
@@ -364,5 +360,9 @@ public class ScreenView extends JFrame {
 
 		
 	}
+	
+
+	
+	
 }
 	
