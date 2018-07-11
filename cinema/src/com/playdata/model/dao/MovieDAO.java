@@ -142,19 +142,20 @@ public class MovieDAO {
       ArrayList<Movie> list = new ArrayList<>();
       try {
          connect();
-         String sql = "select path,start_date,director,actors,summary from movie where movie_name = ?";
+         String sql = "select genre,path,start_date,director,actors,summary,run_time from movie where movie_name = ?";
          pstmt = conn.prepareStatement(sql);
          pstmt.setString(1, movie_name);
          rs = pstmt.executeQuery();
          if (rs.next()) {
             Movie m = new Movie();
-               m.setMovie_name(movie_name);
+               m.setGenre(rs.getString("genre"));
                m.setPath(rs.getString("path"));
+               m.setMovie_name(movie_name);
                m.setStart_date(rs.getString("start_date"));
                m.setDirector(rs.getString("director"));
                m.setActors(rs.getString("actors"));
                m.setSummary(rs.getString("summary"));
-            
+               m.setRun_time(rs.getInt("run_time"));
             return m; // 영화에 관한것
          }
       } catch (SQLException e) {

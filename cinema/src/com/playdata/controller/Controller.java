@@ -179,8 +179,10 @@ public class Controller extends MouseAdapter implements ActionListener {
             if(review_page >= 0 && review_page < review_maxpage) {
                review_page++;
                v_review.rewriteReview(selectReview(list_comment, review_page));
-               if(review_page == review_maxpage)
+               if(review_page == review_maxpage) {
                   v_review.bt_next.setEnabled(false);
+               	  v_review.bt_back.setEnabled(true);
+               }
                else {
                   v_review.bt_back.setEnabled(true);
                   v_review.bt_next.setEnabled(true);
@@ -194,8 +196,10 @@ public class Controller extends MouseAdapter implements ActionListener {
             if(review_page > 0 && review_page <= review_maxpage) {
                review_page--;
                v_review.rewriteReview(selectReview(list_comment, review_page));
-               if(review_page == 0)
-                  v_review.bt_back.setEnabled(false);
+               if(review_page == 0) {
+            	   v_review.bt_back.setEnabled(false);
+            	   v_review.bt_next.setEnabled(true);
+               }
                else {
                   v_review.bt_next.setEnabled(true);
                   v_review.bt_back.setEnabled(true);
@@ -349,6 +353,7 @@ public class Controller extends MouseAdapter implements ActionListener {
       v_mypage.bt_revise.addActionListener(this);
       v_review.bt_reserve.addActionListener(this);
       v_createreview.bt_mypage.addActionListener(this);
+      v_createreview.bt_create.addActionListener(this);
       v_login.bt_find.addActionListener(this);
       v_login.bt_join.addActionListener(this);
       v_join.bt_reset.addActionListener(this);
@@ -420,8 +425,13 @@ public class Controller extends MouseAdapter implements ActionListener {
 
    public void showMovieInfo(Movie m) {
 	   v_review.la_image.setIcon(new ImageIcon(m.getPath()));
-	   v_review.la_name.setText(m.getMovie_name());
-	   v_review.la_genre.setText(m.getGenre());	   
+	   v_review.la_name.setText("영화제목:"+m.getMovie_name());
+	   v_review.la_genre.setText("장르: "+m.getGenre());
+	   v_review.la_actor.setText("주연배우: "+m.getActors());
+	   v_review.la_director.setText("감독: "+m.getDirector());
+	   v_review.la_runtime.setText("상영 시간: "+m.getRun_time()+"분");
+	   v_review.la_startdate.setText("개봉일자: "+m.getStart_date());
+	   v_review.ta_summary.setText("<줄거리>\n"+m.getSummary());
    }
    
    /*
@@ -495,16 +505,25 @@ public class Controller extends MouseAdapter implements ActionListener {
                v_reserve.setVisible(false);
                v_review.setVisible(true);
                
-               showMovieInfo(list_movie, i);
                DB_movie = list_movie.get(i).getMovie_name();
+               Movie m = new MovieDAO().selectReview(DB_movie);
+               showMovieInfo(m);
                list_comment = new CommentDAO().selectReview(DB_movie);
-               for(int j=0;j<list_comment.size()/4;j++) {
-            	   selectReview(list_comment, j);            	   
-               }
+//               for(int j=0;j<list_comment.size()/4;j++) {
+//            	   selectReview(list_comment, j);            	   
+//               }
+               v_review.rewriteReview(selectReview(list_comment, 0));
+               v_review.bt_back.setEnabled(false);
+               review_maxpage = list_comment.size() / 4;
                System.out.println("DB_movie (라벨 버튼) = "+DB_movie);
             }
       }
    }
+   
+ //review 창 후기 페이지 디폴트값 설정 ---> 후기 창을 띄울때마다 아래의 3줄을 적어주어야 한다.
+// v_review.rewriteReview(selectReview(list_comment, 0));
+// v_review.bt_back.setEnabled(false);
+// review_maxpage = list_comment.size() / 4;   //최대 페이지 설정
       
 /*-------------------------------------EVENT LISTENER(actionPerformed)------------------------------------------*/
    /*
@@ -892,21 +911,19 @@ public class Controller extends MouseAdapter implements ActionListener {
          }
       }
        //------------------------------관리자 뷰-----------------------------
-
-      if(ob == v_admin.bt_selectAll) {//회원 전체조회
-     	 System.out.println("hi");
-     	 ArrayList<Member> list = member_dao.selectAllMember();
-     	v_admin.dispTable(list);
-      }else if(ob == v_admin.bt_select) {
-   	   String id = v_admin.showInputmsg("조회하실 아이디를 입력해주세요!");
-   	   
+       if(login_id.equals("admin")) {
+    	   if(ob == v_admin.bt_selectAll) {//회원 전체조회
+    		   System.out.println("hi");
+    		   ArrayList<Member> list = member_dao.selectAllMember();
+    		   v_admin.dispTable(list);
+    	   }else if(ob == v_admin.bt_select) {
+    		   String id = v_admin.showInputmsg("조회하실 아이디를 입력해주세요!");
       }
-      
       if(ob==v_admin.bt_postManage) {
      	v_admin_movie.setVisible(true);
      	v_admin_review.setVisible(true);
       }
-       
+       }
    }//actionPerformed
    public class Client extends Thread {
 		public Socket socket;
