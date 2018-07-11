@@ -334,7 +334,19 @@ public class Controller extends MouseAdapter implements ActionListener {
       for(int i=0; i<v_reserve.subv_reserve.length; i++)
          for(int j=0; j<v_reserve.subv_reserve[i].tbt_stars.length;j++)
             v_reserve.subv_reserve[i].tbt_stars[j].addActionListener(this);
-
+      
+      
+      //좌석 액션리스너
+      for(int i=0; i<v_screen.bt_seat.length; i++)
+    	  v_screen.bt_seat[i].addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				v_screen.checkSelected();
+			}
+		});
+      	
       /*
        * 작성자: 박진형
        * 수정일자: 07/01 10:01

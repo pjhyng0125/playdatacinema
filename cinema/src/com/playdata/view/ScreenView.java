@@ -1,5 +1,6 @@
 package com.playdata.view;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon; 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,7 +23,6 @@ import java.awt.SystemColor;
 public class ScreenView extends JFrame {
 	
     public JToggleButton []bt_seat;
-
  
 	//----------------------------버튼
 
@@ -73,7 +73,7 @@ public class ScreenView extends JFrame {
 //===================== 버튼 및 라벨  =======================================================	
 		
 		//좌석버튼 배열
-		bt_seat = new JToggleButton[10];
+		bt_seat = new JToggleButton[5];
 		int rightShift=0;
 		for(int i=0; i<bt_seat.length; i++) {
 				
@@ -82,8 +82,8 @@ public class ScreenView extends JFrame {
 				bt_seat[i].setBackground(Color.BLUE);
 				
 				//bt_seat[i].setBounds(273+(i*75), 509, 60, 56);//x,y,가로,세로
-				bt_seat[i].setBounds(273+(i*75)+rightShift, 509, 60, 56);//x,y,가로,세로
-			if(i%2!=0) {
+				bt_seat[i].setBounds(273+(i*195)+rightShift, 509, 120, 56);//x,y,가로,세로
+			if(i%1!=0) {
 				rightShift+=39;
 			}
 			
@@ -93,6 +93,7 @@ public class ScreenView extends JFrame {
 		}
 		//라벨 테두리
 		linea = new LineBorder(new Color(153, 56, 0),2);
+		
 		
 		//abc 라벨
 		lb_a = new JLabel(" A");
@@ -241,13 +242,13 @@ public class ScreenView extends JFrame {
 		lb_1 = new JLabel("1");
 		lb_1.setFont(new Font("굴림", Font.BOLD, 15));
 		lb_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lb_1.setBounds(273, 483, 62, 18);
+		lb_1.setBounds(268, 483, 62, 18);
 		getContentPane().add(lb_1);
 		
 		lb_2 = new JLabel("2");
 		lb_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_2.setFont(new Font("굴림", Font.BOLD, 15));
-		lb_2.setBounds(345, 483, 62, 18);
+		lb_2.setBounds(340, 483, 62, 18);
 		getContentPane().add(lb_2);
 		
 		lb_3 = new JLabel("3");
@@ -265,37 +266,37 @@ public class ScreenView extends JFrame {
 		lb_5 = new JLabel("5");
 		lb_5.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_5.setFont(new Font("굴림", Font.BOLD, 15));
-		lb_5.setBounds(648, 483, 62, 18);
+		lb_5.setBounds(655, 483, 62, 18);
 		getContentPane().add(lb_5);
 		
 		lb_6 = new JLabel("6");
 		lb_6.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_6.setFont(new Font("굴림", Font.BOLD, 15));
-		lb_6.setBounds(723, 483, 62, 18);
+		lb_6.setBounds(730, 483, 62, 18);
 		getContentPane().add(lb_6);
 		
 		lb_7 = new JLabel("7");
 		lb_7.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_7.setFont(new Font("굴림", Font.BOLD, 15));
-		lb_7.setBounds(837, 483, 62, 18);
+		lb_7.setBounds(847, 483, 62, 18);
 		getContentPane().add(lb_7);
 		
 		lb_8 = new JLabel("8");
 		lb_8.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_8.setFont(new Font("굴림", Font.BOLD, 15));
-		lb_8.setBounds(912, 483, 62, 18);
+		lb_8.setBounds(922, 483, 62, 18);
 		getContentPane().add(lb_8);
 		
 		lb_9 = new JLabel("9");
 		lb_9.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_9.setFont(new Font("굴림", Font.BOLD, 15));
-		lb_9.setBounds(1026, 483, 62, 18);
+		lb_9.setBounds(1038, 483, 62, 18);
 		getContentPane().add(lb_9);
 		
 		lb_10 = new JLabel("10");
 		lb_10.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_10.setFont(new Font("굴림", Font.BOLD, 15));
-		lb_10.setBounds(1101, 483, 62, 18);
+		lb_10.setBounds(1113, 483, 62, 18);
 		getContentPane().add(lb_10);
 		
 		//테이블
@@ -306,7 +307,7 @@ public class ScreenView extends JFrame {
 		lb_table1.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_table1.setOpaque(true);
 		lb_table1.setBorder(linea);
-		lb_table1.setBounds(304, 453, 75, 18);
+		lb_table1.setBounds(299, 453, 75, 18);
 		getContentPane().add(lb_table1);
 		
 		lb_table2 = new JLabel("table");
@@ -328,7 +329,7 @@ public class ScreenView extends JFrame {
 		lb_table3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
 		lb_table3.setBorder(linea);
 		lb_table3.setBackground(Color.WHITE);
-		lb_table3.setBounds(680, 453, 75, 18);
+		lb_table3.setBounds(687, 453, 75, 18);
 		getContentPane().add(lb_table3);
 		
 		lb_table4 = new JLabel("table");
@@ -338,7 +339,7 @@ public class ScreenView extends JFrame {
 		lb_table4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
 		lb_table4.setBorder(linea);
 		lb_table4.setBackground(Color.WHITE);
-		lb_table4.setBounds(869, 453, 75, 18);
+		lb_table4.setBounds(879, 453, 75, 18);
 		getContentPane().add(lb_table4);
 		
 		lb_table5 = new JLabel("table");
@@ -348,7 +349,7 @@ public class ScreenView extends JFrame {
 		lb_table5.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 13));
 		lb_table5.setBorder(linea);
 		lb_table5.setBackground(Color.WHITE);
-		lb_table5.setBounds(1059, 453, 75, 18);
+		lb_table5.setBounds(1071, 453, 75, 18);
 		getContentPane().add(lb_table5);
 		
 		
@@ -358,9 +359,29 @@ public class ScreenView extends JFrame {
 		setVisible(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-
-		
 	}
 	
+	public void checkSelected() {
+		for(int i=0; i<bt_seat.length; i++) {
+			if(bt_seat[i].isSelected()) {
+				bt_seat[i].setIcon(new ImageIcon("image/selecting.png"));
+			}else {
+				bt_seat[i].setIcon(new ImageIcon("image/select.png"));
+			}
+		}
+	}
+	
+	
+				
+		
+	
+	
+	
+	
+	private static class __Tmp {
+		private static void __tmp() {
+			  javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();
+		}
+	}
 }
 	

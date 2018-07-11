@@ -1,6 +1,6 @@
 package com.playdata.view;
 
-import java.awt.BorderLayout;
+import java.awt.BorderLayout; 
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -73,9 +73,13 @@ public class Admin_Reserview extends JFrame {
 			p_center.add(subv_create[i]);
 		}
 		setSize(800,800);
-		setVisible(false);
+		setVisible(true);
 		
 		
+	}
+	
+	public static void main(String[] args) {
+		new Admin_Reserview();
 	}
 	
 }
