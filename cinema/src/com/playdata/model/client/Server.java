@@ -10,7 +10,9 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import com.playdata.model.dao.CommentDAO;
 import com.playdata.model.dao.MemberDAO;
+import com.playdata.model.vo.Comment;
 import com.playdata.model.vo.Member;
 
 
@@ -24,13 +26,19 @@ public class Server implements Runnable{
 	ServerSocket socketserver;
 	public boolean serverrun;
 	MemberDAO mem_dao;
+	CommentDAO com_dao;
 	
 	static final String INSERTJOIN = "ij";
 	static final String LOGIN = "li";
+	static final String INSERTCOMMENT = "ic";
+	static final String COMMENTSUCCESS = "cs";
+	static final String COMMENTFAIL = "cf";
+	
 	
 	public Server() {
 		clients = new ArrayList<>();
 		mem_dao = new MemberDAO();
+		com_dao = new CommentDAO();
 		new Thread(this).start();
 	}//생성자
 	@Override
@@ -110,8 +118,7 @@ public class Server implements Runnable{
 						Member m = new Member(
 							ms[0], ms[1], ms[2], ms[3], ms[4],
 							ms[5], ms[6], ms[7], Integer.parseInt(ms[8]), Integer.parseInt(ms[9]),
-							Integer.parseInt(ms[10]), ms[11], ms[12]
-								);
+							Integer.parseInt(ms[10]), ms[11], ms[12]);
 						if(mem_dao.join(m)) {
 //							System.out.println("회원가입 성공");
 							sendMsg("success", LOGIN);	//회원 가입 성공시 "li|success" 메세지 보냄
@@ -119,6 +126,16 @@ public class Server implements Runnable{
 						else {
 							sendMsg("fail", LOGIN);  //회원 가입 실패시 "li|fail" 메세지 보냄
 						}
+						break;
+					case INSERTCOMMENT:
+						String ms_c[] = clientmsg.split("&");
+						Comment c = new Comment(
+							ms_c[0], ms_c[1], ms_c[2], Integer.parseInt(ms_c[3]));
+							if(com_dao.insertComment(c)) {//comment 추가 성공시
+								sendMsg("success", COMMENTSUCCESS);
+							}else {	//comment 추가 실패시
+								sendMsg("fail", COMMENTFAIL);								
+							}
 					}//서버 switch
 				}//while(true)
 			} catch (IOException e) {
