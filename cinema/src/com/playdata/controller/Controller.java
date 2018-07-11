@@ -581,7 +581,8 @@ public class Controller extends MouseAdapter implements ActionListener {
         	   user = new Client();
            v_login.setVisible(false);
            v_reserve.setVisible(true);
-        }else {
+        }
+        else {
            JOptionPane.showMessageDialog(v_login,id+" 로그인 실패!");           
         }
         
@@ -933,7 +934,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 		public OutputStream out;
 		boolean clientrun;
 		
-		static final int PORT_NUM = 5000;
+		static final int PORT_NUM = 6000;
 		
 		public Client()  {
 			connect();
@@ -947,7 +948,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 		public void connect() {
 			try {
 				InetAddress localHost = InetAddress.getLocalHost();
-				socket = new Socket(localHost.getHostAddress(), 5000);
+				socket = new Socket(localHost.getHostAddress(), PORT_NUM);
 				in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				out = socket.getOutputStream();
 				sendMsg("hello", "h");
@@ -981,6 +982,15 @@ public class Controller extends MouseAdapter implements ActionListener {
 						out.close();
 						socket.close();
 						break;
+					case "jo":{
+						if(servermsg.equals("success")) {
+							v_join.showMsg("회원가입에 성공하셨습니다^^");
+							v_join.setVisible(false);
+							v_login.setVisible(true);
+						}else {
+							v_join.showMsg("회원가입 실패!");
+						}
+					}
 					}
 				} catch (IOException e) {
 					e.printStackTrace();

@@ -29,7 +29,7 @@ public class Server implements Runnable{
 	CommentDAO com_dao;
 	
 	static final String INSERTJOIN = "ij";
-	static final String LOGIN = "li";
+	static final String JOIN = "jo";
 	static final String INSERTCOMMENT = "ic";
 	static final String COMMENT = "co";
 	
@@ -120,10 +120,10 @@ public class Server implements Runnable{
 							Integer.parseInt(ms[10]), ms[11], ms[12]);
 						if(mem_dao.join(m)) {
 //							System.out.println("회원가입 성공");
-							sendMsg("success", LOGIN);	//회원 가입 성공시 "li|success" 메세지 보냄
+							sendMsg("success", JOIN);	//회원 가입 성공시 "li|success" 메세지 보냄
 						}
 						else {
-							sendMsg("fail", LOGIN);  //회원 가입 실패시 "li|fail" 메세지 보냄
+							sendMsg("fail", JOIN);  //회원 가입 실패시 "li|fail" 메세지 보냄
 						}
 						break;
 					case INSERTCOMMENT:
