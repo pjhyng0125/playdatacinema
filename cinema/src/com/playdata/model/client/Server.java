@@ -31,8 +31,7 @@ public class Server implements Runnable{
 	static final String INSERTJOIN = "ij";
 	static final String LOGIN = "li";
 	static final String INSERTCOMMENT = "ic";
-	static final String COMMENTSUCCESS = "cs";
-	static final String COMMENTFAIL = "cf";
+	static final String COMMENT = "co";
 	
 	
 	public Server() {
@@ -44,7 +43,7 @@ public class Server implements Runnable{
 	@Override
 	public void run() {
 		try {
-			socketserver = new ServerSocket(5000);
+			socketserver = new ServerSocket(6000);
 			System.out.println("Start Server......");
 			while(serverrun) {
 				Socket socket = socketserver.accept();//client 접속 대기
@@ -132,9 +131,9 @@ public class Server implements Runnable{
 						Comment c = new Comment(
 							ms_c[0], ms_c[1], ms_c[2], Integer.parseInt(ms_c[3]));
 							if(com_dao.insertComment(c)) {//comment 추가 성공시
-								sendMsg("success", COMMENTSUCCESS);
+								sendMsg("success", COMMENT);
 							}else {	//comment 추가 실패시
-								sendMsg("fail", COMMENTFAIL);								
+								sendMsg("fail", COMMENT);								
 							}
 					}//서버 switch
 				}//while(true)

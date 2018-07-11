@@ -127,9 +127,6 @@ public class Admin_re_view extends JFrame implements Runnable {
 		p_member.setVisible(true);
 	}
  
-	public static void main(String[] args) {
-		new Admin_re_view();
-	}
 	public void history() {// 결제정보(수익정보, 결제내역) 패널
 		p_history = new JPanel();
 			p_history.setLayout(null);
