@@ -81,7 +81,7 @@ public class Admin_re_view extends JFrame implements Runnable {
 		Thread t = new Thread(this);
 		t.start();
 		setBounds(500, 100, 1253, 800);
-		setVisible(true);
+		setVisible(false);
 	}// 생성자
 
 	public void memberInf() { //회원정보 패널

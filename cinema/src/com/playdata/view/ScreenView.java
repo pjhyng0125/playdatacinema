@@ -182,6 +182,7 @@ public class ScreenView extends JFrame {
 		
 		//À§Ä¡
 		p.setBounds(273, 339, 850, 37);
+		p.setBorder(new BevelBorder(1, Color.BLACK, Color.black));
 		lb_screen.setBounds(400, 12, 44, 18);
 		p.add(lb_screen);
 			
@@ -360,9 +361,6 @@ public class ScreenView extends JFrame {
 
 		
 	}
-	
-
-	
 	
 }
 	

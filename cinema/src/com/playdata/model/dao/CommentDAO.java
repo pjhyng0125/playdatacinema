@@ -31,12 +31,14 @@ public class CommentDAO {
 	public boolean insertComment(Comment c) {
 	    try {
 	         connect();
-	         String sql = "";
+	         String sql = "insert into movie_comment (id,movie_name,no,com_star,content) values (?,?,com_seq.nextval,?,?)";
 	         pstmt = conn.prepareStatement(sql);
-	         rs = pstmt.executeQuery();
-	         while (rs.next()) {
-
-	         }
+	         pstmt.setString(1, c.getId());
+	         pstmt.setString(2, c.getMovie_name());
+	         pstmt.setInt(3, c.getStar());
+	         pstmt.setString(4, c.getContent());
+	         int t = pstmt.executeUpdate();
+	         if(t>0) return true;
 	      } catch (SQLException e) {
 	         e.printStackTrace();
 	      } finally {
