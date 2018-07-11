@@ -549,6 +549,36 @@ public class MemberDAO {
 	}
 	  
    }
+   
+   public ArrayList<Member> selectAllMember() {
+	   ArrayList<Member> list = new ArrayList<>();
+	    try {
+	         connection();
+	         String sql = "select id,gender,name,birth,phone,addr"
+	         		+ ", email,point,cash,mem_grade from member";
+	         prestmt = conn.prepareStatement(sql);
+	         rs = prestmt.executeQuery();
+	         while (rs.next()) {
+	        	 Member m = new Member();
+	        	 	m.setId(rs.getString("id"));
+	        	 	m.setGender(rs.getString("gender"));
+	        	 	m.setName(rs.getString("name"));
+	        	 	m.setBirth(rs.getString("birth"));
+	        	 	m.setPhone(rs.getString("phone"));
+	        	 	m.setAddr(rs.getString("addr"));
+	        	 	m.setEmail(rs.getString("email"));
+	        	 	m.setPoint(rs.getInt("point"));
+	        	 	m.setCash(rs.getInt("cash"));
+	        	 	m.setMem_grade(rs.getInt("mem_grade"));
+	        	 list.add(m);
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         diss();
+	      }
+	    return list;
+   }
 
 //   /*
 //    * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 포인트 차감

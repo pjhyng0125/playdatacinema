@@ -207,7 +207,7 @@ public class Admin_movie_view extends JFrame implements Runnable {
 		p_history.add(sp_pay);
 		p_history.add(la_logo);
 		p_history.add(la_cinema);	
-		p_history.setVisible(true);
+		p_history.setVisible(false);
 	}
 
 	@Override

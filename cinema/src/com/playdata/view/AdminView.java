@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -28,13 +29,14 @@ import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.playdata.model.client.Server;
+import com.playdata.model.vo.Member;
 
 public class AdminView extends JFrame implements Runnable {
 	JPanel p_member; // 회원정보 패널
 	JPanel p_history; // 결제정보(수익정보, 결제내역) 패널
 
-	JComboBox<String> cb_menu;
-	JComboBox<String> cb_month;
+	public JComboBox<String> cb_menu;
+	public JComboBox<String> cb_month;
 	JTextField tf_totProfit;
 
 	JTable t_memberInf;
@@ -52,12 +54,12 @@ public class AdminView extends JFrame implements Runnable {
 	JLabel la_time;
 	JLabel la_logo,la_cinema;
 
-	JButton bt_selectAll;
-	JButton bt_select;
-	JButton bt_delete;
-	JButton bt_canclePay;
-	JButton bt_postManage;
-	JButton bt_cmtManage;
+	public JButton bt_selectAll;
+	public JButton bt_select;
+	public JButton bt_delete;
+	public JButton bt_canclePay;
+	public JButton bt_postManage;
+	public JButton bt_cmtManage;
 
 	JScrollPane sp_member;
 	JScrollPane sp_pro;
@@ -73,7 +75,7 @@ public class AdminView extends JFrame implements Runnable {
 	 */
 	public AdminView() {
 		setTitle("관리자창");
-//		memberInf(); //회원정보 패널 메소드
+		memberInf(); //회원정보 패널 메소드
 		history(); //결제정보 패널 메소드
 		
 		server = new Server();
@@ -84,7 +86,7 @@ public class AdminView extends JFrame implements Runnable {
 
 		getContentPane().setLayout(null);
 			getContentPane().add(la_time);
-//			getContentPane().add(p_member);
+			getContentPane().add(p_member);
 
 			getContentPane().add(p_history);
 			bt_cmtManage = new JButton("후기관리");
@@ -159,7 +161,7 @@ public class AdminView extends JFrame implements Runnable {
 		p_member.add(bt_select);
 		p_member.add(bt_delete);
 
-		p_member.setVisible(true);
+		p_member.setVisible(false);
 	}
  
 	public void history() {// 결제정보(수익정보, 결제내역) 패널
@@ -278,4 +280,26 @@ public class AdminView extends JFrame implements Runnable {
 			}			
 		}
 	}
+ 	
+ 	public void dispTable(ArrayList<Member> list) {
+ 		dtm_member.setRowCount(0);
+ 		String[] mem_grade = {"일반","VIP","VVIP"};
+ 		for(int i=0; i<list.size();i++) {
+ 			Object[] rowData = {list.get(i).getId(),
+ 							   list.get(i).getGender(),
+ 							   list.get(i).getName(),
+ 							   list.get(i).getBirth(),
+ 							  list.get(i).getPhone(),
+ 							  list.get(i).getAddr(),
+ 							  list.get(i).getEmail(),
+ 							  list.get(i).getPoint(),
+ 							  list.get(i).getCash(),
+ 							  mem_grade[list.get(i).getMem_grade()]};
+ 			dtm_member.addRow(rowData);
+ 		}
+ 	}
+ 	
+ 	public String showInputmsg(String msg) {
+ 		return JOptionPane.showInputDialog(msg);
+ 	}
 }

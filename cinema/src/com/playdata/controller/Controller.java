@@ -24,6 +24,8 @@ import com.playdata.model.vo.Comment;
 import com.playdata.model.vo.Member;
 import com.playdata.model.vo.Movie;
 import com.playdata.view.AdminView;
+import com.playdata.view.Admin_movie_view;
+import com.playdata.view.Admin_re_view;
 import com.playdata.view.CashView;
 import com.playdata.view.CheckView;
 import com.playdata.view.Check_sub_View;
@@ -65,6 +67,8 @@ public class Controller extends MouseAdapter implements ActionListener {
    Check_sub_View v_check_sub;
    Calendar cal = Calendar.getInstance();
    AdminView v_admin;
+   Admin_movie_view v_admin_movie;
+   Admin_re_view v_admin_review;
 //dao
    MovieDAO movie_dao;
    MemberDAO member_dao;
@@ -373,6 +377,18 @@ public class Controller extends MouseAdapter implements ActionListener {
       for(int i=0; i<4; i++)
          v_reserve.subv_reserve[i].bt_reserve.addActionListener(this);
    }//생성자
+  
+   
+   //---------------------------------------------------------관리자 eventUp
+   public void adminEventUp() {
+	      v_admin.bt_postManage.addActionListener(this);
+	      v_admin.bt_canclePay.addActionListener(this);
+	      v_admin.bt_cmtManage.addActionListener(this);
+	      v_admin.bt_delete.addActionListener(this);
+	      v_admin.bt_select.addActionListener(this);
+	      v_admin.bt_selectAll.addActionListener(this);
+   }
+   
    
    /*
     * 작성자: 박진형
@@ -529,6 +545,9 @@ public class Controller extends MouseAdapter implements ActionListener {
 
          if(id.equals("admin") && pass.equals("1234")) {
         	 v_admin = new AdminView();
+        	 v_admin_movie = new Admin_movie_view();
+        	 v_admin_review = new Admin_re_view();
+             adminEventUp();
         	 v_login.setVisible(false);
         	 v_admin.setVisible(true);
          }
@@ -849,8 +868,8 @@ public class Controller extends MouseAdapter implements ActionListener {
             return;
          }
         String birth = birth1+birth2+birth3;
-        String phone = phone1+phone2+phone3;
-        String email = email1+email2;
+        String phone = phone1+"-"+phone2+"-"+phone3;
+        String email = email1+"@"+email2;
         String addr = addr1; //주소 텍스트필드 2개 필요한지.
         
         //-------------유효성 검사!!---------------------------------
@@ -872,6 +891,22 @@ public class Controller extends MouseAdapter implements ActionListener {
             v_join.showMsg("아이디 중복확인을 해주세요!");
          }
       }
+       //------------------------------관리자 뷰-----------------------------
+
+      if(ob == v_admin.bt_selectAll) {//회원 전체조회
+     	 System.out.println("hi");
+     	 ArrayList<Member> list = member_dao.selectAllMember();
+     	v_admin.dispTable(list);
+      }else if(ob == v_admin.bt_select) {
+   	   String id = v_admin.showInputmsg("조회하실 아이디를 입력해주세요!");
+   	   
+      }
+      
+      if(ob==v_admin.bt_postManage) {
+     	v_admin_movie.setVisible(true);
+     	v_admin_review.setVisible(true);
+      }
+       
    }//actionPerformed
    public class Client extends Thread {
 		public Socket socket;
