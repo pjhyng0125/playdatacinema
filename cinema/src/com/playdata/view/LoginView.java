@@ -65,9 +65,9 @@ public class LoginView extends JFrame
 		
 		icon1 = new ImageIcon("image/logo.png");
 		la_logo = new JLabel(icon1);
-		la_logo.setBounds(150, 50, 50, 50);
+		la_logo.setBounds(150, 60, 50, 50);
 		la_cinema = new JLabel("Cinema");
-		la_cinema.setBounds(80, 50, 100, 50);
+		la_cinema.setBounds(80, 60, 100, 50);
 		la_cinema.setFont(new Font("µµ¿ò", Font.HANGING_BASELINE, 20));
 		
 		setLayout(null);
