@@ -1,82 +1,85 @@
 package com.playdata.view;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;import javax.swing.border.BevelBorder;
-import javax.swing.border.LineBorder;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JToggleButton;
+
 import java.awt.Font;
 import java.awt.GridLayout;
 
-public class Admin_Reserview extends JPanel {
 
-	public JLabel lb_movie_name,lb_runtime,lb_seat,lb_date;
-	public JButton bt_cancle;
-	JPanel p_center,p_runtime,p_seat,p_movie,p_date,p_bt;
-	private JPanel panel_1;
-	private JLabel lblNewLabel;
-	LineBorder linea;
-	
+public class Admin_Reserview extends JFrame {
+
+	public JPanel p_center,p_north;
+	public Admin_ReserSubView[] subv_create;
+	public JLabel lb_movie_name,lb_runtime,lb_seat;
+	private JLabel label;
+	private JLabel la_logo;
+		
 	public Admin_Reserview() {
-		setLayout(new BorderLayout(0, 0));
+		setTitle("예매확인/취소 창");
+		
+	
 		
 		p_center = new JPanel();
-		p_center.setBackground(Color.WHITE);
-		add(p_center, BorderLayout.CENTER);
-		p_center.setLayout(new GridLayout(1,6));
 		
-		p_movie = new JPanel();
-		p_movie.setBackground(Color.LIGHT_GRAY);
-		p_movie.setBorder(new BevelBorder(0, Color.black,Color.black ));
-		p_center.add(p_movie);
+		subv_create = new Admin_ReserSubView[5];
 		
-		p_date  = new JPanel();
-		p_date.setBackground(Color.LIGHT_GRAY);
-		p_date.setBorder(new BevelBorder(0, Color.black,Color.black ));
-		p_center.add(p_date);
+		//p_center
+		getContentPane().add(p_center, BorderLayout.CENTER);
+		p_center.setLayout(new GridLayout(5,1));
+		p_north = new JPanel();
+		lb_movie_name = new JLabel("영화이름");
+		lb_movie_name.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lb_runtime = new JLabel("좌석 번호");
+		lb_runtime.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lb_seat = new JLabel("상영 시간");
+		lb_seat.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 		
-		p_runtime = new JPanel();
-		p_runtime.setBackground(Color.LIGHT_GRAY);
-		p_runtime.setBorder(new BevelBorder(0, Color.black,Color.black ));
-		p_center.add(p_runtime);
-		
-		lb_date = new JLabel("상영 날짜");
-		p_date.add(lb_date);
-		
-		p_seat = new JPanel();
-		p_seat.setBackground(Color.LIGHT_GRAY);
-		p_seat.setBorder(new BevelBorder(0, Color.black,Color.black ));
-		p_center.add(p_seat);
-		
-		lb_movie_name = new JLabel("영화 이름");
-		p_movie.add(lb_movie_name);
+		//p_north
+		p_north.setPreferredSize(new Dimension(0, 60));
+		p_north.setBackground(Color.ORANGE);
+		getContentPane().add(p_north, BorderLayout.PAGE_START);
+		p_north.setLayout(null);
 		
 		
-		lb_runtime = new JLabel("상영시간");
-		p_runtime.add(lb_runtime);
+		//라벨
+		lb_movie_name.setBounds(50, 0, 69, 60);
+		p_north.add(lb_movie_name);
 		
-		lb_seat = new JLabel("좌석번호");
-		p_seat.add(lb_seat);
+		label = new JLabel("상영 날짜");
+		label.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		label.setBounds(203, 0, 69, 60);
+		p_north.add(label);
+		lb_runtime.setBounds(516, 0, 69, 60);
+		p_north.add(lb_runtime);
+		lb_seat.setBounds(363, 0, 69, 60);
+		p_north.add(lb_seat);
 		
-		p_bt = new JPanel();
-		p_bt.setBackground(Color.LIGHT_GRAY);
-		p_center.add(p_bt);
-		p_bt.setLayout(null);
 		
-		bt_cancle = new JButton("취소");
-		bt_cancle.setFont(new Font("맑은 고딕", Font.BOLD, 13));
-		bt_cancle.setForeground(Color.WHITE);
-		bt_cancle.setBackground(Color.BLACK);
-		bt_cancle.setBounds(34, 29, 61, 27);
-		p_bt.add(bt_cancle);
-	
 		
-	   setSize(637,90);
-	   setVisible(false);
-	
+		
+		for(int i=0; i<subv_create.length; i++) {
+			subv_create[i] = new Admin_ReserSubView();
+			p_center.add(subv_create[i]);
+		}
+		setSize(800,800);
+		setVisible(true);
+		
+		
 	}
 	
+	public static void main(String[] args) {
+		new Admin_Reserview();
+	}
 }
+
