@@ -110,7 +110,7 @@ public class AdminView extends JFrame implements Runnable {
 		Thread t = new Thread(this);
 		t.start();
 		setBounds(500, 100, 1200, 800);
-		setVisible(true);
+		setVisible(false);
 		
 		addWindowListener(new WindowAdapter() {
 			@Override

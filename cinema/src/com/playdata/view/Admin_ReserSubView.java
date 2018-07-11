@@ -75,8 +75,8 @@ public class Admin_ReserSubView extends JPanel {
 	
 		
 	   setSize(637,90);
-	   setVisible(true);
+	   setVisible(false);
 	
 	}
-	
+
 }
