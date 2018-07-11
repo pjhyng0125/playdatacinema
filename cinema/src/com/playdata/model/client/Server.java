@@ -25,6 +25,9 @@ public class Server implements Runnable{
 	public boolean serverrun;
 	MemberDAO mem_dao;
 	
+	static final String INSERTJOIN = "ij";
+	static final String LOGIN = "li";
+	
 	public Server() {
 		clients = new ArrayList<>();
 		mem_dao = new MemberDAO();
@@ -87,12 +90,10 @@ public class Server implements Runnable{
 			try {
 				while(serverrun) {
 					String msg = in.readLine();//Client로부터 메세지 받기
-					System.out.println("1");
 					if(msg == null) return;
 					if(msg.trim().length()>0) {
 						System.out.println("from Client> "+ msg);
 					}
-					System.out.println("2");
 					String msgs[] = msg.split("\\|");
 					String protocol = msgs[0];
 					String clientmsg = msgs[1];
@@ -102,17 +103,21 @@ public class Server implements Runnable{
 					case "h":
 						System.out.println(clientmsg);
 						break;
-					case "ij":
+					case INSERTJOIN:	//서버로부터 회원가입 요청을 경우
 						String ms[] = clientmsg.split("&");
-						for(int i=0; i<ms.length; i++)
-							System.out.println(ms[i]);
+//						for(int i=0; i<ms.length; i++)
+//							System.out.println(ms[i]);
 						Member m = new Member(
 							ms[0], ms[1], ms[2], ms[3], ms[4],
 							ms[5], ms[6], ms[7], Integer.parseInt(ms[8]), Integer.parseInt(ms[9]),
 							Integer.parseInt(ms[10]), ms[11], ms[12]
 								);
 						if(mem_dao.join(m)) {
-							System.out.println("회원가입 성공");
+//							System.out.println("회원가입 성공");
+							sendMsg("success", LOGIN);	//회원 가입 성공시 "li|success" 메세지 보냄
+						}
+						else {
+							sendMsg("fail", LOGIN);  //회원 가입 실패시 "li|fail" 메세지 보냄
 						}
 					}//서버 switch
 				}//while(true)

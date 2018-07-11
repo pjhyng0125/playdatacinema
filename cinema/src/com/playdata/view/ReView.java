@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
@@ -22,9 +23,10 @@ import com.playdata.model.vo.Comment;
 public class ReView extends JFrame {
 	public JPanel p_content, p_reviews, p_bottom;
 	public JButton bt_back, bt_next, bt_reserve;
-	public JLabel la_page, la_image, la_name, la_genre, la_logo;
+	public JLabel la_page, la_logo, la_image, la_name, la_genre, la_director, la_actor, la_startdate, la_runtime;
 	public ArrayList<ReviewSubView> list;
 	LineBorder linea;
+	public JTextArea ta_summary;
 
 	
 	public ReView() {
@@ -43,6 +45,11 @@ public class ReView extends JFrame {
 		la_name = new JLabel("영화이름: ");
 		la_genre = new JLabel("영화장르: ");
 		la_logo = new JLabel();
+		la_director = new JLabel("감독명: ");
+		la_actor = new JLabel("주연배우: ");
+		ta_summary = new JTextArea("줄거리: ");
+		la_startdate = new JLabel("개봉일: ");
+		la_runtime = new JLabel("상영시간");
 		
 		//la_logo = new JLabel("icon1");
 		
@@ -97,16 +104,26 @@ public class ReView extends JFrame {
 //add p_content
 		p_content.setLayout(null);
 		la_image.setBounds(100, 50, 200, 200);
-		la_name.setBounds(500, 50, 100, 30);
-		la_genre.setBounds(500, 100, 100, 30);
+		la_name.setBounds(500, 40, 100, 30);
+		la_genre.setBounds(500, 80, 100, 30);
+		la_director.setBounds(500, 120, 100, 30);
+		la_actor.setBounds(500, 160, 100, 30);
+		la_startdate.setBounds(500, 200, 100, 30);
+		la_runtime.setBounds(500, 240, 100, 30);
+		ta_summary.setBounds(850, 50, 200, 100);
 		p_content.add(la_image);
 		p_content.add(la_name);
 		p_content.add(la_genre);
+		p_content.add(la_director);
+		p_content.add(la_actor);
+		p_content.add(la_startdate);
+		p_content.add(la_runtime);
+		p_content.add(ta_summary);
 
 		
 		
 		setSize(1200, 800);
-		setVisible(false);
+		setVisible(true);
 	}//생성자
 	
 	/*
@@ -129,6 +146,8 @@ public class ReView extends JFrame {
 				
 		}
 	}
-
+	public static void main(String[] args) {
+		new ReView();
+	}
 
 }
