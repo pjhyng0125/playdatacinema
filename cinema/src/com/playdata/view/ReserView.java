@@ -14,8 +14,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
-import com.playdata.model.client.Client;
-
 import java.awt.Font;
 /*
  * ¿¹¸Åºä

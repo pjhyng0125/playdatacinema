@@ -1,20 +1,25 @@
 --------------------------------------------------create table-----------------------------------------
+drop table member;
+
 create table member
 (
 id varchar2(20) primary key,
 pass varchar2(20) not null,
 gender varchar2(6),
 name varchar2(15),
-birth number(16),
-phone varchar2(22),
+birth number(8),
+phone varchar2(13),
 addr varchar2(50),
-mail varchar2(50),
-point number(16),
-cash number(16),
+email varchar2(50),
+point number,
+cash number,
 mem_grade number,
-hint varchar2(40),
+hint varchar2(30),
 answer varchar2(30)
 );
+
+select * from member;
+
 
 create table reserve													--문제발생
 (
