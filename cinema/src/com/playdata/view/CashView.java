@@ -137,5 +137,9 @@ public class CashView extends JFrame{
 		
 		return false;
 	}
+	
+	public void showMsg(String message) {
+		JOptionPane.showMessageDialog(this, message);
+	}
 
 }

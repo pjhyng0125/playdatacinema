@@ -100,20 +100,21 @@ create sequence com_seq
 drop sequence com_seq;
 
 -------------------------------------------------------insert-----------------------------------------------
+delete from member;
 
-insert into member values ('encore1','1234','남자','김주원','19920121','01012341234','서울','encore1@naver.com','2000',17000,0,'초등학교 이름은?','온곡');
-insert into member values ('encore2','1234','여자','이주원','19920123','01023412341','대전','encore2@naver.com',5000,20000,1,'좋아하는책은?','파수꾼');
-insert into member values ('encore3','1234','남자','박주원','19920811','01034123412','대구','encore3@naver.com',1000,15000,2,'태어난곳은?','여수');
-insert into member values ('encore4','1234','여자','나주원','19920623','01041234123','부산','encore4@naver.com',100,3000,0,'어릴적 별명은?','몰라');
-insert into member values ('encore5','1234','남자','차주원','19920401','01023452345','여수','encore5@naver.com',5000,18000,1,'좋아하는 게임은?','배그');
-insert into member values ('encore6','1234','여자','길라임','19920520','01034523452','제주도','encore6@naver.com',800,10000,0,'초등학교 이름은?','상계');
-insert into member values ('encore7','1234','남자','나라임','19920529','01045234523','강원도 강릉','encore7@naver.com',50,20000,0,'좋아하는책은??','종이약국');
-insert into member values ('encore8','1234','여자','박라임','19920402','01052345234','서울 마포','encore8@naver.com',780,5000,0,'태어난곳은?','노원');
-insert into member values ('encore9','1234','남자','유시진','19921116','01034563456','서울 서초','encore9@naver.com',700,2000,0,'어릴적 별명은?','남터');
-insert into member values ('encore10','1234','여자','강모연','19920930','01045634563','속초','encore10@naver.com',8000,900000,2,'초등학교 이름은?','계상');
-insert into member values ('encore11','1234','남자','강동원','19920205','01056345634','별내','encore11@naver.com',50,1000,0,'좋아하는 게임은?','메이플');
-insert into member values ('encore12','1234','여자','한지민','19921104','01063456345','전주','encore12@naver.com',0,5000,0,'좋아하는책은?','상실의시대');
-insert into member values ('encore13','1234','남자','현빈','19920509','01011122211','담양','encore13@naver.com',0,0,0,'태어난곳은?','제주도');
+insert into member values ('encore1','1234','남자','김주원','19920121','010-1234-1234','서울','encore1@naver.com','2000',17000,0,'초등학교 이름은?','온곡');
+insert into member values ('encore2','1234','여자','이주원','19920123','010-2341-2341','대전','encore2@naver.com',5000,20000,1,'좋아하는책은?','파수꾼');
+insert into member values ('encore3','1234','남자','박주원','19920811','010-3412-3412','대구','encore3@naver.com',1000,15000,2,'태어난곳은?','여수');
+insert into member values ('encore4','1234','여자','나주원','19920623','010-4123-4123','부산','encore4@naver.com',100,3000,0,'어릴적 별명은?','몰라');
+insert into member values ('encore5','1234','남자','차주원','19920401','010-2345-2345','여수','encore5@naver.com',5000,18000,1,'좋아하는 게임은?','배그');
+insert into member values ('encore6','1234','여자','길라임','19920520','010-3452-3452','제주도','encore6@naver.com',800,10000,0,'초등학교 이름은?','상계');
+insert into member values ('encore7','1234','남자','나라임','19920529','010-4523-4523','강원도 강릉','encore7@naver.com',50,20000,0,'좋아하는책은??','종이약국');
+insert into member values ('encore8','1234','여자','박라임','19920402','010-5234-5234','서울 마포','encore8@naver.com',780,5000,0,'태어난곳은?','노원');
+insert into member values ('encore9','1234','남자','유시진','19921116','010-3456-3456','서울 서초','encore9@naver.com',700,2000,0,'어릴적 별명은?','남터');
+insert into member values ('encore10','1234','여자','강모연','19920930','010-4563-4563','속초','encore10@naver.com',8000,900000,2,'초등학교 이름은?','계상');
+insert into member values ('encore11','1234','남자','강동원','19920205','010-5634-5634','별내','encore11@naver.com',50,1000,0,'좋아하는 게임은?','메이플');
+insert into member values ('encore12','1234','여자','한지민','19921104','010-6345-6345','전주','encore12@naver.com',0,5000,0,'좋아하는책은?','상실의시대');
+insert into member values ('encore13','1234','남자','현빈','19920509','010-1112-2211','담양','encore13@naver.com',0,0,0,'태어난곳은?','제주도');
 
 
 insert into movie values ('마녀','박찬욱','김다미,성동일','마녀가 나타났다!','액션',20,3,15,8000,'image/witch.png','6/28','7/05',120,1);

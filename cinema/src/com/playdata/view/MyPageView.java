@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 /*
  * 마이페이지뷰
@@ -157,4 +158,15 @@ public class MyPageView extends JFrame {
 		setVisible(false);
 	}//생성자
 	
+	public void showMsg(String message) {
+		JOptionPane.showMessageDialog(this, message);
+	}
+	
+	public boolean showYesNOmsg(String msg) {
+		int t = JOptionPane.showConfirmDialog(this, msg,"회원 탈퇴 및 로그아웃",JOptionPane.YES_NO_OPTION);
+		System.out.println(t);
+		if(t==0)return true;
+		
+		return false;
+	}
 }

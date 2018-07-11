@@ -4,6 +4,7 @@ package com.playdata.view;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -27,6 +28,7 @@ public class JoinView extends JFrame
 	public JComboBox<String> cb_hint,cb_email; 
 	JLabel jb[],at[];
 	public JRadioButton rb_gender1, rb_gender2;
+	ButtonGroup bg;
 	JPanel panel;
 	ImageIcon icon1;
 
@@ -108,8 +110,9 @@ public class JoinView extends JFrame
 		
 		rb_gender1 = new JRadioButton();
 		rb_gender2 = new JRadioButton();
-		
-		
+		bg = new ButtonGroup();
+		bg.add(rb_gender1);
+		bg.add(rb_gender2);
 		
 		tf_id.setBounds(80,100,100,25);
 		tf_pass.setBounds(80,140,100,25);

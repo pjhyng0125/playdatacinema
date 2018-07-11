@@ -229,7 +229,7 @@ public class MemberDAO {
    /*
     * 작성자 : 이성훈 작성일자 :07.04 기능설명 : 마이페이지창 - 회원탈퇴
     */
-   public boolean deleteMember(String id) {
+   public boolean deleteMember2(String id) {
       connection();
       String sql = "delete from member where id=?";
       try {
@@ -239,6 +239,33 @@ public class MemberDAO {
 
          if (t > 0) {
             return true;
+         }
+      } catch (SQLException e) {
+         e.printStackTrace();
+      } finally {
+         diss();
+      }
+      return false;
+   }// deleteMember
+   /*
+    * 작성자 : 이성훈 작성일자 :07.04 기능설명 : 마이페이지창 - 회원탈퇴
+    */
+   public boolean deleteMember(String id) {
+      connection();
+      String sql1 = "delete from reserve where id=?";
+      String sql2 = "delete from member where id=?";
+      try {
+         prestmt = conn.prepareStatement(sql1);
+         prestmt.setString(1, id);
+         int t = prestmt.executeUpdate();
+         if (t > 0) {
+        	 connection();
+        	 prestmt = conn.prepareStatement(sql2);
+        	 prestmt.setString(1, id);
+        	 int j = prestmt.executeUpdate();
+        	 if(j>0) {
+        		 return true;
+        	 }
          }
       } catch (SQLException e) {
          e.printStackTrace();
@@ -341,6 +368,7 @@ public class MemberDAO {
          if (rs.next()) {
             int mypoint = rs.getInt(1);
             String result = mypoint+symbol+point;
+            connection();
             prestmt = conn.prepareStatement(sql2);
             prestmt.setInt(1, Integer.parseInt(result));
             prestmt.setString(2, id);
@@ -360,7 +388,7 @@ public class MemberDAO {
    }
    
    /*
-    * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 캐시 추가 감소
+    * 작성자 : 이성훈 작성일자 :07.11 기능설명 : 캐시 추가 감소
     */                  // 아이디      캐쉬         +/- 기호  +는 추가 -는 감소
    public boolean cash_plma(String id, int cash, String symbol) {
       connection();
@@ -381,7 +409,7 @@ public class MemberDAO {
                result = mycash-cash;
                profit_ck(cash, symbol);
             }
-            
+            connection();
             prestmt = conn.prepareStatement(sql2);
             prestmt.setInt(1, result);
             prestmt.setString(2, id);
@@ -446,12 +474,14 @@ public class MemberDAO {
 
          if (rs.next()) {
             int refund = rs.getInt(1);
+            connection();
             prestmt = conn.prepareStatement(sql2);
             prestmt.setString(1, id);
             rs = prestmt.executeQuery();
 
             if (rs.next()) {
                int cash = rs.getInt(1);
+               connection();
                prestmt = conn.prepareStatement(sql3);
                prestmt.setInt(1, (cash + refund));
                prestmt.setString(2, id);
@@ -483,6 +513,7 @@ public class MemberDAO {
 		   rs = prestmt.executeQuery();
 		   if(rs.next()) {
 			   int new_profit = rs.getInt(1)-ticket_price;
+			   connection();
 			   prestmt = conn.prepareStatement(sql2);
 			   prestmt.setInt(1, new_profit);
 			   int t = prestmt.executeUpdate();
@@ -536,7 +567,7 @@ public class MemberDAO {
 			   }else {
 				   new_profit = rs.getInt(1)-ticket_price;
 			   }
-			   
+			   connection();
 			   prestmt = conn.prepareStatement(sql2);
 			   prestmt.setInt(1, new_profit);
 			   int t = prestmt.executeUpdate();
