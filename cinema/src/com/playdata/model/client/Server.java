@@ -44,7 +44,7 @@ public class Server implements Runnable{
 	@Override
 	public void run() {
 		try {
-			socketserver = new ServerSocket(5000);
+			socketserver = new ServerSocket(6000);
 			System.out.println("Start Server......");
 			while(serverrun) {
 				Socket socket = socketserver.accept();//client 접속 대기

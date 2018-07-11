@@ -563,9 +563,10 @@ public class Controller extends MouseAdapter implements ActionListener {
          String pass = new String(v_login.tf_pass.getPassword());
 
          if(id.equals("admin") && pass.equals("1234")) {
+        	 System.out.println("hi");
         	 v_admin = new AdminView();
-        	 v_admin_movie = new Admin_movie_view();
-        	 v_admin_review = new Admin_re_view();
+//        	 v_admin_movie = new Admin_movie_view();
+//        	 v_admin_review = new Admin_re_view();
              adminEventUp();
         	 v_login.setVisible(false);
         	 v_admin.setVisible(true);
@@ -710,16 +711,17 @@ public class Controller extends MouseAdapter implements ActionListener {
      		 if(v_createreview.tbt_stars[i].isSelected()) com_star++;
      	 }
      	 String content = v_createreview.ta_content.getText();   	 
-     	 Comment c = new Comment(login_id, DB_movie, content, com_star);
-     	 if(new CommentDAO().insertComment(c)) {
-     		 if(v_createreview.showConfirmMsg("후기를 등록하시겠습니까?")) {
-     			 v_createreview.showMsg("후기가 등록되었습니다.");
-     		 }else {
-     			 v_createreview.showMsg("후기등록이 취소되었습니다.");
-     		 }
-     	 }else {
-     		 v_createreview.showMsg("후기등록이 취소되었습니다.");
-     	 }
+     	 Comment c = new Comment(login_id, DB_movie, content, com_star-1);
+     	 user.sendMsg(login_id+"&"+DB_movie+"&"+content+"&"+(com_star-1), "ic");
+//     	 if(new CommentDAO().insertComment(c)) {
+//     		 if(v_createreview.showConfirmMsg("후기를 등록하시겠습니까?")) {
+//     			 v_createreview.showMsg("후기가 등록되었습니다.");
+//     		 }else {
+//     			 v_createreview.showMsg("후기등록이 취소되었습니다.");
+//     		 }
+//     	 }else {
+//     		 v_createreview.showMsg("후기등록이 취소되었습니다.");
+//     	 }
       }
       else if(ob == v_createreview.bt_mypage) {
          v_createreview.setVisible(false);

@@ -1,10 +1,10 @@
 package com.playdata.model.vo;
 
 public class Comment {
-	private String id = "id";
+	private String id;
 	private String movie_name;
-	private String content = "blank";
-	private int star = 3;
+	private String content;
+	private int star;
 	
 	public Comment() {
 		// TODO Auto-generated constructor stub

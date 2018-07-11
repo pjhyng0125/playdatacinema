@@ -81,7 +81,7 @@ public class Admin_re_view extends JFrame implements Runnable {
 		Thread t = new Thread(this);
 		t.start();
 		setBounds(500, 100, 1253, 800);
-		setVisible(true);
+		setVisible(false);
 	}// 생성자
 
 	public void memberInf() { //회원정보 패널
@@ -127,9 +127,6 @@ public class Admin_re_view extends JFrame implements Runnable {
 		p_member.setVisible(true);
 	}
  
-	public static void main(String[] args) {
-		new Admin_re_view();
-	}
 	public void history() {// 결제정보(수익정보, 결제내역) 패널
 		p_history = new JPanel();
 			p_history.setLayout(null);
