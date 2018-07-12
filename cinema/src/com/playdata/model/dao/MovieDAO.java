@@ -170,7 +170,7 @@ public class MovieDAO {
    public int selectSchedule(String movie_name) {
       try {
          connect();
-         String sql="select onshow from movie where moviename=?";
+         String sql="select onshow from movie where movie_name=?";
          pstmt = conn.prepareStatement(sql);
          pstmt.setString(1, movie_name);
          rs = pstmt.executeQuery();
@@ -184,6 +184,25 @@ public class MovieDAO {
       }
       return -1;
    }
+   
+   public int selectRuntime(String movie_name) {
+	      try {
+	         connect();
+	         String sql="select run_time from movie where movie_name=?";
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, movie_name);
+	         rs = pstmt.executeQuery();
+	         if(rs.next()) {
+	            return rs.getInt("run_time");
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         disconnect();
+	      }
+	      return -1;
+	   }
+	   
 
    /*
     * 작성자:박형진 수정일자:07/05/21:17 클래스(함수)기능: screenView 영화이미지, 가격보여주기.

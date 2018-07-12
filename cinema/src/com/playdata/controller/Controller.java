@@ -21,6 +21,7 @@ import com.playdata.model.dao.CommentDAO;
 import com.playdata.model.dao.MemberDAO;
 import com.playdata.model.dao.MovieDAO;
 import com.playdata.model.dao.ReserveDAO;
+import com.playdata.model.dao.ScreenDAO;
 import com.playdata.model.vo.Comment;
 import com.playdata.model.vo.Member;
 import com.playdata.model.vo.Movie;
@@ -313,7 +314,16 @@ public class Controller extends MouseAdapter implements ActionListener {
 			v_reserve.subv_reserve[i].bt_reserve.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-
+					System.out.println(DB_date);
+					System.out.println(DB_movie);
+					String[] scheduleInfo = new ScreenDAO().selectSchedule(new MovieDAO().selectSchedule(DB_movie),DB_date);
+					System.out.println(scheduleInfo[0]);
+					for(int j =0; j<scheduleInfo.length;j++) {
+						String[] subScheduleInfo = scheduleInfo[j].split(",");
+						int run_time = movie_dao.selectRuntime(DB_movie);
+						v_schedule.v_st[j].tbt_time.setText(v_schedule.timeCount(subScheduleInfo[0], run_time));
+					}
+				   
 					v_reserve.setVisible(false);
 					v_schedule.setVisible(true);
 				}
@@ -496,7 +506,14 @@ public class Controller extends MouseAdapter implements ActionListener {
 	 * 작성자: 박진형 수정일자: 07/05 17:38 Date => 4 5 ---> 4/5
 	 */
 	public String combineDate(int m, int d) {
-		return month + "/" + day + "";
+		if(m<10) {
+			if(d<10) {
+				return "0"+m + "/0" + d;
+			}else {
+				return "0"+m + "/" + d;
+			}
+		}
+		return m + "/" + d;
 	}
 
 	public void splitDate(String date) {
@@ -590,7 +607,9 @@ public class Controller extends MouseAdapter implements ActionListener {
 			if (ob == v_reserve.subv_reserve[i].bt_reserve) {
 				DB_movie = list_movie.get(i).getMovie_name();
 				v_schedule.la_title.setText(DB_movie);
-				v_schedule.la_date.setText(v_schedule.v_sd[0].getText());
+				DB_date = v_schedule.v_sd[0].getText().substring(0, 6);
+				System.out.println(DB_date);
+				v_schedule.la_date.setText(DB_date);
 
 				v_reserve.setVisible(false);
 				v_schedule.setVisible(true);
