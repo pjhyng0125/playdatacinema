@@ -57,20 +57,25 @@ public class ScreenDAO {
       /*
        * 작성자:박형진 수정일자:07/05/21:17 클래스(함수)기능: scheduleView에서 남은 좌석 보여주기 배열.
        */
-      public String[] selectSchedule(int screen_code) {
+      public String[] selectSchedule(int screen_code,String run_date) {
          String[] list = new String[4]; // 상영시간 갯수
          try {
             connect();
-            String sql = "select count(*),start_time as count from screen" + " group by start_time"
-                  + " having screen_code =? and flag=0";
+            String sql = "select count(*) ,start_time from screen " + 
+            		"where screen_code =? and flag=0 and run_date=? group by start_time order by start_time asc";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, screen_code);
+            pstmt.setString(2, run_date.trim());
             rs = pstmt.executeQuery();
-            for (int i = 0; rs.next(); i++) {
-               list[i] = rs.getString("start_time")+"|"+rs.getInt("count");
-               // 예: 7월10일 11석 >> 710|11
+            int i=0;
+            System.out.println("hi");
+            while(rs.next()) {
+            	System.out.println("bi");
+                list[i] = rs.getString("start_time")+","+rs.getInt(1);
+                System.out.println(list[i]);
+                i++;
             }
-
+               // 예: 18시30분 11석 >> 18:30,11
          } catch (SQLException e) {
             e.printStackTrace();
          } finally {

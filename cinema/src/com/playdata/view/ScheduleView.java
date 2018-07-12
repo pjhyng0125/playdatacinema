@@ -136,6 +136,6 @@ public class ScheduleView extends JFrame {
 			returnTime += ":"+minute;
 		}
 		System.out.println("시작시간: "+screen_time+" \n끝시간: "+returnTime);
-		return returnTime;
+		return screen_time+"~"+returnTime;
 	}
 }
