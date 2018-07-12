@@ -81,6 +81,7 @@ public class MyPageView extends JFrame {
 		// 버튼
 		bt_back = new JButton(i_back);
 		bt_back.setBounds(20, 16, 65, 65);
+		bt_back.setBackground(Color.orange);
 		bt_check = new JButton("예매 확인/취소");
 		bt_check.setBackground(Color.BLACK);
 		bt_check.setForeground(Color.WHITE);
