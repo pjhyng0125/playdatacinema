@@ -43,8 +43,8 @@ public class FindPwView extends JFrame{
       cb_hint = new JComboBox<String>(hintT);
       
       
-      tf_id.setBounds(120,130,100,25);
-      tf_hint.setBounds(120,200,100,25);
+      tf_id.setBounds(120,130,110,25);
+      tf_hint.setBounds(120,200,110,25);
       
       panel = new JPanel();
       panel.setLayout(null);
@@ -66,7 +66,7 @@ public class FindPwView extends JFrame{
       bt_reset.setBackground(Color.BLACK);
       bt_reset.setForeground(Color.WHITE);
       
-      cb_hint.setBounds(120,170,100,25);
+      cb_hint.setBounds(120,170,110,25);
       
       getContentPane().setLayout(null);
       getContentPane().add(tf_id);
