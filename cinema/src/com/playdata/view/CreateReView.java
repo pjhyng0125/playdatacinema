@@ -16,7 +16,7 @@ import java.awt.Font;
 
 public class CreateReView extends JFrame {
 	public JLabel la_id;
-	public JButton bt_create, bt_mypage;
+	public JButton bt_create, bt_cancle;
 	public JTextArea ta_content;
 	public JToggleButton tbt_stars[];
 	public JScrollPane sp;
@@ -29,8 +29,8 @@ public class CreateReView extends JFrame {
 		la_id = new JLabel(id);
 		bt_create = new JButton("»ƒ±‚ ¿‘∑¬");
 		bt_create.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.BOLD, 15));
-		bt_mypage = new JButton("∏∂¿Ã ∆‰¿Ã¡ˆ");
-		bt_mypage.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.BOLD, 15));
+		bt_cancle = new JButton("√Îº“");
+		bt_cancle.setFont(new Font("∏º¿∫ ∞ÌµÒ", Font.BOLD, 15));
 		ta_content = new JTextArea();
 		
 		sp = new JScrollPane(ta_content);
@@ -56,9 +56,9 @@ public class CreateReView extends JFrame {
 		getContentPane().add(la_id);
 		sp.setBounds(43, 200, 400, 100);
 		getContentPane().add(sp);
-		bt_mypage.setBounds(320, 350, 120, 40);
-		bt_mypage.setBackground(Color.black);
-		bt_mypage.setForeground(Color.white);
+		bt_cancle.setBounds(320, 350, 120, 40);
+		bt_cancle.setBackground(Color.black);
+		bt_cancle.setForeground(Color.white);
 		bt_create.setBounds(40, 350, 120, 40);
 		bt_create.setBackground(Color.BLACK);
 		bt_create.setForeground(Color.white);
@@ -67,7 +67,7 @@ public class CreateReView extends JFrame {
 		
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(bt_create);
-		getContentPane().add(bt_mypage);
+		getContentPane().add(bt_cancle);
 		getContentPane().add(panel);
 		//add(la_cinema);
 		setSize(500,450);
