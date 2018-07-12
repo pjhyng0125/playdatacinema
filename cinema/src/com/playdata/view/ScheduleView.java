@@ -23,7 +23,7 @@ public class ScheduleView extends JFrame {
 	public JPanel p_date, p_time, p_next;
 	public JButton bt_next, bt_back;
 	public JLabel la_title, la_date;
-	public JLabel la_logo, la_cinema;
+	public JLabel la_logo, la_cinema,la_screenCode;
 	public ScheduleDateView v_sd[];
 	public ScheduleTimeView v_st[];
 	boolean flag;
@@ -52,6 +52,9 @@ public class ScheduleView extends JFrame {
 		la_title.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 18));
 		la_date = new JLabel("³¯Â¥: 18/07/03");
 		la_date.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 18));
+		la_screenCode = new JLabel("1»ó¿µ°ü/");
+		la_screenCode.setBounds(30, 150, 80, 30);
+		la_screenCode.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 18));
 		
 		v_sd = new ScheduleDateView[4];
 		v_st = new ScheduleTimeView[4];
@@ -82,6 +85,7 @@ public class ScheduleView extends JFrame {
 			
 			add(la_logo);
 			add(la_cinema);
+			
 		}
 //set Background
 		p_date.setBackground(Color.orange);
@@ -95,6 +99,7 @@ public class ScheduleView extends JFrame {
 		la_title.setBounds(30, 150, 100, 30);
 		la_date.setBounds(1014, 150, 136, 30);
 //add panel to frame
+		
 		getContentPane().add(p_date, BorderLayout.PAGE_START);
 		getContentPane().add(p_time, BorderLayout.CENTER);
 		getContentPane().add(p_next, BorderLayout.PAGE_END);
@@ -102,6 +107,7 @@ public class ScheduleView extends JFrame {
 		p_next.add(bt_back);
 		p_date.add(la_date);
 		p_date.add(la_title);
+		p_date.add(la_screenCode);
 		
 		bt_next.setEnabled(false);
 		

@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -24,6 +25,7 @@ public class Admin_Reserview extends JFrame {
 	public JLabel lb_movie_name,lb_runtime,lb_seat;
 	private JLabel label;
 	private JLabel la_logo;
+	public JButton bt_mypage;
 		
 	public Admin_Reserview() {
 		setTitle("예매확인/취소 창");
@@ -33,6 +35,7 @@ public class Admin_Reserview extends JFrame {
 		p_center = new JPanel();
 		
 		subv_create = new Admin_ReserSubView[5];
+		bt_mypage = new JButton("마이페이지");
 		
 		//p_center
 		getContentPane().add(p_center, BorderLayout.CENTER);
@@ -53,6 +56,11 @@ public class Admin_Reserview extends JFrame {
 		
 		
 		//라벨
+		bt_mypage.setBounds(630, 10,100, 30);
+		bt_mypage.setBackground(Color.BLACK);
+		bt_mypage.setForeground(Color.WHITE);
+		bt_mypage.setFont(new Font("맑은 고딕", Font.BOLD, 13));
+		
 		lb_movie_name.setBounds(50, 0, 69, 60);
 		p_north.add(lb_movie_name);
 		
@@ -64,6 +72,7 @@ public class Admin_Reserview extends JFrame {
 		p_north.add(lb_runtime);
 		lb_seat.setBounds(363, 0, 69, 60);
 		p_north.add(lb_seat);
+		p_north.add(bt_mypage);
 		
 		
 		
@@ -77,6 +86,8 @@ public class Admin_Reserview extends JFrame {
 		
 		
 	}
-	
+	  public void showMsg(String msg) {
+			JOptionPane.showMessageDialog(this, msg);
+		}
 }
 

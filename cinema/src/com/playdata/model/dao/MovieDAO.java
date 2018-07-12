@@ -246,13 +246,32 @@ public class MovieDAO {
 	      }
 	      return false;
    }
+   
+   public double selectMovieAvgStar(String movie_name) {
+	      try {
+	         connect();
+	         String sql = "select avg(com_star) from movie_comment where movie_name=?";
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, movie_name);
+	         rs = pstmt.executeQuery();
+	         if(rs.next()) {
+	               return rs.getDouble(1);
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         disconnect();
+	      }
+	      return -1;  
+   }
 
-   public boolean updateMovieAvgStar(String movie_name) {
+   public boolean updateMovieAvgStar(String movie_name,int avg_star) {
 	   try {
 		   connect();
-		   String sql = "update movie set avg_star = (select avg(com_star) from movie_comment where movie_name=?";
+		   String sql = "update movie set avg_star = ? where movie_name=?";
 		   pstmt = conn.prepareStatement(sql);
-		   pstmt.setString(1, movie_name);
+		   pstmt.setInt(1, avg_star);
+		   pstmt.setString(2, movie_name);
 		   int t  = pstmt.executeUpdate();
 		   if(t>0)return true;
 	   } catch (SQLException e) {

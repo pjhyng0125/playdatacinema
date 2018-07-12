@@ -61,18 +61,21 @@ public class ScreenDAO {
          String[] list = new String[4]; // 상영시간 갯수
          try {
             connect();
-            String sql = "select count(*) ,start_time from screen " + 
-            		"where screen_code =? and flag=0 and run_date=? group by start_time order by start_time asc";
+            System.out.println("상영날짜"+run_date);
+            System.out.println("상영관코드"+screen_code);
+            String sql = "select start_time, case when flag=1 and count(*)=5 then 0 " + 
+            									" when flag=0 then count(*) end " + 
+            									"from screen " + 
+            									"where screen_code =?" + 
+            									" and run_date=?" + 
+            									" group by start_time,flag order by start_time asc";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, screen_code);
-            pstmt.setString(2, run_date.trim());
+            pstmt.setString(2, run_date);
             rs = pstmt.executeQuery();
             int i=0;
-            System.out.println("hi");
             while(rs.next()) {
-            	System.out.println("bi");
-                list[i] = rs.getString("start_time")+","+rs.getInt(1);
-                System.out.println(list[i]);
+                list[i] = rs.getString("start_time")+","+rs.getInt(2);
                 i++;
             }
                // 예: 18시30분 11석 >> 18:30,11
