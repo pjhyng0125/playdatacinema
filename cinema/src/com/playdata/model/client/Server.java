@@ -172,8 +172,8 @@ if(mem_dao.updateCashPoint(ms_ca[0], Integer.parseInt(ms_ca[1]), Integer.parseIn
 							sendMsg("fail", CASH);
 						break;
 					case STARUPDATE:
-						String ms_s = clientmsg;
-						if(mov_dao.updateMovieAvgStar(ms_s))
+				String []ms_s = clientmsg.split("&");
+						if(mov_dao.updateMovieAvgStar(ms_c[0], Integer.parseInt(ms_c[1])))
 							sendMsg("success", STAR);
 						else
 							sendMsg("fail", STAR);
