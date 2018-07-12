@@ -50,6 +50,10 @@ public class Server implements Runnable{
 //영화 평점 갱신
 	static final String STARUPDATE = "us";
 	static final String STAR = "st";
+//클라이언트 종료 메세지 (받을 예정)
+	static final String CLIENTEXIT = "ce";
+//서버 종료 메세지 (보낼 예정)
+	static final String SERVEREXIT = "se"; 
 	
 	public Server() {
 		clients = new ArrayList<>();
@@ -177,8 +181,14 @@ if(mem_dao.updateCashPoint(ms_ca[0], Integer.parseInt(ms_ca[1]), Integer.parseIn
 							sendMsg("success", STAR);
 						else
 							sendMsg("fail", STAR);
-							
-						
+					break;
+					case CLIENTEXIT:	//ce|exit
+						if(clientmsg.equals("exit")) {
+							System.out.println("클라이언트 접속 종료 요청");
+							clients.remove(this);	//벡터에서 삭제 ---> 클라이언트에서는 메세지 보내고 close()해주면 될 듯
+						}	//관리자 창 꺼질 때는 server.clients의 모든 요소에 종료 메세지 보낸 후 turnOff();
+							//AdminView 생성자에서 WindowListener();
+					break;
 					}//서버 switch
 				}//while(true)
 			} catch (IOException e) {
