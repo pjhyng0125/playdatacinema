@@ -769,7 +769,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 			String content = v_createreview.ta_content.getText();
 			user.sendMsg(login_id + "&" + DB_movie + "&" + content + "&" + (com_star - 1), "ic");
 			
-			int avg_star = (int) movie_dao.selectMovieAvgStar(DB_movie);
+			int avg_star = (int) new MovieDAO().selectMovieAvgStar(DB_movie);
 			user.sendMsg(DB_movie+"&"+avg_star, "us");
 			// if(new CommentDAO().insertComment(c)) {
 			// if(v_createreview.showConfirmMsg("후기를 등록하시겠습니까?")) {
@@ -1077,7 +1077,6 @@ public class Controller extends MouseAdapter implements ActionListener {
 						}else {
 							System.out.println("평점 최신화 실패");
 						}break;}
-					
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
