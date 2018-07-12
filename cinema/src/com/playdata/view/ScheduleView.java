@@ -113,6 +113,13 @@ public class ScheduleView extends JFrame {
 		return Integer.parseInt(time)+i*300+"";
 	}
 	
+	public void setDefaulttbt() {
+		for(int i=0; i<v_sd.length; i++) {
+			v_sd[i].setSelected(false);
+			v_st[i].tbt_time.setSelected(false);
+		}
+	}
+	
 	public String timeCount(String screen_time,int run_time) {
 		String[] screen_timeArray = screen_time.split(":");
 		int hour = Integer.parseInt(screen_timeArray[0]);
