@@ -19,6 +19,7 @@ import javax.swing.JToggleButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.SystemColor;
+import javax.swing.JLayeredPane;
 
 public class ScreenView extends JFrame {
 	
@@ -35,7 +36,9 @@ public class ScreenView extends JFrame {
 	JLabel lb_screen;//스크린 라벨
 	JLabel lb_theater;//1관,2관....
 	JLabel lb_movie_image;//영화 포스터
+	public JLabel lb_people;//선택인
 	
+	int selected_time;
 	
 	//--------------------------------------패널
 	JPanel p;//screen 패널
@@ -43,8 +46,8 @@ public class ScreenView extends JFrame {
 	
 	//--------------------------------------텍스트필드
 	JTextField tf_info;//상영관정보
-	JTextField tf_seat_info;//좌석정보
-	JTextField tf_select_pay;//선택가격
+	public JTextField tf_seat_info;//좌석정보
+	public JTextField tf_select_pay;//선택가격
 	JTextField tf_movie_info;//영화정보
 	
     //--------------------------------------이미지아이콘
@@ -61,6 +64,7 @@ public class ScreenView extends JFrame {
 	private JLabel label_1;
 	private JLabel label_2;
 	private JLabel label_3;
+	private JLabel lblNewLabel;
 	
 
 	
@@ -109,7 +113,8 @@ public class ScreenView extends JFrame {
 		pay_view.setFont(new Font("굴림", Font.BOLD, 15));
 			pay_view.setBackground(new Color(52,52,51));
 			pay_view.setForeground(Color.WHITE);
-		
+		pay_view.setEnabled(false);
+			
 		//선택,불가능,가능 라벨
 		lb_select = new JLabel("선택중");
 		lb_unselectable = new JLabel("예매(선택불가)");
@@ -352,6 +357,11 @@ public class ScreenView extends JFrame {
 		lb_table5.setBounds(1071, 453, 75, 18);
 		getContentPane().add(lb_table5);
 		
+		lb_people = new JLabel("선택인원: ");
+		lb_people.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		lb_people.setBounds(59, 121, 200, 50);
+		getContentPane().add(lb_people);
+		
 		
 		
 		
@@ -361,14 +371,42 @@ public class ScreenView extends JFrame {
 		
 	}
 	
-	public void checkSelected() {
+	
+	
+	public int checkindex() {
+		int index = 0;
+	
+		for(int i=0; i<bt_seat.length; i++) {
+			if(bt_seat[i].isSelected())
+				index = i;
+			
+				
+			tf_seat_info.setText("좌석 번호: A"+index+"");			
+		}
+		return index;
+	}
+	
+	public int checkClicked() {
+		int count=0;
+		for(int i=0; i<bt_seat.length; i++) {
+			if(bt_seat[i].isSelected())
+				count++;
+		}
+		return count;
+	}
+	
+	public boolean checkSelected() {
+		boolean flag = false;
 		for(int i=0; i<bt_seat.length; i++) {
 			if(bt_seat[i].isSelected()) {
+				flag = true;
 				bt_seat[i].setIcon(new ImageIcon("image/selecting.png"));
 			}else {
 				bt_seat[i].setIcon(new ImageIcon("image/select.png"));
 			}
+			
 		}
+		return flag;
 	}
 	
 	
