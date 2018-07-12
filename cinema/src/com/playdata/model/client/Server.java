@@ -12,8 +12,11 @@ import javax.swing.JOptionPane;
 
 import com.playdata.model.dao.CommentDAO;
 import com.playdata.model.dao.MemberDAO;
+import com.playdata.model.dao.MovieDAO;
+import com.playdata.model.dao.ReserveDAO;
 import com.playdata.model.vo.Comment;
 import com.playdata.model.vo.Member;
+import com.playdata.model.vo.Reserve;
 
 
 
@@ -27,17 +30,33 @@ public class Server implements Runnable{
 	public boolean serverrun;
 	MemberDAO mem_dao;
 	CommentDAO com_dao;
-	
+	ReserveDAO res_dao;
+	MovieDAO mov_dao;
+//회원가입 추가
 	static final String INSERTJOIN = "ij";
 	static final String JOIN = "jo";
+//후기 추가
 	static final String INSERTCOMMENT = "ic";
 	static final String COMMENT = "co";
-	
+//예약 삭제
+	static final String RESERVECANCEL = "dr";
+	static final String RESERVE = "re";
+//회원 삭제
+	static final String MEMBERDELETE = "dm";
+	static final String MEMBER="me";
+//회원 포인트 추가
+	static final String CASHUPDATE = "uc";
+	static final String CASH = "ca";
+//영화 평점 갱신
+	static final String STARUPDATE = "us";
+	static final String STAR = "st";
 	
 	public Server() {
 		clients = new ArrayList<>();
 		mem_dao = new MemberDAO();
 		com_dao = new CommentDAO();
+		res_dao = new ReserveDAO();
+		mov_dao = new MovieDAO();
 		new Thread(this).start();
 	}//생성자
 	@Override
@@ -112,29 +131,54 @@ public class Server implements Runnable{
 						break;
 					case INSERTJOIN:	//서버로부터 회원가입 요청을 경우
 						String ms[] = clientmsg.split("&");
-//						for(int i=0; i<ms.length; i++)
-//							System.out.println(ms[i]);
 						Member m = new Member(
 							ms[0], ms[1], ms[2], ms[3], ms[4],
 							ms[5], ms[6], ms[7], Integer.parseInt(ms[8]), Integer.parseInt(ms[9]),
 							Integer.parseInt(ms[10]), ms[11], ms[12]);
-						if(mem_dao.join(m)) {
-//							System.out.println("회원가입 성공");
+						if(mem_dao.join(m))
 							sendMsg("success", JOIN);	//회원 가입 성공시 "li|success" 메세지 보냄
-						}
-						else {
+						else
 							sendMsg("fail", JOIN);  //회원 가입 실패시 "li|fail" 메세지 보냄
-						}
 						break;
 					case INSERTCOMMENT:
 						String ms_c[] = clientmsg.split("&");
 						Comment c = new Comment(
 							ms_c[0], ms_c[1], ms_c[2], Integer.parseInt(ms_c[3]));
 							if(com_dao.insertComment(c)) {//comment 추가 성공시
-								sendMsg("success", COMMENT);
+								sendMsg("success", COMMENT);	// co|success
 							}else {	//comment 추가 실패시
-								sendMsg("fail", COMMENT);								
+								sendMsg("fail", COMMENT);	//co|fail			
 							}
+							break;
+					case RESERVECANCEL:
+						String ms_r[] = clientmsg.split("&");
+						if(res_dao.deleteReserve(ms_r[0], ms_r[1], ms_r[2]))
+							sendMsg("success", RESERVE);
+						else
+							sendMsg("fail", RESERVE);
+						break;
+					case MEMBERDELETE:
+						String ms_m =  clientmsg;
+						if(mem_dao.deleteMember(ms_m))
+							sendMsg("success", MEMBER);
+						else
+							sendMsg("fail", MEMBER);
+						break;
+					case CASHUPDATE:
+						String ms_ca[] = clientmsg.split("&");
+if(mem_dao.updateCashPoint(ms_ca[0], Integer.parseInt(ms_ca[1]), Integer.parseInt(ms_ca[2])))
+							sendMsg("success", CASH);
+						else
+							sendMsg("fail", CASH);
+						break;
+					case STARUPDATE:
+						String ms_s = clientmsg;
+						if(mov_dao.updateMovieAvgStar(ms_s))
+							sendMsg("success", STAR);
+						else
+							sendMsg("fail", STAR);
+							
+						
 					}//서버 switch
 				}//while(true)
 			} catch (IOException e) {
