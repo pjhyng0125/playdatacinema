@@ -34,7 +34,7 @@ create table reserve													--문제발생
    foreign key (id) references member(id)
 );
 
-
+drop table movie;
 create table movie
 (
 movie_name varchar2(30) primary key, --영화이름
@@ -52,6 +52,8 @@ run_date varchar2(10), --상영 일자
 run_time varchar2(6), --런타임
 onshow	number(2)-- 1이면 상영중
 );
+
+select * from movie;
 
 
 
@@ -117,7 +119,7 @@ insert into member values ('encore11','1234','남자','강동원','19920205','010-563
 insert into member values ('encore12','1234','여자','한지민','19921104','010-6345-6345','전주','encore12@naver.com',0,5000,0,'좋아하는책은?','상실의시대');
 insert into member values ('encore13','1234','남자','현빈','19920509','010-1112-2211','담양','encore13@naver.com',0,0,0,'태어난곳은?','제주도');
 
-
+delete from movie;
 insert into movie values ('마녀','박찬욱','김다미,성동일','마녀가 나타났다!','액션',20,3,15,8000,'image/witch.png','6/28','7/05',120,1);
 insert into movie values ('탐정','이언희','권상우,성동일','역대급 미제 사건을 해결한 추리 콤비','코미디,범죄',32,4,15,8000,'image/returns.png','6/28','7/05',120,1);
 insert into movie values ('허스토리','민규동','김해숙,김희애','재판받는 이야기','드라마',12,3,7,8000,'image/her_story.png','6/28','7/05',120,1);
