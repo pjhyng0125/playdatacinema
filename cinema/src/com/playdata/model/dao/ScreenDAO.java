@@ -37,7 +37,7 @@ public class ScreenDAO {
          try {
             connect();
             String sql = "select seatnum from screen " 
-                     + "where screen_code = ? and start_time = ? and flag=0";
+                     + "where screen_code = ? and start_time = ? and flag=1";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, screen_code);
             pstmt.setString(2, start_time);

@@ -87,7 +87,9 @@ public class Controller extends MouseAdapter implements ActionListener {
 	String DB_movie; // 선택한 영화의 이름을 저장하는 변수 ... 0,1,2,3
 	String DB_date; // Schedule 창에서 선택한 날짜를 저장하는 변수 ... 7/19
 	String DB_time; // Schedule 창에서 선택한 시간을 저장하는 변수 ... 7/19
-
+	int DB_seat;// screen창에 좌석 저장변수
+	
+	
 	boolean flag_date;
 	boolean flag_time;
 
@@ -167,12 +169,12 @@ public class Controller extends MouseAdapter implements ActionListener {
 		v_reserve.setstarSelected(3, 1);
 		// ReserView => show movie list infos...
 		// list_movie = movie_dao.movieSelectAll();
-		list_movie = new ArrayList<>();
-		list_movie.add(new Movie("앤트맨", "액션코미디", 50.0, 4, "image/antman.png"));
-		list_movie.add(new Movie("히스토리", "멜로감동", 25.0, 3, "image/her_story.png"));
-		list_movie.add(new Movie("탐정", "액션코미디", 20.0, 2, "image/returns.png"));
-		list_movie.add(new Movie("마녀", "액션코미디", 15.0, 0, "image/witch.png"));
-		showReserveInfo(list_movie);
+		list_movie = new ArrayList<>(4);
+//		list_movie.add(new Movie("앤트맨", "액션코미디", 50.0, 4, "image/antman.png"));
+//		list_movie.add(new Movie("히스토리", "멜로감동", 25.0, 3, "image/her_story.png"));
+//		list_movie.add(new Movie("탐정", "액션코미디", 20.0, 2, "image/returns.png"));
+//		list_movie.add(new Movie("마녀", "액션코미디", 15.0, 0, "image/witch.png"));
+//		showReserveInfo(list_movie);
 
 		/*-------------------------------------EVENT LISTENER(익명)------------------------------------------*/
 
@@ -280,6 +282,24 @@ public class Controller extends MouseAdapter implements ActionListener {
 							flag_date = true;
 							selected_date = i;
 							v_schedule.la_date.setText(v_schedule.v_sd[i].getText());
+		
+							DB_date = splitTbtText(v_schedule.v_sd[selected_date].getText());
+							String[] scheduleInfo = new ScreenDAO().selectSchedule(new MovieDAO().selectSchedule(DB_movie),DB_date.trim());
+							System.out.println(scheduleInfo[0]);
+							
+							for(int j =0; j<scheduleInfo.length;j++) {
+								if(scheduleInfo[j]!=null) {
+								String[] subScheduleInfo = scheduleInfo[j].split(",");
+								int run_time = movie_dao.selectRuntime(DB_movie);
+								v_schedule.v_st[j].tbt_time.setText(v_schedule.timeCount(subScheduleInfo[0], run_time));
+								v_schedule.v_st[j].la_seat.setText(subScheduleInfo[1]+" / 5석");
+								v_schedule.v_st[j].setVisible(true);
+								}else {
+									for(int k=0;k<4;k++) {
+									v_schedule.v_st[k].setVisible(false);
+								}
+							}
+						}
 						}
 					}
 
@@ -292,9 +312,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 						for (int j = 0; j < v_schedule.v_sd.length; j++)
 							if (selected_date != j)
 								v_schedule.v_sd[j].setEnabled(false);
-
 					}
-					DB_date = splitTbtText(v_schedule.v_sd[selected_date].getText());
 //					String[] dates = DB_date.split("/");
 //					String run_date = dates[0] + dates[1];
 					System.out.println("DB_date : " + DB_date);
@@ -344,8 +362,15 @@ public class Controller extends MouseAdapter implements ActionListener {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-
-					v_screen.checkSelected();
+					v_screen.lb_people.setText("선택인원: "+v_screen.checkClicked()+"");
+					
+					DB_seat = v_screen.checkindex();
+					System.out.println("DB_seat= "+DB_seat); 
+					
+					if(v_screen.checkSelected())
+						v_screen.pay_view.setEnabled(true);
+					else	
+						v_screen.pay_view.setEnabled(false);
 				}
 			});
 
@@ -656,6 +681,10 @@ public class Controller extends MouseAdapter implements ActionListener {
 			v_reserve.setVisible(false);
 			v_mypage.setVisible(true);
 		} else if (ob == v_schedule.bt_next) {//사용중인 좌석 
+			ArrayList<String> list =  new ScreenDAO().selectScreen(movie_dao.selectSchedule(DB_movie), DB_time);
+			for(int i=0;i<list.size();i++) {
+				v_screen.bt_seat[Integer.parseInt(list.get(i))].setEnabled(false);
+			}
 			
 			v_schedule.setVisible(false);
 			v_screen.setVisible(true);
@@ -760,7 +789,20 @@ public class Controller extends MouseAdapter implements ActionListener {
 			showMyReserveInfo(list);
 			v_mypage.setVisible(false);
 			v_myReserview.setVisible(true);
-		} else if (ob == v_createreview.bt_create) { // insertReview!--------------------------------
+		} else if(ob == v_mypage.bt_drop) {//★
+			
+			if(new MemberDAO().deleteMember(login_id)) {
+				v_mypage.showMsg("탈퇴가 완료되었습니다!");
+				login_id = "";
+				v_mypage.setVisible(false);
+				v_login.setVisible(true);
+			}
+		}
+		else if(ob == v_myReserview.bt_mypage){
+			v_myReserview.setVisible(false);
+			v_mypage.setVisible(true);
+		}
+		else if (ob == v_createreview.bt_create) { // insertReview!--------------------------------
 			int com_star = 0;
 			for (int i = 0; i < v_createreview.tbt_stars.length; i++) {
 				if (v_createreview.tbt_stars[i].isSelected())

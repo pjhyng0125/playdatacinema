@@ -53,7 +53,6 @@ public class ScheduleView extends JFrame {
 		la_date = new JLabel("³¯Â¥: 18/07/03");
 		la_date.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 18));
 		la_screenCode = new JLabel("1»ó¿µ°ü/");
-		la_screenCode.setBounds(30, 150, 80, 30);
 		la_screenCode.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 18));
 		
 		v_sd = new ScheduleDateView[4];
@@ -96,7 +95,8 @@ public class ScheduleView extends JFrame {
 		p_next.setPreferredSize(new Dimension(0, 80));
 		bt_next.setBounds(1050, 20, 105, 43);
 		bt_back.setBounds(49, 20, 105, 43);
-		la_title.setBounds(30, 150, 100, 30);
+		la_screenCode.setBounds(30, 140, 80, 30);
+		la_title.setBounds(30, 170, 200, 30);
 		la_date.setBounds(1014, 150, 136, 30);
 //add panel to frame
 		
