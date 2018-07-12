@@ -13,6 +13,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.JTabbedPane;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
@@ -409,11 +410,19 @@ public class ScreenView extends JFrame {
 		return flag;
 	}
 	
+	public ArrayList<Integer> addIndexList() {	//좌석을 선택하고 결제 버튼 선택 직후 선택된 좌석의 인덱스를 리턴
+		ArrayList<Integer> list = new ArrayList<>();
+		for(int i=0; i<bt_seat.length; i++) {
+			if(bt_seat[i].isSelected())
+				list.add(i);
+		}
+		return list;
+	}
 	
-				
-		
-	
-	
+	public void setDefaultSeat() {	//v_screen 앞 뒤로 이동시 가장 먼저 호출
+		for(int i=0; i<bt_seat.length; i++)
+			bt_seat[i].setSelected(false);
+	}
 	
 	
 	private static class __Tmp {
