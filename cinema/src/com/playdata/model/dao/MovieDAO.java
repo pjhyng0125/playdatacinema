@@ -93,17 +93,18 @@ public class MovieDAO {
     *                               flag가 true이면  해당영화를 상영중으로 onshow
     *                               flag가 false이면 해당영화를 미상영중으로
     */
-   public boolean updateMovie(String movie_name,boolean flag) {
+   public boolean updateMovie(String movie_name,int onshow,boolean flag) {
       String sql;
       try {
             connect();
             if(flag) {
-               sql = "update movie set onshow=1 where movie_name=?";               
+               sql = "update movie set onshow=? where movie_name=?";               
             }else {
-               sql = "update movie set onshow=0 where movie_name=?";               
+               sql = "update movie set onshow=? where movie_name=?";               
             }
             pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, movie_name);
+            pstmt.setInt(1, onshow);
+            pstmt.setString(2, movie_name);
             int t = pstmt.executeUpdate();
             if(t>0) return true;
          } catch (SQLException e) {
@@ -189,7 +190,6 @@ public class MovieDAO {
     */
    public Movie selectScreen(String movie_name) {
       Movie m = new Movie();
-      connect();
       try {
          connect();
          String sql = "select path,limit,price from movie"
@@ -210,6 +210,40 @@ public class MovieDAO {
       return m;
    }
    
+   public boolean updateMovieRate(int cnt,int allCnt, String movie_name) {
+	      try {
+	         connect();
+	         String sql = "update movie set rate = ?*100/? where onshow>0 order by onshow asc";
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setInt(1, cnt);
+	         pstmt.setInt(2, allCnt);
+	         pstmt.setString(3, movie_name);
+	         int t  = pstmt.executeUpdate();
+	         if(t>0)return true;
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         disconnect();
+	      }
+	      return false;
+   }
+
+   public boolean updateMovieAvgStar(String movie_name) {
+	   try {
+		   connect();
+		   String sql = "update movie set avg_star = (select avg(com_star) from movie_comment where movie_name=?";
+		   pstmt = conn.prepareStatement(sql);
+		   pstmt.setString(1, movie_name);
+		   int t  = pstmt.executeUpdate();
+		   if(t>0)return true;
+	   } catch (SQLException e) {
+		   e.printStackTrace();
+	   } finally {
+		   disconnect();
+	   }
+	   return false;
+   }
+    
    private void connect() {
       try {
          conn = DriverManager.getConnection(pro.getProperty("url"), pro);

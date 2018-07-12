@@ -70,7 +70,7 @@ public class Admin_ReserSubView extends JPanel {
 		bt_cancle.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 13));
 		bt_cancle.setForeground(Color.WHITE);
 		bt_cancle.setBackground(Color.BLACK);
-		bt_cancle.setBounds(34, 29, 61, 27);
+		bt_cancle.setBounds(34, 29, 100, 27);
 		p_bt.add(bt_cancle);
 	
 		

@@ -25,10 +25,10 @@ create table reserve													--문제발생
 (
    id varchar2(30), --아이디
    movie_name varchar2(60),
-   run_date char(20), --상영일자
-   start_time char(20),--영화 시작 시간
-   seatnum char(4), --좌석번호
-   screen_code char(2), --상영관 번호
+   run_date varchar2(20), --상영일자
+   start_time varchar2(20),--영화 시작 시간
+   seatnum varchar2(4), --좌석번호
+   screen_code varchar2(2), --상영관 번호
    person_cnt number(4),--인원수
    primary key(movie_name,seatnum,start_time),
    foreign key (id) references member(id)
@@ -47,9 +47,9 @@ avg_star number(2) default 0, --평점
 limit number(4), --제한나이
 price number(10), --가격
 path varchar2(30),--이미지 경로
-start_date char(10), --개봉일자
-run_date char(10), --상영 일자
-run_time char(6), --런타임
+start_date varchar2(10), --개봉일자
+run_date varchar2(10), --상영 일자
+run_time varchar2(6), --런타임
 onshow	number(2)-- 1이면 상영중
 );
 

@@ -452,6 +452,40 @@ public class MemberDAO {
       return null;
    }
    
+   public boolean updateCashPoint(String id, int cash,int point) {
+	   	connection();
+	      String sql = "update member set cash=cash+?, point=point+? where id=?";
+	      try {
+	         prestmt = conn.prepareStatement(sql);
+	         prestmt.setInt(1, cash);
+	         prestmt.setInt(2, point);
+	         prestmt.setString(3, id);
+	         int t = prestmt.executeUpdate();
+	         if(t>0) return true;
+	      }catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         diss();
+	      }
+	      return false;
+   }
+   
+   public int selectCash(String id) {
+		connection();
+	      String sql = "select cash from member where id=?";
+	      try {
+	         prestmt = conn.prepareStatement(sql);
+	         prestmt.setString(1, id);
+	         rs = prestmt.executeQuery();
+	         if(rs.next()) return rs.getInt("cash");
+	      }catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         diss();
+	      }
+	      return -1;
+   }
+   
    
    // ************************************  참조할 필요 없습니다        ***************************************  
    
@@ -611,6 +645,8 @@ public class MemberDAO {
 	    return list;
    }
 
+   
+   
 //   /*
 //    * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 포인트 차감
 //    */

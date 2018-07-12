@@ -31,7 +31,7 @@ public class ReserveDAO {
       작성자:박형진 수정일자:07/09/00:42 클래스(함수)기능: 예매확인 뷰 또는 관람내역 뷰 
      after가 true이면 관람한 내역, false이면 봐야할 영화 예매 내역
     */
-   public ArrayList<Reserve> selectOwnHistory(String id, String date, boolean after) {//상영 시간이 필요한지 확인필요
+   public ArrayList<Reserve> selectOwnHistory(String id, String date, boolean after) {//보류메소드
       ArrayList<Reserve> list = new ArrayList<>();
       try {
          connect();
@@ -59,7 +59,29 @@ public class ReserveDAO {
       }
       return list;
    }
-   
+   public ArrayList<Reserve> selectOwnHistory(String id) {//상영 시간이 필요한지 확인필요
+	      ArrayList<Reserve> list = new ArrayList<>();
+	      try {
+	         connect();
+	         String sql= "select movie_name, run_date, start_time, seatnum from reserve where id=? order by run_date asc,start_time asc";            
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, id);
+	         rs = pstmt.executeQuery();
+	         while(rs.next()) {
+	            Reserve r = new Reserve();
+	               r.setMovie_name(rs.getString("movie_name"));
+	               r.setRun_date(rs.getString("run_date"));
+	               r.setStart_time(rs.getString("start_time"));
+	                r.setSeatnum(rs.getString("seatnum"));
+	            list.add(r);
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         disconnect();
+	      }
+	      return list;
+	   }
    
    /*
       작성자:박형진 수정일자:07/09/00:42
@@ -141,6 +163,61 @@ public class ReserveDAO {
 	      }
 	   return false;
    }
+   
+   public boolean deleteReserve(Reserve r) {
+	   try {
+	         connect();
+	         String sql = "delete from reserve where id=? and start_time=? and run_date=?";
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, r.getId());
+	         pstmt.setString(2, r.getStart_time());
+	         pstmt.setString(3, r.getRun_date());
+	         
+	         int t = pstmt.executeUpdate();
+	         if(t>0) return true;
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         disconnect();
+	      }
+	   return false;
+   }
+   public int selectAllCount() {
+	   try {
+	         connect();
+	         String sql = "select count(*) from reserve where movie_name in (select movie_name from movie where onshow>0)";
+	         pstmt = conn.prepareStatement(sql);
+	         rs = pstmt.executeQuery();
+	         if(rs.next()) {
+	        	return rs.getInt(1); 
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         disconnect();
+	      }
+	   return -1;
+   }
+   
+   public int[] selectCount() {
+	   int[] rateCount = new int[4];
+	   try {
+	         connect();
+	         String sql = "select count(*) from reserve " + 
+	         			  "where movie_name in (select movie_name from movie where onshow>0) group by movie_name order by screen_code asc";
+	         pstmt = conn.prepareStatement(sql);
+	         rs = pstmt.executeQuery();
+	         for(int i=0;rs.next();i++) {
+	        	 rateCount[i]=rs.getInt(1);
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         disconnect();
+	      }
+	   return null;
+   }
+   
    
    private void connect() {
          try {

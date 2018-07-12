@@ -104,12 +104,12 @@ public class ReView extends JFrame {
 //add p_content
 		p_content.setLayout(null);
 		la_image.setBounds(100, 50, 200, 200);
-		la_name.setBounds(500, 40, 100, 30);
-		la_genre.setBounds(500, 80, 100, 30);
-		la_director.setBounds(500, 120, 100, 30);
-		la_actor.setBounds(500, 160, 100, 30);
-		la_startdate.setBounds(500, 200, 100, 30);
-		la_runtime.setBounds(500, 240, 100, 30);
+		la_name.setBounds(500, 40, 150, 30);
+		la_genre.setBounds(500, 80, 150, 30);
+		la_director.setBounds(500, 120, 150, 30);
+		la_actor.setBounds(500, 160, 150, 30);
+		la_startdate.setBounds(500, 200, 150, 30);
+		la_runtime.setBounds(500, 240, 150, 30);
 		ta_summary.setBounds(850, 50, 200, 100);
 		p_content.add(la_image);
 		p_content.add(la_name);
