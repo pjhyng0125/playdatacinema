@@ -242,25 +242,25 @@ public class ScreenView extends JFrame {
 		lb_1 = new JLabel("1");
 		lb_1.setFont(new Font("±¼¸²", Font.BOLD, 15));
 		lb_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lb_1.setBounds(268, 483, 62, 18);
+		lb_1.setBounds(266, 483, 62, 18);
 		getContentPane().add(lb_1);
 		
 		lb_2 = new JLabel("2");
 		lb_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_2.setFont(new Font("±¼¸²", Font.BOLD, 15));
-		lb_2.setBounds(340, 483, 62, 18);
+		lb_2.setBounds(339, 483, 62, 18);
 		getContentPane().add(lb_2);
 		
 		lb_3 = new JLabel("3");
 		lb_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_3.setFont(new Font("±¼¸²", Font.BOLD, 15));
-		lb_3.setBounds(459, 483, 62, 18);
+		lb_3.setBounds(461, 483, 62, 18);
 		getContentPane().add(lb_3);
 		
 		lb_4 = new JLabel("4");
 		lb_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_4.setFont(new Font("±¼¸²", Font.BOLD, 15));
-		lb_4.setBounds(534, 483, 62, 18);
+		lb_4.setBounds(532, 483, 62, 18);
 		getContentPane().add(lb_4);
 		
 		lb_5 = new JLabel("5");
@@ -307,7 +307,7 @@ public class ScreenView extends JFrame {
 		lb_table1.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_table1.setOpaque(true);
 		lb_table1.setBorder(linea);
-		lb_table1.setBounds(299, 453, 75, 18);
+		lb_table1.setBounds(297, 453, 75, 18);
 		getContentPane().add(lb_table1);
 		
 		lb_table2 = new JLabel("table");
