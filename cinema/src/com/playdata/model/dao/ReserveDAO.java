@@ -164,14 +164,14 @@ public class ReserveDAO {
 	   return false;
    }
    
-   public boolean deleteReserve(Reserve r) {
+   public boolean deleteReserve(String id, String start_time, String run_date) {
 	   try {
 	         connect();
 	         String sql = "delete from reserve where id=? and start_time=? and run_date=?";
 	         pstmt = conn.prepareStatement(sql);
-	         pstmt.setString(1, r.getId());
-	         pstmt.setString(2, r.getStart_time());
-	         pstmt.setString(3, r.getRun_date());
+	         pstmt.setString(1, id);
+	         pstmt.setString(2, start_time);
+	         pstmt.setString(3, run_date);
 	         
 	         int t = pstmt.executeUpdate();
 	         if(t>0) return true;
