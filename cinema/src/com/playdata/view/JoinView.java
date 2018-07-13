@@ -3,6 +3,8 @@ package com.playdata.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -171,6 +173,17 @@ public class JoinView extends JFrame
 		
 		cb_hint.setBounds(80,220,130,25);
 		cb_email.setBounds(255,460,100,25);
+		cb_email.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String emailT = cb_email.getSelectedItem().toString();
+				System.out.println("emailT="+emailT);
+				tf_email2.setText(emailT);
+
+				
+			}
+		});
 		
 		rb_gender1.setBounds(80,380,25,25);
 		rb_gender2.setBounds(140,380,25,25);
@@ -224,6 +237,7 @@ public class JoinView extends JFrame
 		add(cb_hint);
 		add(cb_email);
 		
+		
 		for(int i=0; i<jb.length; i++)
 		{
 			add(jb[i]);
@@ -244,6 +258,8 @@ public class JoinView extends JFrame
 		JOptionPane.showMessageDialog(this, msg);
 	}
   
+  
+  
   public void setEmpty() {
 	  tf_id.setText("");
 	  tf_addr.setText("");
@@ -261,9 +277,10 @@ public class JoinView extends JFrame
 	  tf_birth3.setText("");
 	  cb_hint.setSelectedIndex(0);
 	  cb_email.setSelectedIndex(0);
+	  
   }
-
-
+  
+  
   public boolean showConfirmMsg(String msg) {
 	  int t = JOptionPane.showConfirmDialog(this,msg,"회원가입 등록",JOptionPane.YES_NO_OPTION);
 	  if(t==0) {
@@ -271,5 +288,6 @@ public class JoinView extends JFrame
 	  }
 	  return false;
   }
+
 }//JoinForm
 
