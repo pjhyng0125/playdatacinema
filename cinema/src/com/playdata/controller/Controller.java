@@ -83,12 +83,12 @@ public class Controller extends MouseAdapter implements ActionListener {
 	int selected_time;// ScheduleTimeView에서 선택된 toggle button의 index를 저장하는 변수
 
 	int DB_screenCode;
-
+	ArrayList<Integer> seatList;
 	String DB_movie; // 선택한 영화의 이름을 저장하는 변수 ... 0,1,2,3
 	String DB_date; // Schedule 창에서 선택한 날짜를 저장하는 변수 ... 7/19
 	String DB_time; // Schedule 창에서 선택한 시간을 저장하는 변수 ... 7/19
+	int DB_price;
 	int DB_seat;// screen창에 좌석 저장변수
-	
 
 	boolean flag_date;
 	boolean flag_time;
@@ -215,6 +215,18 @@ public class Controller extends MouseAdapter implements ActionListener {
 			}
 		});
 
+		//joinview eventlistner
+		v_join.cb_email.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String emailT = v_join.cb_email.getSelectedItem().toString();
+				System.out.println("emailT="+emailT);
+				v_join.tf_email2.setText(emailT);
+
+			}
+		});
+		
 		/*
 		 * 작성자: 박진형 수정일자: 07/03 23:18 이벤트리스너 기능: ScheduleView => Check ScheduleTimeView
 		 */
@@ -367,9 +379,12 @@ public class Controller extends MouseAdapter implements ActionListener {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					v_screen.lb_people.setText("선택인원: " + v_screen.checkClicked() + "");
-
+					int su = v_screen.checkClicked();
+					v_screen.lb_people.setText("선택인원: " + su + "명");
+					Movie m = movie_dao.selectScreen(DB_movie);
+					DB_price = m.getPrice()*su;
 					DB_seat = v_screen.checkindex();
+					v_screen.tf_select_pay.setText(DB_price+"원");
 					System.out.println("DB_seat= " + DB_seat);
 
 					if (v_screen.checkSelected())
@@ -395,6 +410,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 		v_mypage.bt_revise.addActionListener(this);
 		v_mypage.bt_logout.addActionListener(this);
 		v_mypage.bt_revise.addActionListener(this);
+		v_mypage.bt_drop.addActionListener(this);
 		v_review.bt_reserve.addActionListener(this);
 		v_createreview.bt_cancle.addActionListener(this);
 		v_createreview.bt_create.addActionListener(this);
@@ -417,6 +433,16 @@ public class Controller extends MouseAdapter implements ActionListener {
 		v_cash.bt_cash.addActionListener(this);
 		v_cash.bt_charge_cancle.addActionListener(this);
 		v_cash.bt_charge_ok.addActionListener(this);
+		
+		
+		v_pay.bt_cancel.addActionListener(this);
+		v_pay.bt_charge_cancel.addActionListener(this);
+		v_pay.bt_charge_ok.addActionListener(this);
+		v_pay.bt_discount_cancel.addActionListener(this);
+		v_pay.bt_discount_ok.addActionListener(this);
+		v_pay.bt_ok.addActionListener(this);
+		v_pay.bt_point_cancel.addActionListener(this);
+		v_pay.bt_point_ok.addActionListener(this);
 
 		v_myReserview.bt_mypage.addActionListener(this);
 		// v_check.bt_cancel.addActionListener(this);
@@ -680,33 +706,35 @@ public class Controller extends MouseAdapter implements ActionListener {
 			Member m = new MemberDAO().select_member(login_id);
 			v_mypage.la_greet.setText(m.getName() + "님");
 			v_mypage.la_grade2.setText(mem_grade[m.getMem_grade()]);
-			v_mypage.la_cash2.setText(m.getCash() + "원");
 			v_mypage.la_point2.setText(m.getPoint() + "P");
 
 			v_reserve.setVisible(false);
 			v_mypage.setVisible(true);
 		} else if (ob == v_schedule.bt_next) {// 사용중인 좌석
-			
-			
+			System.out.println("hi1");
 			ArrayList<String> list = new ScreenDAO().selectScreen(movie_dao.selectSchedule(DB_movie), DB_time);
 			for (int i = 0; i < list.size(); i++) {
+				System.out.println(Integer.parseInt(list.get(i)));
 				v_screen.bt_seat[Integer.parseInt(list.get(i))].setEnabled(false);
+				System.out.println("hi2");
 			}
+			v_screen.checkSelected();
+			System.out.println("hi3");
 			v_schedule.setVisible(false);
 			v_screen.setVisible(true);
 
 		} else if (ob == v_screen.select_movie) {
-		if(JOptionPane.showConfirmDialog(v_screen, "선택된 좌석 정보가 초기화됩니다.\n뒤로 가시겠습니까?") == 0) {
-			DB_seat = 0;
-			v_screen.setDefaultSeat();
-			v_screen.checklast();
-			v_screen.pay_view.setEnabled(false);
-			v_screen.setVisible(false);
-			v_schedule.setVisible(true);			
-		}
-		} else if (ob == v_screen.pay_view) {
-			v_screen.setVisible(false);
-			v_pay.setVisible(true);
+			if (JOptionPane.showConfirmDialog(v_screen, "선택된 좌석 정보가 초기화됩니다.\n뒤로 가시겠습니까?") == 0) {
+				DB_seat = 0;
+				for(int i=0; i<v_screen.bt_seat.length; i++) {
+					v_screen.bt_seat[i].setEnabled(true);
+				}
+				v_screen.setDefaultSeat();
+				v_screen.checklast();
+				v_screen.pay_view.setEnabled(false);
+				v_screen.setVisible(false);
+				v_schedule.setVisible(true);
+			}
 		} else if (ob == v_reserve.bt_logout) {
 			if (v_reserve.sendConfirmedMsg("로그아웃 하시겠습니까?") == 0) {
 				v_reserve.sendshowMsg("로그아웃 되었습니다.");
@@ -716,6 +744,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 				v_login.tf_id.requestFocus();
 				v_reserve.setVisible(false);
 				v_login.setVisible(true);
+				user.sendMsg("exit", "ce");
 			}
 		} else if (ob == v_mypage.bt_back) {
 			v_mypage.setVisible(false);
@@ -731,7 +760,7 @@ public class Controller extends MouseAdapter implements ActionListener {
 			}
 		} else if (ob == v_mypage.bt_cash) {
 			v_cash.setVisible(true);
-		} else if (ob == v_cash.bt_charge_ok) {// 통신필요----------------------------------------------------------
+		} else if (ob == v_cash.bt_charge_ok ) {// 통신필요----------------------------------------------------------
 			String cash = v_cash.tf_charge_cash.getText().trim();
 			if (!cash.matches("[\\d]+")) {
 				v_cash.showMsg("충전금액을 제대로 입력해주세요!");
@@ -739,7 +768,32 @@ public class Controller extends MouseAdapter implements ActionListener {
 			}
 			String msg = login_id + "&" + Integer.parseInt(cash) + "&" + 0;
 			user.sendMsg(msg, "uc");// -----------------------------------updatecash
-		} else if (ob == v_cash.bt_charge_cancle) {
+		}else if(ob == v_pay.bt_charge_ok) {
+			String cash = v_pay.tf_charge_cash.getText().trim();
+			if (!cash.matches("[\\d]+")) {
+				v_cash.showMsg("충전금액을 제대로 입력해주세요!");
+				return;
+			}
+			String msg = login_id + "&" + Integer.parseInt(cash) + "&" + 0;
+			user.sendMsg(msg, "uc");
+		}
+		else if(ob == v_pay.bt_point_ok) {
+			String point = v_pay.tf_use_point.getText();
+			int current_point = member_dao.selectPoint(login_id);
+			if(point.matches("[\\d]+")) {
+				int sub_point = Integer.parseInt(point);
+				if(sub_point<=current_point) {
+					if(v_pay.showConfirmMsg("정말로 사용하시겠습니까?")){
+					}
+				}else {
+					v_pay.showMsg("보유하신 포인트가 부족합니다!");
+				}
+			}
+		}
+		else if(ob == v_pay.bt_point_cancel) {
+			v_pay.tf_point.setText("");
+		}
+		else if (ob == v_cash.bt_charge_cancle) {
 			v_cash.setVisible(false);
 		} else if (ob == v_mypage.bt_revise) {// 회원정보 수정(통신필요)-----------------------------------------
 			Member m = new MemberDAO().select_member(login_id);
@@ -802,14 +856,6 @@ public class Controller extends MouseAdapter implements ActionListener {
 			showMyReserveInfo(list);
 			v_mypage.setVisible(false);
 			v_myReserview.setVisible(true);
-		} else if (ob == v_mypage.bt_drop) {// ★
-
-			if (new MemberDAO().deleteMember(login_id)) {
-				v_mypage.showMsg("탈퇴가 완료되었습니다!");
-				login_id = "";
-				v_mypage.setVisible(false);
-				v_login.setVisible(true);
-			}
 		} else if (ob == v_myReserview.bt_mypage) {
 			v_myReserview.setVisible(false);
 			v_mypage.setVisible(true);
@@ -838,15 +884,48 @@ public class Controller extends MouseAdapter implements ActionListener {
 			v_createreview.ta_content.setText("");
 			v_myReserview.setVisible(true);
 		} else if (ob == v_schedule.bt_back) {
-			if(JOptionPane.showConfirmDialog(v_schedule, "선택한 날짜/시간이 초기화됩니다.\n뒤로 가시겠습니까?") == 0) {
-			flag_time = false;
-			flag_date = false;
-			v_schedule.setDefaulttbt();
-			v_schedule.bt_next.setEnabled(false);
-			v_schedule.setVisible(false);
-			v_reserve.setVisible(true);
+			if (JOptionPane.showConfirmDialog(v_schedule, "선택한 날짜/시간이 초기화됩니다.\n뒤로 가시겠습니까?") == 0) {
+				flag_time = false;
+				flag_date = false;
+				v_schedule.setDefaulttbt();
+				v_schedule.bt_next.setEnabled(false);
+				v_schedule.setVisible(false);
+				v_reserve.setVisible(true);
 			}
-		} else if (ob == v_login.bt_join) {// 회원가입폼으로 이동.
+		}else if(ob == v_screen.pay_view) {
+			int balance = member_dao.selectCash(login_id)-DB_price;
+			if(balance<0) {
+				v_screen.showMsg("금액이 부족합니다!");
+				return;
+			}
+			seatList = v_screen.addIndexList();
+			v_pay.tf_pmovie_info.setText("영화시작일자: "+DB_date+".   시간: "+ DB_time+ "  /"+DB_screenCode+"상영관");
+			v_pay.tf_have_cash_1.setText(member_dao.selectCash(login_id)+"원");
+			v_pay.tf_use_point.setText(member_dao.selectPoint(login_id)+"");
+			v_pay.tf_pay.setText(DB_price+"원");
+			v_pay.tf_discount.setText("0원");
+			v_pay.tf_point.setText("0P");
+			v_pay.tf_final_pay.setText(DB_price+"원");
+			v_pay.tf_have_cash.setText(member_dao.selectCash(login_id)+"원");
+			v_pay.tf_balance.setText(balance+"원");
+			v_pay.tf_sc_point.setText(DB_price/100+"P");
+			
+			v_screen.setVisible(false);
+			v_pay.setVisible(true);
+		}
+		else if(ob== v_pay.bt_ok) {
+			for(int i=0; i<seatList.size();i++) {
+				user.sendMsg(login_id+"&"+DB_movie+
+						"&"+DB_date+"&"+DB_time+"&"+seatList.get(i)+"&"+DB_screenCode+"&"+seatList.size()*2, "ip");
+			}
+		}
+		else if(ob == v_pay.bt_charge_cancel) {
+			v_pay.tf_charge_cash.setText("");
+		}
+		
+		
+		
+		else if (ob == v_login.bt_join) {// 회원가입폼으로 이동.
 			v_join.tf_id.requestFocus(); // 아이디 텍스트필드 포커스.
 			v_login.setVisible(false);
 			v_join.setVisible(true);
@@ -1117,8 +1196,9 @@ public class Controller extends MouseAdapter implements ActionListener {
 					case "me": {// deleteMember
 						if (servermsg.equals("success")) {
 							v_mypage.showMsg("탈퇴가 완료되었습니다!");
-							v_createreview.setVisible(false);
-							v_myReserview.setVisible(true);
+							login_id="";
+							v_mypage.setVisible(false);
+							v_login.setVisible(true);
 						} else {
 							v_mypage.showMsg("탈퇴 실패!");
 						}
@@ -1129,7 +1209,9 @@ public class Controller extends MouseAdapter implements ActionListener {
 							int newCash = new MemberDAO().selectCash(login_id);
 							if (newCash >= 0) {
 								v_cash.showMsg("충전이 완료되었습니다!");
+								v_pay.lb_have_cash.setText(newCash+"원");
 								v_mypage.la_cash2.setText(newCash + "원");
+								v_pay.tf_charge_cash.setText("");
 								v_cash.tf_charge_cash.setText("");
 								v_cash.tf_charge_cash.requestFocus();
 							}
@@ -1145,6 +1227,19 @@ public class Controller extends MouseAdapter implements ActionListener {
 							System.out.println("평점 최신화 실패");
 						}
 						break;
+					}
+					case "pa":{
+						if(servermsg.equals("success")) {
+							v_pay.showMsg("결제가 완료되었습니다!");
+							
+							v_pay.setVisible(false);
+							v_reserve.setVisible(true);
+						}else {
+							v_pay.showMsg("결제실패!");
+						}
+					}
+					case "se":{
+						System.exit(0);
 					}
 					}
 				} catch (IOException e) {

@@ -16,6 +16,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.Choice;
 import javax.swing.DropMode;
 import javax.swing.ImageIcon;
@@ -28,42 +30,42 @@ public class PayView extends JFrame {
 	JPanel p_cash,p_discount;
 	  
 	//-----------------------------라벨
-	JLabel lb_member;//회원등급
-	JLabel lb_pay;//결제금액
-	JLabel lb_discount;//할인금액
-	JLabel lb_point;//포인트사용
-	JLabel lb_final_pay;//최종결제금액
-	JLabel lb_have_cash;//보유 캐쉬
-	private JLabel lb_have_cash_1;
-	JLabel lb_balance;// 사용후 잔액
-	JLabel lb_sc_point;// 지급예정포인트
-	JLabel lb_cash;//왼쪽 캐쉬
-	JLabel lb_charge_cash;//캐쉬충전
-	JLabel lb_discount_list, lb_discount_coupon,lb_have_point;//할인내역,할인쿠폰,보유포인트
-	Choice ch_copoun;//쿠폰 선택
+	public JLabel lb_member;//회원등급
+	public JLabel lb_pay;//결제금액
+	public JLabel lb_discount;//할인금액
+	public JLabel lb_point;//포인트사용
+	public JLabel lb_final_pay;//최종결제금액
+	public JLabel lb_have_cash;//보유 캐쉬
+	public JLabel lb_have_cash_1;
+	public JLabel lb_balance;// 사용후 잔액
+	public JLabel lb_sc_point;// 지급예정포인트
+	public JLabel lb_cash;//왼쪽 캐쉬
+	public JLabel lb_charge_cash;//캐쉬충전
+	public JLabel lb_discount_list, lb_discount_coupon,lb_have_point;//할인내역,할인쿠폰,보유포인트
+	public Choice ch_copoun;//쿠폰 선택
 	JLabel la_logo;
 	JLabel la_cinema;
 	
 	//-----------------------------텍스트필드
-	JTextField tf_grade;//등급정보
-	JTextField tf_pmovie_info;//영화정보
-    JTextField tf_pay;//결제금액
-    JTextField tf_discount;//할인금액
-    JTextField tf_point;//포인트금액
-    JTextField tf_final_pay;//최종결제금액
-    JTextField tf_have_cash;//보유캐쉬
-    private JTextField tf_have_cash_1;
-    JTextField tf_balance;//사용후 잔액
-    JTextField tf_sc_point;//지급예정포인트
-    JTextField tf_charge_cash;//캐쉬충전
-    JTextField tf_use_point;//포인트 사용
+	public JTextField tf_grade;//등급정보
+	public JTextField tf_pmovie_info;//영화정보
+	public JTextField tf_pay;//결제금액
+	public JTextField tf_discount;//할인금액
+	public JTextField tf_point;//포인트금액
+	public JTextField tf_final_pay;//최종결제금액
+	public JTextField tf_have_cash;//보유캐쉬
+	public  JTextField tf_have_cash_1;
+    public JTextField tf_balance;//사용후 잔액
+    public JTextField tf_sc_point;//지급예정포인트
+    public JTextField tf_charge_cash;//캐쉬충전
+    public JTextField tf_use_point;//포인트 사용
     
     //-------------------------------버튼
-    JButton bt_ok,bt_cancel;//오른쪽 확인,취소
-    JButton bt_charge_ok,bt_charge_cancel;//캐쉬 충전 취소
-    JButton bt_discount_ok,bt_discount_cancel;//할인 쿠폰 사용 취소
-    JButton bt_point_ok,bt_point_cancel;//포인트 사용 취소
-    private JPanel panel_1;
+    public JButton bt_ok,bt_cancel;//오른쪽 확인,취소
+    public JButton bt_charge_ok,bt_charge_cancel;//캐쉬 충전 취소
+    public JButton bt_discount_ok,bt_discount_cancel;//할인 쿠폰 사용 취소
+    public JButton bt_point_ok,bt_point_cancel;//포인트 사용 취소
+    public  JPanel panel_1;
     
     //-------------------------------테두리
     LineBorder lineb,linea;
@@ -132,7 +134,7 @@ public class PayView extends JFrame {
 			tf_final_pay.setBorder(lineb);
 		tf_have_cash = new JTextField();
 		tf_have_cash.setHorizontalAlignment(SwingConstants.RIGHT);
-			tf_have_cash.setText("30,000");
+			tf_have_cash.setText("");
 			tf_have_cash.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
 			tf_have_cash.setBorder(lineb);
 		tf_balance = new JTextField();
@@ -270,10 +272,6 @@ public class PayView extends JFrame {
 			tf_have_cash.setBackground(SystemColor.text);
 			tf_have_cash.setText("30,000");	
 			tf_have_cash.setBorder(lineb);*///왜 더있지??
-		tf_have_cash = new JTextField();
-			tf_have_cash.setBackground(SystemColor.text);
-			tf_have_cash.setText("30,000");
-			tf_have_cash.setFont(new Font("맑은 고딕", Font.PLAIN, 22));
 			
 		//왼쪽 라벨 위치
 		lb_cash.setBounds(101, 103, 109, 47);
@@ -354,5 +352,16 @@ public class PayView extends JFrame {
 		setVisible(false);
 		
 	}//생성자
+	
+	  public void showMsg(String msg) {
+			JOptionPane.showMessageDialog(this, msg);
+		}
+	  public boolean showConfirmMsg(String msg) {
+		  int t = JOptionPane.showConfirmDialog(this,msg,"회원가입 등록",JOptionPane.YES_NO_OPTION);
+		  if(t==0) {
+			  return true;
+		  }
+		  return false;
+	  }
 
 }

@@ -173,17 +173,8 @@ public class JoinView extends JFrame
 		
 		cb_hint.setBounds(80,220,130,25);
 		cb_email.setBounds(255,460,100,25);
-		cb_email.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String emailT = cb_email.getSelectedItem().toString();
-				System.out.println("emailT="+emailT);
-				tf_email2.setText(emailT);
-
-				
-			}
-		});
+	
+	
 		
 		rb_gender1.setBounds(80,380,25,25);
 		rb_gender2.setBounds(140,380,25,25);

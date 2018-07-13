@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.SystemColor;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 
 public class ScreenView extends JFrame {
 	
@@ -216,7 +217,9 @@ public class ScreenView extends JFrame {
 		tf_select_pay = new JTextField();
 		tf_select_pay.setBackground(new Color(52,52,51));
 		tf_select_pay.setForeground(SystemColor.text);
+		tf_select_pay.setHorizontalAlignment(JTextField.CENTER);
 		tf_seat_info = new JTextField();
+		tf_seat_info.setHorizontalAlignment(JTextField.CENTER);
 		tf_seat_info.setForeground(Color.WHITE);
 		tf_seat_info.setBackground(new Color(52,52,51));
 		lb_movie_image = new JLabel(image_witch);
@@ -391,7 +394,7 @@ public class ScreenView extends JFrame {
 		int count=0;
 		for(int i=0; i<bt_seat.length; i++) {
 			if(bt_seat[i].isSelected())
-				count++;
+				count+=2;
 		}
 		return count;
 	}
@@ -440,5 +443,9 @@ public class ScreenView extends JFrame {
 			  javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();
 		}
 	}
+	  public void showMsg(String msg) {
+			JOptionPane.showMessageDialog(this, msg);
+		}
+	  
 }
 	
