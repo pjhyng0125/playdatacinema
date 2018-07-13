@@ -35,7 +35,7 @@ public class AdminView extends JFrame implements Runnable {
 	JPanel p_member; // 회원정보 패널
 	JPanel p_history; // 결제정보(수익정보, 결제내역) 패널
 
-	public JComboBox<String> cb_menu;
+	public JComboBox<String> cb_menu = new JComboBox<>();;
 	public JComboBox<String> cb_month;
 	JTextField tf_totProfit;
 
@@ -54,9 +54,9 @@ public class AdminView extends JFrame implements Runnable {
 	JLabel la_time;
 	JLabel la_logo,la_cinema;
 
-	public JButton bt_selectAll;
-	public JButton bt_select;
-	public JButton bt_delete;
+	public JButton bt_selectAll = new JButton("전체조회");
+	public JButton bt_select = new JButton("선택조회");
+	public JButton bt_delete = new JButton("삭제");
 	public JButton bt_canclePay;
 	public JButton bt_postManage;
 	public JButton bt_cmtManage;
@@ -101,7 +101,6 @@ public class AdminView extends JFrame implements Runnable {
 			bt_postManage.setBackground(Color.black);
 			bt_postManage.setForeground(Color.white);
 			getContentPane().add(bt_postManage);
-			cb_menu = new JComboBox<>();
 			cb_menu.setBounds(1050, 606, 100, 30);
 			
 			getContentPane().add(cb_menu);
@@ -127,15 +126,12 @@ public class AdminView extends JFrame implements Runnable {
 			p_member.setBounds(0, 0, 1036, 753);
 		la_memberInf = new JLabel("회원정보");
 			la_memberInf.setBounds(150, 58, 100, 30);
-		bt_selectAll = new JButton("전체조회");
 			bt_selectAll.setBounds(689, 651, 100, 30);
 			bt_selectAll.setBackground(Color.BLACK);
 			bt_selectAll.setForeground(Color.WHITE);
-		bt_select = new JButton("선택조회");
 			bt_select.setBounds(803, 651, 100, 30);
 			bt_select.setBackground(Color.BLACK);
 			bt_select.setForeground(Color.white);
-		bt_delete = new JButton("삭제");
 			bt_delete.setBounds(917, 651, 80, 30);
 			bt_delete.setBackground(Color.BLACK);
 			bt_delete.setForeground(Color.WHITE);

@@ -37,6 +37,7 @@ import com.playdata.view.CreateReView;
 import com.playdata.view.FindIdPwView;
 import com.playdata.view.FindIdView;
 import com.playdata.view.FindPwView;
+import com.playdata.view.HistoryAdminView;
 import com.playdata.view.JoinUpdateView;
 import com.playdata.view.JoinView;
 import com.playdata.view.LoginView;
@@ -74,10 +75,13 @@ public class Controller extends MouseAdapter implements ActionListener {
 	Admin_movie_view v_admin_movie;
 	Admin_re_view v_admin_review;
 
+	HistoryAdminView v_history;
+	
 	Admin_Reserview v_myReserview;
 	// dao
 	MovieDAO movie_dao;
 	MemberDAO member_dao;
+	ReserveDAO reserve_dao;
 	// int
 	int selected_date;// ScheduleDateView에서 선택된 toggle button의 index를 저장하는 변수
 	int selected_time;// ScheduleTimeView에서 선택된 toggle button의 index를 저장하는 변수
@@ -132,6 +136,8 @@ public class Controller extends MouseAdapter implements ActionListener {
 		v_cash = new CashView();
 		v_check = new CheckView();
 		v_check_sub = new Check_sub_View();
+		reserve_dao = new ReserveDAO();
+		v_history = new HistoryAdminView();
 
 		v_myReserview = new Admin_Reserview();
 		// dao
@@ -460,6 +466,9 @@ public class Controller extends MouseAdapter implements ActionListener {
 
 	// ---------------------------------------------------------관리자 eventUp
 	public void adminEventUp() {
+		v_history.bt_movie.addActionListener(this);
+		v_history.bt_reserve.addActionListener(this);
+		v_admin.cb_menu.addActionListener(this);
 		v_admin.bt_postManage.addActionListener(this);
 		v_admin.bt_canclePay.addActionListener(this);
 		v_admin.bt_cmtManage.addActionListener(this);
@@ -1099,19 +1108,58 @@ public class Controller extends MouseAdapter implements ActionListener {
 			}
 		}
 		// ------------------------------관리자 뷰-----------------------------
-		if (login_id.equals("admin")) {
-			if (ob == v_admin.bt_selectAll) {// 회원 전체조회
-				System.out.println("hi");
-				ArrayList<Member> list = member_dao.selectAllMember();
-				v_admin.dispTable(list);
-			} else if (ob == v_admin.bt_select) {
-				String id = v_admin.showInputmsg("조회하실 아이디를 입력해주세요!");
+		
+		//진형변경시작
+	if(v_admin != null) {
+		if (ob == v_admin.bt_selectAll) {// 회원 전체조회
+			System.out.println("hi");
+			ArrayList<Member> list = member_dao.selectAllMember();
+			v_admin.dispTable(list);
+		} else if (ob == v_admin.bt_select) {
+			String selectid = v_admin.showInputmsg("조회할 아이디를 입력해주세요!");
+			ArrayList<Member> list = member_dao.selectid(selectid);
+			v_admin.dispTable(list);	
+		} else if (ob == v_admin.bt_delete) {
+			String deleteid = v_admin.showInputmsg("삭제할 아이디를 입력해주세요!");
+		if(deleteid != null && deleteid.length() != 0) {
+			if(v_admin.showconfirmmsg(deleteid + " 를 정말 삭제하시겠습니까?") == 0)
+				if(member_dao.deleteMember(deleteid))
+					v_admin.showmsg(deleteid+" 삭제 완료하였습니다.");
+				else
+					v_admin.showmsg(deleteid+" 는 존재하지 않는 아이디입니다.");
+			ArrayList<Member> list = member_dao.selectAllMember();
+			v_admin.dispTable(list);
+		}
+		else
+			v_admin.showmsg("아이디를 정상적으로 입력해주세요.");
+		}//v_admin.bt_delete
+		if(ob == v_history.bt_movie) {
+			ArrayList<Movie> list = movie_dao.selectMovie_Adm();
+			v_history.displayTable(list);
+		}
+		if(ob == v_history.bt_reserve) {
+			ArrayList<Reserve> list = reserve_dao.selectAll();
+			v_history.displayTable_reserve(list);
+		}
+//진형변경콤보박스이벤트
+		if(ob == v_admin.cb_menu) {
+			int index = v_admin.cb_menu.getSelectedIndex();
+			if(index == 0) {
+				v_admin.history(false);;
+				v_admin.memberInf(true);
+			}else {
+				v_history.setVisible(true);
+				v_admin.memberInf(false);
+				v_admin.cb_menu.setSelectedIndex(0);
 			}
+		}//admin.cb_menu
+//진형변경끝			
 			if (ob == v_admin.bt_postManage) {
 				v_admin_movie.setVisible(true);
 				v_admin_review.setVisible(true);
 			}
-		}
+	}
+		
 	}// actionPerformed
 
 	public class Client extends Thread {

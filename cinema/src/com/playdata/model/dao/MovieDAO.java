@@ -232,7 +232,7 @@ public class MovieDAO {
       try {
          connect();
          String sql = "select path,limit,price from movie"
-                  + " while movie_name = ?";
+                  + " where movie_name = ?";
          pstmt = conn.prepareStatement(sql);
          pstmt.setString(1, movie_name);
          rs = pstmt.executeQuery();

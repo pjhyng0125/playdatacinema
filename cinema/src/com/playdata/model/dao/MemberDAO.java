@@ -256,6 +256,23 @@ public class MemberDAO {
 		return false;
 	}// deleteMember
 	
+	public int selectPoint(String id) {
+	      connection();
+	      String sql = "select point from member where id=?";
+	      try {
+	         prestmt = conn.prepareStatement(sql);
+	         prestmt.setString(1, id);
+	         rs = prestmt.executeQuery();
+	         if (rs.next())
+	            return rs.getInt("point");
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         diss();
+	      }
+	      return -1;
+	   }
+	
 	/*
 	 * 작성자 : 이성훈 작성일자 :07.05 기능설명 : 마이페이지창 - 예매 확인/취소
 	 */
