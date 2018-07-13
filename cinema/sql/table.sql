@@ -19,7 +19,7 @@ answer varchar2(30)
 );
 
 select * from member;
-
+select * from screen;
 
 create table reserve													--문제발생
 (
@@ -78,7 +78,6 @@ flag number(2) not null, --1이면 매진석
 primary key(screen_code,run_date,start_time,seatnum)
 );
 
-
 ---보류
 create table admin
 (
@@ -127,7 +126,7 @@ insert into movie values ('앤트맨과와스프','페이트 리드','폴러드,에반젤린 릴리',
 insert into movie values ('독전','이창동','김다미,성동일','독전이 나타났다!','액션',25,4,15,8000,'image/antman.png','6/28','7/05',120,2);
 insert into movie values ('베테랑','이병헌','김다미,성동일','베테랑이 나타났다!','액션',20,2,15,8000,'image/her_story.png','6/28','7/05',120,3);
 insert into movie values ('실미도','박찬욱','김다미,성동일','실미도가 나타났다!','액션',15,1,15,8000,'image/returns.png','6/28','7/05',120,4);
-
+select * from movie;
 delete from reserve;
 insert into RESERVE values ('encore1','마녀','7/05','12:30','2',1,2);
 insert into RESERVE values ('encore2','마녀','7/06','12:30','4',1,2);
@@ -163,6 +162,11 @@ insert into movie_comment values ('encore5','앤트맨과와스프',1,1,'노잼');
 insert into movie_comment values ('encore6','앤트맨과와스프',2,5,'노잼');
 insert into movie_comment values ('encore7','앤트맨과와스프',3,5,'댓글세개');
 
+insert into screen values (1,'07/16','09:30',0,1);
+insert into screen values (1,'07/16','09:30',1,1);
+insert into screen values (1,'07/16','09:30',2,0);
+insert into screen values (1,'07/16','09:30',3,0);
+insert into screen values (1,'07/12','09:30',4,0);
 
 delete from screen;
 insert into screen values (1,'07/12','09:30',0,0);

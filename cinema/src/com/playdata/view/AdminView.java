@@ -161,7 +161,7 @@ public class AdminView extends JFrame implements Runnable {
 		p_member.add(bt_select);
 		p_member.add(bt_delete);
 
-		p_member.setVisible(false);
+		p_member.setVisible(true);
 	}
  
 	public void history() {// 결제정보(수익정보, 결제내역) 패널
@@ -237,7 +237,7 @@ public class AdminView extends JFrame implements Runnable {
 		p_history.add(tf_totProfit);
 		p_history.add(la_logo);
 		p_history.add(la_cinema);
-		p_history.setVisible(true);
+		p_history.setVisible(false);
 	}
 
 	@Override
@@ -281,7 +281,7 @@ public class AdminView extends JFrame implements Runnable {
 		}
 	}
  	
- 	public void dispTable(ArrayList<Member> list) {
+ 	public void displayTable(ArrayList<Member> list) {
  		dtm_member.setRowCount(0);
  		String[] mem_grade = {"일반","VIP","VVIP"};
  		for(int i=0; i<list.size();i++) {

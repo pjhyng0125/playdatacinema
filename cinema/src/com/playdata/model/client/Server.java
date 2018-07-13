@@ -50,10 +50,13 @@ public class Server implements Runnable{
 //영화 평점 갱신
 	static final String STARUPDATE = "us";
 	static final String STAR = "st";
+//결제 추가
+	static final String INSERTPAY = "ip";
+	static final String PAY = "pa";
 //클라이언트 종료 메세지 (받을 예정)
 	static final String CLIENTEXIT = "ce";
 //서버 종료 메세지 (보낼 예정)
-	static final String SERVEREXIT = "se"; 
+	static final String SERVEREXIT = "se";
 	
 	public Server() {
 		clients = new ArrayList<>();
@@ -182,6 +185,17 @@ if(mem_dao.updateCashPoint(ms_ca[0], Integer.parseInt(ms_ca[1]), Integer.parseIn
 						else
 							sendMsg("fail", STAR);
 					break;
+					case INSERTPAY:
+						String ms_p[] = clientmsg.split("&");
+						Reserve r = new Reserve(
+							ms_p[0], ms_p[1], ms_p[2], ms_p[3], ms_p[4]
+									, Integer.parseInt(ms_p[5]), Integer.parseInt(ms_p[6])
+								);
+						if(res_dao.insertReserve(r))
+							sendMsg("success", PAY);
+						else
+							sendMsg("fail", PAY);
+						break;
 					case CLIENTEXIT:	//ce|exit
 						if(clientmsg.equals("exit")) {
 							System.out.println("클라이언트 접속 종료 요청");
