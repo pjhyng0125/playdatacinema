@@ -299,6 +299,8 @@ public class AdminView extends JFrame implements Runnable {
  		}
  	}
  	
+ 	
+ 	
  	public String showInputmsg(String msg) {
  		return JOptionPane.showInputDialog(msg);
  	}
