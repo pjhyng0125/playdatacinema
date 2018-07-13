@@ -56,6 +56,26 @@ public class MovieDAO {
       return movieList;
    }
    
+   public ArrayList<Movie> selectMovie_Adm() {/* 영화제목, 장르, 상영중여부 */
+	   ArrayList<Movie> list = new ArrayList<>();
+	   try {
+		   connect();
+		   String sql = "select movie_name, genre, onshow from movie";
+		   pstmt = conn.prepareStatement(sql);
+		   rs = pstmt.executeQuery();
+		   while (rs.next()) {
+			   Movie m = new Movie(
+		rs.getString(1), rs.getString(2), rs.getInt(3));
+			   list.add(m);
+		   }
+	   } catch (SQLException e) {
+		   e.printStackTrace();
+	   } finally {
+		   disconnect();
+	   }
+	   return list;
+   }
+   
    
    /*
     * 작성자:박형진 수정일자:07/06/21:18 클래스(함수)기능: 영화추가하기, 관리자 기능.

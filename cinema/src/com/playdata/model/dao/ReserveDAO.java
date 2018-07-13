@@ -27,6 +27,35 @@ public class ReserveDAO {
       }
    }
    
+   public ArrayList<Reserve> selectAll() {//보류메소드
+	      ArrayList<Reserve> list = new ArrayList<>();
+	      try {
+	         connect();
+	         String sql;
+	            sql = "select * from reserve";            
+	         
+	         pstmt = conn.prepareStatement(sql);
+	         rs = pstmt.executeQuery();
+	         while(rs.next()) {
+	            Reserve r = new Reserve(
+	            	rs.getString(1),
+	            	rs.getString(2),
+	            	rs.getString(3),
+	            	rs.getString(4),
+	            	rs.getString(5),
+	            	rs.getInt(6),
+	            	rs.getInt(7)
+	            		);
+	            list.add(r);
+	         }
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	      } finally {
+	         disconnect();
+	      }
+	      return list;
+	   }
+   
    /*
       작성자:박형진 수정일자:07/09/00:42 클래스(함수)기능: 예매확인 뷰 또는 관람내역 뷰 
      after가 true이면 관람한 내역, false이면 봐야할 영화 예매 내역

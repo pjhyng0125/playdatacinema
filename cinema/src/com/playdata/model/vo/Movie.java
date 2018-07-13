@@ -27,6 +27,17 @@ public class Movie {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+	
+	public Movie(String movie_name, String genre, int onshow) {
+		super();
+		this.movie_name = movie_name;
+		this.genre = genre;
+		this.onshow = onshow;
+	}
+
+
+
 	public Movie(String movie_name, String genre, double rate, int avg_star, String path) { // reserView¿ë
 		super();
 		this.movie_name = movie_name;

@@ -75,8 +75,8 @@ public class AdminView extends JFrame implements Runnable {
 	 */
 	public AdminView() {
 		setTitle("관리자창");
-		memberInf(); //회원정보 패널 메소드
-		history(); //결제정보 패널 메소드
+		memberInf(true); //회원정보 패널 메소드
+		history(false); //결제정보 패널 메소드
 		
 		server = new Server();
 		server.serverrun = true;
@@ -121,7 +121,7 @@ public class AdminView extends JFrame implements Runnable {
 		
 	}// 생성자
 
-	public void memberInf() { //회원정보 패널
+	public void memberInf(boolean flag) { //회원정보 패널
 		p_member = new JPanel();
 			p_member.setLayout(null);
 			p_member.setBounds(0, 0, 1036, 753);
@@ -161,16 +161,16 @@ public class AdminView extends JFrame implements Runnable {
 		p_member.add(bt_select);
 		p_member.add(bt_delete);
 
-		p_member.setVisible(true);
+		p_member.setVisible(flag);
 	}
  
-	public void history() {// 결제정보(수익정보, 결제내역) 패널
+	public void history(boolean flag) {// 결제정보(수익정보, 결제내역) 패널
 		p_history = new JPanel();
 			p_history.setLayout(null);
 			p_history.setBounds(0, 0, 1036, 800);
 			p_history.setBackground(Color.pink);
 			p_history.setPreferredSize(new Dimension(500,500));
-		la_profitInf = new JLabel("수익정보");
+		la_profitInf = new JLabel("영화정보");
 		la_profitInf.setFont(new Font("맑은 고딕", Font.BOLD, 22));
 			la_profitInf.setBounds(150, 82, 100, 30);
 		la_payHistory = new JLabel("결제내역");
@@ -205,7 +205,7 @@ public class AdminView extends JFrame implements Runnable {
 		
 
 
-		Object[] payCol = { "아이디", "결제일", "티켓코드" };
+		Object[] payCol = { "아이디", "영화제목", "런타임", "시작시간", "좌석번호", "스크린코드", "인원수" };
 		Object[] proCol = { "아이디", "충전금액" };
 
 		
@@ -237,7 +237,7 @@ public class AdminView extends JFrame implements Runnable {
 		p_history.add(tf_totProfit);
 		p_history.add(la_logo);
 		p_history.add(la_cinema);
-		p_history.setVisible(false);
+		p_history.setVisible(flag);
 	}
 
 	@Override
@@ -298,8 +298,6 @@ public class AdminView extends JFrame implements Runnable {
  			dtm_member.addRow(rowData);
  		}
  	}
- 	
- 	
  	
  	public String showInputmsg(String msg) {
  		return JOptionPane.showInputDialog(msg);
