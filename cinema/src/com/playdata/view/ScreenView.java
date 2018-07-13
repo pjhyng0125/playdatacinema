@@ -410,6 +410,16 @@ public class ScreenView extends JFrame {
 		return flag;
 	}
 	
+	public void checklast() {
+		for(int i=0; i<bt_seat.length; i++) {
+			if(bt_seat[i].isSelected()) {
+				bt_seat[i].setIcon(new ImageIcon("image/selecting.png"));
+			}else {
+				bt_seat[i].setIcon(new ImageIcon("image/select.png"));
+			}
+		}
+	}
+	
 	public ArrayList<Integer> addIndexList() {	//좌석을 선택하고 결제 버튼 선택 직후 선택된 좌석의 인덱스를 리턴
 		ArrayList<Integer> list = new ArrayList<>();
 		for(int i=0; i<bt_seat.length; i++) {

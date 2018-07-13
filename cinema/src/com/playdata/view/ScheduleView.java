@@ -121,6 +121,9 @@ public class ScheduleView extends JFrame {
 	
 	public void setDefaulttbt() {
 		for(int i=0; i<v_sd.length; i++) {
+			v_sd[i].setEnabled(true);
+			v_st[i].tbt_time.setEnabled(true);
+			
 			v_sd[i].setSelected(false);
 			v_st[i].tbt_time.setSelected(false);
 		}

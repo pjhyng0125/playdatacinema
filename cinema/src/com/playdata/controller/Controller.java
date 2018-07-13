@@ -696,8 +696,14 @@ public class Controller extends MouseAdapter implements ActionListener {
 			v_screen.setVisible(true);
 
 		} else if (ob == v_screen.select_movie) {
+		if(JOptionPane.showConfirmDialog(v_screen, "선택된 좌석 정보가 초기화됩니다.\n뒤로 가시겠습니까?") == 0) {
+			DB_seat = 0;
+			v_screen.setDefaultSeat();
+			v_screen.checklast();
+			v_screen.pay_view.setEnabled(false);
 			v_screen.setVisible(false);
-			v_schedule.setVisible(true);
+			v_schedule.setVisible(true);			
+		}
 		} else if (ob == v_screen.pay_view) {
 			v_screen.setVisible(false);
 			v_pay.setVisible(true);
@@ -832,8 +838,14 @@ public class Controller extends MouseAdapter implements ActionListener {
 			v_createreview.ta_content.setText("");
 			v_myReserview.setVisible(true);
 		} else if (ob == v_schedule.bt_back) {
+			if(JOptionPane.showConfirmDialog(v_schedule, "선택한 날짜/시간이 초기화됩니다.\n뒤로 가시겠습니까?") == 0) {
+			flag_time = false;
+			flag_date = false;
+			v_schedule.setDefaulttbt();
+			v_schedule.bt_next.setEnabled(false);
 			v_schedule.setVisible(false);
 			v_reserve.setVisible(true);
+			}
 		} else if (ob == v_login.bt_join) {// 회원가입폼으로 이동.
 			v_join.tf_id.requestFocus(); // 아이디 텍스트필드 포커스.
 			v_login.setVisible(false);
