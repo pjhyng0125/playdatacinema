@@ -281,7 +281,7 @@ public class AdminView extends JFrame implements Runnable {
 		}
 	}
  	
- 	public void displayTable(ArrayList<Member> list) {
+ 	public void dispTable(ArrayList<Member> list) {
  		dtm_member.setRowCount(0);
  		String[] mem_grade = {"¿œπ›","VIP","VVIP"};
  		for(int i=0; i<list.size();i++) {
@@ -303,5 +303,11 @@ public class AdminView extends JFrame implements Runnable {
  	
  	public String showInputmsg(String msg) {
  		return JOptionPane.showInputDialog(msg);
+ 	}
+ 	public void showmsg(String msg) {
+ 		JOptionPane.showMessageDialog(this, msg);
+ 	}
+ 	public int showconfirmmsg(String msg) {
+ 		return JOptionPane.showConfirmDialog(this, msg);
  	}
 }
