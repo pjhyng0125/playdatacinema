@@ -120,13 +120,13 @@ insert into member values ('encore12','1234','여자','한지민','19921104','010-634
 insert into member values ('encore13','1234','남자','현빈','19920509','010-1112-2211','담양','encore13@naver.com',0,0,0,'태어난곳은?','제주도');
 
 delete from movie;
-insert into movie values ('마녀','박찬욱','김다미,성동일','마녀가 나타났다!','액션',20,3,15,8000,'image/witch.png','6/28','7/05',120,1);
+insert into movie values ('마녀','박훈정','김다미,조민수','마녀가 나타났다!','미스터리,액션',20,3,15,8000,'image/witch.png','6/28','7/05',120,1);
 insert into movie values ('탐정','이언희','권상우,성동일','역대급 미제 사건을 해결한 추리 콤비','코미디,범죄',32,4,15,8000,'image/returns.png','6/28','7/05',120,1);
 insert into movie values ('허스토리','민규동','김해숙,김희애','재판받는 이야기','드라마',12,3,7,8000,'image/her_story.png','6/28','7/05',120,1);
 insert into movie values ('앤트맨과와스프','페이트 리드','폴러드,에반젤린 릴리','가장의 은둔히어로 스토리!','액션',37,4,12,8000,'image/antman.png','6/28','7/05',120,1);
-insert into movie values ('독전','이창동','김다미,성동일','독전이 나타났다!','액션',25,4,15,8000,'image/antman.png','6/28','7/05',120,2);
-insert into movie values ('베테랑','이병헌','김다미,성동일','베테랑이 나타났다!','액션',20,2,15,8000,'image/her_story.png','6/28','7/05',120,3);
-insert into movie values ('실미도','박찬욱','김다미,성동일','실미도가 나타났다!','액션',15,1,15,8000,'image/returns.png','6/28','7/05',120,4);
+insert into movie values ('독전','이해영','김주혁,강승현','독전이 나타났다!','범죄,액션',25,4,15,8000,'image/believer.png','6/28','7/05',120,2);
+insert into movie values ('베테랑','류승완','유아인,황정민','베테랑이 나타났다!','코미디,액션',20,2,15,8000,'image/veteran.png','6/28','7/05',120,3);
+insert into movie values ('실미도','강우석','설경구,안성기','실미도가 나타났다!','스릴러,드라마',15,1,15,8000,'image/silmido.png','6/28','7/05',120,4);
 
 delete from reserve;
 insert into RESERVE values ('encore1','마녀','7/05','12:30','2',1,2);
